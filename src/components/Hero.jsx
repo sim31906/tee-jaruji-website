@@ -192,8 +192,8 @@ export default function Hero() {
             fontFamily: fonts.display,
             fontStyle: 'italic',
             fontSize: '1.2rem',
-            color: colors.pinkDeep,
-            opacity: 0.5,
+            color: colors.accent,
+            opacity: 0.85,
           }}>
             {Array(6).fill(null).map((_, i) => (
               <span key={i} style={{ marginRight: '3rem' }}>· welcome · tee jaruji · official ·</span>

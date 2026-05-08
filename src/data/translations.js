@@ -91,7 +91,6 @@ export const translations = {
       sectionTitle: 'ติดต่อ',
       sectionItalic: 'เรา',
       items: [
-        { label: 'โทรศัพท์', value: '+66 (0) ___-___-____', action: 'โทรเลย' },
         { label: 'Line ออฟฟิเชียล', value: '@teejaruji', action: 'เพิ่มเพื่อน' },
         { label: 'อีเมล', value: 'contact@teejaruji.com', action: 'ส่งอีเมล' },
       ],
@@ -239,7 +238,6 @@ export const translations = {
       sectionTitle: 'Get in',
       sectionItalic: 'Touch',
       items: [
-        { label: 'Telephone', value: '+66 (0) ___-___-____', action: 'Call now' },
         { label: 'Line Official', value: '@teejaruji', action: 'Add friend' },
         { label: 'Email', value: 'contact@teejaruji.com', action: 'Send mail' },
       ],
@@ -387,7 +385,6 @@ export const translations = {
       sectionTitle: '联系',
       sectionItalic: '我们',
       items: [
-        { label: '电话', value: '+66 (0) ___-___-____', action: '立即拨打' },
         { label: 'Line 官方', value: '@teejaruji', action: '添加好友' },
         { label: '电子邮件', value: 'contact@teejaruji.com', action: '发送邮件' },
       ],

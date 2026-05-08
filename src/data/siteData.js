@@ -133,7 +133,6 @@ export const aboutQuote = {
 
 // ---- CONTACT ----
 export const contacts = [
-  { label: 'Telephone', value: '+66 (0) ___-___-____', action: 'Call now', href: 'tel:+66' },
   { label: 'Line Official', value: '@teejaruji', action: 'Add friend', href: 'https://line.me/R/ti/p/@369zivpv?ts=02130418&oat_content=url&utm_source=ig&utm_medium=social&utm_content=link_in_bio' },
   { label: 'Email', value: 'contact@teejaruji.com', action: 'Send mail', href: 'mailto:contact@teejaruji.com' },
 ];

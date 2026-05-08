@@ -15,22 +15,13 @@ export default function SectionHeader({ num, title, italic, dark = false }) {
       `}</style>
 
       <div className="section-header-tj" style={{
-        display: 'grid',
-        gridTemplateColumns: 'auto 1fr',
-        gap: '3rem',
-        alignItems: 'end',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
         marginBottom: '4rem',
         paddingBottom: '2rem',
         borderBottom: `1px solid ${borderColor}`,
       }}>
-        <div style={{
-          fontFamily: fonts.mono,
-          fontSize: '0.8rem',
-          letterSpacing: '0.3em',
-          color: numColor,
-        }}>
-          {num}
-        </div>
         <h2 style={{
           fontFamily: fonts.display,
           fontSize: 'clamp(2.2rem, 4.5vw, 4rem)',
@@ -41,6 +32,14 @@ export default function SectionHeader({ num, title, italic, dark = false }) {
         }}>
           {title} <span style={{ fontStyle: 'italic', color: accentColor }}>{italic}</span>
         </h2>
+        <div style={{
+          fontFamily: fonts.mono,
+          fontSize: '0.8rem',
+          letterSpacing: '0.3em',
+          color: numColor,
+        }}>
+          {num}
+        </div>
       </div>
     </>
   );

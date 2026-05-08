@@ -3,11 +3,11 @@ import { contacts } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
-import { FaPhone, FaLine } from 'react-icons/fa';
+import { FaLine } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
-const ICONS = [FaPhone, FaLine, MdEmail];
-const CARD_COLORS = ['#f5b8a8', '#00B900', '#f0c878'];
+const ICONS = [FaLine, MdEmail];
+const CARD_COLORS = ['#00B900', '#f0c878'];
 
 export default function Contact() {
   const { lang } = useLang();
@@ -65,8 +65,9 @@ export default function Contact() {
 
         <div className="contact-cards-tj" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: 'repeat(2, 1fr)',
           gap: '1.5rem',
+          maxWidth: '800px',
         }}>
           {t.items.map((c, i) => {
             const Icon = ICONS[i];
