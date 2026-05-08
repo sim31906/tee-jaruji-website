@@ -11,14 +11,15 @@ export default function Supporters() {
   return (
     <>
       <style>{`
-        .fan-photo-tj {
-          transition: all 0.4s ease;
+        @keyframes fan-scroll-down {
+          0%   { transform: translateY(-50%); }
+          100% { transform: translateY(0); }
         }
-        .fan-photo-tj:hover {
-          transform: scale(1.08) translateY(-5px) !important;
-          z-index: 5;
-          box-shadow: 0 15px 30px rgba(217, 122, 142, 0.3);
+        @keyframes fan-scroll-up {
+          0%   { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
         }
+        .fan-col-inner { will-change: transform; }
         @media (max-width: 968px) {
           .fan-stats-tj { grid-template-columns: 1fr !important; }
           .stat-tj {
@@ -26,7 +27,7 @@ export default function Supporters() {
             border-bottom: 1px solid ${colors.ink} !important;
           }
           .stat-tj:last-child { border-bottom: none !important; }
-          .fan-gallery-tj { grid-template-columns: repeat(3, 1fr) !important; }
+          .fan-gallery-tj { grid-template-columns: repeat(2, 1fr) !important; height: 320px !important; }
           .supporters-section-tj { padding: 5rem 1.5rem !important; }
         }
       `}</style>
@@ -54,34 +55,62 @@ export default function Supporters() {
           {t.description}
         </p>
 
-        <div className="fan-gallery-tj" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(6, 1fr)',
-          gap: '0.5rem',
-          marginBottom: '3rem',
-        }}>
-          {fanGradients.map((grad, i) => (
-            <div
-              key={i}
-              className="fan-photo-tj"
-              style={{
-                aspectRatio: '1',
-                background: `linear-gradient(135deg, ${grad[0]}, ${grad[1]})`,
-                position: 'relative',
-                cursor: 'pointer',
-                transform: i % 2 === 1 ? 'translateY(15px)' : 'translateY(0)',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '2rem',
-                color: 'rgba(255,255,255,0.8)',
-              }}
-            >
-              ♡
+        {(() => {
+          const cols = [
+            fanGradients.slice(0, 3),
+            fanGradients.slice(3, 6),
+            fanGradients.slice(6, 9),
+            fanGradients.slice(9, 12),
+          ];
+          const speeds = [16, 22, 14, 20];
+          return (
+            <div className="fan-gallery-tj" style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '0.75rem',
+              height: '460px',
+              overflow: 'hidden',
+              marginBottom: '3rem',
+              borderRadius: '12px',
+            }}>
+              {cols.map((col, ci) => {
+                const goDown = ci % 2 === 0;
+                return (
+                  <div key={ci} style={{ overflow: 'hidden', height: '100%' }}>
+                    <div
+                      className="fan-col-inner"
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.75rem',
+                        animation: `${goDown ? 'fan-scroll-down' : 'fan-scroll-up'} ${speeds[ci]}s linear infinite`,
+                      }}
+                    >
+                      {[...col, ...col].map((grad, i) => (
+                        <div
+                          key={i}
+                          style={{
+                            flexShrink: 0,
+                            aspectRatio: '1',
+                            background: `linear-gradient(135deg, ${grad[0]}, ${grad[1]})`,
+                            borderRadius: '10px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            fontSize: '1.8rem',
+                            color: 'rgba(255,255,255,0.8)',
+                          }}
+                        >
+                          ♡
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          ))}
-        </div>
+          );
+        })()}
 
         <div className="fan-stats-tj" style={{
           display: 'grid',
