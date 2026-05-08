@@ -11,7 +11,9 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git config *)",
-      "Bash(vercel --version)"
+      "Bash(vercel --version)",
+      "Bash(git push *)",
+      "Bash(gh --version)"
     ]
   }
 }
