@@ -22,6 +22,14 @@ export default function SectionHeader({ num, title, italic, dark = false }) {
         paddingBottom: '2rem',
         borderBottom: `1px solid ${borderColor}`,
       }}>
+        <div style={{
+          fontFamily: fonts.mono,
+          fontSize: '0.8rem',
+          letterSpacing: '0.3em',
+          color: numColor,
+        }}>
+          {num}
+        </div>
         <h2 style={{
           fontFamily: fonts.display,
           fontSize: 'clamp(2.2rem, 4.5vw, 4rem)',
@@ -32,14 +40,6 @@ export default function SectionHeader({ num, title, italic, dark = false }) {
         }}>
           {title} <span style={{ fontStyle: 'italic', color: accentColor }}>{italic}</span>
         </h2>
-        <div style={{
-          fontFamily: fonts.mono,
-          fontSize: '0.8rem',
-          letterSpacing: '0.3em',
-          color: numColor,
-        }}>
-          {num}
-        </div>
       </div>
     </>
   );
