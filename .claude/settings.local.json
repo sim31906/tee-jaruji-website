@@ -13,7 +13,11 @@
       "Bash(git config *)",
       "Bash(vercel --version)",
       "Bash(git push *)",
-      "Bash(gh --version)"
+      "Bash(gh --version)",
+      "Bash(npm list *)",
+      "Bash(npx vite *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(curl -s http://localhost:3000/work/events -o /dev/null -w \"%{http_code}\")"
     ]
   }
 }

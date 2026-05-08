@@ -18,6 +18,7 @@ export const hero = {
 // ---- WORKS ----
 export const works = [
   {
+    slug: 'events',
     icon: 'E',
     type: 'Category 01',
     title: 'Event\nAppearances',
@@ -28,8 +29,22 @@ export const works = [
       { name: 'Press Conference', year: '2024' },
     ],
     color: colors.pink,
+    detail: {
+      headline: 'Event Appearances',
+      sub: 'งานเปิดตัว · แฟนมีต · งานพรีเซนเตอร์ · กิจกรรมพิเศษ',
+      body: 'รวบรวมกิจกรรมและงานอีเวนต์ต่าง ๆ ที่ Tee Jaruji เข้าร่วม ทั้งในประเทศและต่างประเทศ ตั้งแต่งานแฟนมีต งานแถลงข่าว ไปจนถึงการเป็นพรีเซนเตอร์ให้กับแบรนด์ชั้นนำ',
+      items: [
+        { name: 'Fan Meeting Bangkok', year: '2025', detail: 'Bitec · 2,000 ที่นั่ง' },
+        { name: 'Brand Event · BKK', year: '2025', detail: 'Siam Paragon · Presenter' },
+        { name: 'Press Conference', year: '2024', detail: 'Series Launch Event' },
+        { name: 'Fan Meeting Chiang Mai', year: '2024', detail: 'Nimman Hall · 500 ที่นั่ง' },
+        { name: 'International Event · Japan', year: '2024', detail: 'Tokyo · Thai Wave Festival' },
+        { name: 'Charity Event', year: '2024', detail: 'Bangkok · Red Cross' },
+      ],
+    },
   },
   {
+    slug: 'performance',
     icon: 'P',
     type: 'Category 02',
     title: 'Performance\n& Acting',
@@ -40,8 +55,22 @@ export const works = [
       { name: 'Short Film', year: '2024' },
     ],
     color: colors.blue,
+    detail: {
+      headline: 'Performance & Acting',
+      sub: 'ซีรีส์ · ภาพยนตร์ · ละครเวที · Short Film',
+      body: 'ผลงานการแสดงที่ Tee Jaruji ฝากไว้บนจอและบนเวที ตั้งแต่บทนำในซีรีส์ ไปจนถึงการแสดงสดบนเวทีที่ต้องอาศัยความสามารถเต็มที่',
+      items: [
+        { name: 'Lead Role · Series', year: '2025', detail: 'CH3 · บทนำ' },
+        { name: 'Stage Performance', year: '2024', detail: 'รอบพิเศษ · กรุงเทพฯ' },
+        { name: 'Short Film', year: '2024', detail: 'Official Selection · Thai Film Fest' },
+        { name: 'Supporting Role · Film', year: '2024', detail: 'ภาพยนตร์ไทย' },
+        { name: 'Guest Role · Series', year: '2023', detail: 'GMM25' },
+        { name: 'Theater Play', year: '2023', detail: 'Bangkok · 10 รอบ' },
+      ],
+    },
   },
   {
+    slug: 'music',
     icon: 'M',
     type: 'Category 03',
     title: 'Music\n& Sound',
@@ -52,6 +81,19 @@ export const works = [
       { name: 'Live Concert', year: '2024' },
     ],
     color: colors.creamDark,
+    detail: {
+      headline: 'Music & Sound',
+      sub: 'ซิงเกิล · OST · Live Performance · Collaboration',
+      body: 'ผลงานเพลงและการแสดงดนตรีสดของ Tee Jaruji ตั้งแต่ซิงเกิลเดี่ยว การร่วมงานกับศิลปินอื่น ไปจนถึง OST ประกอบซีรีส์และภาพยนตร์',
+      items: [
+        { name: 'Single Release', year: '2025', detail: 'Digital Streaming · All Platforms' },
+        { name: 'OST Collaboration', year: '2024', detail: 'ประกอบซีรีส์ CH3' },
+        { name: 'Live Concert', year: '2024', detail: 'Impact Arena · Guest Artist' },
+        { name: 'Acoustic Session', year: '2024', detail: 'YouTube Live' },
+        { name: 'Collab Single', year: '2023', detail: 'Feat. Artist' },
+        { name: 'Year-End Concert', year: '2023', detail: 'Central World Stage' },
+      ],
+    },
   },
 ];
 

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { colors, fonts } from '../styles/theme';
 import { works, education } from '../data/siteData';
 import SectionHeader from './SectionHeader';
@@ -96,7 +97,7 @@ export default function Profile() {
           </div>
         ))}
 
-        <h3 style={{
+        <h3 id="selected-works" style={{
           fontFamily: fonts.mono,
           fontSize: '0.8rem',
           letterSpacing: '0.3em',
@@ -116,6 +117,10 @@ export default function Profile() {
           {works.map((work, i) => (
             <Reveal key={i} delay={i * 120}>
             <TiltCard style={{ height: '100%' }}>
+            <Link
+              to={`/work/${work.slug}`}
+              style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}
+            >
             <div
               className="work-card-tj"
               style={{
@@ -200,7 +205,18 @@ export default function Profile() {
                   </li>
                 ))}
               </ul>
+              <div style={{
+                marginTop: '1.5rem',
+                fontFamily: fonts.mono,
+                fontSize: '0.68rem',
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                color: colors.accent,
+              }}>
+                View All →
+              </div>
             </div>
+            </Link>
             </TiltCard>
             </Reveal>
           ))}

@@ -1,3 +1,5 @@
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { colors } from './styles/theme';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -10,8 +12,21 @@ import Fanclub from './components/Fanclub';
 import Footer from './components/Footer';
 import CursorSparkle from './components/CursorSparkle';
 import Reveal from './components/Reveal';
+import WorkDetailPage from './pages/WorkDetailPage';
 
-export default function App() {
+function MainPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const target = location.state?.scrollTo;
+    if (!target) return;
+    const el = document.getElementById(target);
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }, []);
+
   return (
     <div style={{
       background: colors.cream,
@@ -20,7 +35,6 @@ export default function App() {
       position: 'relative',
       overflowX: 'hidden',
     }}>
-      {/* Grain overlay */}
       <div style={{
         position: 'fixed',
         inset: 0,
@@ -30,8 +44,6 @@ export default function App() {
         zIndex: 1,
         mixBlendMode: 'multiply',
       }} />
-
-      {/* Floating background blobs */}
       <div style={{
         position: 'fixed',
         top: '20%',
@@ -56,7 +68,6 @@ export default function App() {
         zIndex: 0,
         animation: 'float 10s ease-in-out infinite reverse',
       }} />
-
       <CursorSparkle />
       <Navigation />
       <Hero />
@@ -68,5 +79,14 @@ export default function App() {
       <Reveal><Fanclub /></Reveal>
       <Reveal><Footer /></Reveal>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/work/:slug" element={<WorkDetailPage />} />
+    </Routes>
   );
 }
