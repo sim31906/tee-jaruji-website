@@ -7,7 +7,7 @@ export default function CursorSparkle() {
     let lastTime = 0;
 
     const spawn = (x, y) => {
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < 2; i++) {
         const el = document.createElement('div');
         const size = Math.random() * 7 + 3;
         const color = palette[Math.floor(Math.random() * palette.length)];
@@ -36,7 +36,7 @@ export default function CursorSparkle() {
 
     const onMove = (e) => {
       const now = Date.now();
-      if (now - lastTime < 60) return;
+      if (now - lastTime < 120) return;
       lastTime = now;
       spawn(e.clientX, e.clientY);
     };

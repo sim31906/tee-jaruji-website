@@ -40,15 +40,6 @@ function MainPage() {
     }}>
       <div style={{
         position: 'fixed',
-        inset: 0,
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E")`,
-        pointerEvents: 'none',
-        opacity: 0.08,
-        zIndex: 1,
-        mixBlendMode: 'multiply',
-      }} />
-      <div style={{
-        position: 'fixed',
         top: '20%',
         right: '-10%',
         width: '500px',
@@ -58,6 +49,7 @@ function MainPage() {
         pointerEvents: 'none',
         zIndex: 0,
         animation: 'float 8s ease-in-out infinite',
+        willChange: 'transform',
       }} />
       <div style={{
         position: 'fixed',
@@ -70,6 +62,7 @@ function MainPage() {
         pointerEvents: 'none',
         zIndex: 0,
         animation: 'float 10s ease-in-out infinite reverse',
+        willChange: 'transform',
       }} />
       <CursorSparkle />
       <Navigation />

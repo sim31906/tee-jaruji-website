@@ -12,14 +12,18 @@ export default function Supporters() {
     <>
       <style>{`
         @keyframes fan-scroll-down {
-          0%   { transform: translateY(-50%); }
-          100% { transform: translateY(0); }
+          0%   { transform: translate3d(0, -50%, 0); }
+          100% { transform: translate3d(0, 0, 0); }
         }
         @keyframes fan-scroll-up {
-          0%   { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
+          0%   { transform: translate3d(0, 0, 0); }
+          100% { transform: translate3d(0, -50%, 0); }
         }
-        .fan-col-inner { will-change: transform; }
+        .fan-col-inner {
+          will-change: transform;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        }
         @media (max-width: 968px) {
           .fan-stats-tj { grid-template-columns: 1fr !important; }
           .stat-tj {
@@ -27,7 +31,7 @@ export default function Supporters() {
             border-bottom: 1px solid ${colors.ink} !important;
           }
           .stat-tj:last-child { border-bottom: none !important; }
-          .fan-gallery-tj { grid-template-columns: repeat(2, 1fr) !important; height: 320px !important; }
+          .fan-gallery-tj { grid-template-columns: repeat(2, 1fr) !important; height: 520px !important; }
           .supporters-section-tj { padding: 5rem 1.5rem !important; }
         }
       `}</style>
@@ -68,7 +72,7 @@ export default function Supporters() {
               display: 'grid',
               gridTemplateColumns: 'repeat(4, 1fr)',
               gap: '0.75rem',
-              height: '700px',
+              height: '650px',
               overflow: 'hidden',
               marginBottom: '3rem',
               borderRadius: '12px',
