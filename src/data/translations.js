@@ -84,7 +84,7 @@ export const translations = {
       sectionTitle: 'ติดตาม',
       sectionItalic: 'ออนไลน์',
       quote: 'ขอบคุณที่แวะมาทำความรู้จักกัน ฝากติดตามผลงานและเรื่องราวต่าง ๆ ผ่านช่องทางออนไลน์ของผมได้นะครับ',
-      signature: '— ที จารุจิ',
+      signature: '— ตี๋ จารุจิ',
     },
     contact: {
       sectionNum: '03 / ติดต่อ',

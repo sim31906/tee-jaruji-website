@@ -16,11 +16,20 @@ export default function Footer() {
         fontStyle: 'italic',
         fontWeight: 300,
         lineHeight: 1,
-        marginBottom: '2rem',
+        marginBottom: '0.5rem',
         color: colors.accent,
         letterSpacing: '-0.02em',
       }}>
         Tee Jaruji
+      </div>
+      <div style={{
+        fontFamily: fonts.mono,
+        fontSize: 'clamp(0.85rem, 2vw, 1rem)',
+        letterSpacing: '0.2em',
+        color: colors.pinkDeep,
+        marginBottom: '2rem',
+      }}>
+        ตี๋ จารุจิ
       </div>
       <div style={{
         fontFamily: fonts.mono,
