@@ -74,13 +74,13 @@ export const education = [
 // ---- SOCIAL MEDIA ----
 // เเก้ url ใส่ลิงก์จริงได้เลย
 export const socials = [
-  { platform: 'Facebook', handle: '@teejaruji', url: 'https://facebook.com/teejaruji' },
-  { platform: 'Instagram', handle: '@teejaruji', url: 'https://instagram.com/teejaruji' },
-  { platform: 'X / Twitter', handle: '@teejaruji', url: 'https://x.com/teejaruji' },
-  { platform: 'YouTube', handle: '@teejaruji', url: 'https://youtube.com/@teejaruji' },
-  { platform: 'Weibo', handle: 'Tee Jaruji', url: 'https://weibo.com/teejaruji' },
-  { platform: 'RedNote · 小红书', handle: 'Tee Jaruji', url: 'https://xiaohongshu.com/teejaruji' },
-  { platform: 'TikTok', handle: '@teejaruji', url: 'https://tiktok.com/@teejaruji' },
+  { platform: 'Facebook', handle: '@teejaruji', url: 'https://www.facebook.com/share/1JzG4Trtip/?mibextid=wwXIfr', color: '#1877F2' },
+  { platform: 'Instagram', handle: '@tee_jaruji', url: 'https://www.instagram.com/tee_jaruji?igsh=bnI4cnVjejBkazJl', color: '#E1306C' },
+  { platform: 'X', handle: '@Tee_Jaruji', url: 'https://x.com/Tee_Jaruji?lang=en', color: '#000000' },
+  { platform: 'TikTok', handle: '@tee_jaruji', url: 'https://www.tiktok.com/@tee_jaruji?_r=1&_t=ZS-96B7FFn7PlN', color: '#69C9D0' },
+  { platform: 'Line', handle: '@369zivpv', url: 'https://line.me/R/ti/p/@369zivpv?ts=02130418&oat_content=url', color: '#00B900' },
+  { platform: 'Weibo', handle: 'Tee Jaruji', url: 'https://weibo.com/u/6186540338', color: '#E6162D' },
+  { platform: 'RedNote', handle: 'Tee Jaruji', url: 'https://xhslink.com/m/8XlnQB1Lywm', color: '#FF2442' },
 ];
 
 // ---- ABOUT QUOTE ----
