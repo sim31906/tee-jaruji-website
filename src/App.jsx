@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { colors } from './styles/theme';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -17,6 +17,10 @@ import WorkDetailPage from './pages/WorkDetailPage';
 function MainPage() {
   const location = useLocation();
   useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const target = location.state?.scrollTo;
     if (target) {
       const el = document.getElementById(target);
@@ -24,8 +28,6 @@ function MainPage() {
         const top = el.getBoundingClientRect().top + window.scrollY - 120;
         window.scrollTo({ top, behavior: 'instant' });
       }
-    } else {
-      window.scrollTo(0, 0);
     }
   }, []);
   return (
