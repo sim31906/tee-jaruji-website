@@ -54,7 +54,7 @@ export default function Schedule() {
                 </div>
                 <div style={{
                   fontFamily: fonts.mono,
-                  fontSize: '0.7rem',
+                  fontSize: '0.8rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
                   color: colors.accent,

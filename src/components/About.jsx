@@ -79,7 +79,7 @@ export default function About() {
         }}>
           <div style={{
             fontFamily: fonts.display,
-            fontSize: '1.8rem',
+            fontSize: '1.65rem',
             fontStyle: 'italic',
             fontWeight: 300,
             lineHeight: 1.5,
@@ -148,7 +148,7 @@ export default function About() {
                   <div style={{ position: 'relative', zIndex: 1 }}>
                     <div className="social-text-tj" style={{
                       fontFamily: fonts.mono,
-                      fontSize: '0.6rem',
+                      fontSize: '0.8rem',
                       letterSpacing: '0.25em',
                       textTransform: 'uppercase',
                       color: colors.inkSoft,

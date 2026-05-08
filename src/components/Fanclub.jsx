@@ -95,7 +95,7 @@ export default function Fanclub() {
               </span>
               <h3 style={{
                 fontFamily: fonts.display,
-                fontSize: '2rem',
+                fontSize: '1.7rem',
                 fontWeight: 500,
                 marginBottom: '1rem',
                 lineHeight: 1.1,
@@ -113,7 +113,7 @@ export default function Fanclub() {
               </p>
               <div style={{
                 fontFamily: fonts.mono,
-                fontSize: '0.75rem',
+                fontSize: '0.8rem',
                 letterSpacing: '0.2em',
                 textTransform: 'uppercase',
               }}>
@@ -138,7 +138,7 @@ export default function Fanclub() {
           <div>
             <h3 style={{
               fontFamily: fonts.display,
-              fontSize: '2.2rem',
+              fontSize: '1.9rem',
               fontWeight: 500,
               lineHeight: 1.1,
               marginBottom: '0.75rem',
@@ -160,7 +160,7 @@ export default function Fanclub() {
               color: colors.cream,
               padding: '1.25rem 2.5rem',
               fontFamily: fonts.mono,
-              fontSize: '0.75rem',
+              fontSize: '0.8rem',
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
               textAlign: 'center',

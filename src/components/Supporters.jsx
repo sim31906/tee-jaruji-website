@@ -111,7 +111,7 @@ export default function Supporters() {
               </div>
               <div style={{
                 fontFamily: fonts.mono,
-                fontSize: '0.7rem',
+                fontSize: '0.8rem',
                 letterSpacing: '0.3em',
                 textTransform: 'uppercase',
                 marginTop: '0.5rem',

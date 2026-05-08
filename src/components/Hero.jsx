@@ -63,7 +63,7 @@ export default function Hero() {
 
           <h1 style={{
             fontFamily: fonts.display,
-            fontSize: 'clamp(4rem, 12vw, 11rem)',
+            fontSize: 'clamp(4rem, 9vw, 9rem)',
             fontWeight: 400,
             lineHeight: 0.85,
             letterSpacing: '-0.04em',

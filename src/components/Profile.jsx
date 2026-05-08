@@ -64,7 +64,7 @@ export default function Profile() {
           >
             <div style={{
               fontFamily: fonts.mono,
-              fontSize: '0.75rem',
+              fontSize: '0.8rem',
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
               color: colors.accent,
@@ -74,7 +74,7 @@ export default function Profile() {
             <div>
               <h3 style={{
                 fontFamily: fonts.display,
-                fontSize: '2.2rem',
+                fontSize: '1.9rem',
                 fontWeight: 500,
                 marginBottom: '0.5rem',
                 lineHeight: 1.1,
@@ -91,7 +91,7 @@ export default function Profile() {
                 {s.school}
               </div>
               <p style={{
-                fontSize: '0.95rem',
+                fontSize: '1rem',
                 lineHeight: 1.7,
                 color: colors.inkSoft,
                 maxWidth: '600px',
@@ -162,7 +162,7 @@ export default function Profile() {
               </div>
               <div style={{
                 fontFamily: fonts.mono,
-                fontSize: '0.7rem',
+                fontSize: '0.8rem',
                 letterSpacing: '0.2em',
                 textTransform: 'uppercase',
                 marginBottom: '0.75rem',
@@ -172,7 +172,7 @@ export default function Profile() {
               </div>
               <h3 style={{
                 fontFamily: fonts.display,
-                fontSize: '1.8rem',
+                fontSize: '1.7rem',
                 fontWeight: 500,
                 marginBottom: '1rem',
                 lineHeight: 1.1,
@@ -181,7 +181,7 @@ export default function Profile() {
                 {t.works[i].title}
               </h3>
               <p style={{
-                fontSize: '0.9rem',
+                fontSize: '1rem',
                 lineHeight: 1.6,
                 color: colors.inkSoft,
                 marginBottom: '1rem',
@@ -198,7 +198,7 @@ export default function Profile() {
                     gap: '1rem',
                   }}>
                     <span>{item.name}</span>
-                    <span style={{ fontFamily: fonts.mono, fontSize: '0.7rem', color: colors.accent }}>
+                    <span style={{ fontFamily: fonts.mono, fontSize: '0.8rem', color: colors.accent }}>
                       {item.year}
                     </span>
                   </li>

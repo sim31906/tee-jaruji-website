@@ -132,7 +132,7 @@ export default function WorkDetailPage() {
 
         <div style={{
           fontFamily: fonts.mono,
-          fontSize: '0.75rem',
+          fontSize: '0.85rem',
           letterSpacing: '0.3em',
           textTransform: 'uppercase',
           color: colors.accent,
@@ -142,7 +142,7 @@ export default function WorkDetailPage() {
         </div>
         <h1 style={{
           fontFamily: fonts.display,
-          fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+          fontSize: 'clamp(2.2rem, 4.5vw, 4rem)',
           fontWeight: 500,
           lineHeight: 1.05,
           color: colors.ink,
@@ -170,7 +170,7 @@ export default function WorkDetailPage() {
       <div className="detail-body-tj" style={{ padding: '4rem', maxWidth: '900px', margin: '0 auto' }}>
         <div style={{
           fontFamily: fonts.mono,
-          fontSize: '0.75rem',
+          fontSize: '0.85rem',
           letterSpacing: '0.3em',
           textTransform: 'uppercase',
           color: colors.accent,
@@ -189,7 +189,7 @@ export default function WorkDetailPage() {
             </div>
             <div style={{
               fontFamily: fonts.mono,
-              fontSize: '0.72rem',
+              fontSize: '0.78rem',
               letterSpacing: '0.15em',
               color: colors.accent,
               textAlign: 'right',
@@ -218,7 +218,7 @@ export default function WorkDetailPage() {
             padding: '1rem 2.5rem',
             borderRadius: '2px',
             fontFamily: fonts.mono,
-            fontSize: '0.72rem',
+            fontSize: '0.78rem',
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
             gap: '0.5rem',

@@ -12,7 +12,7 @@ export default function Footer() {
     }}>
       <div style={{
         fontFamily: fonts.display,
-        fontSize: 'clamp(3rem, 12vw, 9rem)',
+        fontSize: 'clamp(2.5rem, 8vw, 6rem)',
         fontStyle: 'italic',
         fontWeight: 300,
         lineHeight: 1,
@@ -24,7 +24,7 @@ export default function Footer() {
       </div>
       <div style={{
         fontFamily: fonts.mono,
-        fontSize: '0.7rem',
+        fontSize: '0.8rem',
         letterSpacing: '0.2em',
         textTransform: 'uppercase',
         color: colors.inkSoft,

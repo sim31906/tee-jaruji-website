@@ -120,7 +120,7 @@ export const socials = [
   { platform: 'Instagram', handle: '@tee_jaruji', url: 'https://www.instagram.com/tee_jaruji?igsh=bnI4cnVjejBkazJl', color: '#E1306C' },
   { platform: 'X', handle: '@Tee_Jaruji', url: 'https://x.com/Tee_Jaruji?lang=en', color: '#000000' },
   { platform: 'TikTok', handle: '@tee_jaruji', url: 'https://www.tiktok.com/@tee_jaruji?_r=1&_t=ZS-96B7FFn7PlN', color: '#69C9D0' },
-  { platform: 'Line', handle: '@369zivpv', url: 'https://line.me/R/ti/p/@369zivpv?ts=02130418&oat_content=url', color: '#00B900' },
+  { platform: 'Line', handle: '@369zivpv', url: 'https://line.me/ti/g2/oOMD7IBEzAyK5iMXg_rsrVY6w5KvCcxOSyMTUw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default', color: '#00B900' },
   { platform: 'Weibo', handle: 'Tee Jaruji', url: 'https://weibo.com/u/6186540338', color: '#E6162D' },
   { platform: 'RedNote', handle: 'Tee Jaruji', url: 'https://xhslink.com/m/8XlnQB1Lywm', color: '#FF2442' },
 ];
@@ -134,7 +134,7 @@ export const aboutQuote = {
 // ---- CONTACT ----
 export const contacts = [
   { label: 'Telephone', value: '+66 (0) ___-___-____', action: 'Call now', href: 'tel:+66' },
-  { label: 'Line Official', value: '@teejaruji', action: 'Add friend', href: 'https://line.me/ti/p/~teejaruji' },
+  { label: 'Line Official', value: '@teejaruji', action: 'Add friend', href: 'https://line.me/R/ti/p/@369zivpv?ts=02130418&oat_content=url&utm_source=ig&utm_medium=social&utm_content=link_in_bio' },
   { label: 'Email', value: 'contact@teejaruji.com', action: 'Send mail', href: 'mailto:contact@teejaruji.com' },
 ];
 

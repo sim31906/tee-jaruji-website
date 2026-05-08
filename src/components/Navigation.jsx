@@ -92,7 +92,7 @@ export default function Navigation() {
           display: 'flex',
           gap: '2rem',
           fontFamily: fonts.mono,
-          fontSize: '0.7rem',
+          fontSize: '0.8rem',
           letterSpacing: '0.2em',
           textTransform: 'uppercase',
         }}>
@@ -157,7 +157,7 @@ export default function Navigation() {
             flexDirection: 'column',
             gap: '1rem',
             fontFamily: fonts.mono,
-            fontSize: '0.75rem',
+            fontSize: '0.8rem',
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
             boxShadow: `4px 4px 0 ${colors.pink}`,

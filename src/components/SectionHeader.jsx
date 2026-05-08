@@ -33,7 +33,7 @@ export default function SectionHeader({ num, title, italic, dark = false }) {
         </div>
         <h2 style={{
           fontFamily: fonts.display,
-          fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+          fontSize: 'clamp(2.2rem, 4.5vw, 4rem)',
           fontWeight: 400,
           lineHeight: 0.9,
           letterSpacing: '-0.02em',
