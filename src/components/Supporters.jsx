@@ -68,7 +68,7 @@ export default function Supporters() {
               display: 'grid',
               gridTemplateColumns: 'repeat(4, 1fr)',
               gap: '0.75rem',
-              height: '460px',
+              height: '700px',
               overflow: 'hidden',
               marginBottom: '3rem',
               borderRadius: '12px',
