@@ -1,8 +1,13 @@
 import { colors, fonts } from '../styles/theme';
-import { fanGradients, fanStats } from '../data/siteData';
+import { fanGradients } from '../data/siteData';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
 
 export default function Supporters() {
+  const { lang } = useLang();
+  const t = translations[lang].supporters;
+
   return (
     <>
       <style>{`
@@ -37,7 +42,7 @@ export default function Supporters() {
           zIndex: 2,
         }}
       >
-        <SectionHeader num="05 / Supporters" title="My" italic="Family" />
+        <SectionHeader num={t.sectionNum} title={t.sectionTitle} italic={t.sectionItalic} />
 
         <p style={{
           maxWidth: '600px',
@@ -46,7 +51,7 @@ export default function Supporters() {
           color: colors.inkSoft,
           marginBottom: '3rem',
         }}>
-          ขอบคุณทุกคนที่อยู่เคียงข้างกันมาตลอด ทุกรอยยิ้ม ทุกข้อความ ทุกการสนับสนุน คือพลังที่ทำให้ก้าวต่อไปได้ทุกวัน
+          {t.description}
         </p>
 
         <div className="fan-gallery-tj" style={{
@@ -84,14 +89,14 @@ export default function Supporters() {
           border: `1px solid ${colors.ink}`,
           marginTop: '4rem',
         }}>
-          {fanStats.map((s, i) => (
+          {t.stats.map((s, i) => (
             <div
               key={i}
               className="stat-tj"
               style={{
                 padding: '2.5rem',
                 textAlign: 'center',
-                borderRight: i < fanStats.length - 1 ? `1px solid ${colors.ink}` : 'none',
+                borderRight: i < t.stats.length - 1 ? `1px solid ${colors.ink}` : 'none',
                 background: i === 1 ? colors.pinkSoft : colors.cream,
               }}
             >

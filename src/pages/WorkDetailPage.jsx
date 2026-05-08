@@ -2,29 +2,39 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useLayoutEffect } from 'react';
 import { works } from '../data/siteData';
 import { colors, fonts } from '../styles/theme';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 import CursorSparkle from '../components/CursorSparkle';
 
 export default function WorkDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
+  const { lang } = useLang();
+  const t = translations[lang].workDetail;
+  const tp = translations[lang].profile;
 
   useLayoutEffect(() => { window.scrollTo(0, 0); }, []);
-  const work = works.find((w) => w.slug === slug);
+
+  const workIndex = works.findIndex((w) => w.slug === slug);
+  const work = works[workIndex];
+  const detail = workIndex >= 0 ? tp.workDetail[workIndex] : null;
 
   function goBack() {
     navigate('/', { state: { scrollTo: 'selected-works' } });
   }
 
-  if (!work) {
+  if (!work || !detail) {
     return (
       <div style={{ padding: '4rem', textAlign: 'center', fontFamily: fonts.body }}>
         <p>ไม่พบข้อมูล</p>
-        <button onClick={goBack} style={{ background: 'none', border: 'none', color: colors.accent, cursor: 'pointer' }}>← กลับหน้าหลัก</button>
+        <button onClick={goBack} style={{ background: 'none', border: 'none', color: colors.accent, cursor: 'pointer' }}>
+          {t.backNav}
+        </button>
       </div>
     );
   }
 
-  const { detail, color, icon } = work;
+  const { color, icon, type } = work;
 
   return (
     <>
@@ -38,23 +48,31 @@ export default function WorkDetailPage() {
           padding: 1.25rem 0;
           border-bottom: 1px solid ${colors.creamDark};
           align-items: center;
-          transition: background 0.2s;
+          transition: background 0.2s, padding 0.2s;
         }
-        .detail-item-tj:hover { background: ${colors.creamDark}; padding-left: 0.75rem; padding-right: 0.75rem; margin: 0 -0.75rem; border-radius: 8px; }
+        .detail-item-tj:hover {
+          background: ${colors.creamDark};
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+          margin: 0 -0.75rem;
+          border-radius: 8px;
+        }
         .back-btn-tj {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          fontFamily: ${fonts.mono};
+          font-family: inherit;
           font-size: 0.75rem;
           letter-spacing: 0.2em;
           text-transform: uppercase;
           color: ${colors.inkSoft};
-          text-decoration: none;
-          transition: color 0.2s, gap 0.2s;
+          background: none;
+          border: none;
           cursor: pointer;
+          transition: color 0.2s;
+          padding: 0;
         }
-        .back-btn-tj:hover { color: ${colors.ink}; gap: 0.75rem; }
+        .back-btn-tj:hover { color: ${colors.ink}; }
         @media (max-width: 768px) {
           .detail-hero-tj { padding: 6rem 1.5rem 3rem !important; }
           .detail-body-tj { padding: 3rem 1.5rem !important; }
@@ -65,12 +83,10 @@ export default function WorkDetailPage() {
 
       <CursorSparkle />
 
-      {/* Nav bar */}
+      {/* Nav */}
       <nav style={{
         position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
+        top: 0, left: 0, right: 0,
         zIndex: 100,
         display: 'flex',
         alignItems: 'center',
@@ -80,15 +96,10 @@ export default function WorkDetailPage() {
         backdropFilter: 'blur(12px)',
         borderBottom: `1px solid ${colors.creamDark}`,
       }}>
-        <button onClick={goBack} className="back-btn-tj" style={{ background: 'none', border: 'none' }}>
-          ← กลับหน้าหลัก
+        <button onClick={goBack} className="back-btn-tj">
+          {t.backNav}
         </button>
-        <span style={{
-          fontFamily: fonts.display,
-          fontSize: '1.1rem',
-          letterSpacing: '0.15em',
-          color: colors.ink,
-        }}>
+        <span style={{ fontFamily: fonts.display, fontSize: '1.1rem', letterSpacing: '0.15em', color: colors.ink }}>
           Tee · Jaruji
         </span>
       </nav>
@@ -103,7 +114,6 @@ export default function WorkDetailPage() {
           overflow: 'hidden',
         }}
       >
-        {/* Big background letter */}
         <div style={{
           position: 'absolute',
           right: '-0.5rem',
@@ -128,7 +138,7 @@ export default function WorkDetailPage() {
           color: colors.accent,
           marginBottom: '1rem',
         }}>
-          {work.type}
+          {type}
         </div>
         <h1 style={{
           fontFamily: fonts.display,
@@ -150,34 +160,14 @@ export default function WorkDetailPage() {
         }}>
           {detail.sub}
         </p>
-        <p style={{
-          fontSize: '1rem',
-          lineHeight: 1.8,
-          color: colors.inkSoft,
-          maxWidth: '600px',
-        }}>
+        <p style={{ fontSize: '1rem', lineHeight: 1.8, color: colors.inkSoft, maxWidth: '600px' }}>
           {detail.body}
         </p>
-
-        {/* Color accent bar */}
-        <div style={{
-          width: '60px',
-          height: '4px',
-          background: color,
-          borderRadius: '2px',
-          marginTop: '2.5rem',
-        }} />
+        <div style={{ width: '60px', height: '4px', background: color, borderRadius: '2px', marginTop: '2.5rem' }} />
       </div>
 
       {/* Items list */}
-      <div
-        className="detail-body-tj"
-        style={{
-          padding: '4rem',
-          maxWidth: '900px',
-          margin: '0 auto',
-        }}
-      >
+      <div className="detail-body-tj" style={{ padding: '4rem', maxWidth: '900px', margin: '0 auto' }}>
         <div style={{
           fontFamily: fonts.mono,
           fontSize: '0.75rem',
@@ -186,25 +176,15 @@ export default function WorkDetailPage() {
           color: colors.accent,
           marginBottom: '2rem',
         }}>
-          — All Works
+          {t.allWorks}
         </div>
 
         {detail.items.map((item, i) => (
           <div key={i} className="detail-item-tj">
-            <div style={{
-              fontFamily: fonts.body,
-              fontSize: '1.05rem',
-              fontWeight: 500,
-              color: colors.ink,
-            }}>
+            <div style={{ fontFamily: fonts.body, fontSize: '1.05rem', fontWeight: 500, color: colors.ink }}>
               {item.name}
             </div>
-            <div className="item-detail" style={{
-              fontFamily: fonts.body,
-              fontSize: '0.85rem',
-              color: colors.inkSoft,
-              textAlign: 'right',
-            }}>
+            <div className="item-detail" style={{ fontFamily: fonts.body, fontSize: '0.85rem', color: colors.inkSoft, textAlign: 'right' }}>
               {item.detail}
             </div>
             <div style={{
@@ -228,26 +208,28 @@ export default function WorkDetailPage() {
         borderTop: `1px solid ${colors.creamDark}`,
         marginTop: '2rem',
       }}>
-        <button onClick={goBack} style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          background: colors.ink,
-          color: colors.cream,
-          padding: '1rem 2.5rem',
-          borderRadius: '2px',
-          fontFamily: fonts.mono,
-          fontSize: '0.72rem',
-          letterSpacing: '0.2em',
-          textTransform: 'uppercase',
-          gap: '0.5rem',
-          transition: 'opacity 0.2s',
-          cursor: 'pointer',
-          border: 'none',
-        }}
+        <button
+          onClick={goBack}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            background: colors.ink,
+            color: colors.cream,
+            padding: '1rem 2.5rem',
+            borderRadius: '2px',
+            fontFamily: fonts.mono,
+            fontSize: '0.72rem',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            gap: '0.5rem',
+            transition: 'opacity 0.2s',
+            cursor: 'pointer',
+            border: 'none',
+          }}
           onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
-          ← กลับไป Selected Works
+          {t.backButton}
         </button>
       </div>
     </>

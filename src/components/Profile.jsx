@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 import { colors, fonts } from '../styles/theme';
-import { works, education } from '../data/siteData';
+import { works } from '../data/siteData';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
 import TiltCard from './TiltCard';
 import Reveal from './Reveal';
 
 export default function Profile() {
+  const { lang } = useLang();
+  const t = translations[lang].profile;
+
   return (
     <>
       <style>{`
@@ -32,7 +37,7 @@ export default function Profile() {
           zIndex: 2,
         }}
       >
-        <SectionHeader num="01 / Profile" title="Study &" italic="Work" />
+        <SectionHeader num={t.sectionNum} title={t.sectionTitle} italic={t.sectionItalic} />
 
         <h3 style={{
           fontFamily: fonts.mono,
@@ -41,10 +46,10 @@ export default function Profile() {
           textTransform: 'uppercase',
           color: colors.accent,
         }}>
-          — Education
+          {t.educationLabel}
         </h3>
 
-        {education.map((s, i) => (
+        {t.education.map((s, i) => (
           <div
             key={i}
             className="study-block-tj"
@@ -106,7 +111,7 @@ export default function Profile() {
           marginTop: '5rem',
           marginBottom: '2rem',
         }}>
-          — Selected Works
+          {t.worksLabel}
         </h3>
 
         <div className="work-grid-tj" style={{
@@ -137,10 +142,8 @@ export default function Profile() {
                 className="work-bar"
                 style={{
                   position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '6px',
+                  top: 0, left: 0,
+                  width: '100%', height: '6px',
                   background: work.color,
                   transform: 'scaleX(0)',
                   transformOrigin: 'left',
@@ -175,7 +178,7 @@ export default function Profile() {
                 lineHeight: 1.1,
                 whiteSpace: 'pre-line',
               }}>
-                {work.title}
+                {t.works[i].title}
               </h3>
               <p style={{
                 fontSize: '0.9rem',
@@ -183,7 +186,7 @@ export default function Profile() {
                 color: colors.inkSoft,
                 marginBottom: '1rem',
               }}>
-                {work.desc}
+                {t.works[i].desc}
               </p>
               <ul style={{ fontSize: '0.85rem' }}>
                 {work.items.map((item, j) => (
@@ -195,11 +198,7 @@ export default function Profile() {
                     gap: '1rem',
                   }}>
                     <span>{item.name}</span>
-                    <span style={{
-                      fontFamily: fonts.mono,
-                      fontSize: '0.7rem',
-                      color: colors.accent,
-                    }}>
+                    <span style={{ fontFamily: fonts.mono, fontSize: '0.7rem', color: colors.accent }}>
                       {item.year}
                     </span>
                   </li>
@@ -213,7 +212,7 @@ export default function Profile() {
                 textTransform: 'uppercase',
                 color: colors.accent,
               }}>
-                View All →
+                {t.viewAll}
               </div>
             </div>
             </Link>

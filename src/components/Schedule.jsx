@@ -1,8 +1,13 @@
 import { colors, fonts } from '../styles/theme';
-import { upcomingEvents, googleCalendarUrl } from '../data/siteData';
+import { googleCalendarUrl } from '../data/siteData';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
 
 export default function Schedule() {
+  const { lang } = useLang();
+  const t = translations[lang].schedule;
+
   return (
     <>
       <style>{`
@@ -21,7 +26,7 @@ export default function Schedule() {
           zIndex: 2,
         }}
       >
-        <SectionHeader num="04 / Schedule" title="Event" italic="Schedule" />
+        <SectionHeader num={t.sectionNum} title={t.sectionTitle} italic={t.sectionItalic} />
 
         <div style={{
           display: 'grid',
@@ -29,7 +34,7 @@ export default function Schedule() {
           gap: '1.5rem',
           marginBottom: '3rem',
         }}>
-          {upcomingEvents.map((e, i) => (
+          {t.events.map((e, i) => (
             <div key={i} style={{
               background: colors.cream,
               borderLeft: `4px solid ${colors.accent}`,
@@ -44,12 +49,7 @@ export default function Schedule() {
                 paddingRight: '1.5rem',
                 flexShrink: 0,
               }}>
-                <div style={{
-                  fontFamily: fonts.display,
-                  fontSize: '2.5rem',
-                  fontWeight: 500,
-                  lineHeight: 1,
-                }}>
+                <div style={{ fontFamily: fonts.display, fontSize: '2.5rem', fontWeight: 500, lineHeight: 1 }}>
                   {e.day}
                 </div>
                 <div style={{
@@ -64,20 +64,10 @@ export default function Schedule() {
                 </div>
               </div>
               <div>
-                <h4 style={{
-                  fontFamily: fonts.display,
-                  fontSize: '1.3rem',
-                  fontWeight: 500,
-                  marginBottom: '0.25rem',
-                }}>
+                <h4 style={{ fontFamily: fonts.display, fontSize: '1.3rem', fontWeight: 500, marginBottom: '0.25rem' }}>
                   {e.title}
                 </h4>
-                <p style={{
-                  fontSize: '0.85rem',
-                  color: colors.inkSoft,
-                }}>
-                  {e.detail}
-                </p>
+                <p style={{ fontSize: '0.85rem', color: colors.inkSoft }}>{e.detail}</p>
               </div>
             </div>
           ))}
@@ -91,28 +81,11 @@ export default function Schedule() {
         }}>
           <iframe
             src={googleCalendarUrl}
-            style={{
-              width: '100%',
-              height: '600px',
-              border: 'none',
-              display: 'block',
-            }}
+            style={{ width: '100%', height: '600px', border: 'none', display: 'block' }}
             loading="lazy"
             title="Tee Jaruji Calendar"
           />
         </div>
-
-        <p style={{
-          fontFamily: fonts.mono,
-          fontSize: '0.7rem',
-          letterSpacing: '0.2em',
-          textTransform: 'uppercase',
-          color: colors.inkSoft,
-          marginTop: '1.5rem',
-          textAlign: 'center',
-        }}>
-          * เปลี่ยน calendar URL ใน src/data/siteData.js
-        </p>
       </section>
     </>
   );

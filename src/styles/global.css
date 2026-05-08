@@ -72,22 +72,10 @@ img, video {
 }
 
 /* ============ SCROLLBAR ============ */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #fdf6ec;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #f4b8c8;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #d97a8e;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #f4b8c8; border-radius: 0; border: none; }
+::-webkit-scrollbar-thumb:hover { background: #e8907a; }
 
 /* ============ SELECTION ============ */
 ::selection {

@@ -1,9 +1,9 @@
 import { colors, fonts } from '../styles/theme';
-import { socials, aboutQuote } from '../data/siteData';
+import { socials } from '../data/siteData';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
-import {
-  FaFacebook, FaInstagram, FaWeibo, FaLine,
-} from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaWeibo, FaLine } from 'react-icons/fa';
 import { FaXTwitter, FaTiktok } from 'react-icons/fa6';
 import { SiXiaohongshu } from 'react-icons/si';
 
@@ -18,6 +18,9 @@ const ICONS = {
 };
 
 export default function About() {
+  const { lang } = useLang();
+  const t = translations[lang].about;
+
   return (
     <>
       <style>{`
@@ -66,7 +69,7 @@ export default function About() {
           zIndex: 2,
         }}
       >
-        <SectionHeader num="02 / About" title="Find Me" italic="Online" />
+        <SectionHeader num={t.sectionNum} title={t.sectionTitle} italic={t.sectionItalic} />
 
         <div className="about-grid-tj" style={{
           display: 'grid',
@@ -74,7 +77,6 @@ export default function About() {
           gap: '5rem',
           alignItems: 'start',
         }}>
-          {/* Quote */}
           <div style={{
             fontFamily: fonts.display,
             fontSize: '1.8rem',
@@ -94,7 +96,7 @@ export default function About() {
               fontFamily: fonts.display,
               lineHeight: 1,
             }}>"</span>
-            {aboutQuote.text}
+            {t.quote}
             <span style={{
               display: 'block',
               fontSize: '0.85rem',
@@ -105,11 +107,10 @@ export default function About() {
               color: colors.accent,
               marginTop: '2rem',
             }}>
-              {aboutQuote.signature}
+              {t.signature}
             </span>
           </div>
 
-          {/* Social Grid */}
           <div className="social-grid-tj" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
@@ -137,10 +138,7 @@ export default function About() {
                     boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
                   }}
                 >
-                  <div
-                    className="social-bg-tj"
-                    style={{ background: s.color, borderRadius: '16px' }}
-                  />
+                  <div className="social-bg-tj" style={{ background: s.color, borderRadius: '16px' }} />
                   {Icon && (
                     <Icon
                       className="social-icon-tj social-text-tj"
@@ -148,28 +146,22 @@ export default function About() {
                     />
                   )}
                   <div style={{ position: 'relative', zIndex: 1 }}>
-                    <div
-                      className="social-text-tj"
-                      style={{
-                        fontFamily: fonts.mono,
-                        fontSize: '0.6rem',
-                        letterSpacing: '0.25em',
-                        textTransform: 'uppercase',
-                        color: colors.inkSoft,
-                        marginBottom: '0.25rem',
-                      }}
-                    >
+                    <div className="social-text-tj" style={{
+                      fontFamily: fonts.mono,
+                      fontSize: '0.6rem',
+                      letterSpacing: '0.25em',
+                      textTransform: 'uppercase',
+                      color: colors.inkSoft,
+                      marginBottom: '0.25rem',
+                    }}>
                       {s.platform}
                     </div>
-                    <div
-                      className="social-text-tj"
-                      style={{
-                        fontFamily: fonts.body,
-                        fontSize: '0.85rem',
-                        fontWeight: 500,
-                        color: colors.ink,
-                      }}
-                    >
+                    <div className="social-text-tj" style={{
+                      fontFamily: fonts.body,
+                      fontSize: '0.85rem',
+                      fontWeight: 500,
+                      color: colors.ink,
+                    }}>
                       {s.handle}
                     </div>
                   </div>

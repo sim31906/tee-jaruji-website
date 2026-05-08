@@ -1,10 +1,15 @@
 import { colors, fonts } from '../styles/theme';
-import { services, reportFormUrl } from '../data/siteData';
+import { reportFormUrl } from '../data/siteData';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
 import TiltCard from './TiltCard';
 import Reveal from './Reveal';
 
 export default function Fanclub() {
+  const { lang } = useLang();
+  const t = translations[lang].fanclub;
+
   return (
     <>
       <style>{`
@@ -48,7 +53,7 @@ export default function Fanclub() {
           zIndex: 2,
         }}
       >
-        <SectionHeader num="06 / Fanclub Services" title="บริการ" italic="เเฟนคลับ" dark />
+        <SectionHeader num={t.sectionNum} title={t.sectionTitle} italic={t.sectionItalic} dark />
 
         <p style={{
           maxWidth: '600px',
@@ -57,7 +62,7 @@ export default function Fanclub() {
           opacity: 0.8,
           marginBottom: '3rem',
         }}>
-          ช่องทางสำหรับเเฟนคลับที่ต้องการสนับสนุน · จัดกิจกรรม · หรือเเจ้งปัญหาต่าง ๆ ทีมงานยินดีดูเเลทุกท่านอย่างใกล้ชิด
+          {t.description}
         </p>
 
         <div className="service-grid-tj" style={{
@@ -66,7 +71,7 @@ export default function Fanclub() {
           gap: '2rem',
           marginBottom: '4rem',
         }}>
-          {services.map((s, i) => (
+          {t.services.map((s, i) => (
             <Reveal key={i} delay={i * 150}>
             <TiltCard style={{ height: '100%' }}>
             <div
@@ -138,14 +143,10 @@ export default function Fanclub() {
               lineHeight: 1.1,
               marginBottom: '0.75rem',
             }}>
-              เเจ้งปัญหา / รายงาน
+              {t.reportTitle}
             </h3>
-            <p style={{
-              fontSize: '0.95rem',
-              lineHeight: 1.6,
-              opacity: 0.85,
-            }}>
-              พบเห็นบัญชีปลอม ภาพ/วิดีโอที่ใช้โดยไม่ได้รับอนุญาต ข้อมูลเท็จ หรือต้องการรายงานเรื่องอื่น ๆ สามารถส่งเรื่องผ่านเเบบฟอร์มได้ตลอด 24 ชั่วโมง
+            <p style={{ fontSize: '0.95rem', lineHeight: 1.6, opacity: 0.85 }}>
+              {t.reportDesc}
             </p>
           </div>
           <a
@@ -166,21 +167,9 @@ export default function Fanclub() {
               transition: 'all 0.3s',
             }}
           >
-            Open Report Form ↗
+            {t.reportButton}
           </a>
         </div>
-
-        <p style={{
-          fontFamily: fonts.mono,
-          fontSize: '0.7rem',
-          letterSpacing: '0.2em',
-          textTransform: 'uppercase',
-          color: 'rgba(253, 246, 236, 0.4)',
-          marginTop: '1.5rem',
-          textAlign: 'center',
-        }}>
-          * เปลี่ยน Google Form URL ใน src/data/siteData.js
-        </p>
       </section>
     </>
   );

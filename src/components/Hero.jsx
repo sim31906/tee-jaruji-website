@@ -1,10 +1,15 @@
 import { colors, fonts } from '../styles/theme';
 import { hero } from '../data/siteData';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 
 export default function Hero() {
+  const { lang } = useLang();
+  const t = translations[lang].hero;
+
   const handleVideoClick = () => {
     if (!hero.videoUrl) {
-      alert('วางลิงก์วิดีโอเเนะนำตัวที่ src/data/siteData.js > hero.videoUrl');
+      alert('วางลิงก์วิดีโอแนะนำตัวที่ src/data/siteData.js > hero.videoUrl');
     }
   };
 
@@ -52,13 +57,8 @@ export default function Hero() {
             animation: 'hero-reveal 0.8s ease both',
             animationDelay: '0.1s',
           }}>
-            <span style={{
-              display: 'inline-block',
-              width: '40px',
-              height: '1px',
-              background: colors.accent,
-            }}></span>
-            {hero.tagline}
+            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: colors.accent }}></span>
+            {t.tagline}
           </div>
 
           <h1 style={{
@@ -72,11 +72,7 @@ export default function Hero() {
             animationDelay: '0.3s',
           }}>
             {hero.name}<br />
-            <span style={{
-              fontStyle: 'italic',
-              fontWeight: 300,
-              color: colors.accent,
-            }}>
+            <span style={{ fontStyle: 'italic', fontWeight: 300, color: colors.accent }}>
               {hero.surname}
             </span>
           </h1>
@@ -90,11 +86,11 @@ export default function Hero() {
             animation: 'hero-reveal 0.9s ease both',
             animationDelay: '0.55s',
           }}>
-            {hero.description}
+            {t.description}
           </p>
 
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', animation: 'hero-reveal 0.9s ease both', animationDelay: '0.75s' }}>
-            {hero.tags.map(tag => (
+            {t.tags.map(tag => (
               <span key={tag} style={{
                 padding: '0.5rem 1rem',
                 border: `1px solid ${colors.ink}`,
@@ -123,7 +119,6 @@ export default function Hero() {
           transform: 'rotate(-2deg)',
         }}>
           {hero.videoUrl ? (
-            // ถ้าเป็น YouTube embed
             hero.videoUrl.includes('youtube.com') || hero.videoUrl.includes('youtu.be') ? (
               <iframe
                 src={hero.videoUrl}
@@ -133,14 +128,7 @@ export default function Hero() {
                 title="Intro video"
               />
             ) : (
-              // ถ้าเป็น MP4
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              >
+              <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
                 <source src={hero.videoUrl} type="video/mp4" />
               </video>
             )
@@ -161,43 +149,33 @@ export default function Hero() {
                 transition: 'all 0.3s',
               }}
             >
-              <div
-                className="play-icon-tj"
-                style={{
-                  width: '90px',
-                  height: '90px',
-                  border: `2px solid ${colors.ink}`,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '1.5rem',
-                  transition: 'all 0.3s',
-                  background: 'rgba(253, 246, 236, 0.5)',
-                }}
-              >
+              <div className="play-icon-tj" style={{
+                width: '90px',
+                height: '90px',
+                border: `2px solid ${colors.ink}`,
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1.5rem',
+                transition: 'all 0.3s',
+                background: 'rgba(253, 246, 236, 0.5)',
+              }}>
                 <div style={{
-                  width: 0,
-                  height: 0,
+                  width: 0, height: 0,
                   borderLeft: `20px solid ${colors.ink}`,
                   borderTop: '14px solid transparent',
                   borderBottom: '14px solid transparent',
                   marginLeft: '5px',
                 }}></div>
               </div>
-              <div style={{
-                fontFamily: fonts.mono,
-                fontSize: '0.75rem',
-                letterSpacing: '0.3em',
-                textTransform: 'uppercase',
-              }}>
-                Watch Intro
+              <div style={{ fontFamily: fonts.mono, fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>
+                {t.watchIntro}
               </div>
             </div>
           )}
         </div>
 
-        {/* Marquee */}
         <div style={{
           position: 'absolute',
           bottom: '2rem',
@@ -218,9 +196,7 @@ export default function Hero() {
             opacity: 0.5,
           }}>
             {Array(6).fill(null).map((_, i) => (
-              <span key={i} style={{ marginRight: '3rem' }}>
-                · welcome · tee jaruji · official ·
-              </span>
+              <span key={i} style={{ marginRight: '3rem' }}>· welcome · tee jaruji · official ·</span>
             ))}
           </div>
         </div>

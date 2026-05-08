@@ -1,17 +1,18 @@
 import { colors, fonts } from '../styles/theme';
 import { contacts } from '../data/siteData';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
 
 export default function Contact() {
+  const { lang } = useLang();
+  const t = translations[lang].contact;
+
   return (
     <>
       <style>{`
-        .contact-item-tj {
-          transition: background 0.3s;
-        }
-        .contact-item-tj:hover {
-          background: ${colors.pinkSoft};
-        }
+        .contact-item-tj { transition: background 0.3s; }
+        .contact-item-tj:hover { background: ${colors.pinkSoft}; }
         @media (max-width: 968px) {
           .contact-grid-tj { grid-template-columns: 1fr !important; }
           .contact-item-tj {
@@ -33,7 +34,7 @@ export default function Contact() {
           background: colors.cream,
         }}
       >
-        <SectionHeader num="03 / Contact" title="Get in" italic="Touch" />
+        <SectionHeader num={t.sectionNum} title={t.sectionTitle} italic={t.sectionItalic} />
 
         <div className="contact-grid-tj" style={{
           display: 'grid',
@@ -41,13 +42,13 @@ export default function Contact() {
           border: `1px solid ${colors.ink}`,
           background: colors.cream,
         }}>
-          {contacts.map((c, i) => (
+          {t.items.map((c, i) => (
             <div
               key={i}
               className="contact-item-tj"
               style={{
                 padding: '3rem 2.5rem',
-                borderRight: i < contacts.length - 1 ? `1px solid ${colors.ink}` : 'none',
+                borderRight: i < t.items.length - 1 ? `1px solid ${colors.ink}` : 'none',
               }}
             >
               <div style={{
@@ -69,9 +70,9 @@ export default function Contact() {
                 {c.value}
               </div>
               <a
-                href={c.href}
-                target={c.href.startsWith('http') ? '_blank' : undefined}
-                rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                href={contacts[i].href}
+                target={contacts[i].href.startsWith('http') ? '_blank' : undefined}
+                rel={contacts[i].href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 style={{
                   display: 'inline-block',
                   marginTop: '1.5rem',
