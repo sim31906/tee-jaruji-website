@@ -404,7 +404,7 @@ export const translations = {
         {
           date: '2018年10月毕业',
           degree: '本科学位',
-          school: '卡塞萨特大学',
+          school: 'Kasetsart University',
           location: '社会科学学院 · 心理学系',
         },
       ],
