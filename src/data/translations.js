@@ -17,6 +17,11 @@ export const translations = {
       sectionItalic: 'ผลงาน',
       educationLabel: '— การศึกษา',
       worksLabel: '— ผลงานที่คัดสรร',
+      worksTab: 'ผลงานที่คัดสรร',
+      journeyTab: 'การเดินทาง',
+      journeyLabel: '— การเดินทางของตี๋',
+      journeyLegend: { event: 'งานอีเวนต์', acting: 'การแสดง', music: 'เพลงและดนตรี' },
+      viewTimeline: 'ดูการเดินทาง →',
       viewAll: 'ดูทั้งหมด →',
       education: [
         {
@@ -150,6 +155,14 @@ export const translations = {
       backButton: '← กลับไป ผลงานที่คัดสรร',
       allWorks: '— ผลงานทั้งหมด',
     },
+    timeline: {
+      backNav: '← กลับหน้าหลัก',
+      heading: 'การเดินทาง',
+      headingItalic: 'ของตี๋',
+      sub: 'จาก พ.ศ. 2554 จนถึงปัจจุบัน · ทุกก้าวของการเดินทาง',
+      filterAll: 'ทั้งหมด',
+      viewTimeline: 'ดูการเดินทาง →',
+    },
   },
 
   en: {
@@ -170,6 +183,11 @@ export const translations = {
       sectionItalic: 'Work',
       educationLabel: '— Education',
       worksLabel: '— Selected Works',
+      worksTab: 'Selected Works',
+      journeyTab: 'Career Journey',
+      journeyLabel: "— Tee's Journey",
+      journeyLegend: { event: 'Events', acting: 'Acting', music: 'Music' },
+      viewTimeline: 'View Journey →',
       viewAll: 'View All →',
       education: [
         {
@@ -303,6 +321,14 @@ export const translations = {
       backButton: '← Back to Selected Works',
       allWorks: '— All Works',
     },
+    timeline: {
+      backNav: '← Back to Home',
+      heading: 'Career',
+      headingItalic: 'Journey',
+      sub: 'From 2011 to present · Every step of the way',
+      filterAll: 'All',
+      viewTimeline: 'View Journey →',
+    },
   },
 
   zh: {
@@ -323,6 +349,11 @@ export const translations = {
       sectionItalic: '作品',
       educationLabel: '— 教育经历',
       worksLabel: '— 精选作品',
+      worksTab: '精选作品',
+      journeyTab: '成长历程',
+      journeyLabel: '— Tee 的历程',
+      journeyLegend: { event: '活动', acting: '影视', music: '音乐' },
+      viewTimeline: '查看历程 →',
       viewAll: '查看全部 →',
       education: [
         {
@@ -455,6 +486,14 @@ export const translations = {
       backNav: '← 返回主页',
       backButton: '← 返回精选作品',
       allWorks: '— 全部作品',
+    },
+    timeline: {
+      backNav: '← 返回主页',
+      heading: '成长',
+      headingItalic: '历程',
+      sub: '从 2011 年至今 · 每一步的历程',
+      filterAll: '全部',
+      viewTimeline: '查看历程 →',
     },
   },
 };

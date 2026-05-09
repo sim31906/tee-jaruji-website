@@ -310,6 +310,45 @@ export const services = [
 // ใส่ลิงก์ Google Form ที่นี่
 export const reportFormUrl = "https://forms.google.com/your-form-id";
 
+// ---- CAREER TIMELINE ----
+// type: 'event' | 'acting' | 'music'
+export const careerTimeline = [
+  { year: 2554, type: 'acting', title: 'บทรับเชิญครั้งแรก', desc: 'ก้าวแรกในวงการบันเทิง · บทรับเชิญในซีรีส์ทางโทรทัศน์' },
+  { year: 2555, type: 'acting', title: 'ร่วมแสดงซีรีส์ไทย', desc: 'บทรองในซีรีส์โทรทัศน์ · สร้างชื่อในวงการ' },
+  { year: 2556, type: 'event', title: 'งานอีเวนต์แรก', desc: 'เริ่มออกงานพีอาร์และกิจกรรมแบรนด์' },
+  { year: 2557, type: 'music', title: 'เพลงแรก', desc: 'ร่วมร้องเพลงประกอบซีรีส์เป็นครั้งแรก' },
+  { year: 2557, type: 'acting', title: 'ละครโทรทัศน์', desc: 'บทหลักครั้งแรกในซีรีส์ทางโทรทัศน์' },
+  { year: 2558, type: 'acting', title: 'บทนำครั้งแรก', desc: 'บทพระเอกในซีรีส์ยอดนิยม · สร้างฐานแฟนคลับ' },
+  { year: 2559, type: 'music', title: 'ซิงเกิลเดี่ยวชุดแรก', desc: 'ปล่อยเพลงเดี่ยวอย่างเป็นทางการ · เผยแพร่บนทุกแพลตฟอร์ม' },
+  { year: 2559, type: 'event', title: 'แฟนมีตครั้งแรก', desc: 'จัดงานพบแฟนคลับอย่างเป็นทางการเป็นครั้งแรก' },
+  { year: 2560, type: 'acting', title: 'ภาพยนตร์ไทย', desc: 'บทรับเชิญพิเศษในภาพยนตร์ใหญ่' },
+  { year: 2561, type: 'event', title: 'จบการศึกษา · KU', desc: 'สำเร็จการศึกษาปริญญาตรี คณะสังคมศาสตร์ มหาวิทยาลัยเกษตรศาสตร์' },
+  { year: 2561, type: 'acting', title: 'ซีรีส์วาย', desc: 'รับบทหลักในซีรีส์วายที่โด่งดัง · ก้าวสู่ระดับประเทศ' },
+  { year: 2562, type: 'event', title: 'งานต่างประเทศครั้งแรก', desc: 'เดินทางไปร่วมงานในต่างประเทศ · เปิดตลาดใหม่' },
+  { year: 2562, type: 'acting', title: 'บทนำซีรีส์ฮิต', desc: 'ซีรีส์ที่โด่งดังที่สุดในปีนั้น · รางวัลนักแสดงยอดเยี่ยม' },
+  { year: 2563, type: 'music', title: 'OST ซีรีส์', desc: 'ร้องเพลงประกอบซีรีส์ · ติดชาร์ต Spotify Thailand' },
+  { year: 2563, type: 'event', title: 'ออนไลน์อีเวนต์', desc: 'ปรับตัวสู่รูปแบบออนไลน์ · Virtual Fan Meeting ครั้งแรก' },
+  { year: 2564, type: 'acting', title: 'ซีรีส์ยอดนิยม', desc: 'กลับมาพร้อมซีรีส์สุดฮิต หลังสถานการณ์โควิด' },
+  { year: 2564, type: 'music', title: 'ซิงเกิลใหม่', desc: 'ปล่อยเพลงใหม่ · ยอดสตรีมสูงสุดนับตั้งแต่เปิดตัว' },
+  { year: 2565, type: 'event', title: 'แฟนมีตกลับมา', desc: 'กลับมาจัดงานพบแฟนคลับแบบ Onsite หลังโควิด' },
+  { year: 2565, type: 'acting', title: 'ภาพยนตร์ไทย', desc: 'บทสมทบสำคัญในภาพยนตร์ที่เข้าฉายในโรง' },
+  { year: 2566, type: 'event', title: 'แฟนมีต เชียงใหม่', desc: 'Nimman Hall · 500 ที่นั่ง · บ้านเกิดบ้านเกิด' },
+  { year: 2566, type: 'acting', title: 'บทรับเชิญ GMM25', desc: 'ปรากฏตัวใน Crossover Series ทาง GMM25' },
+  { year: 2566, type: 'acting', title: 'ละครเวที', desc: 'กรุงเทพฯ · 10 รอบการแสดง · ขายบัตรหมดเกลี้ยง' },
+  { year: 2566, type: 'music', title: 'ซิงเกิลร่วมงาน', desc: 'Collaboration กับศิลปินชื่อดัง · Top Chart' },
+  { year: 2566, type: 'music', title: 'คอนเสิร์ตสิ้นปี', desc: 'Central World Stage · ศิลปินรับเชิญพิเศษ' },
+  { year: 2567, type: 'event', title: 'งานต่างประเทศ · ญี่ปุ่น', desc: 'โตเกียว · Thai Wave Festival · ตัวแทนนักแสดงไทย' },
+  { year: 2567, type: 'event', title: 'งานการกุศล', desc: 'กรุงเทพฯ · สภากาชาด · ร่วมระดมทุนเพื่อสังคม' },
+  { year: 2567, type: 'acting', title: 'การแสดงบนเวที', desc: 'รอบพิเศษ กรุงเทพฯ · ร่วมงานกับผู้กำกับระดับประเทศ' },
+  { year: 2567, type: 'acting', title: 'ภาพยนตร์สั้น', desc: 'Official Selection · Thai Film Festival · กำกับโดยผู้กำกับรางวัล' },
+  { year: 2567, type: 'music', title: 'OST ช่อง 3', desc: 'ร้องเพลงประกอบซีรีส์ช่อง 3 · ติดชาร์ตต่อเนื่อง' },
+  { year: 2567, type: 'music', title: 'คอนเสิร์ตสด', desc: 'Impact Arena · ศิลปินรับเชิญพิเศษ · ผู้ชม 10,000 คน' },
+  { year: 2568, type: 'event', title: 'งานแบรนด์ · Siam Paragon', desc: 'พรีเซนเตอร์แบรนด์ชั้นนำ · ออกสื่อครั้งใหญ่' },
+  { year: 2568, type: 'acting', title: 'บทนำ · ช่อง 3', desc: 'พระเอกหลักซีรีส์ไพรม์ไทม์ · ช่อง 3' },
+  { year: 2568, type: 'music', title: 'ซิงเกิลใหม่', desc: 'Digital Streaming · ทุกแพลตฟอร์มทั่วโลก' },
+  { year: 2569, type: 'event', title: 'เปิดเว็บไซต์อย่างเป็นทางการ', desc: 'teejaruji.com · ศูนย์รวมทุกเรื่องราวและผลงาน' },
+];
+
 // ---- NAV LINKS ----
 export const navItems = [
   "home",

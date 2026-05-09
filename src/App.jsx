@@ -13,6 +13,7 @@ import Footer from './components/Footer';
 import CursorSparkle from './components/CursorSparkle';
 import Reveal from './components/Reveal';
 import WorkDetailPage from './pages/WorkDetailPage';
+import TimelinePage from './pages/TimelinePage';
 
 function MainPage() {
   const location = useLocation();
@@ -83,6 +84,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/work/:slug" element={<WorkDetailPage />} />
+      <Route path="/timeline" element={<TimelinePage />} />
     </Routes>
   );
 }

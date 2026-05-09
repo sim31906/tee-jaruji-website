@@ -1,15 +1,30 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { colors, fonts } from '../styles/theme';
-import { works, education } from '../data/siteData';
+import { works, education, careerTimeline } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
 import TiltCard from './TiltCard';
 import Reveal from './Reveal';
 
+const TYPE_COLORS = {
+  event: colors.pink,
+  acting: colors.blue,
+  music: colors.creamDark,
+};
+const TYPE_BG = {
+  event: '#fce4ea',
+  acting: '#dceaf4',
+  music: '#f5ead8',
+};
+
+const SLUG_TO_TYPE = { events: 'event', performance: 'acting', music: 'music' };
+
 export default function Profile() {
   const { lang } = useLang();
   const t = translations[lang].profile;
+  const [activeTab, setActiveTab] = useState('works');
 
   return (
     <>
@@ -19,6 +34,13 @@ export default function Profile() {
         }
         .work-card-tj:hover .work-bar {
           transform: scaleX(1) !important;
+        }
+        .timeline-cta-tj:hover {
+          background: ${colors.ink} !important;
+          color: ${colors.cream} !important;
+        }
+        .timeline-cta-tj:hover * {
+          color: ${colors.cream} !important;
         }
         .edu-card-tj {
           display: flex;
@@ -138,124 +160,340 @@ export default function Profile() {
           ))}
         </div>
 
-        <h3 id="selected-works" style={{
-          fontFamily: fonts.mono,
-          fontSize: '0.8rem',
-          letterSpacing: '0.3em',
-          textTransform: 'uppercase',
-          color: colors.accent,
+        {/* Tab switcher */}
+        <div id="selected-works" style={{
+          display: 'flex',
+          gap: '0',
           marginTop: '5rem',
-          marginBottom: '2rem',
+          marginBottom: '2.5rem',
+          borderBottom: `1px solid ${colors.ink}`,
         }}>
-          {t.worksLabel}
-        </h3>
-
-        <div className="work-grid-tj" style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '2rem',
-        }}>
-          {works.map((work, i) => (
-            <Reveal key={i} delay={i * 120}>
-            <TiltCard style={{ height: '100%' }}>
-            <Link
-              to={`/work/${work.slug}`}
-              style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}
-            >
-            <div
-              className="work-card-tj"
+          {[
+            { key: 'works', label: t.worksTab },
+            { key: 'journey', label: t.journeyTab },
+          ].map(tab => (
+            <button
+              key={tab.key}
+              onClick={() => setActiveTab(tab.key)}
               style={{
-                position: 'relative',
-                padding: '2.5rem 2rem',
-                background: colors.cream,
-                border: `1px solid ${colors.ink}`,
-                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                fontFamily: fonts.mono,
+                fontSize: '0.78rem',
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                padding: '0.75rem 1.75rem',
+                background: 'none',
+                border: 'none',
+                borderBottom: activeTab === tab.key ? `2px solid ${colors.ink}` : '2px solid transparent',
+                color: activeTab === tab.key ? colors.ink : colors.inkSoft,
                 cursor: 'pointer',
+                marginBottom: '-1px',
+                transition: 'all 0.2s',
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {activeTab === 'works' && (
+          <div className="work-grid-tj" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '2rem',
+          }}>
+            {works.map((work, i) => (
+              <Reveal key={i} delay={i * 120}>
+              <TiltCard style={{ height: '100%' }}>
+              <div
+                className="work-card-tj"
+                style={{
+                  position: 'relative',
+                  padding: '2.5rem 2rem',
+                  background: colors.cream,
+                  border: `1px solid ${colors.ink}`,
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  className="work-bar"
+                  style={{
+                    position: 'absolute',
+                    top: 0, left: 0,
+                    width: '100%', height: '6px',
+                    background: work.color,
+                    transform: 'scaleX(0)',
+                    transformOrigin: 'left',
+                    transition: 'transform 0.4s',
+                  }}
+                />
+                <div style={{
+                  fontFamily: fonts.display,
+                  fontSize: '4rem',
+                  fontStyle: 'italic',
+                  color: colors.accent,
+                  marginBottom: '1.5rem',
+                  lineHeight: 1,
+                }}>
+                  {work.icon}
+                </div>
+                <div style={{
+                  fontFamily: fonts.mono,
+                  fontSize: '0.8rem',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  marginBottom: '0.75rem',
+                  color: colors.inkSoft,
+                }}>
+                  {work.type}
+                </div>
+                <h3 style={{
+                  fontFamily: fonts.display,
+                  fontSize: '1.7rem',
+                  fontWeight: 500,
+                  marginBottom: '1rem',
+                  lineHeight: 1.1,
+                  whiteSpace: 'pre-line',
+                }}>
+                  {t.works[i].title}
+                </h3>
+                <p style={{
+                  fontSize: '1rem',
+                  lineHeight: 1.6,
+                  color: colors.inkSoft,
+                  marginBottom: '1rem',
+                }}>
+                  {t.works[i].desc}
+                </p>
+                <ul style={{ fontSize: '0.85rem' }}>
+                  {work.items.map((item, j) => (
+                    <li key={j} style={{
+                      padding: '0.6rem 0',
+                      borderBottom: j < work.items.length - 1 ? `1px dashed ${colors.creamDark}` : 'none',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      gap: '1rem',
+                    }}>
+                      <span>{item.name}</span>
+                      <span style={{ fontFamily: fonts.mono, fontSize: '0.8rem', color: colors.accent }}>
+                        {item.year}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  to={`/work/${work.slug}`}
+                  style={{
+                    marginTop: '1.5rem',
+                    fontFamily: fonts.mono,
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    color: colors.accent,
+                    textDecoration: 'none',
+                  }}
+                >
+                  {t.viewAll}
+                </Link>
+              </div>
+              </TiltCard>
+              </Reveal>
+            ))}
+          </div>
+        )}
+
+        {activeTab === 'works' && (
+          <Reveal delay={200}>
+          <Link
+            to="/timeline"
+            style={{ textDecoration: 'none' }}
+          >
+            <div
+              className="timeline-cta-tj"
+              style={{
+                marginTop: '2rem',
+                border: `1px solid ${colors.ink}`,
+                padding: '3rem 2.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                background: colors.cream,
+                transition: 'all 0.3s',
+                cursor: 'pointer',
+                position: 'relative',
                 overflow: 'hidden',
               }}
             >
-              <div
-                className="work-bar"
-                style={{
-                  position: 'absolute',
-                  top: 0, left: 0,
-                  width: '100%', height: '6px',
-                  background: work.color,
-                  transform: 'scaleX(0)',
-                  transformOrigin: 'left',
-                  transition: 'transform 0.4s',
-                }}
-              />
+              {/* watermark year */}
               <div style={{
+                position: 'absolute',
+                right: '4rem',
+                top: '50%',
+                transform: 'translateY(-50%)',
                 fontFamily: fonts.display,
-                fontSize: '4rem',
+                fontSize: 'clamp(5rem, 12vw, 9rem)',
                 fontStyle: 'italic',
-                color: colors.accent,
-                marginBottom: '1.5rem',
+                color: colors.ink,
+                opacity: 0.04,
                 lineHeight: 1,
+                userSelect: 'none',
+                pointerEvents: 'none',
+                letterSpacing: '-0.04em',
               }}>
-                {work.icon}
+                2554
               </div>
+
+              <div>
+                <div style={{
+                  fontFamily: fonts.mono,
+                  fontSize: '0.72rem',
+                  letterSpacing: '0.3em',
+                  textTransform: 'uppercase',
+                  color: colors.inkSoft,
+                  marginBottom: '0.75rem',
+                }}>
+                  — ทุกก้าวของการเดินทาง
+                </div>
+                <div style={{
+                  fontFamily: fonts.display,
+                  fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+                  fontWeight: 500,
+                  color: colors.ink,
+                  lineHeight: 1.0,
+                  letterSpacing: '-0.02em',
+                }}>
+                  การเดินทางของตี๋{' '}
+                  <span style={{ fontStyle: 'italic', color: colors.accent }}>
+                    2554 — ปัจจุบัน
+                  </span>
+                </div>
+              </div>
+
               <div style={{
                 fontFamily: fonts.mono,
-                fontSize: '0.8rem',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                marginBottom: '0.75rem',
-                color: colors.inkSoft,
+                fontSize: '2rem',
+                color: colors.ink,
+                lineHeight: 1,
+                flexShrink: 0,
+                marginLeft: '2rem',
               }}>
-                {work.type}
-              </div>
-              <h3 style={{
-                fontFamily: fonts.display,
-                fontSize: '1.7rem',
-                fontWeight: 500,
-                marginBottom: '1rem',
-                lineHeight: 1.1,
-                whiteSpace: 'pre-line',
-              }}>
-                {t.works[i].title}
-              </h3>
-              <p style={{
-                fontSize: '1rem',
-                lineHeight: 1.6,
-                color: colors.inkSoft,
-                marginBottom: '1rem',
-              }}>
-                {t.works[i].desc}
-              </p>
-              <ul style={{ fontSize: '0.85rem' }}>
-                {work.items.map((item, j) => (
-                  <li key={j} style={{
-                    padding: '0.6rem 0',
-                    borderBottom: j < work.items.length - 1 ? `1px dashed ${colors.creamDark}` : 'none',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    gap: '1rem',
-                  }}>
-                    <span>{item.name}</span>
-                    <span style={{ fontFamily: fonts.mono, fontSize: '0.8rem', color: colors.accent }}>
-                      {item.year}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <div style={{
-                marginTop: '1.5rem',
-                fontFamily: fonts.mono,
-                fontSize: '0.68rem',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-                color: colors.accent,
-              }}>
-                {t.viewAll}
+                →
               </div>
             </div>
-            </Link>
-            </TiltCard>
-            </Reveal>
-          ))}
-        </div>
+          </Link>
+          </Reveal>
+        )}
+
+        {activeTab === 'journey' && (
+          <div>
+            {/* Legend */}
+            <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+              {Object.entries(t.journeyLegend).map(([key, label]) => (
+                <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: TYPE_COLORS[key], flexShrink: 0 }} />
+                  <span style={{ fontFamily: fonts.mono, fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: colors.inkSoft }}>
+                    {label}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* Timeline */}
+            {(() => {
+              const years = [...new Set(careerTimeline.map(e => e.year))].sort((a, b) => a - b);
+              return (
+                <div style={{ position: 'relative' }}>
+                  {/* Vertical line */}
+                  <div style={{
+                    position: 'absolute',
+                    left: '5.5rem',
+                    top: 0, bottom: 0,
+                    width: '1px',
+                    background: colors.creamDark,
+                  }} />
+
+                  {years.map((year, yi) => {
+                    const items = careerTimeline.filter(e => e.year === year);
+                    return (
+                      <Reveal key={year} delay={yi * 60}>
+                      <div style={{ marginBottom: '2.5rem' }}>
+                        {/* Year marker */}
+                        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
+                          <div style={{
+                            fontFamily: fonts.mono,
+                            fontSize: '0.72rem',
+                            letterSpacing: '0.2em',
+                            color: colors.accent,
+                            width: '4.5rem',
+                            flexShrink: 0,
+                          }}>
+                            {year}
+                          </div>
+                          <div style={{
+                            width: '10px', height: '10px',
+                            borderRadius: '50%',
+                            background: colors.ink,
+                            flexShrink: 0,
+                            zIndex: 1,
+                            marginLeft: '0.5rem',
+                          }} />
+                        </div>
+
+                        {/* Items for this year */}
+                        <div style={{ paddingLeft: '6.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                          {items.map((item, ii) => (
+                            <div
+                              key={ii}
+                              style={{
+                                display: 'flex',
+                                gap: '1rem',
+                                padding: '1rem 1.25rem',
+                                background: TYPE_BG[item.type],
+                                borderLeft: `3px solid ${TYPE_COLORS[item.type]}`,
+                              }}
+                            >
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                <div style={{
+                                  fontFamily: fonts.mono,
+                                  fontSize: '0.65rem',
+                                  letterSpacing: '0.2em',
+                                  textTransform: 'uppercase',
+                                  color: TYPE_COLORS[item.type],
+                                  marginBottom: '0.3rem',
+                                  filter: 'brightness(0.75)',
+                                }}>
+                                  {t.journeyLegend[item.type]}
+                                </div>
+                                <div style={{
+                                  fontFamily: fonts.display,
+                                  fontSize: '1.05rem',
+                                  fontWeight: 500,
+                                  color: colors.ink,
+                                  marginBottom: '0.2rem',
+                                }}>
+                                  {item.title}
+                                </div>
+                                <div style={{
+                                  fontSize: '0.85rem',
+                                  lineHeight: 1.5,
+                                  color: colors.inkSoft,
+                                }}>
+                                  {item.desc}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      </Reveal>
+                    );
+                  })}
+                </div>
+              );
+            })()}
+          </div>
+        )}
       </section>
     </>
   );
