@@ -325,7 +325,7 @@ export default function Profile() {
                   color: colors.inkSoft,
                   marginBottom: '0.75rem',
                 }}>
-                  — ทุกก้าวของการเดินทาง
+                  {t.ctaSub}
                 </div>
                 <div style={{
                   fontFamily: fonts.display,
@@ -335,9 +335,9 @@ export default function Profile() {
                   lineHeight: 1.0,
                   letterSpacing: '-0.02em',
                 }}>
-                  การเดินทางของตี๋{' '}
+                  {t.ctaTitle}{' '}
                   <span style={{ fontStyle: 'italic', color: colors.accent }}>
-                    2554 — ปัจจุบัน
+                    {t.ctaYears}
                   </span>
                 </div>
               </div>

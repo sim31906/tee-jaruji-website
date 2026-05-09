@@ -23,6 +23,9 @@ export const translations = {
       journeyLegend: { event: 'งานอีเวนต์', acting: 'การแสดง', music: 'เพลงและดนตรี' },
       viewTimeline: 'ดูการเดินทาง →',
       viewAll: 'ดูทั้งหมด →',
+      ctaSub: '— ทุกก้าวของการเดินทาง',
+      ctaTitle: 'การเดินทางของตี๋',
+      ctaYears: '2554 — ปัจจุบัน',
       education: [
         {
           date: '~2543 — 2552',
@@ -157,6 +160,7 @@ export const translations = {
     },
     timeline: {
       backNav: '← กลับหน้าหลัก',
+      sectionNum: '— การเดินทาง',
       heading: 'การเดินทาง',
       headingItalic: 'ของตี๋',
       sub: 'จาก พ.ศ. 2554 จนถึงปัจจุบัน · ทุกก้าวของการเดินทาง',
@@ -189,6 +193,9 @@ export const translations = {
       journeyLegend: { event: 'Events', acting: 'Acting', music: 'Music' },
       viewTimeline: 'View Journey →',
       viewAll: 'View All →',
+      ctaSub: '— Every step of the way',
+      ctaTitle: "Tee's Career Journey",
+      ctaYears: '2011 — Present',
       education: [
         {
           date: '~2000 — 2009',
@@ -323,6 +330,7 @@ export const translations = {
     },
     timeline: {
       backNav: '← Back to Home',
+      sectionNum: '— Journey',
       heading: 'Career',
       headingItalic: 'Journey',
       sub: 'From 2011 to present · Every step of the way',
@@ -355,6 +363,9 @@ export const translations = {
       journeyLegend: { event: '活动', acting: '影视', music: '音乐' },
       viewTimeline: '查看历程 →',
       viewAll: '查看全部 →',
+      ctaSub: '— 每一步的成长历程',
+      ctaTitle: 'Tee 的成长历程',
+      ctaYears: '2011 — 至今',
       education: [
         {
           date: '~2000 — 2009',
@@ -489,6 +500,7 @@ export const translations = {
     },
     timeline: {
       backNav: '← 返回主页',
+      sectionNum: '— 历程',
       heading: '成长',
       headingItalic: '历程',
       sub: '从 2011 年至今 · 每一步的历程',

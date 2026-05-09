@@ -160,7 +160,7 @@ export default function TimelinePage() {
           color: colors.accent,
           marginBottom: '1rem',
         }}>
-          01 / Journey
+          {t.sectionNum}
         </div>
         <h1 style={{
           fontFamily: fonts.display,
