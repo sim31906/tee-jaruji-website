@@ -204,6 +204,10 @@ export default function Profile() {
             {works.map((work, i) => (
               <Reveal key={i} delay={i * 120}>
               <TiltCard style={{ height: '100%' }}>
+              <Link
+                to={`/work/${work.slug}`}
+                style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}
+              >
               <div
                 className="work-card-tj"
                 style={{
@@ -212,6 +216,7 @@ export default function Profile() {
                   background: colors.cream,
                   border: `1px solid ${colors.ink}`,
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  cursor: 'pointer',
                   overflow: 'hidden',
                 }}
               >
@@ -282,21 +287,18 @@ export default function Profile() {
                   ))}
                 </ul>
 
-                <Link
-                  to={`/work/${work.slug}`}
-                  style={{
-                    marginTop: '1.5rem',
-                    fontFamily: fonts.mono,
-                    fontSize: '0.68rem',
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    color: colors.accent,
-                    textDecoration: 'none',
-                  }}
-                >
+                <div style={{
+                  marginTop: '1.5rem',
+                  fontFamily: fonts.mono,
+                  fontSize: '0.68rem',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: colors.accent,
+                }}>
                   {t.viewAll}
-                </Link>
+                </div>
               </div>
+              </Link>
               </TiltCard>
               </Reveal>
             ))}
