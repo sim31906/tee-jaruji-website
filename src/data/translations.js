@@ -20,16 +20,22 @@ export const translations = {
       viewAll: 'ดูทั้งหมด →',
       education: [
         {
-          date: '2022 — ปัจจุบัน',
-          degree: 'ปริญญาตรี',
-          school: 'University Name · Faculty',
-          desc: 'การศึกษาและความสนใจในด้านศิลปะการแสดง สื่อสารมวลชน และการสร้างสรรค์ผลงาน เป็นรากฐานสำคัญของเส้นทางอาชีพในวันนี้',
+          date: '~2543 — 2552',
+          degree: 'ประถม — มัธยมต้น',
+          school: 'โรงเรียนปรินส์รอยแยลส์วิทยาลัย',
+          location: 'เชียงใหม่',
         },
         {
-          date: '2019 — 2022',
-          degree: 'มัธยมศึกษา',
-          school: 'School Name',
-          desc: 'เริ่มต้นเส้นทางในวงการบันเทิงควบคู่กับการเรียน เก็บประสบการณ์ผ่านกิจกรรมการแสดงและดนตรีของโรงเรียน',
+          date: '~2552 — 2555',
+          degree: 'มัธยมปลาย',
+          school: 'โรงเรียนวารีเชียงใหม่',
+          location: 'เชียงใหม่',
+        },
+        {
+          date: 'จบ ต.ค. 2561',
+          degree: 'ปริญญาตรี',
+          school: 'มหาวิทยาลัยเกษตรศาสตร์',
+          location: 'คณะสังคมศาสตร์ · ภาควิชาจิตวิทยา',
         },
       ],
       works: [
@@ -167,16 +173,22 @@ export const translations = {
       viewAll: 'View All →',
       education: [
         {
-          date: '2022 — Present',
-          degree: "Bachelor's Degree",
-          school: 'University Name · Faculty',
-          desc: 'Studies in performing arts, media, and creative work — the foundation of my career journey today.',
+          date: '~2000 — 2009',
+          degree: 'Primary — Junior High',
+          school: "Prince Royal's College",
+          location: 'Chiang Mai',
         },
         {
-          date: '2019 — 2022',
-          degree: 'High School',
-          school: 'School Name',
-          desc: 'Started my entertainment journey alongside studies, gaining experience through school performances and music activities.',
+          date: '~2009 — 2012',
+          degree: 'Senior High School',
+          school: 'Waree Chiang Mai School',
+          location: 'Chiang Mai',
+        },
+        {
+          date: 'Grad. Oct 2018',
+          degree: "Bachelor's Degree",
+          school: 'Kasetsart University',
+          location: 'Faculty of Social Sciences · Psychology',
         },
       ],
       works: [
@@ -314,16 +326,22 @@ export const translations = {
       viewAll: '查看全部 →',
       education: [
         {
-          date: '2022 — 至今',
-          degree: '本科学位',
-          school: '大学名称 · 学院',
-          desc: '在表演艺术、传媒与创意领域的学习，是我职业道路的重要基础。',
+          date: '~2000 — 2009',
+          degree: '小学 — 初中',
+          school: "Prince Royal's College",
+          location: '清迈',
         },
         {
-          date: '2019 — 2022',
+          date: '~2009 — 2012',
           degree: '高中',
-          school: '学校名称',
-          desc: '在学习的同时开始进入娱乐行业，通过学校的表演和音乐活动积累经验。',
+          school: 'Waree Chiang Mai School',
+          location: '清迈',
+        },
+        {
+          date: '2018年10月毕业',
+          degree: '本科学位',
+          school: '卡塞萨特大学',
+          location: '社会科学学院 · 心理学系',
         },
       ],
       works: [

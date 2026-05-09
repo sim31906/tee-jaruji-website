@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { colors, fonts } from '../styles/theme';
-import { works } from '../data/siteData';
+import { works, education } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
@@ -20,10 +20,36 @@ export default function Profile() {
         .work-card-tj:hover .work-bar {
           transform: scaleX(1) !important;
         }
+        .edu-card-tj {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+          padding: 2rem 0;
+          border-bottom: 1px solid ${colors.creamDark};
+          transition: background 0.3s;
+        }
+        .edu-logo-tj {
+          flex-shrink: 0;
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: ${fonts.mono};
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          color: #fff;
+          overflow: hidden;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .edu-logo-tj img { width: 100%; height: 100%; object-fit: cover; }
         @media (max-width: 968px) {
           .work-grid-tj { grid-template-columns: 1fr !important; }
-          .study-block-tj { grid-template-columns: 1fr !important; gap: 1rem !important; }
           .profile-section-tj { padding: 5rem 1.5rem !important; }
+          .edu-card-tj { gap: 1.25rem; }
+          .edu-logo-tj { width: 60px; height: 60px; font-size: 0.65rem; }
         }
       `}</style>
 
@@ -45,62 +71,72 @@ export default function Profile() {
           letterSpacing: '0.3em',
           textTransform: 'uppercase',
           color: colors.accent,
+          marginBottom: '1.5rem',
         }}>
           {t.educationLabel}
         </h3>
 
-        {t.education.map((s, i) => (
-          <div
-            key={i}
-            className="study-block-tj"
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 2fr',
-              gap: '4rem',
-              alignItems: 'start',
-              padding: '3rem 0',
-              borderTop: `1px solid ${colors.creamDark}`,
-            }}
-          >
-            <div style={{
-              fontFamily: fonts.mono,
-              fontSize: '0.8rem',
-              letterSpacing: '0.3em',
-              textTransform: 'uppercase',
-              color: colors.accent,
-            }}>
-              {s.date}
-            </div>
-            <div>
-              <h3 style={{
-                fontFamily: fonts.display,
-                fontSize: '1.9rem',
-                fontWeight: 500,
-                marginBottom: '0.5rem',
-                lineHeight: 1.1,
-              }}>
-                {s.degree}
-              </h3>
-              <div style={{
-                fontStyle: 'italic',
-                color: colors.inkSoft,
-                marginBottom: '1rem',
-                fontFamily: fonts.display,
-                fontSize: '1.2rem',
-              }}>
-                {s.school}
+        <div style={{ marginBottom: '2rem' }}>
+          {education.map((ed, i) => (
+            <Reveal key={i} delay={i * 100}>
+            <div className="edu-card-tj">
+              {/* Logo */}
+              <div
+                className="edu-logo-tj"
+                style={{ background: ed.logoColor }}
+              >
+                {ed.logoUrl
+                  ? <img src={ed.logoUrl} alt={ed.abbr} />
+                  : ed.abbr
+                }
               </div>
-              <p style={{
-                fontSize: '1rem',
-                lineHeight: 1.7,
-                color: colors.inkSoft,
-                maxWidth: '600px',
-              }}>
-                {s.desc}
-              </p>
+
+              {/* Info */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+                  <h3 style={{
+                    fontFamily: fonts.display,
+                    fontSize: '1.5rem',
+                    fontWeight: 500,
+                    lineHeight: 1.1,
+                    color: colors.ink,
+                  }}>
+                    {t.education[i].school}
+                  </h3>
+                  <span style={{
+                    fontFamily: fonts.mono,
+                    fontSize: '0.75rem',
+                    letterSpacing: '0.2em',
+                    color: colors.accent,
+                    whiteSpace: 'nowrap',
+                  }}>
+                    {t.education[i].date}
+                  </span>
+                </div>
+                <div style={{
+                  fontFamily: fonts.mono,
+                  fontSize: '0.78rem',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  color: colors.inkSoft,
+                  marginTop: '0.4rem',
+                }}>
+                  {t.education[i].degree}
+                </div>
+                <div style={{
+                  fontStyle: 'italic',
+                  fontFamily: fonts.display,
+                  fontSize: '1rem',
+                  color: colors.accent,
+                  marginTop: '0.25rem',
+                }}>
+                  {t.education[i].location}
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+            </Reveal>
+          ))}
+        </div>
 
         <h3 id="selected-works" style={{
           fontFamily: fonts.mono,

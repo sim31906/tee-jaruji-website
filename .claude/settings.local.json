@@ -21,7 +21,14 @@
       "Bash(git -C c:\\\\tee-jaruji-website log --oneline -20)",
       "Bash(findstr -E \"vite|config\")",
       "Bash(Get-ChildItem -File)",
-      "Bash(Select-Object Name)"
+      "Bash(Select-Object Name)",
+      "WebSearch",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:th.wikipedia.org)",
+      "WebFetch(domain:www.prc.ac.th)",
+      "WebFetch(domain:www.wareecm.ac.th)",
+      "WebFetch(domain:www.varee.ac.th)",
+      "WebFetch(domain:commons.wikimedia.org)"
     ]
   }
 }
