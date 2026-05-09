@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { colors, fonts } from '../styles/theme';
-import { works, education, careerTimeline } from '../data/siteData';
+import { works, education } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
@@ -19,12 +18,9 @@ const TYPE_BG = {
   music: '#f5ead8',
 };
 
-const SLUG_TO_TYPE = { events: 'event', performance: 'acting', music: 'music' };
-
 export default function Profile() {
   const { lang } = useLang();
   const t = translations[lang].profile;
-  const [activeTab, setActiveTab] = useState('works');
 
   return (
     <>
@@ -160,43 +156,19 @@ export default function Profile() {
           ))}
         </div>
 
-        {/* Tab switcher */}
-        <div id="selected-works" style={{
-          display: 'flex',
-          gap: '0',
+        <h3 id="selected-works" style={{
+          fontFamily: fonts.mono,
+          fontSize: '0.8rem',
+          letterSpacing: '0.3em',
+          textTransform: 'uppercase',
+          color: colors.accent,
           marginTop: '5rem',
-          marginBottom: '2.5rem',
-          borderBottom: `1px solid ${colors.ink}`,
+          marginBottom: '2rem',
         }}>
-          {[
-            { key: 'works', label: t.worksTab },
-            { key: 'journey', label: t.journeyTab },
-          ].map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              style={{
-                fontFamily: fonts.mono,
-                fontSize: '0.78rem',
-                letterSpacing: '0.25em',
-                textTransform: 'uppercase',
-                padding: '0.75rem 1.75rem',
-                background: 'none',
-                border: 'none',
-                borderBottom: activeTab === tab.key ? `2px solid ${colors.ink}` : '2px solid transparent',
-                color: activeTab === tab.key ? colors.ink : colors.inkSoft,
-                cursor: 'pointer',
-                marginBottom: '-1px',
-                transition: 'all 0.2s',
-              }}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+          {t.worksLabel}
+        </h3>
 
-        {activeTab === 'works' && (
-          <div className="work-grid-tj" style={{
+        <div className="work-grid-tj" style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '2rem',
@@ -303,9 +275,7 @@ export default function Profile() {
               </Reveal>
             ))}
           </div>
-        )}
 
-        {activeTab === 'works' && (
           <Reveal delay={200}>
           <Link
             to="/timeline"
@@ -385,117 +355,6 @@ export default function Profile() {
             </div>
           </Link>
           </Reveal>
-        )}
-
-        {activeTab === 'journey' && (
-          <div>
-            {/* Legend */}
-            <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-              {Object.entries(t.journeyLegend).map(([key, label]) => (
-                <div key={key} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: TYPE_COLORS[key], flexShrink: 0 }} />
-                  <span style={{ fontFamily: fonts.mono, fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: colors.inkSoft }}>
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Timeline */}
-            {(() => {
-              const years = [...new Set(careerTimeline.map(e => e.year))].sort((a, b) => a - b);
-              return (
-                <div style={{ position: 'relative' }}>
-                  {/* Vertical line */}
-                  <div style={{
-                    position: 'absolute',
-                    left: '5.5rem',
-                    top: 0, bottom: 0,
-                    width: '1px',
-                    background: colors.creamDark,
-                  }} />
-
-                  {years.map((year, yi) => {
-                    const items = careerTimeline.filter(e => e.year === year);
-                    return (
-                      <Reveal key={year} delay={yi * 60}>
-                      <div style={{ marginBottom: '2.5rem' }}>
-                        {/* Year marker */}
-                        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem' }}>
-                          <div style={{
-                            fontFamily: fonts.mono,
-                            fontSize: '0.72rem',
-                            letterSpacing: '0.2em',
-                            color: colors.accent,
-                            width: '4.5rem',
-                            flexShrink: 0,
-                          }}>
-                            {year}
-                          </div>
-                          <div style={{
-                            width: '10px', height: '10px',
-                            borderRadius: '50%',
-                            background: colors.ink,
-                            flexShrink: 0,
-                            zIndex: 1,
-                            marginLeft: '0.5rem',
-                          }} />
-                        </div>
-
-                        {/* Items for this year */}
-                        <div style={{ paddingLeft: '6.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                          {items.map((item, ii) => (
-                            <div
-                              key={ii}
-                              style={{
-                                display: 'flex',
-                                gap: '1rem',
-                                padding: '1rem 1.25rem',
-                                background: TYPE_BG[item.type],
-                                borderLeft: `3px solid ${TYPE_COLORS[item.type]}`,
-                              }}
-                            >
-                              <div style={{ flex: 1, minWidth: 0 }}>
-                                <div style={{
-                                  fontFamily: fonts.mono,
-                                  fontSize: '0.65rem',
-                                  letterSpacing: '0.2em',
-                                  textTransform: 'uppercase',
-                                  color: TYPE_COLORS[item.type],
-                                  marginBottom: '0.3rem',
-                                  filter: 'brightness(0.75)',
-                                }}>
-                                  {t.journeyLegend[item.type]}
-                                </div>
-                                <div style={{
-                                  fontFamily: fonts.display,
-                                  fontSize: '1.05rem',
-                                  fontWeight: 500,
-                                  color: colors.ink,
-                                  marginBottom: '0.2rem',
-                                }}>
-                                  {item.title}
-                                </div>
-                                <div style={{
-                                  fontSize: '0.85rem',
-                                  lineHeight: 1.5,
-                                  color: colors.inkSoft,
-                                }}>
-                                  {item.desc}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      </Reveal>
-                    );
-                  })}
-                </div>
-              );
-            })()}
-          </div>
-        )}
       </section>
     </>
   );
