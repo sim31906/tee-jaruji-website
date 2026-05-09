@@ -208,7 +208,7 @@ export const socials = [
   },
   {
     platform: "Line",
-    handle: "@369zivpv",
+    handle: "Tee's RooM Open ChaT",
     url: "https://line.me/ti/g2/oOMD7IBEzAyK5iMXg_rsrVY6w5KvCcxOSyMTUw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default",
     color: "#00B900",
   },
