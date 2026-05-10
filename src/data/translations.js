@@ -6,7 +6,7 @@ export const translations = {
       supporters: 'แฟนคลับ', fanclub: 'บริการ',
     },
     hero: {
-      tagline: 'EST. ONLINE · 2026',
+      tagline: 'ธนพล จารุจิตรานนท์',
       description: 'นักแสดง · นักร้อง · ศิลปิน — เก็บรวบรวมเรื่องราว ผลงาน และช่วงเวลาดี ๆ ที่อยากแบ่งปันกับทุกคน ยินดีต้อนรับสู่บ้านอย่างเป็นทางการของผมครับ',
       tags: ['นักแสดง', 'นักร้อง', 'นักเล่าเรื่อง'],
       watchIntro: 'ดูวิดีโอแนะนำตัว',
@@ -187,7 +187,7 @@ export const translations = {
       supporters: 'supporters', fanclub: 'fanclub',
     },
     hero: {
-      tagline: 'EST. ONLINE · 2026',
+      tagline: 'Thanapon Jarujitranon',
       description: 'Actor · Singer · Artist — collecting stories, works, and wonderful moments to share with everyone. Welcome to my official home.',
       tags: ['Performer', 'Vocalist', 'Storyteller'],
       watchIntro: 'Watch Intro',
@@ -368,7 +368,7 @@ export const translations = {
       supporters: '支持者', fanclub: '粉丝服务',
     },
     hero: {
-      tagline: 'EST. ONLINE · 2026',
+      tagline: '塔纳朋·扎卢吉塔侬',
       description: '演员 · 歌手 · 艺术家 — 收集故事、作品和美好时刻，与大家分享。欢迎来到我的官方主页。',
       tags: ['表演者', '歌手', '讲述者'],
       watchIntro: '观看介绍',
