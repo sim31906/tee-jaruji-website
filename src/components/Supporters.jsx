@@ -3,10 +3,12 @@ import { fanGradients } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
+import { useGoogleDrivePhotos } from '../hooks/useGoogleDrivePhotos';
 
 export default function Supporters() {
   const { lang } = useLang();
   const t = translations[lang].supporters;
+  const { photos } = useGoogleDrivePhotos();
 
   return (
     <>
@@ -60,13 +62,28 @@ export default function Supporters() {
         </p>
 
         {(() => {
-          const cols = [
-            fanGradients.slice(0, 3),
-            fanGradients.slice(3, 6),
-            fanGradients.slice(6, 9),
-            fanGradients.slice(9, 12),
-          ];
           const speeds = [16, 22, 14, 20];
+
+          /* split into 4 columns — use real photos if loaded, else gradients */
+          let cols;
+          const usePhotos = photos.length > 0;
+
+          if (usePhotos) {
+            /* repeat photos to fill all 4 columns */
+            const pool = [...photos, ...photos, ...photos, ...photos].slice(0, Math.max(photos.length * 2, 8));
+            const perCol = Math.ceil(pool.length / 4);
+            cols = [0, 1, 2, 3].map(ci =>
+              pool.slice(ci * perCol, ci * perCol + perCol)
+            );
+          } else {
+            cols = [
+              fanGradients.slice(0, 3),
+              fanGradients.slice(3, 6),
+              fanGradients.slice(6, 9),
+              fanGradients.slice(9, 12),
+            ];
+          }
+
           return (
             <div className="fan-gallery-tj" style={{
               display: 'grid',
@@ -90,14 +107,17 @@ export default function Supporters() {
                         animation: `${goDown ? 'fan-scroll-down' : 'fan-scroll-up'} ${speeds[ci]}s linear infinite`,
                       }}
                     >
-                      {[...col, ...col].map((grad, i) => (
+                      {[...col, ...col].map((item, i) => (
                         <div
                           key={i}
                           style={{
                             flexShrink: 0,
                             aspectRatio: '1',
-                            background: `linear-gradient(135deg, ${grad[0]}, ${grad[1]})`,
                             borderRadius: '10px',
+                            overflow: 'hidden',
+                            background: usePhotos
+                              ? colors.creamDark
+                              : `linear-gradient(135deg, ${item[0]}, ${item[1]})`,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -105,7 +125,14 @@ export default function Supporters() {
                             color: 'rgba(255,255,255,0.8)',
                           }}
                         >
-                          ♡
+                          {usePhotos ? (
+                            <img
+                              src={item.src}
+                              alt={item.alt}
+                              loading="lazy"
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                          ) : '♡'}
                         </div>
                       ))}
                     </div>
