@@ -309,7 +309,7 @@ export default function Schedule() {
             const month = d ? formatMonth(d, lang) : '—';
             const time  = formatTime(ev, lang);
             const desc  = ev.description
-              ? ev.description.replace(/<[^>]+>/g, '').slice(0, 90)
+              ? ev.description.replace(/<[^>]+>/g, '').trim().slice(0, 200)
               : '';
 
             return (
@@ -346,9 +346,8 @@ export default function Schedule() {
                     {ev.summary || (lang === 'th' ? 'ไม่มีชื่อ' : 'Untitled')}
                   </h4>
                   {desc && (
-                    <p style={{ fontSize: '.8rem', color: colors.inkSoft, lineHeight: 1.5,
-                      overflow: 'hidden', display: '-webkit-box',
-                      WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                    <p style={{ fontSize: '.8rem', color: colors.inkSoft, lineHeight: 1.6,
+                      whiteSpace: 'pre-line' }}>
                       {desc}
                     </p>
                   )}
