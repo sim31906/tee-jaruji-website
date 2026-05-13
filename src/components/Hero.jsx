@@ -176,30 +176,6 @@ export default function Hero() {
           )}
         </div>
 
-        <div style={{
-          position: 'absolute',
-          bottom: '2rem',
-          left: 0,
-          right: 0,
-          overflow: 'hidden',
-          whiteSpace: 'nowrap',
-          zIndex: 1,
-          gridColumn: '1 / -1',
-        }}>
-          <div style={{
-            display: 'inline-block',
-            animation: 'scroll-marquee 30s linear infinite',
-            fontFamily: fonts.display,
-            fontStyle: 'italic',
-            fontSize: '1.2rem',
-            color: colors.accent,
-            opacity: 0.85,
-          }}>
-            {Array(6).fill(null).map((_, i) => (
-              <span key={i} style={{ marginRight: '3rem' }}>· welcome · tee jaruji · official ·</span>
-            ))}
-          </div>
-        </div>
       </section>
     </>
   );
