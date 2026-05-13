@@ -339,7 +339,7 @@ export default function Schedule() {
                 </div>
 
                 {/* Content */}
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
                   <h4 style={{ fontFamily: fonts.display, fontSize: '1.2rem', fontWeight: 500,
                     marginBottom: '.3rem', color: colors.ink,
                     overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -347,7 +347,7 @@ export default function Schedule() {
                   </h4>
                   {desc && (
                     <p style={{ fontSize: '.8rem', color: colors.inkSoft, lineHeight: 1.6,
-                      whiteSpace: 'pre-line' }}>
+                      whiteSpace: 'pre-line', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                       {desc}
                     </p>
                   )}
