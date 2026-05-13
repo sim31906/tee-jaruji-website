@@ -32,38 +32,111 @@ const label = {
   errLoad: { th: 'ไม่สามารถโหลดกำหนดการได้',  en: 'Could not load events', zh: '无法加载日程' },
 };
 
-/* สร้าง URL สำหรับ "Add to my Google Calendar"
-   — ใช้ได้ทั้ง desktop (เปิด browser) และ mobile (เปิด app ถ้าติดตั้งอยู่) */
-function makeAddUrl(ev) {
-  const fmtDT = d => d.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
-  const fmtD  = s => s.replace(/-/g,'');
-  let dates;
+function getStartEnd(ev) {
   if (ev.start?.dateTime) {
     const s = new Date(ev.start.dateTime);
-    const e = ev.end?.dateTime ? new Date(ev.end.dateTime) : new Date(s.getTime()+3600000);
-    dates = `${fmtDT(s)}/${fmtDT(e)}`;
-  } else {
-    const s = fmtD(ev.start.date);
-    const e = ev.end?.date ? fmtD(ev.end.date) : s;
-    dates = `${s}/${e}`;
+    const e = ev.end?.dateTime ? new Date(ev.end.dateTime) : new Date(s.getTime() + 3600000);
+    return { s, e, allDay: false };
   }
+  const s = new Date(ev.start.date);
+  const e = ev.end?.date ? new Date(ev.end.date) : new Date(s.getTime() + 86400000);
+  return { s, e, allDay: true };
+}
+
+function makeGoogleUrl(ev) {
+  const { s, e, allDay } = getStartEnd(ev);
+  const fmt  = d => d.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  const fmtD = d => d.toISOString().slice(0,10).replace(/-/g,'');
+  const dates = allDay ? `${fmtD(s)}/${fmtD(e)}` : `${fmt(s)}/${fmt(e)}`;
   const p = new URLSearchParams({
-    action:   'TEMPLATE',
-    text:     ev.summary || '',
-    dates,
-    details:  (ev.description || '').replace(/<[^>]+>/g,''),
+    action: 'TEMPLATE', text: ev.summary || '',
+    dates, details: (ev.description||'').replace(/<[^>]+>/g,''),
     location: ev.location || '',
   });
-  return `https://calendar.google.com/calendar/render?${p.toString()}`;
+  return `https://calendar.google.com/calendar/render?${p}`;
 }
+
+function makeOutlookUrl(ev) {
+  const { s, e, allDay } = getStartEnd(ev);
+  const p = new URLSearchParams({
+    path:     '/calendar/action/compose',
+    rru:      'addevent',
+    subject:  ev.summary || '',
+    startdt:  s.toISOString(),
+    enddt:    e.toISOString(),
+    body:     (ev.description||'').replace(/<[^>]+>/g,''),
+    location: ev.location || '',
+    allday:   allDay ? 'true' : 'false',
+  });
+  return `https://outlook.live.com/calendar/0/action/compose?${p}`;
+}
+
+function makeYahooUrl(ev) {
+  const { s, e } = getStartEnd(ev);
+  const fmt = d => d.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  const diffH = Math.round((e - s) / 3600000);
+  const dur = String(Math.floor(diffH/10)).padStart(1,'0') + String(diffH%10).padStart(1,'0') + '00';
+  const p = new URLSearchParams({
+    v: '60', view: 'd', type: '20',
+    title: ev.summary || '', st: fmt(s),
+    dur, desc: (ev.description||'').replace(/<[^>]+>/g,''),
+    in_loc: ev.location || '',
+  });
+  return `https://calendar.yahoo.com/?${p}`;
+}
+
+function generateICS(ev) {
+  const { s, e, allDay } = getStartEnd(ev);
+  const fmt  = d => d.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  const fmtD = d => d.toISOString().slice(0,10).replace(/-/g,'');
+  const esc  = v => (v||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+  const lines = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Tee Jaruji//EN','CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    `UID:${ev.id||Date.now()}@teejaruji.com`,
+    allDay ? `DTSTART;VALUE=DATE:${fmtD(s)}` : `DTSTART:${fmt(s)}`,
+    allDay ? `DTEND;VALUE=DATE:${fmtD(e)}`   : `DTEND:${fmt(e)}`,
+    `SUMMARY:${esc(ev.summary)}`,
+    ev.description ? `DESCRIPTION:${esc((ev.description).replace(/<[^>]+>/g,''))}` : null,
+    ev.location    ? `LOCATION:${esc(ev.location)}` : null,
+    'END:VEVENT','END:VCALENDAR',
+  ].filter(Boolean);
+  return lines.join('\r\n');
+}
+
+function downloadICS(ev) {
+  const blob = new Blob([generateICS(ev)], { type: 'text/calendar;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = Object.assign(document.createElement('a'), {
+    href: url, download: `${(ev.summary||'event').replace(/[^\w]/g,'_')}.ics`,
+  });
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+const SAVE_OPTIONS = [
+  { id: 'google',  label: 'Google Calendar', color: '#4285F4', action: ev => window.open(makeGoogleUrl(ev),  '_blank') },
+  { id: 'apple',   label: 'Apple Calendar',  color: '#555',    action: ev => downloadICS(ev) },
+  { id: 'outlook', label: 'Outlook',         color: '#0078D4', action: ev => window.open(makeOutlookUrl(ev), '_blank') },
+  { id: 'yahoo',   label: 'Yahoo Calendar',  color: '#6001D2', action: ev => window.open(makeYahooUrl(ev),   '_blank') },
+  { id: 'ics',     label: 'iCal / Other (.ics)', color: '#888', action: ev => downloadICS(ev) },
+];
 
 export default function Schedule() {
   const { lang } = useLang();
   const t = translations[lang].schedule;
 
-  const [events,   setEvents]   = useState([]);
-  const [status,   setStatus]   = useState('loading'); // loading | ok | error | nokey
+  const [events,    setEvents]    = useState([]);
+  const [status,    setStatus]    = useState('loading'); // loading | ok | error | nokey
   const [errDetail, setErrDetail] = useState('');
+  const [openSave,  setOpenSave]  = useState(null); // ev.id ที่ dropdown เปิดอยู่
+
+  useEffect(() => {
+    if (!openSave) return;
+    const close = () => setOpenSave(null);
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [openSave]);
 
   useEffect(() => {
     if (!API_KEY || !CALENDAR_ID) { setStatus('nokey'); return; }
@@ -124,6 +197,25 @@ export default function Schedule() {
         }
         .sc-open-link:hover { color: ${colors.ink}; }
         .sc-open-link:hover .sc-arrow { transform: translateX(4px); }
+        .sc-save-wrap { position: relative; }
+        .sc-dropdown {
+          position: absolute; bottom: calc(100% + 6px); left: 0;
+          background: ${colors.cream}; border: 1px solid ${colors.creamDark};
+          box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+          z-index: 50; min-width: 200px;
+          animation: sc-drop-in .18s cubic-bezier(.22,.68,0,1.2);
+        }
+        @keyframes sc-drop-in { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+        .sc-drop-item {
+          display: flex; align-items: center; gap: .65rem;
+          width: 100%; padding: .7rem 1rem; border: none; background: none;
+          cursor: pointer; text-align: left; text-decoration: none;
+          font-family: ${fonts.mono}; font-size: .7rem; letter-spacing: .12em;
+          color: ${colors.ink}; transition: background .15s;
+          white-space: nowrap;
+        }
+        .sc-drop-item:hover { background: ${colors.blueSoft}; }
+        .sc-drop-divider { height: 1px; background: ${colors.creamDark}; margin: .2rem 0; }
         .sc-viewall {
           display: inline-block;
           font-family: ${fonts.mono}; font-size: .75rem; letter-spacing: .2em;
@@ -269,10 +361,32 @@ export default function Schedule() {
                       <span className="sc-arrow">→</span>
                       <span>{label.open[lang] || label.open.en}</span>
                     </a>
-                    <button className="sc-save-btn"
-                      onClick={() => window.open(makeAddUrl(ev), '_blank')}>
-                      {label.save[lang] || label.save.en}
-                    </button>
+
+                    {/* Save dropdown */}
+                    <div className="sc-save-wrap" onClick={e => e.stopPropagation()}>
+                      <button className="sc-save-btn"
+                        onClick={() => setOpenSave(openSave === (ev.id||i) ? null : (ev.id||i))}>
+                        {label.save[lang] || label.save.en}
+                        <span style={{ fontSize: '.55rem', marginLeft: '.2rem' }}>
+                          {openSave === (ev.id||i) ? '▲' : '▼'}
+                        </span>
+                      </button>
+
+                      {openSave === (ev.id||i) && (
+                        <div className="sc-dropdown">
+                          {SAVE_OPTIONS.map((opt, oi) => (
+                            <span key={opt.id}>
+                              {oi === SAVE_OPTIONS.length - 1 && <div className="sc-drop-divider" />}
+                              <button className="sc-drop-item" onClick={() => { opt.action(ev); setOpenSave(null); }}>
+                                <span style={{ width: 8, height: 8, borderRadius: '50%',
+                                  background: opt.color, flexShrink: 0, display: 'inline-block' }} />
+                                {opt.label}
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
