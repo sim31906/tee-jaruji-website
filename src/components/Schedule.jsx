@@ -25,11 +25,37 @@ function formatTime(event, lang) {
 }
 
 const label = {
-  open:    { th: 'ดูใน Google Calendar', en: 'Open in Google Calendar', zh: '在 Google 日历中查看' },
-  viewAll: { th: 'ดูปฏิทินทั้งหมด',      en: 'View Full Calendar',       zh: '查看完整日历' },
-  noEvent: { th: 'ไม่มีกำหนดการที่ใกล้จะถึง', en: 'No upcoming events', zh: '暂无活动' },
-  errLoad: { th: 'ไม่สามารถโหลดกำหนดการได้',  en: 'Could not load events',  zh: '无法加载日程' },
+  open:    { th: 'ดูรายละเอียด',          en: 'View Details',             zh: '查看详情' },
+  save:    { th: '+ บันทึกในปฏิทินของฉัน', en: '+ Save to My Calendar',    zh: '+ 保存到我的日历' },
+  viewAll: { th: 'ดูปฏิทินทั้งหมด',      en: 'View Full Calendar',        zh: '查看完整日历' },
+  noEvent: { th: 'ไม่มีกำหนดการที่ใกล้จะถึง', en: 'No upcoming events',   zh: '暂无活动' },
+  errLoad: { th: 'ไม่สามารถโหลดกำหนดการได้',  en: 'Could not load events', zh: '无法加载日程' },
 };
+
+/* สร้าง URL สำหรับ "Add to my Google Calendar"
+   — ใช้ได้ทั้ง desktop (เปิด browser) และ mobile (เปิด app ถ้าติดตั้งอยู่) */
+function makeAddUrl(ev) {
+  const fmtDT = d => d.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  const fmtD  = s => s.replace(/-/g,'');
+  let dates;
+  if (ev.start?.dateTime) {
+    const s = new Date(ev.start.dateTime);
+    const e = ev.end?.dateTime ? new Date(ev.end.dateTime) : new Date(s.getTime()+3600000);
+    dates = `${fmtDT(s)}/${fmtDT(e)}`;
+  } else {
+    const s = fmtD(ev.start.date);
+    const e = ev.end?.date ? fmtD(ev.end.date) : s;
+    dates = `${s}/${e}`;
+  }
+  const p = new URLSearchParams({
+    action:   'TEMPLATE',
+    text:     ev.summary || '',
+    dates,
+    details:  (ev.description || '').replace(/<[^>]+>/g,''),
+    location: ev.location || '',
+  });
+  return `https://calendar.google.com/calendar/render?${p.toString()}`;
+}
 
 export default function Schedule() {
   const { lang } = useLang();
@@ -76,17 +102,28 @@ export default function Schedule() {
           padding: 1.5rem;
           display: flex;
           gap: 1.5rem;
-          align-items: center;
-          cursor: pointer;
-          transition: transform .25s cubic-bezier(.22,.68,0,1.2), box-shadow .25s ease;
-          text-decoration: none;
+          align-items: flex-start;
         }
-        .sc-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 20px 48px rgba(0,0,0,0.10);
-        }
-        .sc-card:hover .sc-arrow { transform: translateX(4px); }
         .sc-arrow { display: inline-block; transition: transform .2s ease; }
+        .sc-save-btn {
+          display: inline-flex; align-items: center; gap: .3rem;
+          font-family: ${fonts.mono}; font-size: .62rem; letter-spacing: .12em;
+          text-transform: uppercase; cursor: pointer;
+          background: none; border: 1px solid ${colors.accent};
+          color: ${colors.accent}; padding: .38rem .85rem;
+          transition: background .2s, color .2s;
+          white-space: nowrap; flex-shrink: 0;
+        }
+        .sc-save-btn:hover { background: ${colors.accent}; color: #fff; }
+        .sc-actions { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; margin-top: .65rem; }
+        .sc-open-link {
+          display: inline-flex; align-items: center; gap: .3rem;
+          font-family: ${fonts.mono}; font-size: .62rem; letter-spacing: .12em;
+          text-transform: uppercase; color: ${colors.inkSoft}; text-decoration: none;
+          transition: color .2s;
+        }
+        .sc-open-link:hover { color: ${colors.ink}; }
+        .sc-open-link:hover .sc-arrow { transform: translateX(4px); }
         .sc-viewall {
           display: inline-block;
           font-family: ${fonts.mono}; font-size: .75rem; letter-spacing: .2em;
@@ -185,12 +222,7 @@ export default function Schedule() {
               : '';
 
             return (
-              <a key={ev.id || i}
-                className="sc-card"
-                href={ev.htmlLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <div key={ev.id || i} className="sc-card">
                 {/* Date column */}
                 <div style={{
                   textAlign: 'center',
@@ -198,6 +230,8 @@ export default function Schedule() {
                   paddingRight: '1.5rem',
                   flexShrink: 0,
                   minWidth: 52,
+                  alignSelf: 'flex-start',
+                  paddingTop: '.2rem',
                 }}>
                   <div style={{ fontFamily: fonts.display, fontSize: '2.5rem',
                     fontWeight: 500, lineHeight: 1, color: colors.ink }}>
@@ -223,19 +257,25 @@ export default function Schedule() {
                   {desc && (
                     <p style={{ fontSize: '.8rem', color: colors.inkSoft, lineHeight: 1.5,
                       overflow: 'hidden', display: '-webkit-box',
-                      WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
-                      marginBottom: '.5rem' }}>
+                      WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
                       {desc}
                     </p>
                   )}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '.3rem',
-                    fontFamily: fonts.mono, fontSize: '.62rem', letterSpacing: '.12em',
-                    textTransform: 'uppercase', color: colors.accent }}>
-                    <span className="sc-arrow">→</span>
-                    <span>{label.open[lang] || label.open.en}</span>
+
+                  {/* Actions */}
+                  <div className="sc-actions">
+                    <a className="sc-open-link"
+                      href={ev.htmlLink} target="_blank" rel="noopener noreferrer">
+                      <span className="sc-arrow">→</span>
+                      <span>{label.open[lang] || label.open.en}</span>
+                    </a>
+                    <button className="sc-save-btn"
+                      onClick={() => window.open(makeAddUrl(ev), '_blank')}>
+                      {label.save[lang] || label.save.en}
+                    </button>
                   </div>
                 </div>
-              </a>
+              </div>
             );
           })}
         </div>
