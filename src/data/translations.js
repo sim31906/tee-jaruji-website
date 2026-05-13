@@ -106,7 +106,7 @@ export const translations = {
       sectionItalic: 'เรา',
       items: [
         { label: 'Line ออฟฟิเชียล', value: '@teejaruji', action: 'เพิ่มเพื่อน' },
-        { label: 'อีเมล', value: 'contact@teejaruji.com', action: 'ส่งอีเมล' },
+        { label: 'อีเมล', value: 'TNP.JARUJI@GMAIL.COM', action: 'ส่งอีเมล' },
       ],
     },
     schedule: {
@@ -287,7 +287,7 @@ export const translations = {
       sectionItalic: 'Touch',
       items: [
         { label: 'Line Official', value: '@teejaruji', action: 'Add friend' },
-        { label: 'Email', value: 'contact@teejaruji.com', action: 'Send mail' },
+        { label: 'Email', value: 'TNP.JARUJI@GMAIL.COM', action: 'Send mail' },
       ],
     },
     schedule: {
@@ -468,7 +468,7 @@ export const translations = {
       sectionItalic: '我们',
       items: [
         { label: 'Line 官方', value: '@teejaruji', action: '添加好友' },
-        { label: '电子邮件', value: 'contact@teejaruji.com', action: '发送邮件' },
+        { label: '电子邮件', value: 'TNP.JARUJI@GMAIL.COM', action: '发送邮件' },
       ],
     },
     schedule: {
