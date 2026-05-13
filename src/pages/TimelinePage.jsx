@@ -29,15 +29,7 @@ export default function TimelinePage() {
   const [progress,    setProgress]    = useState(0);
   const [showTop,     setShowTop]     = useState(false);
   const [heroIn,      setHeroIn]      = useState(false);
-  const [checkpoints, setCheckpoints] = useState(new Set());
-
-  function toggleCheckpoint(year) {
-    setCheckpoints(prev => {
-      const next = new Set(prev);
-      if (next.has(year)) next.delete(year); else next.add(year);
-      return next;
-    });
-  }
+  const [visited,     setVisited]     = useState(new Set());
 
   const timelineRef    = useRef(null);
   const cardRefs       = useRef([]);
@@ -65,6 +57,25 @@ export default function TimelinePage() {
     return () => window.removeEventListener('scroll', onScroll);
   }, [filter]);
 
+  /* ── auto-checkpoint: mark years as visited when scroll passes them ── */
+  useEffect(() => {
+    const tl = timelineRef.current;
+    if (!tl) return;
+    setVisited(prev => {
+      const next = new Set(prev);
+      let changed = false;
+      yearGroupRefs.current.forEach((el, yi) => {
+        if (!el) return;
+        const year = years[yi];
+        if (year && el.offsetTop <= progress * tl.offsetHeight && !next.has(year)) {
+          next.add(year);
+          changed = true;
+        }
+      });
+      return changed ? next : prev;
+    });
+  }, [progress]);
+
   /* ── card & year-label entrance (IntersectionObserver) ── */
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean);
@@ -79,16 +90,21 @@ export default function TimelinePage() {
                              transform .65s cubic-bezier(.22,.68,0,1.2) ${i * 35}ms`;
     });
     years.forEach(el => {
-      el.style.opacity   = '0';
-      el.style.transform = 'translateY(12px)';
-      el.style.transition = 'opacity .5s ease, transform .5s ease';
+      el.style.opacity  = '0';
+      el.style.animation = 'none';
     });
 
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          e.target.style.opacity   = '1';
-          e.target.style.transform = 'translateX(0) translateY(0) scale(1)';
+          if (e.target.classList.contains('tl-year-row')) {
+            e.target.style.animation = 'tl-year-pop .65s cubic-bezier(.22,.68,0,1.2) both';
+            const line = e.target.querySelector('.tl-year-line');
+            if (line) line.style.transform = 'scaleX(1)';
+          } else {
+            e.target.style.opacity   = '1';
+            e.target.style.transform = 'translateX(0) translateY(0) scale(1)';
+          }
           obs.unobserve(e.target);
         }
       });
@@ -116,7 +132,7 @@ export default function TimelinePage() {
 
   function goBack() { navigate('/', { state: { scrollTo: 'selected-works' } }); }
   function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-  function changeFilter(k) { cardRefs.current = []; yearRefs.current = []; yearGroupRefs.current = []; setFilter(k); }
+  function changeFilter(k) { cardRefs.current = []; yearRefs.current = []; yearGroupRefs.current = []; setVisited(new Set()); setFilter(k); }
 
   /* ── helper: is this year's checkpoint already passed by the traveler ── */
   function isYearPassed(yi) {
@@ -153,6 +169,16 @@ export default function TimelinePage() {
         }
         @keyframes tl-dot-appear { from{transform:translateX(-50%) scale(0)} to{transform:translateX(-50%) scale(1)} }
         @keyframes tl-btn-in { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes tl-year-pop {
+          0%   { opacity:0; transform:translateX(-30px) scale(0.84); }
+          62%  { transform:translateX(3px) scale(1.018); opacity:1; }
+          100% { opacity:1; transform:translateX(0) scale(1); }
+        }
+        .tl-year-line {
+          transform: scaleX(0);
+          transform-origin: left center;
+          transition: background .3s, transform .85s cubic-bezier(.22,.68,0,1.2) .3s;
+        }
 
         /* ── nav ── */
         .tl-back { font-family:${fonts.mono}; font-size:.75rem; letter-spacing:.2em;
@@ -429,75 +455,53 @@ export default function TimelinePage() {
           {/* Traveler dot on line */}
           <div style={{ position:'absolute', left:-7, top:`${progress * 100}%`,
             width:16, height:16, borderRadius:'50%',
-            background:colors.ink, border:`3px solid ${colors.cream}`,
+            background:colors.ink, border:`2px solid ${colors.cream}`,
             zIndex:3, transform:'translateY(-50%)',
-            transition:'top .08s ease-out',
+            opacity: progress > 0.02 && progress < 0.98 ? 1 : 0,
+            transition:'top .08s ease-out, opacity .3s ease',
             animation:'tl-pulse 2.2s ease infinite',
             willChange:'top',
             pointerEvents:'none' }} />
 
           {years.map(year => {
-            const items    = filtered.filter(e => e.year === year);
-            const yi       = yearIdx++;
-            const passed   = isYearPassed(yi);
-            const marked   = checkpoints.has(year);
+            const items  = filtered.filter(e => e.year === year);
+            const yi     = yearIdx++;
+            const passed = visited.has(year) || isYearPassed(yi);
             return (
               <div key={year} ref={el => { yearGroupRefs.current[yi] = el; }}
                 style={{ marginBottom:'4.5rem', position:'relative' }}>
 
-                {/* ── Line marker — 3 states ── */}
-                {marked ? (
-                  /* CHECKPOINT ◆ diamond — accent, always visible */
-                  <div style={{ position:'absolute', left:'-3.5rem', top:'.3rem',
-                    transform:'translateX(-50%) rotate(45deg)',
-                    width:18, height:18, zIndex:3, marginLeft:'-1px',
+                {/* ── Line marker: ◆ diamond when passed, ○ circle when not ── */}
+                {passed ? (
+                  <div style={{ position:'absolute', left:'calc(-3.5rem - 8px)', top:'.25rem',
+                    transform:'rotate(45deg)',
+                    width:16, height:16, zIndex:3,
                     background:colors.accent,
                     boxShadow:`0 0 0 3px ${colors.cream}, 0 0 0 5px ${colors.accent}`,
-                    transition:'all .3s cubic-bezier(.22,.68,0,1.4)' }} />
+                    transition:'all .35s cubic-bezier(.22,.68,0,1.4)' }} />
                 ) : (
-                  /* WAYPOINT ● circle — fill when passed */
-                  <div style={{ position:'absolute', left:'-3.5rem', top:'.35rem',
-                    transform:'translateX(-50%)',
-                    width:18, height:18, borderRadius:'50%', zIndex:2, marginLeft:'-1px',
-                    background: passed ? colors.ink : colors.cream,
-                    border: passed ? `2px solid ${colors.ink}` : `2px solid ${colors.creamDark}`,
+                  <div style={{ position:'absolute', left:'calc(-3.5rem - 8px)', top:'.3rem',
+                    width:16, height:16, borderRadius:'50%', zIndex:2,
+                    background: colors.cream,
+                    border: `2px solid ${colors.creamDark}`,
                     transition:'background .3s ease, border-color .3s ease',
                     display:'flex', alignItems:'center', justifyContent:'center' }}>
                     <div style={{ width:6, height:6, borderRadius:'50%',
-                      background: passed ? colors.cream : 'transparent',
-                      transition:'background .3s ease' }} />
+                      background: 'transparent', transition:'background .3s ease' }} />
                   </div>
                 )}
 
-                {/* Year label row + checkpoint button */}
+                {/* Year label row */}
                 <div ref={el => { yearRefs.current[yi] = el; }}
                   className="tl-year-row">
 
-                  {/* checkpoint toggle button */}
-                  <button
-                    className="tl-cp-btn"
-                    onClick={() => toggleCheckpoint(year)}
-                    title={marked ? t.checkpointRemove : t.checkpointAdd}
-                  >
-                    <span className="cp-icon" style={{
-                      color: marked ? colors.accent : colors.inkSoft,
-                    }}>
-                      {marked ? '◆' : '◇'}
-                    </span>
-                  </button>
-
                   <span style={{ fontFamily:fonts.mono, fontSize:'.8rem', letterSpacing:'.25em',
-                    color: marked ? colors.accent : passed ? colors.ink : colors.inkSoft,
-                    fontWeight: (marked || passed) ? 700 : 400,
+                    color: passed ? colors.accent : colors.inkSoft,
+                    fontWeight: passed ? 700 : 400,
                     transition:'color .3s, font-weight .3s' }}>{year}</span>
 
-                  <div style={{ flex:1, height:1,
-                    background: marked ? colors.accent : passed ? colors.ink : colors.creamDark,
-                    transition:'background .3s' }} />
-
-                  <span className="cp-hint">
-                    {marked ? t.checkpointDone : t.checkpointHint}
-                  </span>
+                  <div className="tl-year-line" style={{ flex:1, height:1,
+                    background: passed ? colors.accent : colors.creamDark }} />
 
                   <span style={{ fontFamily:fonts.mono, fontSize:'.6rem', letterSpacing:'.12em',
                     color:colors.inkSoft }}>{items.length} {t.itemsUnit}</span>
