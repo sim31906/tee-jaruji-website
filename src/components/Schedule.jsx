@@ -32,6 +32,20 @@ const label = {
   errLoad: { th: 'ไม่สามารถโหลดกำหนดการได้',  en: 'Could not load events', zh: '无法加载日程' },
 };
 
+function htmlToText(html) {
+  if (!html) return '';
+  return html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
+    .replace(/<\/div>/gi, '\n')
+    .replace(/<a[^>]*href="([^"]*)"[^>]*>([^<]*)<\/a>/gi, '$2')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, ' ').replace(/&#39;/g, "'").replace(/&quot;/g, '"')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 function getStartEnd(ev) {
   if (ev.start?.dateTime) {
     const s = new Date(ev.start.dateTime);
@@ -50,7 +64,7 @@ function makeGoogleUrl(ev) {
   const dates = allDay ? `${fmtD(s)}/${fmtD(e)}` : `${fmt(s)}/${fmt(e)}`;
   const p = new URLSearchParams({
     action: 'TEMPLATE', text: ev.summary || '',
-    dates, details: (ev.description||'').replace(/<[^>]+>/g,''),
+    dates, details: htmlToText(ev.description),
     location: ev.location || '',
   });
   return `https://calendar.google.com/calendar/render?${p}`;
@@ -64,7 +78,7 @@ function makeOutlookUrl(ev) {
     subject:  ev.summary || '',
     startdt:  s.toISOString(),
     enddt:    e.toISOString(),
-    body:     (ev.description||'').replace(/<[^>]+>/g,''),
+    body:     htmlToText(ev.description),
     location: ev.location || '',
     allday:   allDay ? 'true' : 'false',
   });
@@ -79,7 +93,7 @@ function makeYahooUrl(ev) {
   const p = new URLSearchParams({
     v: '60', view: 'd', type: '20',
     title: ev.summary || '', st: fmt(s),
-    dur, desc: (ev.description||'').replace(/<[^>]+>/g,''),
+    dur, desc: htmlToText(ev.description),
     in_loc: ev.location || '',
   });
   return `https://calendar.yahoo.com/?${p}`;
@@ -97,7 +111,7 @@ function generateICS(ev) {
     allDay ? `DTSTART;VALUE=DATE:${fmtD(s)}` : `DTSTART:${fmt(s)}`,
     allDay ? `DTEND;VALUE=DATE:${fmtD(e)}`   : `DTEND:${fmt(e)}`,
     `SUMMARY:${esc(ev.summary)}`,
-    ev.description ? `DESCRIPTION:${esc((ev.description).replace(/<[^>]+>/g,''))}` : null,
+    ev.description ? `DESCRIPTION:${esc(htmlToText(ev.description))}` : null,
     ev.location    ? `LOCATION:${esc(ev.location)}` : null,
     'END:VEVENT','END:VCALENDAR',
   ].filter(Boolean);
@@ -309,7 +323,7 @@ export default function Schedule() {
             const month = d ? formatMonth(d, lang) : '—';
             const time  = formatTime(ev, lang);
             const desc  = ev.description
-              ? ev.description.replace(/<[^>]+>/g, '').trim().slice(0, 200)
+              ? htmlToText(ev.description).slice(0, 200)
               : '';
 
             return (
