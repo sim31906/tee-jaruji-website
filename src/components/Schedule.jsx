@@ -115,11 +115,10 @@ function downloadICS(ev) {
 }
 
 const SAVE_OPTIONS = [
-  { id: 'google',  label: 'Google Calendar', color: '#4285F4', action: ev => window.open(makeGoogleUrl(ev),  '_blank') },
-  { id: 'apple',   label: 'Apple Calendar',  color: '#555',    action: ev => downloadICS(ev) },
-  { id: 'outlook', label: 'Outlook',         color: '#0078D4', action: ev => window.open(makeOutlookUrl(ev), '_blank') },
-  { id: 'yahoo',   label: 'Yahoo Calendar',  color: '#6001D2', action: ev => window.open(makeYahooUrl(ev),   '_blank') },
-  { id: 'ics',     label: 'iCal / Other (.ics)', color: '#888', action: ev => downloadICS(ev) },
+  { id: 'google',  label: 'Google Calendar',     color: '#4285F4', action: ev => window.open(makeGoogleUrl(ev),  '_blank') },
+  { id: 'outlook', label: 'Outlook',             color: '#0078D4', action: ev => window.open(makeOutlookUrl(ev), '_blank') },
+  { id: 'yahoo',   label: 'Yahoo Calendar',      color: '#6001D2', action: ev => window.open(makeYahooUrl(ev),   '_blank') },
+  { id: 'ics',     label: 'iCal / Other (.ics)', color: '#888',    action: ev => downloadICS(ev) },
 ];
 
 export default function Schedule() {
