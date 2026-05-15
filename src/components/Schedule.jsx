@@ -212,13 +212,13 @@ export default function Schedule() {
         .sc-open-link:hover .sc-arrow { transform: translateX(4px); }
         .sc-save-wrap { position: relative; }
         .sc-dropdown {
-          position: absolute; bottom: calc(100% + 6px); left: 0;
+          position: absolute; top: calc(100% + 6px); left: 0;
           background: ${colors.cream}; border: 1px solid ${colors.creamDark};
           box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-          z-index: 50; min-width: 200px;
+          z-index: 100; min-width: 200px;
           animation: sc-drop-in .18s cubic-bezier(.22,.68,0,1.2);
         }
-        @keyframes sc-drop-in { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes sc-drop-in { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:translateY(0)} }
         .sc-drop-item {
           display: flex; align-items: center; gap: .65rem;
           width: 100%; padding: .7rem 1rem; border: none; background: none;
@@ -353,7 +353,7 @@ export default function Schedule() {
                 </div>
 
                 {/* Content */}
-                <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
                   <h4 style={{ fontFamily: fonts.display, fontSize: '1.2rem', fontWeight: 500,
                     marginBottom: '.3rem', color: colors.ink,
                     overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -410,8 +410,9 @@ export default function Schedule() {
         {CALENDAR_ID && (
           <div style={{ marginBottom: '2.5rem',
             border: `1px solid ${colors.creamDark}`,
-            boxShadow: `8px 8px 0 ${colors.pink}`,
-            overflow: 'hidden' }}>
+            boxShadow: `4px 4px 0 ${colors.pink}`,
+            overflow: 'hidden',
+            maxWidth: '100%' }}>
             <iframe
               src={
                 `https://calendar.google.com/calendar/embed` +
