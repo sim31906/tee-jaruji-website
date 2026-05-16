@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { colors, fonts } from '../styles/theme';
 import CursorSparkle from '../components/CursorSparkle';
@@ -17,8 +17,9 @@ const SHOWS = [
       'เรื่องราวของสายลม หนุ่มนักเรียนนอกที่ป่วยเป็นโรคกลัวการสัมผัส ซึ่งบังเอิญพบกับนับหนึ่ง โดยอุบัติเหตุ ความใกล้ชิดจากการปั่นจักรยานช่วยรักษาแผลใจและเปลี่ยนจากความไม่ตั้งใจเป็นความรักที่ต้องตัดสินใจในตอนจบ',
     summaryEn:
       'The story of the Wind, a young student who suffers from contact phobia. He accidentally met Nabneung by accident. The intimacy of cycling heals the wounds and turns from inattention to love that has to be decided at the end.',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/rvFBiV1SWoc',
+    image: '/posters/pan-pai-preview.jpg',
+    posterImage: '/posters/pan-pai.jpg',
     platforms: [
       { name: 'Netflix', url: 'https://www.netflix.com/th-en/title/82745549', color: '#E50914' },
     ],
@@ -34,8 +35,9 @@ const SHOWS = [
       '"ความรัก" เป็นความปราถนาดีของแม่ หากมันท่วมท้นจนเกินไป อาจกลายเป็นการบงการชีวิตลูก แต่ภายใต้ความเชื่อฟังกลับแอบซ่อนไว้ด้วยความรู้สึกต่อต้าน จนเกิดความแตกแยกเพราะความเข้าใจผิดและริษยา ทำให้สายสัมพันธ์พี่น้องสั่นคลอนจนต้องห้ำหั่นกันเอง มีเพียง "ความรัก" ที่จะหลอมรวมพวกเค้ากลับมาใหม่ แต่ใครคือคนนั้นที่จะช่วยให้พวกเค้าหลุดพ้นจากความเกลียดชังนี้ได้',
     summaryEn:
       '"Love" is a mother\'s good wish. If it\'s too overwhelming, it may become a manipulation of the child\'s life, but under obedience, it is hidden with a feeling of opposition, resulting in a division due to misunderstanding and jealousy. This makes the bond of siblings shaky. Only "love" will reunite them, but who will help them get rid of this hatred?',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/Pirl_NHw28s',
+    image: '/posters/saen-rak-preview.jpg',
+    posterImage: '/posters/saen-rak.jpg',
     platforms: [
       { name: 'Netflix', url: 'https://www.netflix.com/th/title/81992234', color: '#E50914' },
       { name: 'Ch3+', url: 'https://ch3plus.com/drama/1740', color: '#E87722' },
@@ -52,8 +54,9 @@ const SHOWS = [
       '"เรือนทาส" รกร้างถูกทิ้งไว้ในเรือนพระยาธรรมานุรักษ์ จุดเริ่มต้นความเฮี้ยนของ "ผีมะลิ" วิญญาณที่ถูกจองจำ เฝ้ารอวันทวงคืนทุกสิ่งและเปิดเผยความจริงที่ถูกซ่อนไว้ ณ เรือนแห่งนี้ ชาวบ้านริมคลองแสนแสบและบ่าวไพร่ในเรือนพระยาธรรมานุรักษ์ต่างร่ำลือถึงความน่ากลัวของ "ผีมะลิ" วิญญาณเฮี้ยนที่คอยหลอกหลอนในยามค่ำคืน',
     summaryEn:
       'The abandoned "slave house" left in Phraya Thammanurak\'s estate marks the beginning of the "Phi Mali" haunting — a spirit imprisoned, waiting for the day to reclaim everything and reveal the truth hidden in this house. Villagers and servants alike tremble at the legend of the spirit that haunts the night.',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/Y3JpGKJnXNI',
+    image: '/posters/ruean-that-preview.jpg',
+    posterImage: '/posters/ruean-that.jpg',
     platforms: [
       { name: 'Ch3+', url: 'https://ch3plus.com/drama/1531', color: '#E87722' },
     ],
@@ -69,8 +72,9 @@ const SHOWS = [
       'เรื่องราวของติณห์ แพทย์ประจำบ้านแผนกเวชศาตร์ฉุกเฉินอายุ 29 ปี ที่ต้องเผชิญกับความวุ่นวายของเคสในห้องฉุกเฉินอยู่ทุกวัน หลังจากที่ไม่สามารถช่วยชีวิตนักศึกษาได้ เขาก็พบว่าตนเองติดอยู่ในการย้อนเวลา วนซ้ำในคืนเดิมซ้ำแล้วซ้ำอีก จนกระทั่ง "จินตะ" เทพผู้ส่งสารของพระเจ้าปรากฏตัวพร้อมเงื่อนไขที่จะช่วยให้เขาหลุดพ้น',
     summaryEn:
       'The story of Tinh, a 29-year-old emergency medicine resident. When he fails to save a student\'s life, he finds himself trapped in a time loop — reliving the same night over and over. On the 18th night, a divine messenger named "Jinta" appears with a condition: save a certain patient to break free.',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/QeXnXV3FStg',
+    image: '/posters/triage-preview.jpg',
+    posterImage: '/posters/triage.jpg',
     platforms: [
       {
         name: 'AIS Play',
@@ -90,8 +94,9 @@ const SHOWS = [
       '\'เต้าหู้\' ตุ๊กตาหมีขาวนวลตัวใหญ่ เป็นที่พักพิงใจให้ \'ณัฐ\' มาหลายปี จู่ ๆ ปาฏิหาริย์ก็ทำให้เต้าหู้กลายร่างเป็นหนุ่มน้อย แต่ร่างใหม่กลับไร้ซึ่งความจำที่เคยมี เต้าหู้จึงต้องสืบเสาะค้นหาความเป็นมาของตัวเอง และเรื่องราวยิ่งซับซ้อนเมื่อเขาพบว่าที่มาของตนนั้นเกี่ยวข้องกับอดีตอันมืดมนและความลับของครอบครัวผู้เป็นเจ้าของ',
     summaryEn:
       'Tofu, a big white teddy bear, has been a shelter for Nat for many years. A miracle suddenly turns Tofu into a young man — but the new body has no memory. Tofu must search for his own history, discovering his origins involve a dark past and the deep secrets of his owner\'s family.',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/hLohjSSV-Xk',
+    image: '/posters/khun-mee-preview.jpg',
+    posterImage: '/posters/khun-mee.jpg',
     platforms: [
       { name: 'Ch3+', url: 'https://ch3plus.com/drama/1299', color: '#E87722' },
     ],
@@ -107,8 +112,9 @@ const SHOWS = [
       'มุกมณี รอง บก.สาวแห่งสำนักข่าว Women on the Top เคยชินกับชีวิตที่เธอควบคุมทุกอย่างได้มาตลอด 27 ปี แต่แล้วชีวิตที่เป็นระบบระเบียบของเธอก็ถึงคราวสั่นคลอน เมื่อเธอได้พบกับ ชินกฤต ทนายหนุ่มหน้าตาคมเข้ม ผู้มาพร้อมฝีปากคมกริบ จนกระทั่งอุบัติเหตุบางอย่างทำให้เขาและเธอตื่นขึ้นมาบนเตียงเดียวกันในสภาพเปลือยเปล่าอย่างไม่รู้ต้นสายปลายเหตุ',
     summaryEn:
       'Mook Manee, deputy editor of Women on the Top, has controlled her perfectly ordered life for 27 years. That order is shattered when she meets Chinnakrit — a sharp-tongued young lawyer — at a wedding. A mysterious accident leaves them both waking up naked in the same bed with no memory of why.',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/uSr6o6_I2IY',
+    image: '/posters/bupphe-preview.jpg',
+    posterImage: '/posters/bupphe.jpg',
     platforms: [
       { name: 'Ch3+', url: 'https://ch3plus.com/drama/1317', color: '#E87722' },
     ],
@@ -124,8 +130,9 @@ const SHOWS = [
       'โครงการฝึกงาน Hotel Stars ปีที่ 3 กำลังจะเริ่มต้นขึ้น โรงแรม LP Paradise ได้เฟ้นหานักศึกษาจากทั่วประเทศ 10 คนเข้ามาฝึกงานในสามแผนก ทั้งงานแม่บ้าน งานครัว และงานต้อนรับ พบกับมิตรภาพ การแข่งขัน และการแย่งชิงแบบไม่มีใครยอมใครของพวกเขา',
     summaryEn:
       'The 3rd year Hotel Stars internship program is about to begin. LP Paradise Hotel selects 10 students from across the country for three departments: housekeeping, kitchen, and reception. Watch friendship, fierce competition, and rivalry unfold as they fight for the top 2 spots and a trip abroad.',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/PjEtlSgL_Dk',
+    image: '/posters/hotel-stars-preview.jpg',
+    posterImage: '/posters/hotel-stars.jpg',
     platforms: [
       { name: 'Ch3+', url: 'https://ch3plus.com/drama/858', color: '#E87722' },
     ],
@@ -141,8 +148,9 @@ const SHOWS = [
       'เรื่องราวความรักของเหล่าเดือนมหาวิทยาลัยและแก๊งหมอเถื่อนกับความรักสามแบบสามสไตล์ เรื่องราวของ "วาโย" และ "มิ่ง" สองเพื่อนซี้สมัยมัธยมต้องเข้าประกวดเดือนมหา\'ลัย และทำให้ต้องใกล้ชิดกับแก๊งหมอเถื่อนมากขึ้น ใครกันจะได้ใจใคร ร่วมลุ้นไปด้วยกัน',
     summaryEn:
       '2Moons2 — the love story of university moon candidates and the secret doctor gang, told in three love stories and three styles. Wayo and Ming, two high-school best friends, are selected as their faculty\'s moon candidates, pulling them closer to the upperclassmen who will change their lives.',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/yhl5W32cino',
+    image: '/posters/2moons2-preview.jpg',
+    posterImage: '/posters/2moons2.jpg',
     platforms: [
       { name: 'Ch3+', url: 'https://ch3plus.com/original/832', color: '#E87722' },
       {
@@ -168,8 +176,9 @@ const SHOWS = [
       '"ส้มป่อย" สาวลำพูน สาวโสดขาแรง สายฮา ที่ไม่อยากติดแหง็กใช้ชีวิตที่เหลืออยู่ในบ้านเกิด การได้แฟนดีๆ ไปใช้ชีวิตคูล ๆ อยู่กรุงเทพฯ ถือเป็นลาภอันประเสริฐ แล้วฟ้าก็ประทาน "แวน" ยูทูปเบอร์สายท่องเที่ยวมาให้ ส้มป่อยจึงโร่ปรึกษา "แซ้ป" เจ้าเข้าทรงสายแว้นท์เพื่อหากลเม็ดมัดใจ โดยที่ส้มป่อยไม่รู้เลยว่าแซ้ปแอบชอบเธออยู่',
     summaryEn:
       '"Som Poi", a funny and strong-willed single girl from Lamphun, dreams of escaping to Bangkok with a good boyfriend. When a travel YouTuber named "Van" appears, she consults "Sap" — a street spirit medium — for love advice. She doesn\'t know that Sap has secretly had a crush on her all along.',
-    trailerUrl: '',
-    image: '',
+    trailerUrl: 'https://www.youtube.com/embed/_Amb08XpAvA',
+    image: '/posters/som-poi-preview.jpg',
+    posterImage: '/posters/som-poi.jpg',
     platforms: [
       { name: 'Netflix', url: 'https://www.netflix.com/th/title/81511310', color: '#E50914' },
     ],
@@ -260,7 +269,7 @@ function ShowCard({ show, index, onClick, t, lang }) {
           <img
             src={show.image}
             alt={show.titleTh}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
           />
         ) : (
           <div
@@ -542,11 +551,11 @@ function ShowModal({ show, onClose, t, lang }) {
                 boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
               }}
             >
-              {show.image ? (
+              {(show.posterImage || show.image) ? (
                 <img
-                  src={show.image}
+                  src={show.posterImage || show.image}
                   alt={show.titleTh}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
                 />
               ) : (
                 <div
@@ -807,6 +816,10 @@ export default function PerformancePage() {
   const { lang } = useLang();
   const t = translations[lang].performance;
   const [selectedShow, setSelectedShow] = useState(null);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleClose = useCallback(() => setSelectedShow(null), []);
 
