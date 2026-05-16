@@ -34,7 +34,7 @@ export const translations = {
           location: 'เชียงใหม่',
         },
         {
-          date: '~2552 — 2555',
+          date: '~2553 — 2555',
           degree: 'มัธยมปลาย',
           school: 'โรงเรียนวารีเชียงใหม่',
           location: 'เชียงใหม่',
@@ -235,9 +235,9 @@ export const translations = {
           location: 'Chiang Mai',
         },
         {
-          date: '~2009 — 2012',
+          date: '~2010 — 2012',
           degree: 'Senior High School',
-          school: 'Waree Chiang Mai School',
+          school: 'Varee Chiang Mai School',
           location: 'Chiang Mai',
         },
         {
@@ -436,9 +436,9 @@ export const translations = {
           location: '清迈',
         },
         {
-          date: '~2009 — 2012',
+          date: '~2010 — 2012',
           degree: '高中',
-          school: 'Waree Chiang Mai School',
+          school: 'Varee Chiang Mai School',
           location: '清迈',
         },
         {
