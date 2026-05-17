@@ -216,14 +216,22 @@ const PLATFORM_CONFIG = {
   'YouTube (ENG SUB)':{ label: 'YT ENG',  bg: '#FF0000' },
 };
 
+const IMAGE_PLATFORMS = new Set(['Ch3+', 'AIS Play']);
+
 function getPlatformIcon(name, size = 22) {
   if (name === 'Netflix') return <SiNetflix size={size} />;
+  if (name === 'YouTube (ENG SUB)') return (
+    <>
+      <SiYoutube size={size} />
+      <span style={{ fontFamily: fonts.mono, fontSize: '0.38rem', letterSpacing: '0.08em', opacity: 0.9, lineHeight: 1, marginTop: '2px' }}>ENG</span>
+    </>
+  );
   if (name.startsWith('YouTube')) return <SiYoutube size={size} />;
   if (name === 'Ch3+') return (
-    <img src="/platforms/ch3plus.png" alt="Ch3+" style={{ width: size * 1.6, height: size * 1.6, objectFit: 'contain' }} />
+    <img src="/platforms/ch3plus.png" alt="Ch3+" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
   );
   if (name === 'AIS Play') return (
-    <img src="/platforms/ais-play.png" alt="AIS Play" style={{ width: size * 1.6, height: size * 1.6, objectFit: 'contain' }} />
+    <img src="/platforms/ais-play.png" alt="AIS Play" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
   );
   return <span style={{ fontFamily: fonts.mono, fontSize: '0.7rem', fontWeight: 700 }}>{name}</span>;
 }
@@ -443,7 +451,7 @@ function ShowCard({ show, index, onClick, t, lang }) {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '0.25rem',
+                gap: '1px',
                 width: '48px',
                 height: '48px',
                 background: PLATFORM_CONFIG[p.name]?.bg ?? p.color,
@@ -451,24 +459,11 @@ function ShowCard({ show, index, onClick, t, lang }) {
                 borderRadius: '8px',
                 textDecoration: 'none',
                 boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+                position: 'relative',
+                overflow: 'hidden',
               }}
             >
-              {getPlatformIcon(p.name, 20)}
-              <span style={{
-                fontFamily: fonts.mono,
-                fontSize: '0.42rem',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-                opacity: 0.85,
-                lineHeight: 1,
-                maxWidth: '44px',
-                textAlign: 'center',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-              }}>
-                {PLATFORM_CONFIG[p.name]?.label ?? p.name}
-              </span>
+              {getPlatformIcon(p.name, 24)}
             </a>
           ))}
         </div>
@@ -712,7 +707,7 @@ function ShowModal({ show, onClose, t, lang }) {
                       flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '0.35rem',
+                      gap: '1px',
                       width: '64px',
                       height: '64px',
                       background: PLATFORM_CONFIG[p.name]?.bg ?? p.color,
@@ -720,24 +715,11 @@ function ShowModal({ show, onClose, t, lang }) {
                       borderRadius: '10px',
                       textDecoration: 'none',
                       boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                      position: 'relative',
+                      overflow: 'hidden',
                     }}
                   >
-                    {getPlatformIcon(p.name, 24)}
-                    <span style={{
-                      fontFamily: fonts.mono,
-                      fontSize: '0.48rem',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      opacity: 0.85,
-                      lineHeight: 1,
-                      maxWidth: '56px',
-                      textAlign: 'center',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      whiteSpace: 'nowrap',
-                    }}>
-                      {PLATFORM_CONFIG[p.name]?.label ?? p.name}
-                    </span>
+                    {getPlatformIcon(p.name, 28)}
                   </a>
                 ))}
               </div>
