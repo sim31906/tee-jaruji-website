@@ -736,7 +736,7 @@ function ShowModal({ show, onClose, t, lang }) {
                       textOverflow: 'ellipsis',
                       whiteSpace: 'nowrap',
                     }}>
-                      {PLATFORM_LABEL[p.name] ?? p.name}
+                      {PLATFORM_CONFIG[p.name]?.label ?? p.name}
                     </span>
                   </a>
                 ))}
