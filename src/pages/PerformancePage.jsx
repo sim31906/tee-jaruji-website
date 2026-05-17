@@ -208,22 +208,22 @@ function pad(n) {
   return String(n).padStart(2, '0');
 }
 
-const PLATFORM_LABEL = {
-  'Netflix': 'Netflix',
-  'Ch3+': 'Ch3+',
-  'AIS Play': 'AIS Play',
-  'YouTube': 'YouTube',
-  'YouTube (ENG SUB)': 'YT ENG',
+const PLATFORM_CONFIG = {
+  'Netflix':           { label: 'Netflix',  bg: '#E50914' },
+  'Ch3+':             { label: 'Ch3+',     bg: '#000000' },
+  'AIS Play':         { label: 'AIS Play', bg: '#000000' },
+  'YouTube':          { label: 'YouTube',  bg: '#FF0000' },
+  'YouTube (ENG SUB)':{ label: 'YT ENG',  bg: '#FF0000' },
 };
 
-function getPlatformIcon(name) {
-  if (name === 'Netflix') return <SiNetflix size={22} />;
-  if (name.startsWith('YouTube')) return <SiYoutube size={22} />;
+function getPlatformIcon(name, size = 22) {
+  if (name === 'Netflix') return <SiNetflix size={size} />;
+  if (name.startsWith('YouTube')) return <SiYoutube size={size} />;
   if (name === 'Ch3+') return (
-    <span style={{ fontFamily: fonts.mono, fontSize: '0.85rem', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1 }}>CH3+</span>
+    <img src="/platforms/ch3plus.png" alt="Ch3+" style={{ width: size * 1.6, height: size * 1.6, objectFit: 'contain' }} />
   );
   if (name === 'AIS Play') return (
-    <span style={{ fontFamily: fonts.mono, fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.05em', lineHeight: 1 }}>AIS</span>
+    <img src="/platforms/ais-play.png" alt="AIS Play" style={{ width: size * 1.6, height: size * 1.6, objectFit: 'contain' }} />
   );
   return <span style={{ fontFamily: fonts.mono, fontSize: '0.7rem', fontWeight: 700 }}>{name}</span>;
 }
@@ -446,14 +446,14 @@ function ShowCard({ show, index, onClick, t, lang }) {
                 gap: '0.25rem',
                 width: '48px',
                 height: '48px',
-                background: p.color,
+                background: PLATFORM_CONFIG[p.name]?.bg ?? p.color,
                 color: '#fff',
                 borderRadius: '8px',
                 textDecoration: 'none',
                 boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
               }}
             >
-              {getPlatformIcon(p.name)}
+              {getPlatformIcon(p.name, 20)}
               <span style={{
                 fontFamily: fonts.mono,
                 fontSize: '0.42rem',
@@ -467,7 +467,7 @@ function ShowCard({ show, index, onClick, t, lang }) {
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
               }}>
-                {PLATFORM_LABEL[p.name] ?? p.name}
+                {PLATFORM_CONFIG[p.name]?.label ?? p.name}
               </span>
             </a>
           ))}
@@ -715,14 +715,14 @@ function ShowModal({ show, onClose, t, lang }) {
                       gap: '0.35rem',
                       width: '64px',
                       height: '64px',
-                      background: p.color,
+                      background: PLATFORM_CONFIG[p.name]?.bg ?? p.color,
                       color: '#fff',
                       borderRadius: '10px',
                       textDecoration: 'none',
                       boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
                     }}
                   >
-                    {getPlatformIcon(p.name)}
+                    {getPlatformIcon(p.name, 24)}
                     <span style={{
                       fontFamily: fonts.mono,
                       fontSize: '0.48rem',

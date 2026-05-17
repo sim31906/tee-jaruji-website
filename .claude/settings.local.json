@@ -29,7 +29,8 @@
       "WebFetch(domain:www.wareecm.ac.th)",
       "WebFetch(domain:www.varee.ac.th)",
       "WebFetch(domain:commons.wikimedia.org)",
-      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\tee-jaruji-website\\\\public\\\\posters\")"
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\tee-jaruji-website\\\\public\\\\posters\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\tee-jaruji-website\\\\public\\\\platforms\")"
     ]
   }
 }

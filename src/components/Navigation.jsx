@@ -34,8 +34,27 @@ export default function Navigation() {
   return (
     <>
       <style>{`
-        .nav-link-tj:hover { opacity: 0.5; }
+        .nav-link-tj {
+          position: relative;
+          padding-bottom: 3px;
+        }
+        .nav-link-tj::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1.5px;
+          background: ${colors.accent};
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link-tj:hover { opacity: 1 !important; color: ${colors.accent} !important; }
+        .nav-link-tj:hover::after { transform: scaleX(1); }
         .nav-link-tj.active { color: ${colors.accent} !important; }
+        .nav-link-tj.active::after { transform: scaleX(1); }
+
         .lang-btn-tj {
           background: none;
           border: none;
@@ -51,6 +70,22 @@ export default function Navigation() {
         }
         .lang-btn-tj:hover { color: ${colors.ink}; }
         .lang-btn-tj.active-lang { color: ${colors.ink}; background: ${colors.pinkSoft}; font-weight: 600; }
+
+        @keyframes nav-fade-in {
+          from { opacity: 0; transform: translateY(-6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .nav-links-tj li {
+          animation: nav-fade-in 0.4s ease both;
+        }
+        .nav-links-tj li:nth-child(1) { animation-delay: 0.05s; }
+        .nav-links-tj li:nth-child(2) { animation-delay: 0.10s; }
+        .nav-links-tj li:nth-child(3) { animation-delay: 0.15s; }
+        .nav-links-tj li:nth-child(4) { animation-delay: 0.20s; }
+        .nav-links-tj li:nth-child(5) { animation-delay: 0.25s; }
+        .nav-links-tj li:nth-child(6) { animation-delay: 0.30s; }
+        .nav-links-tj li:nth-child(7) { animation-delay: 0.35s; }
+
         @media (max-width: 968px) {
           .nav-links-tj { display: none !important; }
           .menu-toggle-tj { display: block !important; }
