@@ -419,7 +419,16 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.55rem' }}>
                   <button onClick={() => onPlay(song)} style={{ width: 36, height: 36, borderRadius: '50%', border: 'none', background: isActive && isPlaying ? colors.accent : colors.ink, color: colors.cream, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', flexShrink: 0, transition: 'background 0.2s', paddingLeft: isActive && isPlaying ? 0 : '2px' }}>
-                    {isActive && isPlaying ? '⏸' : '▶'}
+                    {isActive && isPlaying ? (
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ display: 'block' }}>
+                        <line x1="2.5" y1="1" x2="2.5" y2="11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                        <line x1="9.5" y1="1" x2="9.5" y2="11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                      </svg>
+                    ) : (
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ display: 'block', marginLeft: '2px' }}>
+                        <polygon points="1,1 11,6 1,11" fill="currentColor"/>
+                      </svg>
+                    )}
                   </button>
                   <div style={{ flex: 1, height: 4, background: colors.creamDark, borderRadius: 2, cursor: isActive && progress.duration ? 'pointer' : 'default', position: 'relative' }}
                     onClick={(e) => { if (!isActive || !progress.duration) return; const rect = e.currentTarget.getBoundingClientRect(); onSeek(Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))); }}>
@@ -463,7 +472,16 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.55rem' }}>
                   <button onClick={() => onPlay(song)} style={{ width: 36, height: 36, borderRadius: '50%', border: 'none', background: isActive && isPlaying ? colors.accent : colors.ink, color: colors.cream, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', flexShrink: 0, transition: 'background 0.2s', paddingLeft: isActive && isPlaying ? 0 : '2px' }}>
-                    {isActive && isPlaying ? '⏸' : '▶'}
+                    {isActive && isPlaying ? (
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ display: 'block' }}>
+                        <line x1="2.5" y1="1" x2="2.5" y2="11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                        <line x1="9.5" y1="1" x2="9.5" y2="11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                      </svg>
+                    ) : (
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ display: 'block', marginLeft: '2px' }}>
+                        <polygon points="1,1 11,6 1,11" fill="currentColor"/>
+                      </svg>
+                    )}
                   </button>
                   <div style={{ flex: 1, height: 4, background: colors.creamDark, borderRadius: 2, cursor: isActive && progress.duration ? 'pointer' : 'default', position: 'relative' }}
                     onClick={(e) => { if (!isActive || !progress.duration) return; const rect = e.currentTarget.getBoundingClientRect(); onSeek(Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width))); }}>
@@ -972,16 +990,35 @@ export default function MusicPage() {
           </div>
 
           <div className="player-controls-row">
-            <button className="ctrl-btn" onClick={handlePrev} title="ก่อนหน้า">⏮</button>
+            <button className="ctrl-btn" onClick={handlePrev} title="ก่อนหน้า">
+              <svg width="16" height="14" viewBox="0 0 16 14" fill="none" style={{ display: 'block' }}>
+                <line x1="1" y1="1" x2="1" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <polygon points="15,1 4,7 15,13" fill="currentColor"/>
+              </svg>
+            </button>
             <button
               className="ctrl-btn ctrl-btn-play"
               onClick={togglePlay}
               title={isPlaying ? 'หยุด' : 'เล่น'}
-              style={{ width: 44, height: 44, fontSize: '1.1rem' }}
+              style={{ width: 44, height: 44 }}
             >
-              {isPlaying ? '⏸' : '▶'}
+              {isPlaying ? (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ display: 'block' }}>
+                  <line x1="3" y1="1" x2="3" y2="13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                  <line x1="11" y1="1" x2="11" y2="13" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                </svg>
+              ) : (
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ display: 'block', marginLeft: '2px' }}>
+                  <polygon points="2,1 13,7 2,13" fill="currentColor"/>
+                </svg>
+              )}
             </button>
-            <button className="ctrl-btn" onClick={handleNext} title="ถัดไป">⏭</button>
+            <button className="ctrl-btn" onClick={handleNext} title="ถัดไป">
+              <svg width="16" height="14" viewBox="0 0 16 14" fill="none" style={{ display: 'block' }}>
+                <polygon points="1,1 12,7 1,13" fill="currentColor"/>
+                <line x1="15" y1="1" x2="15" y2="13" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </button>
             {!currentSong.audioFile && (
               <span style={{
                 fontFamily: fonts.mono,
