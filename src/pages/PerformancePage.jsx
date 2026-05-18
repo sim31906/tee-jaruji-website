@@ -1181,6 +1181,7 @@ export default function PerformancePage() {
             color: colors.ink,
             maxWidth: "700px",
             marginBottom: "1.5rem",
+            textShadow: '0 1px 8px rgba(253,246,236,0.9), 0 2px 20px rgba(253,246,236,0.6)',
           }}
         >
           {t.titleMain}{" "}
@@ -1194,6 +1195,7 @@ export default function PerformancePage() {
             fontSize: "1.1rem",
             fontStyle: "italic",
             color: colors.inkSoft,
+            textShadow: '0 1px 6px rgba(253,246,236,0.8)',
             marginBottom: "0.75rem",
           }}
         >
@@ -1205,6 +1207,7 @@ export default function PerformancePage() {
             lineHeight: 1.75,
             color: colors.inkSoft,
             maxWidth: "560px",
+            textShadow: '0 1px 6px rgba(253,246,236,0.8)',
           }}
         >
           {t.subtitle}
