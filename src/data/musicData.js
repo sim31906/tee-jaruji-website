@@ -178,8 +178,8 @@ When you feel the same as me, that I love you`,
     links: [
       { platform: 'YouTube', label: 'MV', url: 'https://www.youtube.com/watch?v=MwbfqxKtQ4Q', color: '#FF0000' },
       { platform: 'Apple Music', label: 'Apple Music', url: 'https://apple.co/3LGF77M', color: '#FC3C44' },
-      { platform: 'Spotify', label: 'Spotify', url: 'https://spoti.fi/3wIogfr', color: '#1DB954' },
-      { platform: 'Joox', label: 'JOOX', url: 'https://bit.ly/3wEqeih', color: '#00C64F' },
+      { platform: 'Spotify', label: 'Spotify', url: 'https://open.spotify.com/track/2IjhnzvkL85np73tQmFPgD', color: '#1DB954' },
+      { platform: 'Joox', label: 'JOOX', url: 'https://www.joox.com/th/single/GpZm1EyTD2niNdTWyH1NMg==?appshare=iphone', color: '#00C64F' },
     ],
   },
   {
