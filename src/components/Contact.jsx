@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { colors, fonts } from '../styles/theme';
 import { contacts } from '../data/siteData';
@@ -50,94 +50,94 @@ const EMAIL_CLIENTS = [
   },
 ];
 
-function EmailPicker({ onClose, anchorRef }) {
+function EmailPicker({ onClose }) {
   const ref = useRef(null);
-  const [pos, setPos] = useState(null);
-
-  useLayoutEffect(() => {
-    if (anchorRef?.current) {
-      const rect = anchorRef.current.getBoundingClientRect();
-      const pickerWidth = 220;
-      let left = rect.left + rect.width / 2;
-      left = Math.min(left, window.innerWidth - pickerWidth / 2 - 16);
-      left = Math.max(left, pickerWidth / 2 + 16);
-      setPos({ top: rect.bottom + 12, left });
-    }
-  }, [anchorRef]);
 
   useEffect(() => {
-    function handleClick(e) {
+    function handleKey(e) { if (e.key === 'Escape') onClose(); }
+    function handleOutside(e) {
       if (ref.current && !ref.current.contains(e.target)) onClose();
     }
-    document.addEventListener('mousedown', handleClick);
-    window.addEventListener('scroll', onClose, { passive: true });
+    document.addEventListener('keydown', handleKey);
+    document.addEventListener('mousedown', handleOutside);
+    document.addEventListener('touchstart', handleOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClick);
-      window.removeEventListener('scroll', onClose);
+      document.removeEventListener('keydown', handleKey);
+      document.removeEventListener('mousedown', handleOutside);
+      document.removeEventListener('touchstart', handleOutside);
     };
   }, [onClose]);
 
-  if (!pos) return null;
-
   return createPortal(
-    <div ref={ref} style={{
-      position: 'fixed',
-      top: pos.top,
-      left: pos.left,
-      transform: 'translateX(-50%)',
-      background: colors.cream,
-      border: `1px solid ${colors.creamDark}`,
-      borderRadius: '14px',
-      boxShadow: '0 12px 40px rgba(0,0,0,0.18)',
-      padding: '0.75rem',
-      zIndex: 9999,
-      minWidth: '200px',
-      animation: 'emailPickerIn 0.22s cubic-bezier(0.34,1.2,0.64,1)',
-    }}>
+    <>
       <style>{`
-        @keyframes emailPickerIn {
-          from { opacity: 0; transform: translateX(-50%) scale(0.92) translateY(-8px); }
-          to   { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
+        @keyframes epBgIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes epIn {
+          from { opacity: 0; transform: translate(-50%, -50%) scale(0.88); }
+          to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
       `}</style>
-      <div style={{
-        fontFamily: fonts.mono,
-        fontSize: '0.58rem',
-        letterSpacing: '0.25em',
-        textTransform: 'uppercase',
-        color: colors.inkSoft,
-        padding: '0.3rem 0.5rem 0.6rem',
+      <div
+        onClick={onClose}
+        style={{
+          position: 'fixed', inset: 0, zIndex: 9998,
+          background: 'rgba(0,0,0,0.3)',
+          backdropFilter: 'blur(3px)',
+          animation: 'epBgIn 0.2s ease',
+        }}
+      />
+      <div ref={ref} style={{
+        position: 'fixed',
+        top: '50%', left: '50%',
+        transform: 'translate(-50%, -50%)',
+        background: colors.cream,
+        border: `1px solid ${colors.creamDark}`,
+        borderRadius: '18px',
+        boxShadow: '0 24px 60px rgba(0,0,0,0.25)',
+        padding: '0.75rem',
+        zIndex: 9999,
+        minWidth: '240px',
+        animation: 'epIn 0.25s cubic-bezier(0.34,1.2,0.64,1)',
       }}>
-        เปิดด้วย
+        <div style={{
+          fontFamily: fonts.mono,
+          fontSize: '0.58rem',
+          letterSpacing: '0.25em',
+          textTransform: 'uppercase',
+          color: colors.inkSoft,
+          padding: '0.3rem 0.5rem 0.6rem',
+        }}>
+          เปิดด้วย
+        </div>
+        {EMAIL_CLIENTS.map((client) => (
+          <a
+            key={client.label}
+            href={client.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              padding: '0.6rem 0.75rem',
+              borderRadius: '10px',
+              textDecoration: 'none',
+              color: colors.ink,
+              fontFamily: fonts.body,
+              fontSize: '0.92rem',
+              transition: 'background 0.15s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = colors.creamDark}
+            onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+          >
+            {client.icon}
+            <span>{client.label}</span>
+            <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: colors.inkSoft }}>↗</span>
+          </a>
+        ))}
       </div>
-      {EMAIL_CLIENTS.map((client) => (
-        <a
-          key={client.label}
-          href={client.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onClose}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            padding: '0.6rem 0.75rem',
-            borderRadius: '10px',
-            textDecoration: 'none',
-            color: colors.ink,
-            fontFamily: fonts.body,
-            fontSize: '0.92rem',
-            transition: 'background 0.15s',
-          }}
-          onMouseEnter={e => e.currentTarget.style.background = colors.creamDark}
-          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-        >
-          {client.icon}
-          <span>{client.label}</span>
-          <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: colors.inkSoft }}>↗</span>
-        </a>
-      ))}
-    </div>,
+    </>,
     document.body
   );
 }
@@ -146,7 +146,9 @@ export default function Contact() {
   const { lang } = useLang();
   const t = translations[lang].contact;
   const [showPicker, setShowPicker] = useState(false);
-  const emailCardRef = useRef(null);
+  const closedAt = useRef(0);
+  const handleClose = () => { closedAt.current = Date.now(); setShowPicker(false); };
+  const handleToggle = () => { if (Date.now() - closedAt.current < 200) return; setShowPicker(p => !p); };
 
   return (
     <>
@@ -254,13 +256,12 @@ export default function Contact() {
               return (
                 <div
                   key={i}
-                  ref={emailCardRef}
                   className="contact-card-tj"
                   style={{ cursor: 'pointer' }}
-                  onClick={() => setShowPicker(p => !p)}
+                  onClick={handleToggle}
                 >
                   {cardInner}
-                  {showPicker && <EmailPicker onClose={() => setShowPicker(false)} anchorRef={emailCardRef} />}
+                  {showPicker && <EmailPicker onClose={handleClose} />}
                 </div>
               );
             }
