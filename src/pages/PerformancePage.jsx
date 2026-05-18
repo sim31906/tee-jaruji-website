@@ -1201,7 +1201,7 @@ export default function PerformancePage() {
             color: colors.ink,
             maxWidth: "700px",
             marginBottom: "1.5rem",
-            textShadow: '0 1px 8px rgba(253,246,236,0.9), 0 2px 20px rgba(253,246,236,0.6)',
+            textShadow: '0 1px 4px rgba(253,246,236,1), 0 2px 16px rgba(253,246,236,0.9), 0 4px 30px rgba(253,246,236,0.7)',
           }}
         >
           {t.titleMain}{" "}
@@ -1214,8 +1214,8 @@ export default function PerformancePage() {
             fontFamily: fonts.display,
             fontSize: "1.1rem",
             fontStyle: "italic",
-            color: colors.inkSoft,
-            textShadow: '0 1px 6px rgba(253,246,236,0.8)',
+            color: colors.ink,
+            textShadow: '0 1px 6px rgba(253,246,236,1), 0 2px 14px rgba(253,246,236,0.8)',
             marginBottom: "0.75rem",
           }}
         >
@@ -1225,9 +1225,9 @@ export default function PerformancePage() {
           style={{
             fontSize: "1rem",
             lineHeight: 1.75,
-            color: colors.inkSoft,
+            color: colors.ink,
             maxWidth: "560px",
-            textShadow: '0 1px 6px rgba(253,246,236,0.8)',
+            textShadow: '0 1px 6px rgba(253,246,236,1), 0 2px 14px rgba(253,246,236,0.8)',
           }}
         >
           {t.subtitle}
