@@ -628,7 +628,7 @@ function ShowModal({ show, onClose, t, lang }) {
             borderBottom: `1px solid ${colors.creamDark}`,
             position: "sticky",
             top: 0,
-            background: `linear-gradient(135deg, ${show.gradient[0]}66, ${show.gradient[1]}44, ${colors.cream})`,
+            background: `linear-gradient(135deg, ${show.gradient[0]}, ${show.gradient[1]}, ${colors.cream} 70%)`,
             zIndex: 10,
           }}
         >
