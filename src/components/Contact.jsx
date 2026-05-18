@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { colors, fonts } from '../styles/theme';
 import { contacts } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
@@ -49,32 +50,56 @@ const EMAIL_CLIENTS = [
   },
 ];
 
-function EmailPicker({ onClose }) {
+function EmailPicker({ onClose, anchorRef }) {
   const ref = useRef(null);
+  const [pos, setPos] = useState(null);
+
+  useLayoutEffect(() => {
+    if (anchorRef?.current) {
+      const rect = anchorRef.current.getBoundingClientRect();
+      const pickerWidth = 220;
+      let left = rect.left + rect.width / 2;
+      left = Math.min(left, window.innerWidth - pickerWidth / 2 - 16);
+      left = Math.max(left, pickerWidth / 2 + 16);
+      setPos({ top: rect.bottom + 12, left });
+    }
+  }, [anchorRef]);
 
   useEffect(() => {
     function handleClick(e) {
       if (ref.current && !ref.current.contains(e.target)) onClose();
     }
     document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
+    window.addEventListener('scroll', onClose, { passive: true });
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+      window.removeEventListener('scroll', onClose);
+    };
   }, [onClose]);
 
-  return (
+  if (!pos) return null;
+
+  return createPortal(
     <div ref={ref} style={{
-      position: 'absolute',
-      bottom: 'calc(100% + 12px)',
-      left: '50%',
+      position: 'fixed',
+      top: pos.top,
+      left: pos.left,
       transform: 'translateX(-50%)',
       background: colors.cream,
       border: `1px solid ${colors.creamDark}`,
       borderRadius: '14px',
       boxShadow: '0 12px 40px rgba(0,0,0,0.18)',
       padding: '0.75rem',
-      zIndex: 100,
+      zIndex: 9999,
       minWidth: '200px',
       animation: 'emailPickerIn 0.22s cubic-bezier(0.34,1.2,0.64,1)',
     }}>
+      <style>{`
+        @keyframes emailPickerIn {
+          from { opacity: 0; transform: translateX(-50%) scale(0.92) translateY(-8px); }
+          to   { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
+        }
+      `}</style>
       <div style={{
         fontFamily: fonts.mono,
         fontSize: '0.58rem',
@@ -112,7 +137,8 @@ function EmailPicker({ onClose }) {
           <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: colors.inkSoft }}>↗</span>
         </a>
       ))}
-    </div>
+    </div>,
+    document.body
   );
 }
 
@@ -120,6 +146,7 @@ export default function Contact() {
   const { lang } = useLang();
   const t = translations[lang].contact;
   const [showPicker, setShowPicker] = useState(false);
+  const emailCardRef = useRef(null);
 
   return (
     <>
@@ -162,11 +189,6 @@ export default function Contact() {
         .contact-card-tj:hover .cc-label { color: rgba(255,255,255,0.75) !important; }
         .contact-card-tj:hover .cc-value { color: #fff !important; }
         .contact-card-tj:hover .cc-action { color: #fff !important; border-color: rgba(255,255,255,0.3) !important; }
-
-        @keyframes emailPickerIn {
-          from { opacity: 0; transform: translateX(-50%) scale(0.92) translateY(8px); }
-          to   { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
-        }
 
         @media (max-width: 968px) {
           .contact-cards-tj { grid-template-columns: 1fr !important; }
@@ -232,12 +254,13 @@ export default function Contact() {
               return (
                 <div
                   key={i}
+                  ref={emailCardRef}
                   className="contact-card-tj"
                   style={{ cursor: 'pointer' }}
                   onClick={() => setShowPicker(p => !p)}
                 >
                   {cardInner}
-                  {showPicker && <EmailPicker onClose={() => setShowPicker(false)} />}
+                  {showPicker && <EmailPicker onClose={() => setShowPicker(false)} anchorRef={emailCardRef} />}
                 </div>
               );
             }
