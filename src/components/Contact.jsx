@@ -55,17 +55,8 @@ function EmailPicker({ onClose }) {
 
   useEffect(() => {
     function handleKey(e) { if (e.key === 'Escape') onClose(); }
-    function handleOutside(e) {
-      if (ref.current && !ref.current.contains(e.target)) onClose();
-    }
     document.addEventListener('keydown', handleKey);
-    document.addEventListener('mousedown', handleOutside);
-    document.addEventListener('touchstart', handleOutside);
-    return () => {
-      document.removeEventListener('keydown', handleKey);
-      document.removeEventListener('mousedown', handleOutside);
-      document.removeEventListener('touchstart', handleOutside);
-    };
+    return () => document.removeEventListener('keydown', handleKey);
   }, [onClose]);
 
   return createPortal(
@@ -79,11 +70,13 @@ function EmailPicker({ onClose }) {
       `}</style>
       <div
         onClick={onClose}
+        onTouchEnd={e => { e.preventDefault(); onClose(); }}
         style={{
           position: 'fixed', inset: 0, zIndex: 9998,
           background: 'rgba(0,0,0,0.3)',
           backdropFilter: 'blur(3px)',
           animation: 'epBgIn 0.2s ease',
+          cursor: 'pointer',
         }}
       />
       <div ref={ref} style={{
