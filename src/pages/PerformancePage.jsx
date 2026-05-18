@@ -606,14 +606,17 @@ function ShowModal({ show, onClose, t, lang }) {
           width: "100%",
           maxWidth: "900px",
           maxHeight: "90vh",
-          overflowY: "auto",
           borderRadius: "6px",
+          overflow: "hidden",
           position: "relative",
           boxShadow: "0 32px 80px rgba(0,0,0,0.35)",
           animation: "modalIn 0.38s cubic-bezier(0.34,1.08,0.64,1)",
+          display: "flex",
+          flexDirection: "column",
         }}
         onClick={(e) => e.stopPropagation()}
       >
+        <div style={{ overflowY: "auto", flex: 1 }}>
         {/* modal header */}
         <div
           style={{
@@ -713,6 +716,7 @@ function ShowModal({ show, onClose, t, lang }) {
           >
             {/* poster */}
             <div
+              className="modal-poster-tj"
               style={{
                 width: "100%",
                 aspectRatio: "2/3",
@@ -1017,6 +1021,7 @@ function ShowModal({ show, onClose, t, lang }) {
             )}
           </div>
         </div>
+        </div>{/* end scrollable inner */}
       </div>
     </div>
   );
@@ -1066,12 +1071,21 @@ export default function PerformancePage() {
           .modal-body-tj { flex-direction: column !important; }
           .modal-left-tj {
             width: 100% !important;
+            overflow: hidden !important;
             border-right: none !important;
             border-bottom: 1px solid ${colors.creamDark} !important;
           }
-          .modal-left-tj > div:first-child {
-            max-width: 200px;
-            margin: 0 auto;
+          .modal-poster-tj {
+            max-width: 160px !important;
+            max-height: 240px !important;
+            margin: 0 auto !important;
+          }
+          .modal-poster-tj img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
           }
           .modal-right-tj { padding: 1.5rem !important; }
         }
