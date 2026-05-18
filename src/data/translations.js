@@ -102,11 +102,11 @@ export const translations = {
     },
     contact: {
       sectionNum: '03 / ติดต่อ',
-      sectionTitle: 'ติดต่อ',
-      sectionItalic: 'เรา',
+      sectionTitle: 'ติดต่อเรื่อง',
+      sectionItalic: 'งาน',
       items: [
-        { label: 'Line ออฟฟิเชียล', value: '@teejaruji', action: 'เพิ่มเพื่อน' },
-        { label: 'อีเมล', value: 'TNP.JARUJI@GMAIL.COM', action: 'ส่งอีเมล' },
+        { label: 'Line ออฟฟิเชียล', value: '@teethanapon', action: 'เพิ่มเพื่อน' },
+        { label: 'อีเมล', value: 'Tnp.jaruji@gmail.com', action: 'ส่งอีเมล' },
       ],
     },
     schedule: {
@@ -317,11 +317,11 @@ export const translations = {
     },
     contact: {
       sectionNum: '03 / Contact',
-      sectionTitle: 'Get in',
-      sectionItalic: 'Touch',
+      sectionTitle: 'Work',
+      sectionItalic: 'Enquiries',
       items: [
-        { label: 'Line Official', value: '@teejaruji', action: 'Add friend' },
-        { label: 'Email', value: 'TNP.JARUJI@GMAIL.COM', action: 'Send mail' },
+        { label: 'Line Official', value: '@teethanapon', action: 'Add friend' },
+        { label: 'Email', value: 'Tnp.jaruji@gmail.com', action: 'Send mail' },
       ],
     },
     schedule: {
@@ -532,11 +532,11 @@ export const translations = {
     },
     contact: {
       sectionNum: '03 / Contact',
-      sectionTitle: '联系',
-      sectionItalic: '我们',
+      sectionTitle: '工作',
+      sectionItalic: '问询',
       items: [
-        { label: 'Line 官方', value: '@teejaruji', action: '添加好友' },
-        { label: '电子邮件', value: 'TNP.JARUJI@GMAIL.COM', action: '发送邮件' },
+        { label: 'Line 官方', value: '@teethanapon', action: '添加好友' },
+        { label: '电子邮件', value: 'Tnp.jaruji@gmail.com', action: '发送邮件' },
       ],
     },
     schedule: {

@@ -88,6 +88,11 @@ function WaveformBars({ isPlaying, count = 8 }) {
 function SongCard({ song, index, isActive, onSelect, lang }) {
   const [hovered, setHovered] = useState(false);
   const [c1, c2] = song.gradient;
+  const isMV = !!song.youtubeEmbed;
+  const accentColor = isMV ? colors.blue : colors.accent;
+  const typeLabel = isMV ? 'MV' : 'TEE';
+  const primaryTitle = lang !== 'th' ? song.titleEn : song.title;
+  const secondaryTitle = lang !== 'th' ? song.title : song.titleEn;
 
   return (
     <div
@@ -96,130 +101,91 @@ function SongCard({ song, index, isActive, onSelect, lang }) {
       onMouseLeave={() => setHovered(false)}
       style={{
         cursor: 'pointer',
-        borderRadius: '3px',
-        overflow: 'hidden',
-        border: `1px solid ${isActive ? colors.accent : colors.creamDark}`,
-        transition: 'all 0.3s ease',
-        transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
-        boxShadow: hovered
-          ? '0 16px 40px rgba(61,44,46,0.14)'
-          : isActive
-          ? `0 4px 16px ${colors.accent}30`
-          : '0 2px 8px rgba(61,44,46,0.06)',
         background: colors.cream,
+        border: `1px solid ${colors.ink}`,
+        overflow: 'hidden',
+        transition: 'box-shadow 0.3s cubic-bezier(0.4,0,0.2,1)',
+        boxShadow: hovered ? `8px 8px 0 ${colors.ink}` : '4px 4px 0 transparent',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
+      {/* accent bar */}
       <div style={{
-        height: 148,
+        height: '5px',
+        background: isActive ? accentColor : accentColor,
+        transform: hovered || isActive ? 'scaleX(1)' : 'scaleX(0.3)',
+        transformOrigin: 'left',
+        transition: 'transform 0.4s cubic-bezier(0.4,0,0.2,1)',
+      }} />
+
+      {/* poster */}
+      <div style={{
+        width: '100%',
+        aspectRatio: '16/9',
         background: `linear-gradient(135deg, ${c1}, ${c2})`,
         position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         overflow: 'hidden',
+        flexShrink: 0,
       }}>
         {song.coverImage && (
-          <img
-            src={song.coverImage}
-            alt={song.title}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
-            }}
-          />
-        )}
-        <div style={{
-          position: 'absolute',
-          top: '0.75rem',
-          left: '0.75rem',
-          fontFamily: fonts.mono,
-          fontSize: '0.6rem',
-          letterSpacing: '0.2em',
-          color: 'rgba(255,255,255,0.65)',
-        }}>
-          {String(index + 1).padStart(2, '0')}
-        </div>
-
-        <div style={{
-          width: 48,
-          height: 48,
-          borderRadius: '50%',
-          background: 'rgba(255,255,255,0.22)',
-          backdropFilter: 'blur(8px)',
-          border: '1.5px solid rgba(255,255,255,0.45)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          opacity: hovered || isActive ? 1 : 0,
-          transform: hovered || isActive ? 'scale(1)' : 'scale(0.75)',
-          transition: 'all 0.3s ease',
-        }}>
-          <span style={{ fontSize: '1.1rem', color: 'white', marginLeft: '3px' }}>▶</span>
-        </div>
-
-        {isActive && (
-          <div style={{
-            position: 'absolute',
-            bottom: 0, left: 0, right: 0,
-            height: '3px',
-            background: colors.accent,
+          <img src={song.coverImage} alt={song.title} style={{
+            width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center',
           }} />
         )}
-
+        {/* type badge */}
         <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(61,44,46,0.08)',
-          opacity: hovered ? 1 : 0,
-          transition: 'opacity 0.3s',
-        }} />
+          position: 'absolute', top: '0.75rem', right: '0.75rem',
+          background: isMV ? `${colors.blue}cc` : `${colors.accent}cc`,
+          color: colors.cream,
+          fontFamily: fonts.mono, fontSize: '0.62rem',
+          letterSpacing: '0.2em', textTransform: 'uppercase',
+          padding: '0.2rem 0.55rem', borderRadius: '2px',
+          backdropFilter: 'blur(4px)',
+        }}>
+          {typeLabel}
+        </div>
+        {/* hover overlay */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: `${accentColor}99`,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          opacity: hovered ? 1 : 0, transition: 'opacity 0.3s',
+        }}>
+          <span style={{
+            fontFamily: fonts.mono, fontSize: '0.78rem',
+            letterSpacing: '0.25em', textTransform: 'uppercase',
+            color: colors.ink, fontWeight: 600,
+          }}>ดูรายละเอียด →</span>
+        </div>
       </div>
 
-      <div style={{ padding: '1rem 1.1rem 1.25rem' }}>
-        <div style={{
-          fontFamily: fonts.display,
-          fontSize: '1.08rem',
-          fontWeight: 600,
-          color: colors.ink,
-          lineHeight: 1.25,
-          marginBottom: '0.2rem',
-        }}>
-          {lang !== 'th' ? song.titleEn : song.title}
+      {/* card body */}
+      <div style={{ padding: '1.25rem 1.25rem 1.5rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+        <div style={{ fontFamily: fonts.mono, fontSize: '0.65rem', letterSpacing: '0.3em', color: accentColor }}>
+          {String(index + 1).padStart(2, '0')}
         </div>
-        <div style={{
-          fontFamily: fonts.mono,
-          fontSize: '0.6rem',
-          letterSpacing: '0.15em',
-          color: colors.inkSoft,
-          textTransform: 'uppercase',
-          marginBottom: '0.4rem',
-        }}>
-          {lang !== 'th' ? song.title : song.titleEn}
-        </div>
-        <div style={{
-          fontFamily: fonts.body,
-          fontSize: '0.78rem',
-          color: colors.inkSoft,
-        }}>
+        <h3 style={{ fontFamily: fonts.display, fontSize: '1.2rem', fontWeight: 700, lineHeight: 1.2, color: colors.ink, margin: 0 }}>
+          {primaryTitle}
+        </h3>
+        <p style={{ fontFamily: fonts.mono, fontSize: '0.65rem', letterSpacing: '0.1em', color: colors.inkSoft, textTransform: 'uppercase', margin: 0 }}>
+          {secondaryTitle}
+        </p>
+        <div style={{ fontFamily: fonts.body, fontSize: '0.78rem', color: colors.inkSoft }}>
           {song.artist}
         </div>
-        {song.note && (
-          <div style={{
-            marginTop: '0.5rem',
-            fontFamily: fonts.mono,
-            fontSize: '0.58rem',
-            letterSpacing: '0.08em',
-            color: colors.accent,
-            background: `${colors.accent}14`,
-            padding: '0.2rem 0.5rem',
-            borderRadius: '2px',
-            display: 'inline-block',
-          }}>
-            ★ {song.note}
+        {song.links && song.links.length > 0 && (
+          <div style={{ marginTop: 'auto', paddingTop: '0.75rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}
+            onClick={e => e.stopPropagation()}>
+            {song.links.map((link, i) => (
+              <a key={i} href={link.url} target="_blank" rel="noopener noreferrer"
+                onClick={e => e.stopPropagation()}
+                className="platform-tile-music"
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: '8px', background: link.color, flexShrink: 0, position: 'relative', overflow: 'hidden' }}
+              >
+                <PlatformIcon platform={link.platform} size={20} />
+              </a>
+            ))}
           </div>
         )}
       </div>
@@ -791,10 +757,10 @@ export default function MusicPage() {
         .song-grid-music {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 1.1rem;
+          gap: 1.75rem;
         }
 
-        .section-pad { padding: 4rem; max-width: 960px; margin: 0 auto; }
+        .section-pad { padding: 4rem; max-width: 1200px; margin: 0 auto; }
 
         .music-badge {
           display: inline-block;
@@ -1247,7 +1213,7 @@ export default function MusicPage() {
       </div>
 
       {/* Divider */}
-      <div style={{ maxWidth: '960px', margin: '0 auto', padding: '0 4rem' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 4rem' }}>
         <div style={{ borderTop: `1px solid ${colors.creamDark}` }} />
       </div>
 

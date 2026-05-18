@@ -590,12 +590,13 @@ function ShowModal({ show, onClose, t, lang }) {
         position: "fixed",
         inset: 0,
         zIndex: 1000,
-        background: "rgba(61,44,46,0.72)",
-        backdropFilter: "blur(6px)",
+        background: "rgba(61,44,46,0.65)",
+        backdropFilter: "blur(8px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         padding: "1rem",
+        animation: "fadeInModal 0.25s ease",
       }}
       onClick={onClose}
     >
@@ -606,9 +607,10 @@ function ShowModal({ show, onClose, t, lang }) {
           maxWidth: "900px",
           maxHeight: "90vh",
           overflowY: "auto",
-          borderRadius: "4px",
+          borderRadius: "6px",
           position: "relative",
           boxShadow: "0 32px 80px rgba(0,0,0,0.35)",
+          animation: "modalIn 0.38s cubic-bezier(0.34,1.08,0.64,1)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
@@ -619,11 +621,11 @@ function ShowModal({ show, onClose, t, lang }) {
             alignItems: "center",
             justifyContent: "space-between",
             gap: "1.5rem",
-            padding: "1.5rem 1.75rem",
+            padding: "1.75rem 1.75rem",
             borderBottom: `1px solid ${colors.creamDark}`,
             position: "sticky",
             top: 0,
-            background: colors.cream,
+            background: `linear-gradient(135deg, ${show.gradient[0]}66, ${show.gradient[1]}44, ${colors.cream})`,
             zIndex: 10,
           }}
         >
@@ -1078,6 +1080,12 @@ export default function PerformancePage() {
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: ${colors.creamDark}; border-radius: 3px; }
+
+        @keyframes fadeInModal { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modalIn {
+          from { opacity: 0; transform: scale(0.92) translateY(16px); }
+          to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
 
         @keyframes platform-pop {
           0%   { transform: scale(1); }

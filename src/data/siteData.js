@@ -242,9 +242,9 @@ export const contacts = [
   },
   {
     label: "Email",
-    value: "contact@teejaruji.com",
+    value: "Tnp.jaruji@gmail.com",
     action: "Send mail",
-    href: "mailto:contact@teejaruji.com",
+    href: "mailto:Tnp.jaruji@gmail.com",
   },
 ];
 

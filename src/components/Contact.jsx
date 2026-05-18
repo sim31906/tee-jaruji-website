@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { colors, fonts } from '../styles/theme';
 import { contacts } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
@@ -8,17 +9,124 @@ import { MdEmail } from 'react-icons/md';
 
 const ICONS = [FaLine, MdEmail];
 const CARD_COLORS = ['#00B900', '#f0c878'];
+const EMAIL = 'Tnp.jaruji@gmail.com';
+
+const EMAIL_CLIENTS = [
+  {
+    label: 'Gmail',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M2 6l10 7L22 6" stroke="#EA4335" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="2" y="4" width="20" height="16" rx="2" stroke="#4285F4" strokeWidth="1.5" fill="none"/>
+        <path d="M2 4l10 9 10-9" fill="#EA4335" opacity="0.15"/>
+      </svg>
+    ),
+    color: '#EA4335',
+    url: `https://mail.google.com/mail/?view=cm&to=${EMAIL}`,
+  },
+  {
+    label: 'Outlook',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="3" width="13" height="18" rx="2" fill="#0072C6"/>
+        <rect x="9" y="7" width="13" height="13" rx="2" fill="#28A8E8"/>
+        <circle cx="8.5" cy="13" r="3" fill="white"/>
+      </svg>
+    ),
+    color: '#0072C6',
+    url: `https://outlook.live.com/mail/deeplink/compose?to=${EMAIL}`,
+  },
+  {
+    label: 'iOS / Android',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="4" width="20" height="16" rx="3" fill="#555"/>
+        <path d="M2 7l10 7 10-7" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    color: '#555555',
+    url: `mailto:${EMAIL}`,
+  },
+];
+
+function EmailPicker({ onClose }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (ref.current && !ref.current.contains(e.target)) onClose();
+    }
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [onClose]);
+
+  return (
+    <div ref={ref} style={{
+      position: 'absolute',
+      bottom: 'calc(100% + 12px)',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      background: colors.cream,
+      border: `1px solid ${colors.creamDark}`,
+      borderRadius: '14px',
+      boxShadow: '0 12px 40px rgba(0,0,0,0.18)',
+      padding: '0.75rem',
+      zIndex: 100,
+      minWidth: '200px',
+      animation: 'emailPickerIn 0.22s cubic-bezier(0.34,1.2,0.64,1)',
+    }}>
+      <div style={{
+        fontFamily: fonts.mono,
+        fontSize: '0.58rem',
+        letterSpacing: '0.25em',
+        textTransform: 'uppercase',
+        color: colors.inkSoft,
+        padding: '0.3rem 0.5rem 0.6rem',
+      }}>
+        เปิดด้วย
+      </div>
+      {EMAIL_CLIENTS.map((client) => (
+        <a
+          key={client.label}
+          href={client.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onClose}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            padding: '0.6rem 0.75rem',
+            borderRadius: '10px',
+            textDecoration: 'none',
+            color: colors.ink,
+            fontFamily: fonts.body,
+            fontSize: '0.92rem',
+            transition: 'background 0.15s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = colors.creamDark}
+          onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+        >
+          {client.icon}
+          <span>{client.label}</span>
+          <span style={{ marginLeft: 'auto', fontSize: '0.75rem', color: colors.inkSoft }}>↗</span>
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export default function Contact() {
   const { lang } = useLang();
   const t = translations[lang].contact;
+  const [showPicker, setShowPicker] = useState(false);
 
   return (
     <>
       <style>{`
         .contact-card-tj {
           position: relative;
-          overflow: hidden;
+          overflow: visible;
           display: flex;
           flex-direction: column;
           text-decoration: none;
@@ -29,6 +137,11 @@ export default function Contact() {
         .contact-card-tj:hover {
           transform: translateY(-8px);
           box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .contact-card-tj .cc-inner {
+          border-radius: 20px;
+          overflow: hidden;
+          position: relative;
         }
         .contact-card-tj .cc-fill {
           position: absolute;
@@ -49,6 +162,11 @@ export default function Contact() {
         .contact-card-tj:hover .cc-label { color: rgba(255,255,255,0.75) !important; }
         .contact-card-tj:hover .cc-value { color: #fff !important; }
         .contact-card-tj:hover .cc-action { color: #fff !important; border-color: rgba(255,255,255,0.3) !important; }
+
+        @keyframes emailPickerIn {
+          from { opacity: 0; transform: translateX(-50%) scale(0.92) translateY(8px); }
+          to   { opacity: 1; transform: translateX(-50%) scale(1) translateY(0); }
+        }
 
         @media (max-width: 968px) {
           .contact-cards-tj { grid-template-columns: 1fr !important; }
@@ -72,6 +190,58 @@ export default function Contact() {
           {t.items.map((c, i) => {
             const Icon = ICONS[i];
             const cardColor = CARD_COLORS[i];
+            const isEmail = i === 1;
+
+            const cardInner = (
+              <div className="cc-inner" style={{ background: colors.creamDark, padding: '3rem 2.5rem 2.5rem', boxShadow: '0 2px 16px rgba(0,0,0,0.05)' }}>
+                <div className="cc-fill" style={{ background: cardColor }} />
+                <div className="cc-icon-wrap" style={{ position: 'relative', zIndex: 1, marginBottom: '2.5rem' }}>
+                  <div style={{
+                    width: '60px', height: '60px', borderRadius: '14px',
+                    background: cardColor, display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', fontSize: '1.6rem', color: '#fff',
+                  }}>
+                    <Icon />
+                  </div>
+                </div>
+                <div className="cc-label" style={{
+                  fontFamily: fonts.mono, fontSize: '0.8rem', letterSpacing: '0.3em',
+                  textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '0.6rem',
+                }}>
+                  {c.label}
+                </div>
+                <div className="cc-value" style={{
+                  fontFamily: fonts.display, fontSize: '1.35rem', fontWeight: 500,
+                  color: colors.ink, lineHeight: 1.2, flex: 1, paddingBottom: '2rem', wordBreak: 'break-all',
+                }}>
+                  {c.value}
+                </div>
+                <div className="cc-action" style={{
+                  fontFamily: fonts.mono, fontSize: '0.8rem', letterSpacing: '0.2em',
+                  textTransform: 'uppercase', color: colors.inkSoft,
+                  borderTop: `1px solid ${colors.creamDark}`, paddingTop: '1.25rem',
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                }}>
+                  {c.action}
+                  <span style={{ fontSize: '1rem' }}>↗</span>
+                </div>
+              </div>
+            );
+
+            if (isEmail) {
+              return (
+                <div
+                  key={i}
+                  className="contact-card-tj"
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setShowPicker(p => !p)}
+                >
+                  {cardInner}
+                  {showPicker && <EmailPicker onClose={() => setShowPicker(false)} />}
+                </div>
+              );
+            }
+
             return (
               <a
                 key={i}
@@ -79,74 +249,9 @@ export default function Contact() {
                 target={contacts[i].href.startsWith('http') ? '_blank' : undefined}
                 rel={contacts[i].href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className="contact-card-tj"
-                style={{
-                  background: colors.creamDark,
-                  padding: '3rem 2.5rem 2.5rem',
-                  boxShadow: '0 2px 16px rgba(0,0,0,0.05)',
-                }}
+                style={{ boxShadow: '0 2px 16px rgba(0,0,0,0.05)' }}
               >
-                {/* Colour fill on hover */}
-                <div className="cc-fill" style={{ background: cardColor }} />
-
-                {/* Icon box */}
-                <div className="cc-icon-wrap" style={{ position: 'relative', zIndex: 1, marginBottom: '2.5rem' }}>
-                  <div style={{
-                    width: '60px',
-                    height: '60px',
-                    borderRadius: '14px',
-                    background: cardColor,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '1.6rem',
-                    color: '#fff',
-                  }}>
-                    <Icon />
-                  </div>
-                </div>
-
-                {/* Label */}
-                <div className="cc-label" style={{
-                  fontFamily: fonts.mono,
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.3em',
-                  textTransform: 'uppercase',
-                  color: colors.inkSoft,
-                  marginBottom: '0.6rem',
-                }}>
-                  {c.label}
-                </div>
-
-                {/* Value */}
-                <div className="cc-value" style={{
-                  fontFamily: fonts.display,
-                  fontSize: '1.35rem',
-                  fontWeight: 500,
-                  color: colors.ink,
-                  lineHeight: 1.2,
-                  flex: 1,
-                  paddingBottom: '2rem',
-                  wordBreak: 'break-all',
-                }}>
-                  {c.value}
-                </div>
-
-                {/* Action */}
-                <div className="cc-action" style={{
-                  fontFamily: fonts.mono,
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
-                  color: colors.inkSoft,
-                  borderTop: `1px solid ${colors.creamDark}`,
-                  paddingTop: '1.25rem',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}>
-                  {c.action}
-                  <span style={{ fontSize: '1rem' }}>↗</span>
-                </div>
+                {cardInner}
               </a>
             );
           })}
