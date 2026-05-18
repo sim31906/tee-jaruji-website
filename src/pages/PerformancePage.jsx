@@ -218,6 +218,26 @@ const SHOWS = [
       },
     ],
   },
+  {
+    id: 10,
+    titleTh: 'ไทยเเลนด์, ไอ มิส ยู!',
+    titleEn: 'Thailand, I Miss You!',
+    type: 'variety',
+    gradient: ['#a8d5b5', '#d4edd9'],
+    accentColor: '#5a9e72',
+    summaryTh:
+      'เมื่อความคิดถึงเป็นเหตุให้ออกเดินทาง เส้นทางการเดินทางของเพื่อนสหายทั้ง 4 คน อาย กมลเนตร, ออกัส วชิรวิชญ์, มีน พีรวิชญ์ และ ตี๋ ธนพล "4 สหายจ๊วบจ๊วบ" ที่จะต้องเผชิญชะตากรรมไปพร้อมกัน กับทริปครั้งแรกของพวกเขาถึง 6 วัน ไม่ว่าจะเป็นการเปิดเผยความในใจ ภารกิจที่ต้องเจอ และร่วมถึงการปลดล็อกปมในใจที่ไม่เคยเปิดเผยที่ไหนมาก่อน',
+    summaryEn:
+      'When nostalgia becomes the reason for traveling — the journey of 4 friends: Aye Kamonnet, Augusta Wachirawit, Min Peerawit and Tee Thanaphon. The "4 Joob-Joob Gang" face their destiny together on their very first 6-day trip, revealing their innermost feelings, completing missions, and unlocking heart knots never shared before.',
+    summaryZh:
+      '当思念成为出发的理由——阿伊·卡蒙耐特、奥古斯·瓦奇拉威奇、明·彼拉威奇和小弟·塔纳蓬四位好友踏上了一段共同面对命运的旅程。"四人帮"首次6天之旅，有彼此心里话的倾诉、迎面而来的挑战，以及那些从未向任何人透露过的心结，在旅途中被一一解开。',
+    trailerUrl: 'https://www.youtube.com/embed/PntxpffRL2k',
+    image: '/posters/thailand-miss-you-preview.jpg',
+    posterImage: '/posters/thailand-miss-you.jpg',
+    platforms: [
+      { name: 'Ch3+', url: 'https://ch3plus.com/drama/1054?lang=en', color: '#E87722' },
+    ],
+  },
 ];
 
 function pad(n) {
@@ -325,7 +345,7 @@ function PlatformBadge({ p }) {
 
 function ShowCard({ show, index, onClick, t, lang }) {
   const [hovered, setHovered] = useState(false);
-  const typeLabel = show.type === "movie" ? t.typeMovie : t.typeSeries;
+  const typeLabel = show.type === "movie" ? t.typeMovie : show.type === "variety" ? t.typeVariety : t.typeSeries;
   const primaryTitle = lang === "th" ? show.titleTh : show.titleEn;
   const secondaryTitle = lang === "th" ? show.titleEn : show.titleTh;
   const secondaryIsThai = lang !== "th";
@@ -617,7 +637,7 @@ function ShowModal({ show, onClose, t, lang }) {
                 marginBottom: "0.4rem",
               }}
             >
-              {show.type === "movie" ? t.typeMovie : t.typeSeries} ·{" "}
+              {show.type === "movie" ? t.typeMovie : show.type === "variety" ? t.typeVariety : t.typeSeries} ·{" "}
               {t.modalCategory}
             </div>
             <h2
