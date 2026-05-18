@@ -26,10 +26,13 @@ export default function Profile() {
     <>
       <style>{`
         .work-card-tj:hover {
-          box-shadow: 12px 12px 0 ${colors.ink} !important;
+          box-shadow: 8px 8px 0 ${colors.ink} !important;
         }
         .work-card-tj:hover .work-bar {
           transform: scaleX(1) !important;
+        }
+        .work-card-tj:hover .work-card-img {
+          transform: scale(1.06) !important;
         }
         .timeline-cta-tj:hover {
           background: ${colors.ink} !important;
@@ -184,90 +187,113 @@ export default function Profile() {
                 className="work-card-tj"
                 style={{
                   position: 'relative',
-                  padding: '2.5rem 2rem',
                   background: colors.cream,
                   border: `1px solid ${colors.ink}`,
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                   cursor: 'pointer',
                   overflow: 'hidden',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '420px',
                 }}
               >
+                {/* accent bar */}
                 <div
                   className="work-bar"
                   style={{
                     position: 'absolute',
                     top: 0, left: 0,
-                    width: '100%', height: '6px',
+                    width: '100%', height: '5px',
                     background: work.color,
                     transform: 'scaleX(0)',
                     transformOrigin: 'left',
                     transition: 'transform 0.4s',
+                    zIndex: 2,
                   }}
                 />
-                <div style={{
-                  fontFamily: fonts.display,
-                  fontSize: '4rem',
-                  fontStyle: 'italic',
-                  color: colors.accent,
-                  marginBottom: '1.5rem',
-                  lineHeight: 1,
-                }}>
-                  {work.icon}
-                </div>
-                <div style={{
-                  fontFamily: fonts.mono,
-                  fontSize: '0.8rem',
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
-                  marginBottom: '0.75rem',
-                  color: colors.inkSoft,
-                }}>
-                  {work.type}
-                </div>
-                <h3 style={{
-                  fontFamily: fonts.display,
-                  fontSize: '1.7rem',
-                  fontWeight: 500,
-                  marginBottom: '1rem',
-                  lineHeight: 1.1,
-                  whiteSpace: 'pre-line',
-                }}>
-                  {t.works[i].title}
-                </h3>
-                <p style={{
-                  fontSize: '1rem',
-                  lineHeight: 1.6,
-                  color: colors.inkSoft,
-                  marginBottom: '1rem',
-                }}>
-                  {t.works[i].desc}
-                </p>
-                <ul style={{ fontSize: '0.85rem' }}>
-                  {work.items.map((item, j) => (
-                    <li key={j} style={{
-                      padding: '0.6rem 0',
-                      borderBottom: j < work.items.length - 1 ? `1px dashed ${colors.creamDark}` : 'none',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      gap: '1rem',
-                    }}>
-                      <span>{item.name}</span>
-                      <span style={{ fontFamily: fonts.mono, fontSize: '0.8rem', color: colors.accent }}>
-                        {item.year}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
 
+                {/* image 70% */}
                 <div style={{
-                  marginTop: '1.5rem',
-                  fontFamily: fonts.mono,
-                  fontSize: '0.68rem',
-                  letterSpacing: '0.2em',
-                  textTransform: 'uppercase',
-                  color: colors.accent,
+                  flex: '0 0 70%',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  background: `linear-gradient(135deg, ${work.gradient[0]}, ${work.gradient[1]})`,
                 }}>
-                  {t.viewAll}
+                  {work.heroImage && (
+                    <img
+                      src={work.heroImage}
+                      alt={work.title}
+                      style={{
+                        position: 'absolute', inset: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'cover',
+                        objectPosition: 'center top',
+                        transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
+                      }}
+                      className="work-card-img"
+                    />
+                  )}
+                  {/* gradient overlay */}
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    background: 'linear-gradient(to bottom, rgba(252,246,236,0) 40%, rgba(252,246,236,0.55) 100%)',
+                  }} />
+                  {/* icon watermark */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '1rem', left: '1.25rem',
+                    fontFamily: fonts.display,
+                    fontSize: '3.5rem',
+                    fontStyle: 'italic',
+                    color: 'rgba(255,255,255,0.55)',
+                    lineHeight: 1,
+                    userSelect: 'none',
+                    textShadow: '0 2px 12px rgba(0,0,0,0.15)',
+                  }}>
+                    {work.icon}
+                  </div>
+                </div>
+
+                {/* text 30% */}
+                <div style={{
+                  flex: '0 0 30%',
+                  padding: '1.25rem 1.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  borderTop: `1px solid ${colors.creamDark}`,
+                }}>
+                  <div>
+                    <div style={{
+                      fontFamily: fonts.mono,
+                      fontSize: '0.65rem',
+                      letterSpacing: '0.3em',
+                      textTransform: 'uppercase',
+                      color: colors.accent,
+                      marginBottom: '0.4rem',
+                    }}>
+                      {work.type}
+                    </div>
+                    <h3 style={{
+                      fontFamily: fonts.display,
+                      fontSize: '1.35rem',
+                      fontWeight: 500,
+                      lineHeight: 1.1,
+                      whiteSpace: 'pre-line',
+                      color: colors.ink,
+                    }}>
+                      {t.works[i].title}
+                    </h3>
+                  </div>
+                  <div style={{
+                    fontFamily: fonts.mono,
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    color: colors.accent,
+                  }}>
+                    {t.viewAll}
+                  </div>
                 </div>
               </div>
               </Link>

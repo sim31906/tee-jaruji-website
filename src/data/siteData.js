@@ -21,6 +21,8 @@ export const works = [
   {
     slug: "events",
     icon: "E",
+    heroImage: "/events-hero-bg.jpg",
+    gradient: [colors.pinkSoft, colors.blueSoft],
     type: "Category 01",
     title: "Event\nAppearances",
     desc: "งานเปิดตัว · งานเเฟนมีต · งานพรีเซนเตอร์ · กิจกรรมพิเศษทั้งในประเทศเเละต่างประเทศ",
@@ -67,6 +69,8 @@ export const works = [
   {
     slug: "performance",
     icon: "P",
+    heroImage: "/perf-hero-bg.jpg",
+    gradient: [colors.pinkSoft, colors.blueSoft],
     type: "Category 02",
     title: "Performance\n& Acting",
     desc: "งานเเสดงละคร · ซีรีส์ · ภาพยนตร์ · เเละการเเสดงบนเวที",
@@ -101,6 +105,8 @@ export const works = [
   {
     slug: "music",
     icon: "M",
+    heroImage: "/music-hero-bg.png",
+    gradient: [colors.pinkSoft, colors.blueSoft],
     type: "Category 03",
     title: "Music\n& Sound",
     desc: "ผลงานเพลง · ซิงเกิล · OST · เเละการเเสดงดนตรีสด",
