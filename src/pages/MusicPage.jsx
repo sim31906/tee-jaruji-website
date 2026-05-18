@@ -688,6 +688,8 @@ export default function MusicPage() {
           font-size: 1rem;
           transition: color 0.2s;
           line-height: 1;
+          -webkit-appearance: none;
+          appearance: none;
           display: flex;
           align-items: center;
           justify-content: center;
