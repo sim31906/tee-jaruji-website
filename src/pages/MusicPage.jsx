@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { colors, fonts } from '../styles/theme';
 import { teeSongs, musicVideos, allSongs } from '../data/musicData';
 import CursorSparkle from '../components/CursorSparkle';
+import { useLang } from '../context/LanguageContext';
+import { translations } from '../data/translations';
 
 function formatTime(secs) {
   if (!secs || isNaN(secs)) return '0:00';
@@ -83,7 +85,7 @@ function WaveformBars({ isPlaying, count = 8 }) {
   );
 }
 
-function SongCard({ song, index, isActive, onSelect }) {
+function SongCard({ song, index, isActive, onSelect, lang }) {
   const [hovered, setHovered] = useState(false);
   const [c1, c2] = song.gradient;
 
@@ -186,7 +188,7 @@ function SongCard({ song, index, isActive, onSelect }) {
           lineHeight: 1.25,
           marginBottom: '0.2rem',
         }}>
-          {song.title}
+          {lang !== 'th' ? song.titleEn : song.title}
         </div>
         <div style={{
           fontFamily: fonts.mono,
@@ -196,7 +198,7 @@ function SongCard({ song, index, isActive, onSelect }) {
           textTransform: 'uppercase',
           marginBottom: '0.4rem',
         }}>
-          {song.titleEn}
+          {lang !== 'th' ? song.title : song.titleEn}
         </div>
         <div style={{
           fontFamily: fonts.body,
@@ -285,7 +287,7 @@ function PlatformLink({ link }) {
   );
 }
 
-function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSeek }) {
+function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSeek, t, lang }) {
   useEffect(() => {
     const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', handleEsc);
@@ -369,7 +371,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
             lineHeight: 1.1,
             marginBottom: '0.25rem',
           }}>
-            {song.title}
+            {lang !== 'th' ? song.titleEn : song.title}
           </h2>
           <div style={{
             fontFamily: fonts.mono,
@@ -378,7 +380,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
             color: colors.inkSoft,
             fontStyle: 'italic',
           }}>
-            {song.titleEn}
+            {lang !== 'th' ? song.title : song.titleEn}
           </div>
           {song.note && (
             <div style={{
@@ -432,15 +434,25 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
             </div>
 
             <div style={{ padding: '1.25rem 2rem', borderBottom: `1px solid ${colors.creamDark}` }}>
-              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '0.75rem' }}>ฟังได้ที่</div>
+              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '0.75rem' }}>{t.listenOn}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {song.links.map((link, i) => <PlatformLink key={i} link={link} />)}
               </div>
             </div>
 
             <div style={{ padding: '1.25rem 2rem 2rem' }}>
-              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '1rem' }}>เนื้อเพลง</div>
+              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '1rem' }}>{t.lyrics}</div>
               <div style={{ fontFamily: fonts.body, fontSize: '0.96rem', lineHeight: 2.1, color: colors.ink, whiteSpace: 'pre-line' }}>{song.lyric}</div>
+              {lang !== 'th' && (lang === 'en' ? song.lyricEn : song.lyricZh) && (
+                <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: `1px solid ${colors.creamDark}` }}>
+                  <div style={{ fontFamily: fonts.mono, fontSize: '0.58rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '1rem' }}>
+                    {lang === 'en' ? 'English Translation' : '中文翻译'}
+                  </div>
+                  <div style={{ fontFamily: fonts.body, fontSize: '0.96rem', lineHeight: 2.1, color: colors.inkSoft, whiteSpace: 'pre-line' }}>
+                    {lang === 'en' ? song.lyricEn : song.lyricZh}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -465,14 +477,24 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
               </div>
             </div>
             <div style={{ padding: '1.25rem 2rem', borderBottom: `1px solid ${colors.creamDark}`, flexShrink: 0 }}>
-              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '0.75rem' }}>ฟังได้ที่</div>
+              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '0.75rem' }}>{t.listenOn}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {song.links.map((link, i) => <PlatformLink key={i} link={link} />)}
               </div>
             </div>
             <div style={{ padding: '1.25rem 2rem 2rem', overflowY: 'auto', flex: 1 }}>
-              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '1rem' }}>เนื้อเพลง</div>
+              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '1rem' }}>{t.lyrics}</div>
               <div style={{ fontFamily: fonts.body, fontSize: '0.96rem', lineHeight: 2.1, color: colors.ink, whiteSpace: 'pre-line' }}>{song.lyric}</div>
+              {lang !== 'th' && (lang === 'en' ? song.lyricEn : song.lyricZh) && (
+                <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: `1px solid ${colors.creamDark}` }}>
+                  <div style={{ fontFamily: fonts.mono, fontSize: '0.58rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '1rem' }}>
+                    {lang === 'en' ? 'English Translation' : '中文翻译'}
+                  </div>
+                  <div style={{ fontFamily: fonts.body, fontSize: '0.96rem', lineHeight: 2.1, color: colors.inkSoft, whiteSpace: 'pre-line' }}>
+                    {lang === 'en' ? song.lyricEn : song.lyricZh}
+                  </div>
+                </div>
+              )}
             </div>
           </>
         )}
@@ -483,6 +505,8 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
 
 export default function MusicPage() {
   const navigate = useNavigate();
+  const { lang } = useLang();
+  const t = translations[lang].music;
   const audioRef = useRef(null);
   const isPlayingRef = useRef(false);
 
@@ -547,6 +571,15 @@ export default function MusicPage() {
 
   const handlePrev = useCallback(() => {
     setCurrentIdx(i => (i - 1 + allSongs.length) % allSongs.length);
+  }, []);
+
+  const handleShuffle = useCallback(() => {
+    setCurrentIdx(i => {
+      let next;
+      do { next = Math.floor(Math.random() * allSongs.length); } while (next === i && allSongs.length > 1);
+      return next;
+    });
+    setIsPlaying(true);
   }, []);
 
   const handleSeek = useCallback((ratio) => {
@@ -825,7 +858,7 @@ export default function MusicPage() {
         backdropFilter: 'blur(12px)',
         borderBottom: `1px solid ${colors.creamDark}`,
       }}>
-        <button className="back-btn-music" onClick={goBack}>← Back</button>
+        <button className="back-btn-music" onClick={goBack}>{t.backNav}</button>
         <span style={{ fontFamily: fonts.display, fontSize: '1.1rem', letterSpacing: '0.15em', color: colors.ink }}>
           Tee · Jaruji
         </span>
@@ -868,7 +901,7 @@ export default function MusicPage() {
           marginBottom: '1rem',
           textShadow: '0 1px 6px rgba(253,246,236,1), 0 2px 14px rgba(253,246,236,0.8)',
         }}>
-          Category 03
+          {t.categoryLabel}
         </div>
         <h1 style={{
           fontFamily: fonts.display,
@@ -879,7 +912,7 @@ export default function MusicPage() {
           marginBottom: '1rem',
           textShadow: '0 1px 4px rgba(253,246,236,1), 0 2px 16px rgba(253,246,236,0.9), 0 4px 30px rgba(253,246,236,0.7)',
         }}>
-          เพลงและดนตรี
+          {t.titleMain}
         </h1>
         <p style={{
           fontFamily: fonts.display,
@@ -888,7 +921,7 @@ export default function MusicPage() {
           color: colors.inkSoft,
           textShadow: '0 1px 6px rgba(253,246,236,1), 0 2px 14px rgba(253,246,236,0.8)',
         }}>
-          Music &amp; Sound — ผลงานเพลงและดนตรีของ Tee Jaruji
+          {t.subtitle}
         </p>
         <div style={{ width: '60px', height: '4px', background: colors.accent, borderRadius: '2px', marginTop: '2.5rem' }} />
       </div>
@@ -907,7 +940,7 @@ export default function MusicPage() {
               fontWeight: 600,
               color: colors.ink,
             }}>
-              {currentSong.title}
+              {lang !== 'th' ? currentSong.titleEn : currentSong.title}
             </div>
             <div style={{ fontFamily: fonts.body, fontSize: '0.78rem', color: colors.inkSoft, marginTop: '0.2rem' }}>
               {currentSong.artist}
@@ -963,15 +996,36 @@ export default function MusicPage() {
             )}
           </div>
 
-          <button
-            className={`ctrl-btn ctrl-btn-list${showPlaylist ? ' active' : ''}`}
-            onClick={() => setShowPlaylist(p => !p)}
-            title="รายการเพลง"
-            style={{ marginTop: '0.75rem', flexDirection: 'column', gap: '0.2rem', width: 'auto', height: 'auto', padding: '0.4rem 0.8rem' }}
-          >
-            <span style={{ fontSize: '1rem', lineHeight: 1 }}>☰</span>
-            <span style={{ fontFamily: fonts.mono, fontSize: '0.52rem', letterSpacing: '0.18em', textTransform: 'uppercase' }}>list</span>
-          </button>
+          <div style={{ display: 'flex', gap: '0.6rem', marginTop: '0.75rem', justifyContent: 'center' }}>
+            <button
+              className="ctrl-btn ctrl-btn-list"
+              onClick={handleShuffle}
+              title="สุ่มเพลง"
+              style={{ flexDirection: 'column', gap: '0.2rem', width: 'auto', height: 'auto', padding: '0.4rem 0.8rem' }}
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+                <line x1="3" y1="15" x2="16" y2="2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <polyline points="12,2 16,2 16,6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                <line x1="3" y1="3" x2="7" y2="7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <line x1="11" y1="11" x2="16" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                <polyline points="16,12 16,16 12,16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              </svg>
+              <span style={{ fontFamily: fonts.mono, fontSize: '0.52rem', letterSpacing: '0.18em', textTransform: 'uppercase' }}>shuffle</span>
+            </button>
+            <button
+              className={`ctrl-btn ctrl-btn-list${showPlaylist ? ' active' : ''}`}
+              onClick={() => setShowPlaylist(p => !p)}
+              title="รายการเพลง"
+              style={{ flexDirection: 'column', gap: '0.2rem', width: 'auto', height: 'auto', padding: '0.4rem 0.8rem' }}
+            >
+              <svg width="25" height="18" viewBox="0 0 25 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: 'block' }}>
+                <line x1="1" y1="2" x2="24" y2="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="1" y1="9" x2="24" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="1" y1="16" x2="24" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+              <span style={{ fontFamily: fonts.mono, fontSize: '0.52rem', letterSpacing: '0.18em', textTransform: 'uppercase' }}>list</span>
+            </button>
+          </div>
         </div>
 
         {/* Playlist panel */}
@@ -1014,7 +1068,7 @@ export default function MusicPage() {
                       color: active ? colors.ink : colors.ink,
                       whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
                     }}>
-                      {song.title}
+                      {lang !== 'th' ? song.titleEn : song.title}
                     </div>
                     <div style={{
                       fontFamily: fonts.body,
@@ -1078,7 +1132,7 @@ export default function MusicPage() {
                       color: colors.ink,
                       whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
                     }}>
-                      {song.title}
+                      {lang !== 'th' ? song.titleEn : song.title}
                     </div>
                     <div style={{
                       fontFamily: fonts.body,
@@ -1132,10 +1186,10 @@ export default function MusicPage() {
             color: colors.ink,
             lineHeight: 1.1,
           }}>
-            เพลงของ Tee
+            {t.teeSongTitle}
           </h2>
           <p style={{ fontFamily: fonts.body, fontSize: '0.88rem', color: colors.inkSoft, marginTop: '0.35rem' }}>
-            เพลงที่ Tee Jaruji ร้อง / ร่วมร้อง — กดการ์ดเพื่อดูเนื้อเพลงและลิงก์
+            {t.teeSongSub}
           </p>
         </div>
 
@@ -1147,6 +1201,7 @@ export default function MusicPage() {
               index={i}
               isActive={currentSong.id === song.id}
               onSelect={selectSong}
+              lang={lang}
             />
           ))}
         </div>
@@ -1181,10 +1236,10 @@ export default function MusicPage() {
             color: colors.ink,
             lineHeight: 1.1,
           }}>
-            MV ที่มี Tee ร่วมแสดง
+            {t.mvTitle}
           </h2>
           <p style={{ fontFamily: fonts.body, fontSize: '0.88rem', color: colors.inkSoft, marginTop: '0.35rem' }}>
-            Music Video ที่ Tee Jaruji ร่วมแสดงในฐานะนักแสดงประกอบ
+            {t.mvSub}
           </p>
         </div>
 
@@ -1196,6 +1251,7 @@ export default function MusicPage() {
               index={i}
               isActive={currentSong.id === song.id}
               onSelect={selectSong}
+              lang={lang}
             />
           ))}
         </div>
@@ -1224,7 +1280,7 @@ export default function MusicPage() {
           onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
           onMouseLeave={e => e.currentTarget.style.opacity = '1'}
         >
-          ← กลับหน้าหลัก
+          {t.backButton}
         </button>
       </div>
 
@@ -1237,6 +1293,8 @@ export default function MusicPage() {
           isPlaying={isPlaying}
           progress={progress}
           onPlay={handleCardPlay}
+          t={t}
+          lang={lang}
           onSeek={handleSeek}
         />
       )}
