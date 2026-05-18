@@ -15,6 +15,7 @@ import Reveal from './components/Reveal';
 import WorkDetailPage from './pages/WorkDetailPage';
 import TimelinePage from './pages/TimelinePage';
 import PerformancePage from './pages/PerformancePage';
+import MusicPage from './pages/MusicPage';
 
 function MainPage() {
   const location = useLocation();
@@ -85,6 +86,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/work/performance" element={<PerformancePage />} />
+      <Route path="/work/music" element={<MusicPage />} />
       <Route path="/work/:slug" element={<WorkDetailPage />} />
       <Route path="/timeline" element={<TimelinePage />} />
     </Routes>
