@@ -880,36 +880,39 @@ export default function MusicPage() {
 
         <div style={{
           fontFamily: fonts.mono,
-          fontSize: '0.85rem',
-          letterSpacing: '0.3em',
+          fontSize: '0.68rem',
+          letterSpacing: '0.35em',
           textTransform: 'uppercase',
           color: colors.accent,
           marginBottom: '1rem',
-          textShadow: '0 1px 6px rgba(253,246,236,1), 0 2px 14px rgba(253,246,236,0.8)',
+          textShadow: '0 1px 6px rgba(253,246,236,1)',
         }}>
           {t.categoryLabel}
         </div>
         <h1 style={{
           fontFamily: fonts.display,
-          fontSize: 'clamp(2.4rem, 5vw, 4rem)',
+          fontSize: 'clamp(2.8rem, 7vw, 5rem)',
           fontWeight: 500,
-          lineHeight: 1.05,
+          lineHeight: 1.0,
+          letterSpacing: '-0.02em',
           color: colors.ink,
-          marginBottom: '1rem',
+          margin: '0 0 1rem',
           textShadow: '0 1px 4px rgba(253,246,236,1), 0 2px 16px rgba(253,246,236,0.9), 0 4px 30px rgba(253,246,236,0.7)',
         }}>
-          {t.titleMain}
+          {t.titleMain}{' '}
+          <span style={{ fontStyle: 'italic', color: colors.accent }}>{t.titleItalic}</span>
         </h1>
         <p style={{
-          fontFamily: fonts.display,
-          fontSize: '1.1rem',
-          fontStyle: 'italic',
-          color: colors.inkSoft,
+          fontFamily: fonts.body,
+          fontSize: '1rem',
+          lineHeight: 1.7,
+          color: colors.ink,
+          maxWidth: '500px',
+          margin: 0,
           textShadow: '0 1px 6px rgba(253,246,236,1), 0 2px 14px rgba(253,246,236,0.8)',
         }}>
           {t.subtitle}
         </p>
-        <div style={{ width: '60px', height: '4px', background: colors.accent, borderRadius: '2px', marginTop: '2.5rem' }} />
       </div>
 
       {/* Sticky Music Player */}

@@ -16,6 +16,7 @@ import WorkDetailPage from './pages/WorkDetailPage';
 import TimelinePage from './pages/TimelinePage';
 import PerformancePage from './pages/PerformancePage';
 import MusicPage from './pages/MusicPage';
+import EventsPage from './pages/EventsPage';
 
 function MainPage() {
   const location = useLocation();
@@ -85,6 +86,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
+      <Route path="/work/events" element={<EventsPage />} />
       <Route path="/work/performance" element={<PerformancePage />} />
       <Route path="/work/music" element={<MusicPage />} />
       <Route path="/work/:slug" element={<WorkDetailPage />} />

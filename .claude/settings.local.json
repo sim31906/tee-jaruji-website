@@ -35,7 +35,9 @@
       "PowerShell(Get-ChildItem -Path \"c:\\\\tee-jaruji-website\\\\\" -Depth 2 | Where-Object { -not $_.PSIsContainer } | Select-Object FullName | Where-Object { $_.FullName -notmatch \"node_modules\" })",
       "PowerShell(Get-ChildItem \"c:\\\\tee-jaruji-website\" -Recurse -Exclude \"node_modules\" | Select-Object -ExpandProperty FullName | Where-Object { $_ -notmatch \"node_modules\" } | Where-Object { $_ -notmatch \"\\\\.git\" })",
       "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\tee-jaruji-website\\\\public\\\\audio\")",
-      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\tee-jaruji-website\\\\public\\\\music\")"
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\tee-jaruji-website\\\\public\\\\music\")",
+      "Bash(dir \"c:\\\\tee-jaruji-website\\\\public\")",
+      "PowerShell(New-Item -ItemType Directory -Path \"c:\\\\tee-jaruji-website\\\\public\\\\events\" -Force)"
     ]
   }
 }
