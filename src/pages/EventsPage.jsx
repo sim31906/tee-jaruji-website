@@ -289,7 +289,7 @@ export default function EventsPage() {
         @media (max-width: 580px) {
           .ev-grid { grid-template-columns: 1fr !important; }
           .ev-section { padding: 4rem 1.25rem !important; }
-          .ev-hero-tj { padding: 6rem 1.5rem 3rem !important; }
+          .ev-hero-tj { padding: 6rem 1.5rem 3rem !important; background-position: center 30% !important; }
         }
       `}</style>
 
