@@ -12,6 +12,8 @@ const ICONS = [FaLine, MdEmail];
 const CARD_COLORS = ['#00B900', '#f0c878'];
 const EMAIL = 'Tnp.jaruji@gmail.com';
 
+const SUBJECT = encodeURIComponent('ติดต่องาน — Tee Jaruji');
+
 const EMAIL_CLIENTS = [
   {
     label: 'Gmail',
@@ -23,7 +25,8 @@ const EMAIL_CLIENTS = [
       </svg>
     ),
     color: '#EA4335',
-    url: `https://mail.google.com/mail/?view=cm&to=${EMAIL}`,
+    url: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${SUBJECT}`,
+    newTab: true,
   },
   {
     label: 'Outlook',
@@ -35,10 +38,11 @@ const EMAIL_CLIENTS = [
       </svg>
     ),
     color: '#0072C6',
-    url: `https://outlook.live.com/mail/deeplink/compose?to=${EMAIL}`,
+    url: `ms-outlook://compose?to=${EMAIL}&subject=${SUBJECT}`,
+    newTab: false,
   },
   {
-    label: 'iOS / Android',
+    label: 'Mail App',
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
         <rect x="2" y="4" width="20" height="16" rx="3" fill="#555"/>
@@ -46,7 +50,8 @@ const EMAIL_CLIENTS = [
       </svg>
     ),
     color: '#555555',
-    url: `mailto:${EMAIL}`,
+    url: `mailto:${EMAIL}?subject=${SUBJECT}`,
+    newTab: false,
   },
 ];
 
@@ -106,8 +111,8 @@ function EmailPicker({ onClose }) {
           <a
             key={client.label}
             href={client.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            target={client.newTab ? '_blank' : '_self'}
+            rel={client.newTab ? 'noopener noreferrer' : undefined}
             onClick={onClose}
             style={{
               display: 'flex',
