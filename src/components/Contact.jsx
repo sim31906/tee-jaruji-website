@@ -14,12 +14,12 @@ const EMAIL = 'Tnp.jaruji@gmail.com';
 
 const SUBJECT = encodeURIComponent('ติดต่องาน — Tee Jaruji');
 
+const isMobile = () => /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 const GMAIL_APP = `googlegmail://co?to=${EMAIL}&subject=${SUBJECT}`;
 const GMAIL_WEB = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${SUBJECT}`;
-
-function openGmail() {
-  window.location.href = GMAIL_APP;
-}
+const OUTLOOK_APP = `ms-outlook://compose?to=${EMAIL}&subject=${SUBJECT}`;
+const OUTLOOK_WEB = `https://outlook.live.com/mail/0/deeplink/compose?to=${EMAIL}&subject=${SUBJECT}`;
 
 const EMAIL_CLIENTS = [
   {
@@ -32,7 +32,7 @@ const EMAIL_CLIENTS = [
       </svg>
     ),
     color: '#EA4335',
-    handleClick: openGmail,
+    handleClick: () => { window.location.href = isMobile() ? GMAIL_APP : GMAIL_WEB; },
   },
   {
     label: 'Outlook',
@@ -44,8 +44,7 @@ const EMAIL_CLIENTS = [
       </svg>
     ),
     color: '#0072C6',
-    url: `ms-outlook://compose?to=${EMAIL}&subject=${SUBJECT}`,
-    newTab: false,
+    handleClick: () => { window.location.href = isMobile() ? OUTLOOK_APP : OUTLOOK_WEB; },
   },
   {
     label: 'Mail App',
