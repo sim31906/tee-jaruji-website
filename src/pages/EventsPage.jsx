@@ -317,7 +317,7 @@ export default function EventsPage() {
         background:`linear-gradient(135deg, ${colors.pinkSoft}, ${colors.blueSoft})`,
         backgroundImage:`linear-gradient(135deg, rgba(252,228,234,0.75), rgba(220,234,244,0.75)), url(/events-hero-bg.jpg)`,
         backgroundSize:'cover',
-        backgroundPosition:'center 10%',
+        backgroundPosition:'center 2%',
         position:'relative',overflow:'hidden',
       }}>
         {/* watermark */}
