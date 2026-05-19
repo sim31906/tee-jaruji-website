@@ -14,6 +14,16 @@ const EMAIL = 'Tnp.jaruji@gmail.com';
 
 const SUBJECT = encodeURIComponent('ติดต่องาน — Tee Jaruji');
 
+const GMAIL_APP = `googlegmail://co?to=${EMAIL}&subject=${SUBJECT}`;
+const GMAIL_WEB = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${SUBJECT}`;
+
+function openGmail() {
+  window.location.href = GMAIL_APP;
+  setTimeout(() => {
+    if (!document.hidden) window.open(GMAIL_WEB, '_blank');
+  }, 600);
+}
+
 const EMAIL_CLIENTS = [
   {
     label: 'Gmail',
@@ -25,8 +35,7 @@ const EMAIL_CLIENTS = [
       </svg>
     ),
     color: '#EA4335',
-    url: `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${SUBJECT}`,
-    newTab: true,
+    handleClick: openGmail,
   },
   {
     label: 'Outlook',
@@ -52,6 +61,17 @@ const EMAIL_CLIENTS = [
     color: '#555555',
     url: `mailto:${EMAIL}?subject=${SUBJECT}`,
     newTab: false,
+  },
+  {
+    label: 'คัดลอก Email',
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <rect x="8" y="2" width="13" height="16" rx="2" stroke="#6c757d" strokeWidth="1.5" fill="none"/>
+        <rect x="3" y="6" width="13" height="16" rx="2" fill="#e9ecef" stroke="#6c757d" strokeWidth="1.5"/>
+      </svg>
+    ),
+    color: '#6c757d',
+    handleClick: () => navigator.clipboard.writeText(EMAIL),
   },
 ];
 
@@ -110,10 +130,13 @@ function EmailPicker({ onClose }) {
         {EMAIL_CLIENTS.map((client) => (
           <a
             key={client.label}
-            href={client.url}
+            href={client.url || '#'}
             target={client.newTab ? '_blank' : '_self'}
             rel={client.newTab ? 'noopener noreferrer' : undefined}
-            onClick={onClose}
+            onClick={e => {
+              if (client.handleClick) { e.preventDefault(); client.handleClick(); }
+              onClose();
+            }}
             style={{
               display: 'flex',
               alignItems: 'center',
