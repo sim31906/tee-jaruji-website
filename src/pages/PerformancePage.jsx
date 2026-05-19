@@ -1076,8 +1076,8 @@ export default function PerformancePage() {
             border-bottom: 1px solid ${colors.creamDark} !important;
           }
           .modal-poster-tj {
-            max-width: 160px !important;
-            max-height: 240px !important;
+            max-width: 220px !important;
+            max-height: 330px !important;
             margin: 0 auto !important;
           }
           .modal-poster-tj img {
