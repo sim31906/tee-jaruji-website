@@ -163,7 +163,7 @@ const SHOWS = [
   {
     id: 8,
     titleTh: "เดือนเกี้ยวเดือน",
-    titleEn: "2 Moons 2 The Series",
+    titleEn: "2 Moons The Series",
     type: "series",
     gradient: ["#dceaf4", "#aecde0"],
     accentColor: colors.blue,
