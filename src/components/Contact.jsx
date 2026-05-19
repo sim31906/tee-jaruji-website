@@ -19,9 +19,6 @@ const GMAIL_WEB = `https://mail.google.com/mail/?view=cm&fs=1&to=${EMAIL}&su=${S
 
 function openGmail() {
   window.location.href = GMAIL_APP;
-  setTimeout(() => {
-    if (!document.hidden) window.open(GMAIL_WEB, '_blank');
-  }, 600);
 }
 
 const EMAIL_CLIENTS = [
