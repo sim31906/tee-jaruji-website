@@ -37,7 +37,8 @@
       "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\tee-jaruji-website\\\\public\\\\audio\")",
       "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\tee-jaruji-website\\\\public\\\\music\")",
       "Bash(dir \"c:\\\\tee-jaruji-website\\\\public\")",
-      "PowerShell(New-Item -ItemType Directory -Path \"c:\\\\tee-jaruji-website\\\\public\\\\events\" -Force)"
+      "PowerShell(New-Item -ItemType Directory -Path \"c:\\\\tee-jaruji-website\\\\public\\\\events\" -Force)",
+      "WebFetch(domain:www.siamturakij.com)"
     ]
   }
 }

@@ -116,7 +116,7 @@ function EventModal({ event, onClose, t }) {
             position:'relative',
           }}>
             {event.image
-              ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:'cover',position:'absolute',inset:0}}/>
+              ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:event.imagePosition||'center',position:'absolute',inset:0}}/>
               : <div style={{fontFamily:fonts.mono,fontSize:'0.65rem',letterSpacing:'0.2em',textTransform:'uppercase',color:meta.color,opacity:0.5}}>
                   {t.imagePlaceholder}
                 </div>
@@ -440,7 +440,7 @@ export default function EventsPage() {
                       display:'flex',alignItems:'center',justifyContent:'center',
                     }}>
                       {event.image
-                        ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:'cover',position:'absolute',inset:0}}/>
+                        ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:event.imagePosition||'center',position:'absolute',inset:0}}/>
                         : <div style={{fontFamily:fonts.mono,fontSize:'0.55rem',letterSpacing:'0.2em',textTransform:'uppercase',color:meta.color,opacity:0.4}}>
                             photo
                           </div>

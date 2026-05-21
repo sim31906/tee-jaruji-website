@@ -1006,6 +1006,188 @@ Candy Crush`,
       { platform: 'YouTube', label: 'ENG', showLabel: true, url: 'https://www.youtube.com/watch?v=HBDcYiaZ--k', color: '#cc0000' },
     ],
   },
+  {
+    id: 'mv-5',
+    title: 'WHENEVER',
+    titleEn: 'WHENEVER',
+    artist: 'SBFIVE',
+    note: 'Tee Jaruji ร่วมร้องใน MV',
+    audioFile: '/audio/whenever.mp3',
+    coverImage: '/music/whenever.jpg',
+    youtubeEmbed: 'https://www.youtube.com/embed/LShweERy2cE',
+    gradient: ['#d4c8e8', '#aecde0'],
+    lyric: `เมื่อไหร่ที่เธอคิดถึงฉันให้เปิดฟัง
+และร้องเพลงนี้ไปด้วยกัน
+เหมือนว่าฉันยังอยู่ (เหมือนว่าฉันยังอยู่)
+เหมือนว่าเรายังเคียงคู่กันใกล้ๆ
+เมื่อไหร่เธอนั้นท้อแท้และหมดหวัง
+ขอให้ร้องเพลงนี้ไปด้วยกัน
+เหมือน ตอน ที่ ยัง อยู่ (เหมือน ตอน ที่ ยัง อยู่)
+เหมือน ตอน เรายังอยู่ด้วยกันได้ไหม?
+
+ดูแลร่างกายของตัวเธอให้ดีๆนะ
+และทำจิตใจของเธอให้เข้มแข็งไว้นะ
+ไม่ว่าใครพูดอะไร ไม่ว่าใครพูดยังไง
+อย่าให้มันทำเธอสงสัยในสิ่งที่เธอนั้นกำลังเป็นอยู่นะ
+เธอมีคุณค่ามากเธอรู้ไหม
+จะให้ฉันเตือนอีกสักครั้งไหม
+ว่าเธอนั้นมีความหมายสำหรับฉันสักเท่าไหร่
+ขอพูดให้เธอมั่นใจ ขอพูดให้เธอแน่ใจ
+อีกสักที
+
+ส่วนฉันเองก็จะรอวันนั้น
+วันที่เราจะเจอะกันอีกครั้ง
+ฉันรู้ดีว่าต้องมีวันนั้น จากนี้...
+
+เมื่อไหร่ที่เธอคิดถึงฉันให้เปิดฟัง
+และร้องเพลงนี้ไปด้วยกัน
+เหมือนว่าฉันยังอยู่ (เหมือนว่าฉันยังอยู่)
+เหมือนว่าเรายังเคียงคู่กันใกล้ๆ
+เมื่อไหร่เธอนั้นท้อแท้และหมดหวัง
+ขอให้ร้องเพลงนี้ไปด้วยกัน
+เหมือน ตอน ที่ ยัง อยู่ (เหมือน ตอน ที่ ยัง อยู่)
+เหมือน ตอน เรายังอยู่ด้วยกันได้ไหม?
+เหมือน ตอน เรายังอยู่ด้วยกันได้ไหม?
+
+ในเวลาที่ใจของเธอ ต้องพบกับความผิดหวัง
+และไม่มีใครที่คอยเข้าใจ และคอยมายืนเคียงข้าง
+ขอให้เธอได้รู้ว่าในโลกนี้นั้นยังมีฉัน
+ที่จะยังคอยเป็นกำลังใจ
+เสมอ...
+
+เมื่อไหร่ที่เธอคิดถึงฉันให้เปิดฟัง
+และร้องเพลงนี้ไปด้วยกัน
+เหมือนว่าฉันยังอยู่ (เหมือนว่าฉันยังอยู่)
+เหมือนว่าเรายังเคียงคู่กันใกล้ๆ
+เมื่อไหร่เธอนั้นท้อแท้และหมดหวัง
+ขอให้ร้องเพลงนี้ไปด้วยกัน
+เหมือน ตอน ที่ ยัง อยู่ (เหมือน ตอน ที่ ยัง อยู่)
+เหมือน ตอน เรายังอยู่ด้วยกันได้ไหม?
+
+เมื่อไหร่ที่เธอคิดถึงฉันให้เปิดฟัง
+และร้องเพลงนี้ไปด้วยกัน
+เหมือนว่าฉันยังอยู่ (เหมือนว่าฉันยังอยู่)
+เหมือนว่าเรายังเคียงคู่กันใกล้ๆ
+เมื่อไหร่เธอนั้นท้อแท้และหมดหวัง
+ขอให้ร้องเพลงนี้ไปด้วยกัน
+เหมือน ตอน ที่ ยัง อยู่ (เหมือน ตอน ที่ ยัง อยู่)
+เหมือน ตอน เรายังอยู่ด้วยกันได้ไหม?`,
+    lyricEn: `Whenever you think of me, play this song
+And sing this song together
+As if I'm still here (as if I'm still here)
+As if we're still close beside each other
+Whenever you feel weary and have lost all hope
+Please sing this song together
+Like the time when we were still here (like the time when we were still here)
+Like the time when we could still be together?
+
+Take good care of yourself
+And keep your spirit strong
+No matter what anyone says, no matter how they say it
+Don't let it make you doubt who you are
+You are so valuable, do you know that?
+Shall I remind you one more time
+How much you mean to me?
+Let me assure you, let me make you certain
+One more time
+
+As for me, I'll wait for that day
+The day we'll meet again
+I know for sure that day will come, from now on...
+
+Whenever you think of me, play this song
+And sing this song together
+As if I'm still here (as if I'm still here)
+As if we're still close beside each other
+Whenever you feel weary and have lost all hope
+Please sing this song together
+Like the time when we were still here (like the time when we were still here)
+Like the time when we could still be together?
+Like the time when we could still be together?
+
+In the time when your heart must face disappointment
+And there is no one who understands, no one standing by your side
+Let me tell you that in this world, there is still me
+Who will always be your strength
+Always...
+
+Whenever you think of me, play this song
+And sing this song together
+As if I'm still here (as if I'm still here)
+As if we're still close beside each other
+Whenever you feel weary and have lost all hope
+Please sing this song together
+Like the time when we were still here (like the time when we were still here)
+Like the time when we could still be together?
+
+Whenever you think of me, play this song
+And sing this song together
+As if I'm still here (as if I'm still here)
+As if we're still close beside each other
+Whenever you feel weary and have lost all hope
+Please sing this song together
+Like the time when we were still here (like the time when we were still here)
+Like the time when we could still be together?`,
+    lyricZh: `无论何时你想起我，就把这首歌打开
+一起唱这首歌吧
+就像我还在这里（就像我还在这里）
+就像我们还紧紧相伴在一起
+无论何时你感到疲倦和失去了希望
+请一起唱这首歌
+像当初我们还在的时候（像当初我们还在的时候）
+像当初我们还能在一起的时候，好吗？
+
+好好照顾你自己的身体
+让内心保持坚强
+无论任何人说什么，无论任何人怎么说
+不要让它让你怀疑你正在成为的自己
+你有很大的价值，你知道吗？
+要我再提醒你一次吗
+你对我有多么重要
+让我给你信心，让我让你确信
+再一次
+
+至于我，我会等待那一天
+那个我们再次相遇的日子
+我清楚地知道那一天一定会来，从现在起...
+
+无论何时你想起我，就把这首歌打开
+一起唱这首歌吧
+就像我还在这里（就像我还在这里）
+就像我们还紧紧相伴在一起
+无论何时你感到疲倦和失去了希望
+请一起唱这首歌
+像当初我们还在的时候（像当初我们还在的时候）
+像当初我们还能在一起的时候，好吗？
+像当初我们还能在一起的时候，好吗？
+
+在你的心必须面对失望的时候
+没有任何人理解你，没有人站在你身边
+让我告诉你，在这个世界上还有我
+我会一直给你力量
+永远...
+
+无论何时你想起我，就把这首歌打开
+一起唱这首歌吧
+就像我还在这里（就像我还在这里）
+就像我们还紧紧相伴在一起
+无论何时你感到疲倦和失去了希望
+请一起唱这首歌
+像当初我们还在的时候（像当初我们还在的时候）
+像当初我们还能在一起的时候，好吗？
+
+无论何时你想起我，就把这首歌打开
+一起唱这首歌吧
+就像我还在这里（就像我还在这里）
+就像我们还紧紧相伴在一起
+无论何时你感到疲倦和失去了希望
+请一起唱这首歌
+像当初我们还在的时候（像当初我们还在的时候）
+像当初我们还能在一起的时候，好吗？`,
+    links: [
+      { platform: 'YouTube', label: 'MV', url: 'https://www.youtube.com/watch?v=LShweERy2cE', color: '#FF0000' },
+    ],
+  },
 ];
 
 export const allSongs = [...teeSongs, ...musicVideos];
