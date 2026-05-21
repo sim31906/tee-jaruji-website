@@ -178,13 +178,20 @@ function SongCard({ song, index, isActive, onSelect, lang }) {
           <div style={{ marginTop: 'auto', paddingTop: '0.75rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}
             onClick={e => e.stopPropagation()}>
             {song.links.map((link, i) => (
-              <a key={i} href={link.url} target="_blank" rel="noopener noreferrer"
-                onClick={e => e.stopPropagation()}
-                className="platform-tile-music"
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: '8px', background: link.color, flexShrink: 0, position: 'relative', overflow: 'hidden' }}
-              >
-                <PlatformIcon platform={link.platform} size={20} />
-              </a>
+              <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.2rem' }}>
+                <a href={link.url} target="_blank" rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                  className="platform-tile-music"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: '8px', background: link.color, flexShrink: 0, position: 'relative', overflow: 'hidden' }}
+                >
+                  <PlatformIcon platform={link.platform} size={20} />
+                </a>
+                {link.label && (
+                  <span style={{ fontFamily: fonts.mono, fontSize: '0.48rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.inkSoft }}>
+                    {link.label}
+                  </span>
+                )}
+              </div>
             ))}
           </div>
         )}
@@ -227,33 +234,48 @@ function PlatformIcon({ platform, size = 26 }) {
 
 function PlatformLink({ link }) {
   return (
-    <a
-      href={link.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      title={link.label || link.platform}
-      className="platform-tile-music"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 64,
-        height: 64,
-        borderRadius: '10px',
-        background: link.color,
-        color: '#fff',
-        textDecoration: 'none',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <PlatformIcon platform={link.platform} size={28} />
-    </a>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
+      <a
+        href={link.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={link.label || link.platform}
+        className="platform-tile-music"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 64,
+          height: 64,
+          borderRadius: '10px',
+          background: link.color,
+          color: '#fff',
+          textDecoration: 'none',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <PlatformIcon platform={link.platform} size={28} />
+      </a>
+      {link.label && (
+        <span style={{
+          fontFamily: fonts.mono,
+          fontSize: '0.55rem',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          color: colors.inkSoft,
+        }}>
+          {link.label}
+        </span>
+      )}
+    </div>
   );
 }
 
 function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSeek, t, lang }) {
+  const [embedLang, setEmbedLang] = useState('th');
+
   useEffect(() => {
     const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', handleEsc);
@@ -267,6 +289,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
   if (!song) return null;
   const [c1, c2] = song.gradient;
   const pct = isActive && progress.duration ? (progress.current / progress.duration) * 100 : 0;
+  const activeEmbed = embedLang === 'en' && song.youtubeEmbedEn ? song.youtubeEmbedEn : song.youtubeEmbed;
 
   return (
     <div
@@ -368,10 +391,25 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         {song.youtubeEmbed ? (
           /* Music Video — single scroll container */
           <div style={{ overflowY: 'auto', flex: 1 }}>
+            {song.youtubeEmbedEn && (
+              <div style={{ display: 'flex', gap: '0.4rem', padding: '0.75rem 1.25rem 0', background: '#000' }}>
+                {['th', 'en'].map(l => (
+                  <button key={l} onClick={() => setEmbedLang(l)} style={{
+                    fontFamily: fonts.mono, fontSize: '0.6rem', letterSpacing: '0.18em',
+                    textTransform: 'uppercase', padding: '0.25rem 0.7rem', borderRadius: '2px',
+                    border: 'none', cursor: 'pointer',
+                    background: embedLang === l ? colors.cream : 'rgba(255,255,255,0.15)',
+                    color: embedLang === l ? colors.ink : 'rgba(255,255,255,0.7)',
+                    transition: 'all 0.2s',
+                  }}>{l === 'th' ? 'TH' : 'EN'}</button>
+                ))}
+              </div>
+            )}
             <div style={{ background: '#000' }}>
               <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
                 <iframe
-                  src={song.youtubeEmbed}
+                  key={activeEmbed}
+                  src={activeEmbed}
                   title={song.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen

@@ -843,6 +843,169 @@ I'll always tell you I love you and take care of you forever`,
       { platform: 'YouTube', label: 'MV', url: 'https://www.youtube.com/watch?v=n6OUf3wAXQ8', color: '#FF0000' },
     ],
   },
+  {
+    id: 'mv-4',
+    title: 'CANDY CRUSH',
+    titleEn: 'CANDY CRUSH',
+    artist: 'SBFIVE',
+    note: 'Tee Jaruji ร่วมร้องใน MV',
+    audioFile: '/audio/candy-crush.mp3',
+    coverImage: '/music/candy-crush.jpg',
+    youtubeEmbed: 'https://www.youtube.com/embed/_xD6dDOhN1w',
+    youtubeEmbedEn: 'https://www.youtube.com/embed/HBDcYiaZ--k',
+    gradient: ['#ff85c2', '#ffd966'],
+    lyric: `มองเห็นเธออยู่ไม่ไกล
+พวกเราคือ SBFIVE
+เราร้องเพลง เราเต้นกัน
+Yeah Boom Boom Boom
+ก็ไม่เคยรู้ว่าเธอเป็นใคร
+แต่รู้สึกได้ไปถึงหัวใจ
+และตอนนี้เรากำลังละลาย
+ยุ่ง ๆ เครียด ๆ ว่าจะเอายังไง
+She is a fire เธอเกินบรรยาย
+เกินจะทำใจให้ตาย
+I am a fire เราต้องไว้ลาย
+มาลุ้นกันหน่อยเป็นไง
+มองซ้ายและมองขวา
+หน้าไปจรดหลัง เล่นเอาเราพัง แหกโค้ง
+ไม่นึกว่าเธอจะทำให้เห็นจุดอ่อน
+ขอเธอลองเปิดใจ รับสิ่งแทนความหมาย
+ฉันตั้งใจเอามามอบไว้ให้เธอ
+เพราะเธอช่างสดใส งดงามเกินกว่าใคร
+
+ให้เลย Candy ครัช Crack Crack Crack Candy ครัช
+ให้เลย Candy ครัช Crack Crack Crack Candy ครัช
+ให้เลย Candy ครัช
+ละละละลาย หัวใจจะวาย
+นานานานานา นานานานานานา
+ฉันจะบ้าตาย โอ้ยจะละลาย
+นานานานานานา นานานานานานานา
+
+เขยิบเข้ามาให้ไว จะโดนใจ SBFIVE you ready you ready? Yeah Boom Boom Boom
+เพราะสายตาเธอมันร้อนเป็นไฟ
+และเธอคนนี้มันช่างดีต่อใจ
+และตอนนี้เรากำลังละลาย
+ไม่ยุ่ง ไม่เครียด แต่หัวใจจะวาย
+She is a fire เธอเกินบรรยาย เกินจะทำใจให้ตาย
+I am a fire เราต้องไว้ลาย เปิดใจให้ฉันได้ไหม
+สายตาก็มองไป ใจก็มองมา เล่นเอาเราบ้า หลุดโค้ง
+ไม่นึกว่าเธอจะทำให้เห็นจุดอ่อน
+ขอเธอลองเปิดใจ รับสิ่งแทนความหมาย
+ฉันตั้งใจเอามามอบไว้ให้เธอ
+เพราะเธอช่างสดใส งดงามเกินกว่าใคร
+
+you so fire, I love you girl, I love you girl
+you so fire, I love you girl, I love you girl
+ให้เลย Candy ครัช Crack Crack Crack Candy ครัช
+ให้เลย Candy ครัช Crack Crack Crack Candy ครัช
+ให้เลย Candy ครัช
+ละละละลาย หัวใจจะวาย
+Candy ครัช   Candy ครัช
+ฉันจะบ้าตาย โอ้ยจะละลาย
+Candy ครัช`,
+    lyricEn: `I see you, not far away
+We are SBFIVE
+We sing and dance together
+Yeah Boom Boom Boom
+Never knew who you were
+But I felt it reach my heart
+And right now we're melting
+So confused and flustered, not sure what to do
+She is a fire, words can't describe her
+Too much for the heart to take
+I am a fire, gotta keep my game
+Let's see how this plays out
+Looking left and right
+Front to back, you've got me crashing off the track
+Never thought you'd find my weak spot
+Please open your heart, receive what I mean to give
+I've brought it just for you
+Because you shine so bright, more beautiful than anyone
+
+Give it away, Candy Crush, Crack Crack Crack Candy Crush
+Give it away, Candy Crush, Crack Crack Crack Candy Crush
+Give it away, Candy Crush
+Me-me-melting, my heart is about to give out
+Na na na na na, na na na na na na na
+I'm going crazy, oh I'm melting
+Na na na na na na, na na na na na na na na
+
+Move in closer, SBFIVE gonna get you, you ready? Yeah Boom Boom Boom
+Because your eyes burn like fire
+And you are so good for the heart
+And right now we're melting
+Not confused, not stressed — but my heart's about to give out
+She is a fire, words can't describe her, too much for the heart to take
+I am a fire, gotta keep my game — can you open your heart for me?
+Eyes on you, heart pulling me in, you've got me going crazy, off the track
+Never thought you'd find my weak spot
+Please open your heart, receive what I mean to give
+I've brought it just for you
+Because you shine so bright, more beautiful than anyone
+
+you so fire, I love you girl, I love you girl
+you so fire, I love you girl, I love you girl
+Give it away, Candy Crush, Crack Crack Crack Candy Crush
+Give it away, Candy Crush, Crack Crack Crack Candy Crush
+Give it away, Candy Crush
+Me-me-melting, my heart is about to give out
+Candy Crush   Candy Crush
+I'm going crazy, oh I'm melting
+Candy Crush`,
+    lyricZh: `我看见你就在不远处
+我们是 SBFIVE
+我们一起唱歌跳舞
+Yeah Boom Boom Boom
+从来不知道你是谁
+但感觉已经触达了心底
+而现在我们正在融化
+慌乱又紧张，不知道该怎么办
+She is a fire 你美得无法言说
+美得让心碎
+I am a fire 我要展现风采
+来看看结果如何吧
+视线左移又右移
+从头到尾，让我彻底崩溃，偏离轨道
+没想到你会找到我的软肋
+请你试着敞开心扉，接受这份心意
+我特意为你带来的礼物
+因为你如此明媚动人，美丽超过任何人
+
+给你了 Candy Crush Crack Crack Crack Candy Crush
+给你了 Candy Crush Crack Crack Crack Candy Crush
+给你了 Candy Crush
+融融融化，心脏快要停跳
+na na na na na na na na na na...
+我要疯掉了，哦要融化了
+na na na na na na na na na na...
+
+快靠近我，SBFIVE 来了，你准备好了吗？Yeah Boom Boom Boom
+因为你的眼神炙热如火
+而你这个人真的太暖心了
+而现在我们正在融化
+不慌不乱——但心脏快要停跳
+She is a fire 你美得无法言说，美得让心碎
+I am a fire 我要展现风采——你能为我敞开心扉吗？
+眼神飘向你，心也被你吸引，让我彻底失控，偏离轨道
+没想到你会找到我的软肋
+请你试着敞开心扉，接受这份心意
+我特意为你带来的礼物
+因为你如此明媚动人，美丽超过任何人
+
+you so fire, I love you girl, I love you girl
+you so fire, I love you girl, I love you girl
+给你了 Candy Crush Crack Crack Crack Candy Crush
+给你了 Candy Crush Crack Crack Crack Candy Crush
+给你了 Candy Crush
+融融融化，心脏快要停跳
+Candy Crush   Candy Crush
+我要疯掉了，哦要融化了
+Candy Crush`,
+    links: [
+      { platform: 'YouTube', label: 'MV (TH)', url: 'https://www.youtube.com/watch?v=_xD6dDOhN1w', color: '#FF0000' },
+      { platform: 'YouTube', label: 'MV (EN)', url: 'https://www.youtube.com/watch?v=HBDcYiaZ--k', color: '#cc0000' },
+    ],
+  },
 ];
 
 export const allSongs = [...teeSongs, ...musicVideos];
