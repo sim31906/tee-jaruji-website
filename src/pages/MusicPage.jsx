@@ -274,8 +274,6 @@ function PlatformLink({ link }) {
 }
 
 function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSeek, t, lang }) {
-  const [embedLang, setEmbedLang] = useState('th');
-
   useEffect(() => {
     const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', handleEsc);
@@ -289,7 +287,6 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
   if (!song) return null;
   const [c1, c2] = song.gradient;
   const pct = isActive && progress.duration ? (progress.current / progress.duration) * 100 : 0;
-  const activeEmbed = embedLang === 'en' && song.youtubeEmbedEn ? song.youtubeEmbedEn : song.youtubeEmbed;
 
   return (
     <div
@@ -391,25 +388,10 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         {song.youtubeEmbed ? (
           /* Music Video — single scroll container */
           <div style={{ overflowY: 'auto', flex: 1 }}>
-            {song.youtubeEmbedEn && (
-              <div style={{ display: 'flex', gap: '0.4rem', padding: '0.75rem 1.25rem 0', background: '#000' }}>
-                {['th', 'en'].map(l => (
-                  <button key={l} onClick={() => setEmbedLang(l)} style={{
-                    fontFamily: fonts.mono, fontSize: '0.6rem', letterSpacing: '0.18em',
-                    textTransform: 'uppercase', padding: '0.25rem 0.7rem', borderRadius: '2px',
-                    border: 'none', cursor: 'pointer',
-                    background: embedLang === l ? colors.cream : 'rgba(255,255,255,0.15)',
-                    color: embedLang === l ? colors.ink : 'rgba(255,255,255,0.7)',
-                    transition: 'all 0.2s',
-                  }}>{l === 'th' ? 'TH' : 'EN'}</button>
-                ))}
-              </div>
-            )}
             <div style={{ background: '#000' }}>
               <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
                 <iframe
-                  key={activeEmbed}
-                  src={activeEmbed}
+                  src={song.youtubeEmbed}
                   title={song.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
