@@ -812,6 +812,33 @@ And you'll know if I'm the one you're looking for
 
 I'll make you proud of me for as long as I still breathe
 I'll always tell you I love you and take care of you forever`,
+    lyricZh: `就算世界变得疯狂
+但你一定会有我
+那个你梦寐以求的男人
+你心中所期盼的那个他
+嘿，为你而来，宝贝
+带着无尽的爱
+睁开眼睛，触碰我的心，感受我的心跳
+
+如果你曾梦想，像小说里那样遇见梦中王子
+或是某天那个你期盼已久的梦中人来拯救你
+那个总是面带微笑、让人心暖的人
+永远是你的知心伴侣，每晚为你轻声哼歌伴你入眠
+即使你也许从未遇见那个真正懂你的人
+那个你渴望陪伴在你身旁的他
+不必再等待，只要你打开心扉
+睁眼看看，你便会看见
+
+请看向我，我将站在这里，为你
+让你的梦想成真
+用我所有的爱，给予你心中所渴望的一切
+
+但如果你仍然不确定
+只需给我一个机会
+你就会知道我是否就是你所寻找的那个人
+
+我要让你为我感到骄傲，只要我还有一口气
+我会时常告诉你我爱你，永远守护你，直到永远`,
     links: [
       { platform: 'YouTube', label: 'MV', url: 'https://www.youtube.com/watch?v=n6OUf3wAXQ8', color: '#FF0000' },
     ],
