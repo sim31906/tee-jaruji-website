@@ -747,6 +747,75 @@ You can't love me — loving the possible one, I'll let go`,
       { platform: 'YouTube', label: 'MV', url: 'https://www.youtube.com/watch?v=3uTZ-S4LwO0', color: '#FF0000' },
     ],
   },
+  {
+    id: 'mv-3',
+    title: 'ชายในฝัน',
+    titleEn: 'Your Man',
+    artist: 'SBFIVE',
+    note: 'Tee Jaruji ร่วมร้องใน MV',
+    audioFile: '/audio/your-man.mp3',
+    coverImage: '/music/your-man.jpg',
+    youtubeEmbed: 'https://www.youtube.com/embed/n6OUf3wAXQ8',
+    gradient: ['#fce9b0', '#f4b8c8'],
+    lyric: `Though the world is getting crazy
+But for sure you gonna have me
+The kind of man that you dream of which
+You wanted him to be
+" For the hip hop "
+Coming here for you baby
+" With the low drop"
+With the love that's endless
+Open up your eyes touch my heart and feel the beat from me
+
+หากเธอเคยฝัน เหมือนในนิยายให้เจอเจ้าชายดังเช่นในฝัน หรือพระเอกหนังที่หวังสักวันเป็นชายในฝันให้มาช่วยเธอ
+ใครที่มีแต่รอยยิ้ม อบอุ่นใจเมื่อได้พบเจอ เป็นคู่คิดที่ดีเสมอ คอยร้องเพลงกล่อมเธอทุกค่ำคืนก่อนนอน
+แม้เธออาจไม่เคย เจอคนที่รู้ใจ
+ที่อยากให้เขามาเคียงกาย
+ไม่ต้องรอกันอีกต่อไป เพียงแค่เธอเปิดใจ
+เปิดตาดูแล้วเธอก็จะเห็น
+
+โปรดมองมาที่ฉัน จะยืนอยู่ตรงนี้ เพื่อเธอ
+ที่จะทำให้ฝันเธอเป็นจริง
+ให้เธอด้วยความรักหมดหัวใจที่มีอย่างที่เธอเองนั้นต้องการ
+
+แต่หากเธอนั้นยังคงไม่แน่ใจ
+ขอเพียงแค่เธอลองคบฉันไว้
+แล้วจะรู้ว่าเป็นอย่างไรเผื่อจะตรงใจที่เธอต้องการ
+
+จะให้เธอภาคภูมิในตัวฉันตราบเท่านานที่ยังคงหายใจอยู่
+จะหมั่นบอกรักให้เธอได้รู้จะดูแลเธออยู่ตราบนานเท่านาน`,
+    lyricEn: `Though the world is getting crazy
+But for sure you gonna have me
+The kind of man that you dream of which
+You wanted him to be
+Coming here for you baby
+With the love that's endless
+Open up your eyes touch my heart and feel the beat from me
+
+If you ever dreamed of meeting a prince like in a novel
+Or a hero you've always hoped would be your dream man
+Someone with nothing but smiles, warm to the heart when you meet
+Always a great partner, singing you to sleep every night
+
+Even if you've never found someone who truly understands
+Who you wished would be by your side
+No need to wait any longer, just open your heart
+Open your eyes and you will see
+
+Please look at me, I'll be standing right here for you
+To make your dreams come true
+Giving you all the love in my heart, exactly as you desire
+
+But if you're still not sure
+Just give me a chance
+And you'll know if I'm the one you're looking for
+
+I'll make you proud of me for as long as I still breathe
+I'll always tell you I love you and take care of you forever`,
+    links: [
+      { platform: 'YouTube', label: 'MV', url: 'https://www.youtube.com/watch?v=n6OUf3wAXQ8', color: '#FF0000' },
+    ],
+  },
 ];
 
 export const allSongs = [...teeSongs, ...musicVideos];
