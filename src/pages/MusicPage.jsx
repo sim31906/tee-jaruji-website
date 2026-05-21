@@ -186,7 +186,7 @@ function SongCard({ song, index, isActive, onSelect, lang }) {
                 >
                   <PlatformIcon platform={link.platform} size={20} />
                 </a>
-                {link.label && (
+                {link.showLabel && link.label && (
                   <span style={{ fontFamily: fonts.mono, fontSize: '0.48rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: colors.inkSoft }}>
                     {link.label}
                   </span>
@@ -258,7 +258,7 @@ function PlatformLink({ link }) {
       >
         <PlatformIcon platform={link.platform} size={28} />
       </a>
-      {link.label && (
+      {link.showLabel && link.label && (
         <span style={{
           fontFamily: fonts.mono,
           fontSize: '0.55rem',

@@ -1002,8 +1002,8 @@ Candy Crush   Candy Crush
 我要疯掉了，哦要融化了
 Candy Crush`,
     links: [
-      { platform: 'YouTube', label: 'MV (TH)', url: 'https://www.youtube.com/watch?v=_xD6dDOhN1w', color: '#FF0000' },
-      { platform: 'YouTube', label: 'MV (EN)', url: 'https://www.youtube.com/watch?v=HBDcYiaZ--k', color: '#cc0000' },
+      { platform: 'YouTube', label: 'TH', showLabel: true, url: 'https://www.youtube.com/watch?v=_xD6dDOhN1w', color: '#FF0000' },
+      { platform: 'YouTube', label: 'ENG', showLabel: true, url: 'https://www.youtube.com/watch?v=HBDcYiaZ--k', color: '#cc0000' },
     ],
   },
 ];
