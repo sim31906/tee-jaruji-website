@@ -18,13 +18,15 @@ export const eventsData = [
   {
     id: 'e-2555-001',
     year: 2555,
-    date: '2555',
+    date: '26 ก.ค. 2555',
     title: 'Cool Boy Cute Thailand by GPad',
     location: 'กรุงเทพฯ',
     type: 'contest',
-    detail: 'ชนะเลิศอันดับ 1 — จุดเริ่มต้นอาชีพ เป็นก้าวแรกสู่วงการบันเทิงของตี๋',
+    detail: 'ตี๋คว้าอันดับ 1 การประกวด Cool Boy Cute Thailand จัดโดย GPad ขึ้นรับรางวัลห้องสมุดอิเล็กทรอนิกส์ GPad มูลค่า 1 ล้านบาท ถือเป็นก้าวแรกสู่วงการบันเทิง',
     image: '/events/e-2555-001.jpg',
-    links: [],
+    links: [
+      { platform: 'Dek-D', label: 'Dek-D', url: 'https://www.dek-d.com/activity/29367/', color: '#FFFFFF' },
+    ],
   },
 
   // ─── 2560 ───
@@ -37,7 +39,9 @@ export const eventsData = [
     type: 'fanmeet',
     detail: 'ตี๋ร่วมแฟนมีตซีรีส์ 2 Moons ณ กัวลาลัมเปอร์ พร้อมนักแสดง Bas, God, Kimmon, Copter และ Tae ถ่ายภาพร่วมกันที่ตึก Petronas Twin Towers',
     image: '/events/e-2560-001.jpg',
-    links: [],
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=zOnQpnyuPXg', color: '#FF0000' },
+    ],
   },
   {
     id: 'e-2560-002',
@@ -48,7 +52,9 @@ export const eventsData = [
     type: 'fanmeet',
     detail: 'ตี๋ร่วมแฟนมีตซีรีส์ 2 Moons ณ ไทเป ไต้หวัน พร้อมนักแสดงนำ God, Bas, Kimmon, Copter และ Tae จัดโดย Golden Entertainment ณ Yu Da High School of Commerce and Home Economics',
     image: '/events/e-2560-002.jpg',
-    links: [],
+    links: [
+      { platform: 'Reeborn', label: 'Reeborn', url: 'https://reeborn.kktix.cc/events/moons-936022c9', color: '#FFFFFF' },
+    ],
   },
   {
     id: 'e-2560-003',
@@ -59,10 +65,11 @@ export const eventsData = [
     type: 'debut',
     detail: 'SBFIVE ปล่อยซิงเกิลดีบิวต์ "Whenever" ทั้ง 5 คนสวมชุดแจ็กเก็ตหนังสีดำในภาพถ่ายปกซิงเกิล ผลิตโดย escalate ภายใต้สังกัด Starhunter Entertainment',
     image: '/events/e-2560-003.jpg',
-    links: [],
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=LShweERy2cE', color: '#FF0000' },
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/photo.php?fbid=10159738255960029&set=a.218336109655674&id=100044378591028', color: '#1877F2' },
+    ],
   },
-
-  // ─── 2561 ───
   {
     id: 'e-2560-004',
     year: 2560,
@@ -72,86 +79,112 @@ export const eventsData = [
     type: 'debut',
     detail: 'SBFIVE เปิดตัวอย่างเป็นทางการในฐานะวงบอยแบนด์สังกัด Starhunter ตี๋รับตำแหน่ง Visual & Support Vocal พร้อมปล่อย MV "Whenever (Mixed A)"',
     image: '/events/e-2560-004.jpg',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/blemperormm2/posts/sbfives-reunionthe-reunion-of-the-five-members-of-sbfive-a-legendary-group-in-th/122240551214142565/', color: '#1877F2' },
+      { platform: 'Sanook', label: 'Sanook', url: 'https://www.sanook.com/music/2397817/', color: '#FFFFFF' },
+    ],
+  },
+
+  // ─── 2561 ───
+  {
+    id: 'e-2561-001',
+    year: 2561,
+    date: '21 ส.ค. 2561',
+    title: 'AIS ZEED One-2-Call Showcase',
+    location: 'Siam Square One กรุงเทพฯ',
+    type: 'brand',
+    detail: 'SBFIVE ขึ้นเวทีในงานเปิดตัวซิมการ์ด AIS ZEED One-2-Call ณ Siam Square One พร้อมสาวกิมมอน วิศรุต ถ่ายภาพร่วมกับตัวแทน AIS ท่ามกลางแบ็กดรอปสีสันสดใสของแบรนด์',
+    image: '/events/e-2561-001.jpg',
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=4JkQl5Kg_xI', color: '#FF0000' },
+      { platform: 'Mangozero', label: 'Mangozero', url: 'https://www.mangozero.com/ais-1-2-call-zeed-sim-sbfive/', color: '#FF8C00' },
+      { platform: 'X', label: 'X', url: 'https://x.com/ais_thailand/status/988402116443029510', color: '#000000' },
+    ],
   },
   {
     id: 'e-2561-002',
     year: 2561,
-    date: 'ก.พ. 2561',
-    title: 'AIS ZEED One-2-Call Showcase',
-    location: 'Siam Square One กรุงเทพฯ',
-    type: 'brand',
-    detail: 'SBFIVE ขึ้นเวทีในงานเปิดตัวซิมการ์ด AIS ZEED',
-    image: '/events/e-2561-002.jpg',
-    links: [],
-  },
-  {
-    id: 'e-2561-003',
-    year: 2561,
-    date: 'เม.ย.–ธ.ค. 2561',
+    date: '9 ม.ค. 2561',
     title: 'SBFIVE × Taokaenoi Brand Tour',
     location: 'หลายประเทศในเอเชีย',
     type: 'brand',
-    detail: 'ตี๋ปรากฏตัวในฐานะพรีเซนเตอร์เถ้าแก่น้อยร่วมกับสมาชิก รายการเดินสายทั้งหมด 10 ตอน ครอบคลุมหลายประเทศ',
-    image: '/events/e-2561-003.jpg',
-    links: [],
+    detail: 'SBFIVE สวมชุดแจ็กเก็ตสีแดงในฐานะพรีเซนเตอร์ขนมเถ้าแก่น้อย ออกเดินสายโปรโมตตลาดต่างประเทศทั่วเอเชียตลอดปี 2561 พร้อมโบกมือทักทายแฟนคลับและพันธมิตรทางธุรกิจ',
+    image: '/events/e-2561-002.jpg',
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/clubtaokaenoi/posts/%E0%B8%A2%E0%B8%B4%E0%B8%99%E0%B8%94%E0%B8%B5%E0%B8%95%E0%B9%89%E0%B8%AD%E0%B8%99%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%99%E0%B8%97%E0%B8%B2%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%AA%E0%B8%B9%E0%B9%88%E0%B8%84%E0%B8%A3%E0%B8%AD%E0%B8%9A%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B8%A7%E0%B9%80%E0%B8%96%E0%B9%89%E0%B8%B2%E0%B9%81%E0%B8%81%E0%B9%88%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%A2-%E0%B8%AA%E0%B8%B3%E0%B8%AB%E0%B8%A3%E0%B8%B1%E0%B8%9A-sbfive-%E0%B8%AD%E0%B8%B5%E0%B8%81-1-%E0%B8%81%E0%B8%A5%E0%B8%B8%E0%B9%88%E0%B8%A1%E0%B8%A8%E0%B8%B4%E0%B8%A5%E0%B8%9B%E0%B8%B4/1224410264326080/', color: '#1877F2' },
+    ],
   },
   {
-    id: 'e-2561-004',
+    id: 'e-2561-003',
     year: 2561,
     date: '27 ต.ค. 2561',
     title: 'SBFive Meet & Greet (สปอนเซอร์ Tao Kae Noi)',
     location: 'Mal Neo Soho, Jakarta Barat อินโดนีเซีย',
     type: 'fanmeet',
-    detail: 'การมาเยือนอินโดนีเซียครั้งที่ 2 จัดโดย Tao Kae Noi',
+    detail: 'SBFIVE สวมเสื้อยืดสีขาวลาย "Faith Hope Love" พบปะแฟนคลับชาวอินโดนีเซียในงาน Meet & Greet ณ Mal Neo Soho Jakarta Barat จัดโดย Tao Kae Noi เป็นครั้งที่ 2 ที่วงมาเยือนอินโดนีเซีย',
+    image: '/events/e-2561-003.jpg',
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=GUlv8y0bICs', color: '#FF0000' },
+      { platform: 'Suara', label: 'Suara', url: 'https://www.suara.com/entertainment/2018/10/27/210445/boyband-sbfive-sukses-guncang-mal-di-jakarta', color: '#FFFFFF' },
+    ],
+  },
+  {
+    id: 'e-2561-004',
+    year: 2561,
+    date: '24 ธ.ค. 2561',
+    title: 'SBFIVE in Myanmar / Taokaenoi Event',
+    location: 'ย่างกุ้ง พม่า',
+    type: 'fanmeet',
+    detail: 'SBFIVE สวมชุดโทนแดงปรากฏตัวในงาน Fun Time, Taokaenoi Time ณ ย่างกุ้ง พม่า แฟนคลับให้การต้อนรับอย่างล้นหลามจนแน่นห้างทั้ง 4 ชั้น',
     image: '/events/e-2561-004.jpg',
-    links: [],
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=w-UZDPbU6ZA&list=PL2XvijwDkXv7HxjWBiuwgjwzQn8TknCGS&index=1', color: '#FF0000' },
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/events/junction-city/sbfive-in-myanmar-taokaenoi-/1854640114650032/', color: '#1877F2' },
+    ],
   },
   {
     id: 'e-2561-005',
     year: 2561,
-    date: 'ธ.ค. 2561',
-    title: 'SBFIVE in Myanmar / Taokaenoi Event',
-    location: 'ย่างกุ้ง พม่า',
-    type: 'fanmeet',
-    detail: 'ตี๋เคยเล่าว่าแฟนคลับแน่นห้างทั้ง 4 ชั้น',
-    image: '/events/e-2561-005.jpg',
-    links: [],
-  },
-  {
-    id: 'e-2561-006',
-    year: 2561,
-    date: 'ธ.ค. 2561',
+    date: '30 พ.ย. 2561',
     title: 'SBFIVE in Vietnam (Taokaenoi Land)',
-    location: 'เวียดนาม',
+    location: 'โฮจิมินห์ซิตี เวียดนาม',
     type: 'fanmeet',
-    detail: 'ระบุใน MyDramaList ในชื่อรายการ "SBFIVE in Vietnam" (2018)',
-    image: '/events/e-2561-006.jpg',
-    links: [],
+    detail: 'SBFIVE ขึ้นเวทีกลางแจ้งในงาน Taokaenoi Land ณ เวียดนาม บริเวณหน้าห้าง Lotte ท่ามกลางฝูงชนที่มารอชมอย่างหนาแน่น',
+    image: '/events/e-2561-005.jpg',
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=w-UZDPbU6ZA&list=PL2XvijwDkXv7HxjWBiuwgjwzQn8TknCGS&index=1', color: '#FF0000' },
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/clubtaokaenoi/posts/%E0%B8%AB%E0%B8%99%E0%B8%B8%E0%B9%88%E0%B8%A1%E0%B9%86-taokaenoi-sbfive-%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%99%E0%B8%B5%E0%B9%89-%E0%B8%97%E0%B8%B5%E0%B9%88-lotte-tan-binh-ho-chi-minh-city-vietnam-%E0%B8%AA%E0%B8%99%E0%B8%B8%E0%B8%81%E0%B8%81/1462899083810529/', color: '#1877F2' },
+    ],
   },
 
   // ─── 2562 ───
   {
     id: 'e-2562-001',
     year: 2562,
-    date: '29 ก.ย. 2562',
-    title: 'SBFIVE First Fan Meet in Vientiane',
-    location: 'เวียงจันทน์ ลาว',
-    type: 'fanmeet',
-    detail: 'SBFIVE จัดแฟนมีตครั้งแรกในลาว ณ เวียงจันทน์ ร่วมกับแฟนคลับชาวลาว จัดโดย Taokaenoi Global บนเวที Fun Time Taokaenoi Time',
-    image: '/events/e-2562-001.jpg',
-    links: [],
-  },
-  {
-    id: 'e-2562-002',
-    year: 2562,
     date: '25 มิ.ย. 2562',
     title: 'Fun Time, TaoKaeNoi Time',
     location: 'Resorts World Sentosa สิงคโปร์',
     type: 'fanmeet',
     detail: 'SBFIVE ทั้ง 9 คนสวมชุดแดงขาวพบปะแฟนคลับชาวสิงคโปร์และไทย ในงาน Fun Time, TaoKaeNoi Time จัดโดยเถ้าแก่น้อย ณ Resorts World Sentosa สิงคโปร์',
+    image: '/events/e-2562-001.jpg',
+    links: [
+      { platform: 'MGR Online', label: 'MGR Online', url: 'https://mgronline.com/business/detail/9620000056253', color: '#FFFFFF' },
+      { platform: 'Siam Turakij', label: 'Siam Turakij', url: 'https://www.siamturakij.com/news/22192-%EF%BF%BD%EF%BF%BD%E0%B9%80%E0%B8%96%E0%B9%89%E0%B8%B2%E0%B9%81%E0%B8%81%E0%B9%88%E0%B8%99%E0%B9%89%E0%B8%AD%E0%B8%A2-%EF%BF%BD%20-%E0%B8%88%E0%B8%B1%E0%B8%94-Fun-Time-TaoKaeNoi-Time-%E0%B8%A5%E0%B8%B8%E0%B9%89%E0%B8%99%E0%B9%80%E0%B8%AD%E0%B9%87%E0%B8%81%E0%B8%8B%E0%B9%8C%E0%B8%84%E0%B8%A5%E0%B8%B9%E0%B8%8B%E0%B8%B5%E0%B8%9E%E0%B8%97%E0%B8%A3%E0%B8%B4%E0%B8%9B%E0%B8%81%E0%B8%B1%E0%B8%9A-9-%E0%B8%AB%E0%B8%99%E0%B8%B8%E0%B9%88%E0%B8%A1%E0%B8%A7%E0%B8%87-%EF%BF%BD%C5%93SBFIVE-%EF%BF%BD%20-', color: '#FFFFFF' },
+    ],
+  },
+  {
+    id: 'e-2562-002',
+    year: 2562,
+    date: '29 ก.ย. 2562',
+    title: 'SBFIVE First Fan Meet in Vientiane',
+    location: 'เวียงจันทน์ ลาว',
+    type: 'fanmeet',
+    detail: 'SBFIVE จัดแฟนมีตครั้งแรกในลาว ณ เวียงจันทน์ ร่วมกับแฟนคลับชาวลาว จัดโดย Taokaenoi Global บนเวที Fun Time Taokaenoi Time',
     image: '/events/e-2562-002.jpg',
-    links: [],
+    links: [
+      { platform: 'Taokaenoi', label: 'Taokaenoi', url: 'https://la.taokaenoiglobal.com/share-your-reunion-dinner-together-with-taokaenoi-2/', color: '#FFFFFF' },
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/media/set/?set=a.2457130147848700&s=15', color: '#1877F2' },
+    ],
   },
   {
     id: 'e-2562-003',
@@ -163,7 +196,11 @@ export const eventsData = [
     detail: 'คอนเสิร์ต + แฟนมีตครั้งแรกในประเทศ บัตร Gold 9,000 PHP / Silver 6,500 / Bronze 3,000 จัดโดย MYNA Productions + Janean Group + Starhunter',
     image: '/events/e-2562-003.jpg',
     imagePosition: 'center 20%',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/events/carlos-p-romulo-auditorium/sbfive-asia-tour-live-in-manila/451951675658967/?locale=th_TH', color: '#1877F2' },
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/playlist?list=PLaa7id4C2DRjYoqP7RiQWM7P5EDII2y-W', color: '#FF0000' },
+      { platform: 'X', label: 'X', url: 'https://x.com/headlinermnl/status/1186642098201608192', color: '#000000' },
+    ],
   },
   {
     id: 'e-2562-004',
@@ -174,7 +211,10 @@ export const eventsData = [
     type: 'concert',
     detail: 'SBFIVE จัดคอนเสิร์ตใหญ่ในไทยครั้งแรก ทั้ง 9 คนขึ้นเวทีท่ามกลางแสงไฟสีสันสดใส ณ UNION HALL 1 ยูเนียนมอลล์ กรุงเทพฯ',
     image: '/events/e-2562-004.jpg',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/icesarunyu/posts/%E0%B8%A3%E0%B8%A7%E0%B8%A1%E0%B8%A2%E0%B9%89%E0%B8%AD%E0%B8%99%E0%B9%80%E0%B8%A7%E0%B8%A5%E0%B8%B2-%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B8%AA%E0%B8%B6%E0%B8%81%E0%B8%94%E0%B8%B5%E0%B9%86-%E0%B9%83%E0%B8%99-sbfive-the-moonlight-concert-%E0%B9%84%E0%B8%9B%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%81%E0%B8%B1%E0%B8%9A-5-%E0%B8%AB%E0%B8%99%E0%B8%B8/2900081450011257/', color: '#1877F2' },
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/playlist?list=PLOCLh05uX50-fTVh6LnYC8ASnPTbHgubr', color: '#FF0000' },
+    ],
   },
 
   // ─── 2563 ───
@@ -187,7 +227,10 @@ export const eventsData = [
     type: 'debut',
     detail: 'SBFIVE เปิดตัว Official MV เพลง "ชายในฝัน" (Your Man) ทั้ง 5 คนสวมชุดสีสันสดใส ถ่ายทำภายใต้สังกัด Star Hunter Entertainment',
     image: '/events/e-2563-001.jpg',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/starhunterstudio/photos/first-meet-with-your-man-%E0%B8%9E%E0%B8%9A%E0%B8%81%E0%B8%B1%E0%B8%9A-5-%E0%B8%AB%E0%B8%99%E0%B8%B8%E0%B9%88%E0%B8%A1-sbfive-%E0%B8%9A%E0%B8%B2%E0%B8%AA-%E0%B8%84%E0%B8%B4%E0%B8%A1%E0%B8%A1%E0%B9%88%E0%B8%AD%E0%B8%99-%E0%B8%84%E0%B8%AD%E0%B8%9B%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C-%E0%B9%80%E0%B8%95%E0%B9%89-%E0%B8%95%E0%B8%B5%E0%B9%8B-%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%88%E0%B8%B0/708304939743029/', color: '#1877F2' },
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=rz2WdhKq5MA', color: '#FF0000' },
+    ],
   },
   {
     id: 'e-2563-002',
@@ -198,7 +241,12 @@ export const eventsData = [
     type: 'press',
     detail: 'ตี๋ร่วมงานแถลงข่าว Channel 3 Super Fan Live!: SUPERNOVA พร้อมพระเอกดาวรุ่งช่อง 3 รวม 12 คน เปิดตัวอย่างเป็นทางการในฐานะนักแสดงสังกัดช่อง 3 ณ วิก 3 พระราม 4',
     image: '/events/e-2563-002.jpg',
-    links: [],
+    links: [
+      { platform: '3Ch', label: '3Ch', url: 'https://ch3plus.com/news/program/204577', color: '#0057A8' },
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/Ch3Thailand/posts/channel-3-super-fan-live-supernova-%E0%B8%84%E0%B8%AD%E0%B8%99%E0%B9%80%E0%B8%AA%E0%B8%B4%E0%B8%A3%E0%B9%8C%E0%B8%95%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B4%E0%B8%94%E0%B8%88%E0%B8%B1%E0%B8%81%E0%B8%A3%E0%B8%A7%E0%B8%B2%E0%B8%A5-%E0%B8%9E%E0%B8%9A%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A3%E0%B8%A7%E0%B8%A1%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B8%81%E0%B8%B1%E0%B8%99%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B9%89%E0%B8%87/3168546883234675/', color: '#1877F2' },
+      { platform: 'Pantip', label: 'Pantip', url: 'https://pantip.com/topic/40107769', color: '#FFFFFF' },
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=ETbnLQsIYgo', color: '#FF0000' },
+    ],
   },
   {
     id: 'e-2563-003',
@@ -209,7 +257,9 @@ export const eventsData = [
     type: 'concert',
     detail: 'ตี๋โชว์เพลง "คุณและคุณ" (กลุ่มแด๊นซ์) คู่กับ มีน พีรวิชญ์ ในเพลง "รักก็คือรัก"',
     image: '/events/e-2563-003.jpg',
-    links: [],
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=M0tCAWg4zL4', color: '#FF0000' },
+    ],
   },
 
   // ─── 2564 ───
@@ -222,7 +272,12 @@ export const eventsData = [
     type: 'film',
     detail: 'ตี๋ร่วมงานเปิดตัวภาพยนตร์ "ส้มป่อย" รับบทพระเอก "แซ้ป" ในภาพยนตร์โรแมนติกคอมเมดี้ ขึ้นเวทีพร้อมนักแสดงร่วมและทีมงาน ท่ามกลางการตกแต่งด้วยดอกไม้สีสดใส',
     image: '/events/e-2564-001.jpg',
-    links: [],
+    links: [
+      { platform: 'Workpoint', label: 'Workpoint', url: 'https://www.workpointtoday.com/sompai', color: '#FFFFFF' },
+      { platform: 'TrueID', label: 'TrueID', url: 'https://entertainment.trueid.net/detail/wYX8Qn8R7J5Y', color: '#E3001B' },
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=WMBYMg3XK5I', color: '#FF0000' },
+      { platform: 'Netflix', label: 'Netflix', url: 'https://www.netflix.com/th/title/81511310', color: '#E50914' },
+    ],
   },
 
   // ─── 2565 ───
@@ -235,7 +290,9 @@ export const eventsData = [
     type: 'blessing',
     detail: 'ตี๋ร่วมพิธีบวงสรวงละคร "คุณหมีปาฏิหาริย์" สวมเสื้อยืดสีชมพูลาย Teddy Bear พร้อมนักแสดงนำ อิน-สาริน, จ๊อบ-ธัชพล และเฟิร์สท-ภาราดา ณ สถานีโทรทัศน์ช่อง 3 หนองแขม',
     image: '/events/e-2565-001.jpg',
-    links: [],
+    links: [
+      { platform: '3Ch', label: '3Ch', url: 'https://ch3plus.com/special/pr/956', color: '#0057A8' },
+    ],
   },
   {
     id: 'e-2565-002',
@@ -246,7 +303,9 @@ export const eventsData = [
     type: 'premiere',
     detail: 'ตี๋รับบท "ต้อล" คู่กับ เต้-ดาวิชญ์ กรีพลฤกษ์ (กลับมาคู่จิ้นในรอบ 5 ปีนับจาก 2 Moons ปี 2560) ผกก. มะเดี่ยว ชูเกียรติ ศักดิ์วีระกุล ทั้งหมด 13 ตอน',
     image: '/events/e-2565-002.jpg',
-    links: [],
+    links: [
+      { platform: 'AIS PLAY', label: 'AIS PLAY', url: 'https://aisplay.ais.co.th/portal/get_section/624ec4b9e0cbb729d7fa2af6/', color: '#00A650' },
+    ],
   },
 
   // ─── 2566 ───
@@ -259,7 +318,9 @@ export const eventsData = [
     type: 'blessing',
     detail: 'ทีมนักแสดงและทีมงานละคร "เรือนทาส" สวมชุดขาวร่วมพิธีบวงสรวงขอพรก่อนถ่ายทำ ตี๋รับบท "เกื้อกูล" คู่กับ อ๊ะ อาย 4EVE',
     image: '/events/e-2566-001.jpg',
-    links: [],
+    links: [
+      { platform: 'Pantip', label: 'Pantip', url: 'https://pantip.com/topic/42466408', color: '#FFFFFF' },
+    ],
   },
 
   // ─── 2567 ───
@@ -272,7 +333,9 @@ export const eventsData = [
     type: 'premiere',
     detail: 'บทบาทพระเอกเต็มตัวเรื่องแรกของตี๋ ออนแอร์ทุกวันพุธ-พฤหัสบดี 20:30 น. จบ 27 มี.ค. 2567 รวม 20 ตอน',
     image: '/events/e-2567-001.jpg',
-    links: [],
+    links: [
+      { platform: '3Ch', label: '3Ch', url: 'https://ch3plus.com/drama/1531', color: '#0057A8' },
+    ],
   },
   {
     id: 'e-2567-002',
@@ -283,7 +346,9 @@ export const eventsData = [
     type: 'press',
     detail: 'ตี๋ร่วมแถลงข่าวซีรีส์ "LOVE LIKE A BIKE ปั่นไปให้ถึงรัก" พร้อมมาสุ จรรยางค์ดีกุล และทีมนักแสดง ต่อหน้าสื่อมวลชนจากสำนักข่าวชั้นนำ จัดโดย S Class Entertainment ร่วมกับ P.S. Performance',
     image: '/events/e-2567-002.jpg',
-    links: [],
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=b0587Jqkt4o', color: '#FF0000' },
+    ],
   },
 
   // ─── 2568 ───
@@ -296,7 +361,10 @@ export const eventsData = [
     type: 'blessing',
     detail: 'ทีมนักแสดงและทีมงานสวมเสื้อ "LOVE LIKE A BIKE" ร่วมพิธีบวงสรวงขอพรพระพิฆเนศวรก่อนถ่ายทำ พร้อมเครื่องสังเวยผลไม้และธูปเทียน ณ ลานพระพิฆเนศวร หน้าศูนย์การค้ายูเนียนมอลล์',
     image: '/events/e-2568-001.jpg',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/PSperfPro/posts/%EF%B8%8F%E0%B8%A3%E0%B8%A7%E0%B8%A1%E0%B8%A0%E0%B8%B2%E0%B8%9E%E0%B8%9A%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B8%B2%E0%B8%81%E0%B8%B2%E0%B8%A8%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9A%E0%B8%A7%E0%B8%87%E0%B8%AA%E0%B8%A3%E0%B8%A7%E0%B8%87%E0%B8%8B%E0%B8%B5%E0%B8%A3%E0%B8%B5%E0%B8%AA%E0%B9%8C-love-like-a-bike-%E0%B8%9B%E0%B8%B1%E0%B9%88%E0%B8%99%E0%B9%84%E0%B8%9B%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%96%E0%B8%B6%E0%B8%87%E0%B8%A3%E0%B8%B1%E0%B8%81-%EF%B8%8F%E0%B8%9A%E0%B8%A7%E0%B8%87%E0%B8%AA%E0%B8%A3%E0%B8%A7%E0%B8%87lovelik/122145274232630285/', color: '#1877F2' },
+      { platform: 'TrueID', label: 'TrueID', url: 'https://entertainment.trueid.net/detail/PR4PmPKPxVpR', color: '#E3001B' },
+    ],
   },
   {
     id: 'e-2568-002',
@@ -307,7 +375,10 @@ export const eventsData = [
     type: 'csr',
     detail: 'ตี๋ร่วมกิจกรรมจิตอาสา "ช่อง 3 อาสาทำดี" พร้อมเพื่อนนักแสดงช่อง 3 ถือป้าย TOGETHER Rescue มอบความสุขให้กับเด็กๆ และชุมชน',
     image: '/events/e-2568-002.jpg',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/nigao.brand/posts/%E0%B8%8A%E0%B9%88%E0%B8%AD%E0%B8%87-3-%E0%B8%AD%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%97%E0%B8%B3%E0%B8%94%E0%B8%B5-%E0%B8%9B%E0%B8%B1%E0%B8%99%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B9%81%E0%B8%A5%E0%B8%81%E0%B8%A3%E0%B8%AD%E0%B8%A2%E0%B8%A2%E0%B8%B4%E0%B9%89%E0%B8%A1-%E0%B8%84%E0%B8%A3%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B8%97%E0%B8%B5%E0%B9%88-2%E0%B8%99%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B9%82%E0%B8%AD%E0%B8%B0%E0%B8%A3%E0%B9%88%E0%B8%A7%E0%B8%A1%E0%B9%80%E0%B8%9B%E0%B9%87%E0%B8%99%E0%B8%AA%E0%B9%88%E0%B8%A7%E0%B8%99%E0%B8%AB%E0%B8%99%E0%B8%B6%E0%B9%88%E0%B8%87%E0%B9%83%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2/1076012531367988/', color: '#1877F2' },
+      { platform: '3Ch', label: '3Ch', url: 'https://ch3plus.com/special/pr/5714', color: '#0057A8' },
+    ],
   },
   {
     id: 'e-2568-003',
@@ -318,7 +389,9 @@ export const eventsData = [
     type: 'media',
     detail: 'ตี๋ร่วมให้สัมภาษณ์รายการสีสันบันเทิงช่อง 3 พร้อมนักแสดงซีรีส์ "LOVE LIKE A BIKE" ได้แก่ แดนนี ลูเชียโน่, วิน ธนัท, มาสุ จรรยางค์ดีกุล, อัล นิติธร และ ต้า นันคุณ',
     image: '/events/e-2568-003.jpg',
-    links: [],
+    links: [
+      { platform: 'YouTube', label: 'YouTube', url: 'https://www.youtube.com/watch?v=wT_06eDp-Y4', color: '#FF0000' },
+    ],
   },
   {
     id: 'e-2568-004',
@@ -329,7 +402,11 @@ export const eventsData = [
     type: 'fanmeet',
     detail: 'ตี๋ร่วมงาน HUSO Fan Meet × Tee จัดโดยคณะมนุษยศาสตร์และสังคมศาสตร์ มหาวิทยาลัยราชภัฏสุราษฎร์ธานี ในงาน SRU Open House 2026 พบปะแฟนคลับและนักศึกษา',
     image: '/events/e-2568-004.jpg',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/sruthailand/posts/dek69-%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1%E0%B8%AB%E0%B8%A3%E0%B8%B7%E0%B8%AD%E0%B8%A2%E0%B8%B1%E0%B8%87-%E0%B9%80%E0%B8%95%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B8%97%E0%B8%9A%E0%B9%84%E0%B8%AB%E0%B8%A5%E0%B9%88%E0%B9%80%E0%B8%AB%E0%B8%A5%E0%B9%88%E0%B8%B2%E0%B8%84%E0%B8%99%E0%B8%94%E0%B8%B1%E0%B8%87%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%87%E0%B8%B2%E0%B8%99-sru-open-house-2026-%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%97%E0%B8%B5%E0%B9%88-15/1301218468670962/', color: '#1877F2' },
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DNW-xGXT24j/', color: '#C13584' },
+      { platform: 'X', label: 'X', url: 'https://x.com/TEePlayRoom/status/1956180035867697510', color: '#000000' },
+    ],
   },
   {
     id: 'e-2568-005',
@@ -340,7 +417,13 @@ export const eventsData = [
     type: 'press',
     detail: 'ตี๋ และมาสุ จรรยางค์ดีกุล นำทีมนักแสดงซีรีส์ "LOVE LIKE A BIKE ปั่นไปให้ถึงรัก" เฉลิมฉลองปิดกล้องถ่ายทำ ถ่ายภาพร่วมกันในบรรยากาศยามค่ำคืน',
     image: '/events/e-2568-005.jpg',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/theseriesythai/posts/%E0%B8%A1%E0%B8%B2%E0%B8%AA%E0%B8%B8%E0%B8%95%E0%B8%B5%E0%B9%8B-%E0%B8%98%E0%B8%99%E0%B8%9E%E0%B8%A5-%E0%B8%99%E0%B8%B3%E0%B8%97%E0%B8%B5%E0%B8%A1%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%9F%E0%B8%B4%E0%B8%99-%E0%B8%9B%E0%B8%B4%E0%B8%94%E0%B8%81%E0%B8%A5%E0%B9%89%E0%B8%AD%E0%B8%87-love-like-a-bike-%E0%B8%9B%E0%B8%B1%E0%B9%88%E0%B8%99%E0%B9%84%E0%B8%9B%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%96%E0%B8%B6%E0%B8%87%E0%B8%A3%E0%B8%B1%E0%B8%81-%E0%B8%AD%E0%B8%A2%E0%B9%88%E0%B8%B2%E0%B8%87%E0%B8%AD%E0%B8%9A%E0%B8%AD%E0%B8%B8%E0%B9%88%E0%B8%99%E0%B8%9B/1390659656401954/', color: '#1877F2' },
+      { platform: 'TrueID', label: 'TrueID', url: 'https://entertainment.trueid.net/detail/xv5le9oQ0ANb', color: '#E3001B' },
+      { platform: 'LINE Today', label: 'LINE Today', url: 'https://today.line.me/th/v3/article/JPO11Vy', color: '#00B900' },
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DPfhzV2E5El/', color: '#C13584' },
+      { platform: 'Thaipost', label: 'Thaipost', url: 'https://www.thaipost.net/entertainment-news/875712/', color: '#1A1A6E' },
+    ],
   },
   {
     id: 'e-2568-006',
@@ -351,7 +434,11 @@ export const eventsData = [
     type: 'media',
     detail: 'ตี๋ร่วมงาน SIAM CENTER THE SUMMER TRENDSETTER — THE THAIDEAOPOLIS RUNWAY ถ่ายภาพหมู่ร่วมกับทีมนักแสดงและทีมงาน ณ สยามเซ็นเตอร์',
     image: '/events/e-2568-006.jpg',
-    links: [],
+    links: [
+      { platform: 'Workpoint', label: 'Workpoint', url: 'https://www.workpointtoday.com/siamcenter-795375-2', color: '#FFFFFF' },
+      { platform: 'Siam Center', label: 'Siam Center', url: 'https://www.siamcenter.co.th/happening/siamcenter-the-summer-trendsetter-thaideaipolis-2026/876', color: '#1A1A1A' },
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/SiamCenter/posts/%EF%B8%8F%EF%B8%8F-%E0%B9%80%E0%B8%9B%E0%B8%B4%E0%B8%94%E0%B8%A4%E0%B8%94%E0%B8%B9%E0%B8%81%E0%B8%B2%E0%B8%A5%E0%B9%81%E0%B8%AB%E0%B8%87%E0%B9%81%E0%B8%9F%E0%B8%8A%E0%B8%B1%E0%B9%88%E0%B8%99-siam-center-the-summer-trendsetter-%E0%B8%A2%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B8%94%E0%B8%B1%E0%B8%9A%E0%B8%94%E0%B8%B5%E0%B8%81%E0%B8%A3%E0%B8%B5%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AE%E0%B8%AD%E0%B8%95%E0%B8%82%E0%B8%B1/1377012181118350/', color: '#1877F2' },
+    ],
   },
   {
     id: 'e-2568-007',
@@ -362,7 +449,10 @@ export const eventsData = [
     type: 'prescreening',
     detail: 'ตี๋ร่วมงาน Pre-Screening ซีรีส์ "Love Like A Bike" พร้อมนักแสดงนำทั้งทีมในชุดสูทสีดำ ถ่ายภาพร่วมกันหน้าฉากหลังโลโก้ซีรีส์ ณ Hall กลางเมือง กรุงเทพฯ',
     image: '/events/e-2568-007.jpg',
-    links: [],
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/theseriesythai/posts/%E0%B8%A1%E0%B8%B2%E0%B8%AA%E0%B8%B8-%E0%B8%95%E0%B8%B5%E0%B9%8B-%E0%B8%98%E0%B8%99%E0%B8%9E%E0%B8%A5-%E0%B9%80%E0%B8%9B%E0%B8%B4%E0%B8%94%E0%B8%AA%E0%B8%95%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%97%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%9F%E0%B8%B4%E0%B8%99%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87-%E0%B9%82%E0%B8%8A%E0%B8%A7%E0%B9%8C%E0%B9%80%E0%B8%84%E0%B8%A1%E0%B8%B5%E0%B8%AB%E0%B8%A7%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%B7%E0%B8%AD%E0%B8%99%E0%B8%97%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B8%AE%E0%B8%AD%E0%B8%A5%E0%B8%A5%E0%B9%8C%E0%B9%83%E0%B8%99%E0%B8%87%E0%B8%B2%E0%B8%99-love-l/1529791865822065/', color: '#1877F2' },
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DU4wCXwEhjd/', color: '#C13584' },
+    ],
   },
 
   // ─── 2569 ───
@@ -375,6 +465,8 @@ export const eventsData = [
     type: 'premiere',
     detail: 'ออนแอร์ทุกวันจันทร์ 22:30 น.',
     image: '/events/e-2569-001.jpg',
-    links: [],
+    links: [
+      { platform: 'Netflix', label: 'Netflix', url: 'https://www.netflix.com/th-en/title/82745549', color: '#E50914' },
+    ],
   },
 ];
