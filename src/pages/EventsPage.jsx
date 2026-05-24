@@ -7,6 +7,12 @@ import CursorSparkle from '../components/CursorSparkle';
 import { useLang } from '../context/LanguageContext';
 import { SiNetflix } from 'react-icons/si';
 
+function ev(event, field, lang) {
+  if (lang === 'en') return event[field + 'En'] || event[field];
+  if (lang === 'zh') return event[field + 'Zh'] || event[field + 'En'] || event[field];
+  return event[field];
+}
+
 function groupByYear(events) {
   const map = {};
   events.forEach(ev => {
@@ -75,8 +81,9 @@ function PlatformIcon({ platform, size = 26 }) {
   );
 }
 
-function EventModal({ event, onClose, t }) {
-  const meta = EVENT_TYPES[event.type] || { label: event.type, color: '#666', bg: '#f5f5f5' };
+function EventModal({ event, onClose, t, lang }) {
+  const meta = EVENT_TYPES[event.type] || { label: { th: event.type, en: event.type, zh: event.type }, color: '#666', bg: '#f5f5f5' };
+  const typeLabel = meta.label[lang] || meta.label.th;
   const [vis, setVis] = useState(false);
 
   useEffect(() => {
@@ -138,14 +145,14 @@ function EventModal({ event, onClose, t }) {
             fontFamily:fonts.mono,fontSize:'0.6rem',letterSpacing:'0.2em',
             textTransform:'uppercase',padding:'0.2rem 0.7rem',
             borderRadius:'4px',marginBottom:'0.75rem',
-          }}>{meta.label}</div>
+          }}>{typeLabel}</div>
 
           <h2 style={{
             fontFamily:fonts.display,
             fontSize:'clamp(1.2rem, 3vw, 1.65rem)',
             fontWeight:500,color:colors.ink,
             lineHeight:1.25,margin:0,paddingRight:'2.5rem',
-          }}>{event.title}</h2>
+          }}>{ev(event, 'title', lang)}</h2>
         </div>
 
         {/* Body */}
@@ -154,11 +161,11 @@ function EventModal({ event, onClose, t }) {
           <div style={{display:'flex',gap:'2rem',flexWrap:'wrap',marginBottom:'1.25rem'}}>
             <div>
               <div style={{fontFamily:fonts.mono,fontSize:'0.62rem',letterSpacing:'0.2em',textTransform:'uppercase',color:colors.inkSoft,marginBottom:'0.3rem'}}>{t.detailDate}</div>
-              <div style={{fontFamily:fonts.display,fontSize:'1.05rem',color:colors.ink}}>{event.date}</div>
+              <div style={{fontFamily:fonts.display,fontSize:'1.05rem',color:colors.ink}}>{lang === 'th' ? event.date : (event.dateEn || event.date)}</div>
             </div>
             <div>
               <div style={{fontFamily:fonts.mono,fontSize:'0.62rem',letterSpacing:'0.2em',textTransform:'uppercase',color:colors.inkSoft,marginBottom:'0.3rem'}}>{t.detailLocation}</div>
-              <div style={{fontFamily:fonts.display,fontSize:'1.05rem',color:colors.ink,lineHeight:1.4}}>{event.location}</div>
+              <div style={{fontFamily:fonts.display,fontSize:'1.05rem',color:colors.ink,lineHeight:1.4}}>{ev(event, 'location', lang)}</div>
             </div>
           </div>
 
@@ -185,7 +192,7 @@ function EventModal({ event, onClose, t }) {
           <p style={{
             fontFamily:fonts.body,fontSize:'0.98rem',
             lineHeight:1.8,color:colors.ink,margin:'0 0 1.5rem',
-          }}>{event.detail}</p>
+          }}>{ev(event, 'detail', lang)}</p>
 
           {/* Links */}
           <div style={{
@@ -455,7 +462,7 @@ export default function EventsPage() {
                   color: activeType===key ? '#fff' : meta.color,
                   background: activeType===key ? meta.color : 'transparent',
                 }}>
-                {meta.label}
+                {meta.label[lang] || meta.label.th}
               </button>
             ))}
           </div>
@@ -495,7 +502,7 @@ export default function EventsPage() {
               gap:'1rem',
             }}>
               {items.map(event => {
-                const meta = EVENT_TYPES[event.type] || { label: event.type, color:'#666', bg:'#f5f5f5' };
+                const meta = EVENT_TYPES[event.type] || { label: { th: event.type, en: event.type, zh: event.type }, color:'#666', bg:'#f5f5f5' };
                 return (
                   <div key={event.id} className="ev-card"
                     style={{borderTop:`3px solid ${meta.color}`}}
@@ -523,22 +530,22 @@ export default function EventsPage() {
                       fontFamily:fonts.mono,fontSize:'0.58rem',
                       letterSpacing:'0.2em',textTransform:'uppercase',
                       color:meta.color,marginBottom:'0.5rem',
-                    }}>{meta.label}</div>
+                    }}>{meta.label[lang] || meta.label.th}</div>
 
                     {/* Title */}
                     <h3 style={{
                       fontFamily:fonts.display,fontSize:'1.05rem',
                       fontWeight:500,color:colors.ink,
                       lineHeight:1.3,margin:'0 0 0.75rem',flex:1,
-                    }}>{event.title}</h3>
+                    }}>{ev(event, 'title', lang)}</h3>
 
                     {/* Date */}
                     <div style={{fontFamily:fonts.mono,fontSize:'0.65rem',letterSpacing:'0.08em',color:colors.inkSoft,marginBottom:'0.2rem'}}>
-                      {event.date}
+                      {lang === 'th' ? event.date : (event.dateEn || event.date)}
                     </div>
                     {/* Location */}
                     <div style={{fontFamily:fonts.mono,fontSize:'0.63rem',letterSpacing:'0.06em',color:colors.inkSoft,lineHeight:1.4,marginBottom:'1rem'}}>
-                      {event.location}
+                      {ev(event, 'location', lang)}
                     </div>
 
                     {/* CTA */}
@@ -561,12 +568,12 @@ export default function EventsPage() {
             letterSpacing:'0.2em',color:colors.inkSoft,
             paddingTop:'2rem',borderTop:`1px solid ${colors.creamDark}`,
           }}>
-            แสดง {totalCount} จาก {eventsData.length} events
+            {t.showing} {totalCount} {t.from} {eventsData.length} events
           </div>
         )}
       </div>
 
-      {selected && <EventModal event={selected} onClose={() => setSelected(null)} t={t} />}
+      {selected && <EventModal event={selected} onClose={() => setSelected(null)} t={t} lang={lang} />}
     </>
   );
 }
