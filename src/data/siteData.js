@@ -185,6 +185,23 @@ export const education = [
   },
 ];
 
+// ---- COLLABORATIONS ----
+// วิธีเพิ่ม: ใส่ { name, logo: '/collab/logo.png', color: '#hex', bg: '#hex', url: '...' }
+// ถ้ายังไม่มีรูป ทิ้ง logo ว่างไว้ ระบบจะแสดง placeholder อัตโนมัติ
+export const collabs = [
+  { id: 'cb-1', name: 'CMG',            logo: '/collab/cmg.png',            color: '#E30613', bg: '#fff0f0', url: '' },
+  { id: 'cb-2', name: 'Central Retail', logo: '/collab/central-retail.png', color: '#E30613', bg: '#f5f5f5', url: '', logoStyle: { width: '2000px', height: 'auto', maxHeight: 120 } },
+];
+
+// ---- COLLAB VIDEO ----
+// วางไฟล์ mp4 ที่ public/collab/video.mp4
+// poster (ภาพ thumbnail) วางที่ public/collab/video-poster.jpg — ถ้าไม่มีปล่อยว่างได้
+export const collabVideo = {
+  file:   '/collab/video.mp4',
+  poster: '/collab/video-poster.jpg',
+  title:  'TEE × CMG × Central Retail',
+};
+
 // ---- SOCIAL MEDIA ----
 // เเก้ url ใส่ลิงก์จริงได้เลย
 export const socials = [
@@ -359,6 +376,7 @@ export const careerTimeline = [
 export const navItems = [
   "home",
   "profile",
+  "collab",
   "about",
   "contact",
   "schedule",

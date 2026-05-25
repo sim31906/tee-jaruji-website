@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import Profile from './components/Profile';
 import About from './components/About';
+import Collab from './components/Collab';
 import Contact from './components/Contact';
 import Schedule from './components/Schedule';
 import Supporters from './components/Supporters';
@@ -72,6 +73,7 @@ function MainPage() {
       <Navigation />
       <Hero />
       <Reveal><Profile /></Reveal>
+      <Reveal><Collab /></Reveal>
       <Reveal><About /></Reveal>
       <Reveal><Contact /></Reveal>
       <Reveal><Schedule /></Reveal>

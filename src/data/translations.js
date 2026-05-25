@@ -1,7 +1,7 @@
 export const translations = {
   th: {
     nav: {
-      home: 'หน้าหลัก', profile: 'ประวัติ', about: 'เกี่ยวกับ',
+      home: 'หน้าหลัก', profile: 'ประวัติ', collab: 'ร่วมงาน', about: 'เกี่ยวกับ',
       contact: 'ติดต่อ', schedule: 'ตารางงาน',
       supporters: 'แฟนคลับ', fanclub: 'บริการ',
     },
@@ -93,15 +93,21 @@ export const translations = {
         },
       ],
     },
+    collab: {
+      sectionNum: '02 / ร่วมงาน',
+      sectionTitle: 'ร่วมงานกับ',
+      sectionItalic: 'แบรนด์',
+      desc: 'แบรนด์และพาร์ทเนอร์ที่ Tee Jaruji เคยร่วมงานด้วย',
+    },
     about: {
-      sectionNum: '02 / เกี่ยวกับ',
+      sectionNum: '03 / เกี่ยวกับ',
       sectionTitle: 'ติดตาม',
       sectionItalic: 'ออนไลน์',
       quote: 'ขอบคุณที่แวะมาทำความรู้จักกัน ฝากติดตามผลงานและเรื่องราวต่าง ๆ ผ่านช่องทางออนไลน์ของผมได้นะครับ',
       signature: '— ตี๋ จารุจิ',
     },
     contact: {
-      sectionNum: '03 / ติดต่อ',
+      sectionNum: '04 / ติดต่อ',
       sectionTitle: 'ติดต่อเรื่อง',
       sectionItalic: 'งาน',
       items: [
@@ -110,7 +116,7 @@ export const translations = {
       ],
     },
     schedule: {
-      sectionNum: '04 / ตารางงาน',
+      sectionNum: '05 / ตารางงาน',
       sectionTitle: 'กิจกรรม',
       sectionItalic: 'ที่กำลังจะมาถึง',
       events: [
@@ -120,7 +126,7 @@ export const translations = {
       ],
     },
     supporters: {
-      sectionNum: '05 / แฟนคลับ',
+      sectionNum: '06 / แฟนคลับ',
       sectionTitle: 'ครอบครัว',
       sectionItalic: 'ของผม',
       description: 'ขอบคุณทุกคนที่อยู่เคียงข้างกันมาตลอด ทุกรอยยิ้ม ทุกข้อความ ทุกการสนับสนุน คือพลังที่ทำให้ก้าวต่อไปได้ทุกวัน',
@@ -131,7 +137,7 @@ export const translations = {
       ],
     },
     fanclub: {
-      sectionNum: '06 / บริการแฟนคลับ',
+      sectionNum: '07 / บริการแฟนคลับ',
       sectionTitle: 'บริการ',
       sectionItalic: 'แฟนคลับ',
       description: 'ช่องทางสำหรับแฟนคลับที่ต้องการสนับสนุน · จัดกิจกรรม · หรือแจ้งปัญหาต่าง ๆ ทีมงานยินดีดูแลทุกท่านอย่างใกล้ชิด',
@@ -217,7 +223,7 @@ export const translations = {
 
   en: {
     nav: {
-      home: 'home', profile: 'profile', about: 'about',
+      home: 'home', profile: 'profile', collab: 'collabs', about: 'about',
       contact: 'contact', schedule: 'schedule',
       supporters: 'supporters', fanclub: 'fanclub',
     },
@@ -309,15 +315,21 @@ export const translations = {
         },
       ],
     },
+    collab: {
+      sectionNum: '02 / Collaborations',
+      sectionTitle: 'Brand',
+      sectionItalic: 'Collabs',
+      desc: 'Brands and partners Tee Jaruji has worked with',
+    },
     about: {
-      sectionNum: '02 / About',
+      sectionNum: '03 / About',
       sectionTitle: 'Find Me',
       sectionItalic: 'Online',
       quote: 'Thank you for stopping by to get to know me. Feel free to follow my work and stories through my online channels.',
       signature: '— Tee Jaruji',
     },
     contact: {
-      sectionNum: '03 / Contact',
+      sectionNum: '04 / Contact',
       sectionTitle: 'Work',
       sectionItalic: 'Enquiries',
       items: [
@@ -326,7 +338,7 @@ export const translations = {
       ],
     },
     schedule: {
-      sectionNum: '04 / Schedule',
+      sectionNum: '05 / Schedule',
       sectionTitle: 'Event',
       sectionItalic: 'Schedule',
       events: [
@@ -336,7 +348,7 @@ export const translations = {
       ],
     },
     supporters: {
-      sectionNum: '05 / Supporters',
+      sectionNum: '06 / Supporters',
       sectionTitle: 'My',
       sectionItalic: 'Family',
       description: 'Thank you to everyone who has always been by my side. Every smile, every message, every bit of support gives me strength to keep going every single day.',
@@ -347,7 +359,7 @@ export const translations = {
       ],
     },
     fanclub: {
-      sectionNum: '06 / Fanclub Services',
+      sectionNum: '07 / Fanclub Services',
       sectionTitle: 'Fan',
       sectionItalic: 'Services',
       description: 'Channels for fans who want to show support, organize events, or report issues. Our team is always ready to assist.',
@@ -433,7 +445,7 @@ export const translations = {
 
   zh: {
     nav: {
-      home: '首页', profile: '简介', about: '关于',
+      home: '首页', profile: '简介', collab: '合作', about: '关于',
       contact: '联系', schedule: '日程',
       supporters: '支持者', fanclub: '粉丝服务',
     },
@@ -525,15 +537,21 @@ export const translations = {
         },
       ],
     },
+    collab: {
+      sectionNum: '02 / 合作品牌',
+      sectionTitle: '品牌',
+      sectionItalic: '合作',
+      desc: 'Tee Jaruji 曾合作过的品牌与合作伙伴',
+    },
     about: {
-      sectionNum: '02 / About',
+      sectionNum: '03 / About',
       sectionTitle: '找我',
       sectionItalic: '在线',
       quote: '感谢你们的到来，欢迎通过我的社交媒体关注我的作品和故事。',
       signature: '— Tee Jaruji',
     },
     contact: {
-      sectionNum: '03 / Contact',
+      sectionNum: '04 / Contact',
       sectionTitle: '工作',
       sectionItalic: '问询',
       items: [
@@ -542,7 +560,7 @@ export const translations = {
       ],
     },
     schedule: {
-      sectionNum: '04 / Schedule',
+      sectionNum: '05 / Schedule',
       sectionTitle: '活动',
       sectionItalic: '日程',
       events: [
@@ -552,7 +570,7 @@ export const translations = {
       ],
     },
     supporters: {
-      sectionNum: '05 / Supporters',
+      sectionNum: '06 / Supporters',
       sectionTitle: '我的',
       sectionItalic: '家人',
       description: '感谢一直陪伴在我身边的每一个人。每一个微笑、每一条留言、每一份支持，都是我每天前进的动力。',
@@ -563,7 +581,7 @@ export const translations = {
       ],
     },
     fanclub: {
-      sectionNum: '06 / Fanclub Services',
+      sectionNum: '07 / Fanclub Services',
       sectionTitle: '粉丝',
       sectionItalic: '服务',
       description: '为想要支持、组织活动或反映问题的粉丝提供的渠道。我们的团队随时准备为您提供帮助。',

@@ -1,6 +1,6 @@
 import { colors, fonts } from '../styles/theme';
 
-export default function SectionHeader({ num, title, italic, dark = false }) {
+export default function SectionHeader({ num, title, italic, dark = false, mb = '4rem', pb = '2rem' }) {
   const textColor = dark ? colors.cream : colors.ink;
   const numColor = dark ? colors.pink : colors.accent;
   const accentColor = dark ? colors.pink : colors.accent;
@@ -18,8 +18,8 @@ export default function SectionHeader({ num, title, italic, dark = false }) {
         display: 'flex',
         flexDirection: 'column',
         gap: '1rem',
-        marginBottom: '4rem',
-        paddingBottom: '2rem',
+        marginBottom: mb,
+        paddingBottom: pb,
         borderBottom: `1px solid ${borderColor}`,
       }}>
         <div style={{
