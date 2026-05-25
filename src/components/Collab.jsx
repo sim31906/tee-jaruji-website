@@ -42,7 +42,6 @@ export default function Collab() {
         .collab-logo-img {
           height: clamp(48px, 8vw, 88px);
           width: auto;
-          max-width: 200px;
           object-fit: contain;
           display: block;
           filter: none;
@@ -101,8 +100,8 @@ export default function Collab() {
         }
         @media (max-width: 768px) {
           .collab-section-tj { padding: 3rem 1.5rem 2rem !important; }
-          .collab-banner { flex-wrap: wrap; gap: 1.25rem !important; overflow: hidden !important; }
-          .collab-logo-img { height: clamp(36px, 10vw, 60px) !important; width: auto !important; max-width: calc(100vw - 3rem) !important; }
+          .collab-banner { flex-wrap: wrap !important; gap: 1.25rem !important; }
+          .collab-logo-img { height: clamp(36px, 10vw, 60px) !important; max-width: calc(100vw - 3rem) !important; }
         }
       `}</style>
 
@@ -177,7 +176,11 @@ export default function Collab() {
             {/* center play button — show only on hover when paused */}
             {!playing && hovering && (
               <button className="collab-play-btn" onClick={togglePlay} aria-label="Play">
-                <div className="collab-play-icon">▶</div>
+                <div className="collab-play-icon">
+                  <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
               </button>
             )}
 
@@ -217,7 +220,10 @@ export default function Collab() {
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: '.75rem', flexShrink: 0, backdropFilter: 'blur(4px)',
                 }}>
-                  {playing ? '⏸' : '▶'}
+                  {playing
+                    ? <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    : <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                  }
                 </button>
                 <span style={{ fontFamily: fonts.mono, fontSize: '.6rem', letterSpacing: '.06em', color: 'rgba(255,255,255,0.8)' }}>
                   {fmt(currentTime)} / {fmt(duration)}
