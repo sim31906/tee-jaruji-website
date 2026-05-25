@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { colors, fonts } from '../styles/theme';
 import { collabs, collabVideo } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
@@ -9,8 +9,10 @@ import Reveal from './Reveal';
 export default function Collab() {
   const { lang } = useLang();
   const t = translations[lang].collab;
-  const videoRef = useRef(null);
-  const hideTimer = useRef(null);
+  const videoRef   = useRef(null);
+  const hideTimer  = useRef(null);
+  const seekBarRef = useRef(null);
+  const dragging   = useRef(false);
   const [playing, setPlaying]       = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration]     = useState(0);
@@ -29,13 +31,41 @@ export default function Collab() {
     else { videoRef.current.play(); setPlaying(true); }
   }
 
-  function handleSeek(e) {
-    if (!videoRef.current || !duration) return;
-    const rect  = e.currentTarget.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  const applySeek = useCallback((clientX) => {
+    if (!videoRef.current || !duration || !seekBarRef.current) return;
+    const rect  = seekBarRef.current.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
     videoRef.current.currentTime = ratio * duration;
     setCurrentTime(ratio * duration);
+  }, [duration]);
+
+  function handleSeek(e) { applySeek(e.clientX); }
+
+  function handleSeekMouseDown(e) {
+    dragging.current = true;
+    applySeek(e.clientX);
   }
+  function handleSeekTouchStart(e) {
+    dragging.current = true;
+    applySeek(e.touches[0].clientX);
+  }
+
+  useEffect(() => {
+    function onMouseMove(e) { if (dragging.current) applySeek(e.clientX); }
+    function onMouseUp()    { dragging.current = false; }
+    function onTouchMove(e) { if (dragging.current) { e.preventDefault(); applySeek(e.touches[0].clientX); } }
+    function onTouchEnd()   { dragging.current = false; }
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup',   onMouseUp);
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend',  onTouchEnd);
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup',   onMouseUp);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend',  onTouchEnd);
+    };
+  }, [applySeek]);
 
   function fmt(s) {
     if (!s || isNaN(s)) return '0:00';
@@ -211,10 +241,17 @@ export default function Collab() {
               style={{ opacity: showControls ? 1 : 0, pointerEvents: showControls ? 'auto' : 'none' }}
             >
               {/* progress bar */}
-              <div onClick={handleSeek} style={{
-                height: 4, background: 'rgba(255,255,255,0.25)', borderRadius: 2,
-                cursor: 'pointer', position: 'relative', marginBottom: '.65rem',
-              }}>
+              <div
+                ref={seekBarRef}
+                onClick={handleSeek}
+                onMouseDown={handleSeekMouseDown}
+                onTouchStart={handleSeekTouchStart}
+                style={{
+                  height: 8, background: 'rgba(255,255,255,0.25)', borderRadius: 4,
+                  cursor: 'pointer', position: 'relative', marginBottom: '.65rem',
+                  touchAction: 'none',
+                }}
+              >
                 <div style={{
                   position: 'absolute', left: 0, top: 0, bottom: 0, borderRadius: 2,
                   width: duration ? `${(currentTime / duration) * 100}%` : '0%',
