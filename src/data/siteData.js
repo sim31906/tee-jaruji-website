@@ -190,7 +190,7 @@ export const education = [
 // ถ้ายังไม่มีรูป ทิ้ง logo ว่างไว้ ระบบจะแสดง placeholder อัตโนมัติ
 export const collabs = [
   { id: 'cb-1', name: 'CMG',            logo: '/collab/cmg.png',            color: '#E30613', bg: '#fff0f0', url: '' },
-  { id: 'cb-2', name: 'Central Retail', logo: '/collab/central-retail.png', color: '#E30613', bg: '#f5f5f5', url: '', logoStyle: { width: 'min(500px, 55vw)', height: 'auto' } },
+  { id: 'cb-2', name: 'Central Retail', logo: '/collab/central-retail.png', color: '#E30613', bg: '#f5f5f5', url: '', logoStyle: { width: 'min(300px, 40vw)', height: 'auto' } },
 ];
 
 // ---- COLLAB VIDEO ----
