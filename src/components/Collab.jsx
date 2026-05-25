@@ -101,8 +101,8 @@ export default function Collab() {
         }
         @media (max-width: 768px) {
           .collab-section-tj { padding: 3rem 1.5rem 2rem !important; }
-          .collab-banner { flex-wrap: wrap; gap: 1.25rem !important; }
-          .collab-logo-img { height: clamp(36px, 10vw, 60px) !important; }
+          .collab-banner { flex-wrap: wrap; gap: 1.25rem !important; overflow: hidden !important; }
+          .collab-logo-img { height: clamp(36px, 10vw, 60px) !important; width: auto !important; max-width: calc(100vw - 3rem) !important; }
         }
       `}</style>
 
