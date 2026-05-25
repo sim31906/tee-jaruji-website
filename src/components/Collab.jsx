@@ -15,6 +15,7 @@ export default function Collab() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration]     = useState(0);
   const [hovering, setHovering]     = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
 
   function showControlsBriefly() {
     setHovering(true);
@@ -39,6 +40,18 @@ export default function Collab() {
   function fmt(s) {
     if (!s || isNaN(s)) return '0:00';
     return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  }
+
+  function toggleFullscreen() {
+    const v = videoRef.current;
+    if (!v) return;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else if (v.requestFullscreen) {
+      v.requestFullscreen();
+    } else if (v.webkitEnterFullscreen) {
+      v.webkitEnterFullscreen(); // iOS Safari
+    }
   }
 
   const showControls = hovering;
@@ -219,23 +232,34 @@ export default function Collab() {
                 }} />
               </div>
 
-              {/* play button + time */}
+              {/* play button + time + fullscreen */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '.65rem' }}>
                 <button onClick={togglePlay} style={{
                   width: 30, height: 30, borderRadius: '50%',
                   background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.4)',
                   color: '#fff', cursor: 'pointer',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '.75rem', flexShrink: 0, backdropFilter: 'blur(4px)',
+                  flexShrink: 0, backdropFilter: 'blur(4px)',
                 }}>
                   {playing
                     ? <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                     : <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                   }
                 </button>
-                <span style={{ fontFamily: fonts.mono, fontSize: '.6rem', letterSpacing: '.06em', color: 'rgba(255,255,255,0.8)' }}>
+                <span style={{ fontFamily: fonts.mono, fontSize: '.6rem', letterSpacing: '.06em', color: 'rgba(255,255,255,0.8)', flex: 1 }}>
                   {fmt(currentTime)} / {fmt(duration)}
                 </span>
+                <button onClick={toggleFullscreen} style={{
+                  width: 30, height: 30, borderRadius: '50%',
+                  background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.4)',
+                  color: '#fff', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0, backdropFilter: 'blur(4px)',
+                }} aria-label="Fullscreen">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
