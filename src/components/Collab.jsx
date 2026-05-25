@@ -10,10 +10,17 @@ export default function Collab() {
   const { lang } = useLang();
   const t = translations[lang].collab;
   const videoRef = useRef(null);
+  const hideTimer = useRef(null);
   const [playing, setPlaying]       = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration]     = useState(0);
   const [hovering, setHovering]     = useState(false);
+
+  function showControlsBriefly() {
+    setHovering(true);
+    clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => setHovering(false), 3000);
+  }
 
   function togglePlay() {
     if (!videoRef.current) return;
@@ -157,8 +164,9 @@ export default function Collab() {
         <Reveal delay={120}>
           <div
             style={{ position: 'relative', width: '100%', background: '#000', overflow: 'hidden', borderRadius: 6 }}
-            onMouseEnter={() => setHovering(true)}
+            onMouseEnter={() => { clearTimeout(hideTimer.current); setHovering(true); }}
             onMouseLeave={() => setHovering(false)}
+            onTouchStart={showControlsBriefly}
           >
             <video
               ref={videoRef}
