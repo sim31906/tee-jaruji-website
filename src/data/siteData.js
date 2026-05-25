@@ -197,7 +197,7 @@ export const collabs = [
 // วางไฟล์ mp4 ที่ public/collab/video.mp4
 // poster (ภาพ thumbnail) วางที่ public/collab/video-poster.jpg — ถ้าไม่มีปล่อยว่างได้
 export const collabVideo = {
-  file:   '/collab/video.mp4',
+  file:   'https://bzd2xmlvjgs51qcz.public.blob.vercel-storage.com/video.mp4',
   poster: '/collab/video-poster.jpg',
   title:  'TEE × CMG × Central Retail',
 };
