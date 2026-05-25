@@ -256,7 +256,6 @@ export default function Collab() {
                   position: 'absolute', left: 0, top: 0, bottom: 0, borderRadius: 2,
                   width: duration ? `${(currentTime / duration) * 100}%` : '0%',
                   background: colors.accent,
-                  transition: 'width .1s linear',
                 }} />
                 <div style={{
                   position: 'absolute', top: '50%', transform: 'translateY(-50%)',
@@ -265,7 +264,6 @@ export default function Collab() {
                   background: colors.accent,
                   boxShadow: '0 0 0 3px rgba(217,122,142,0.35)',
                   pointerEvents: 'none',
-                  transition: 'left .1s linear',
                 }} />
               </div>
 
