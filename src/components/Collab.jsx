@@ -84,12 +84,13 @@ export default function Collab() {
         .collab-play-icon {
           width: 70px; height: 70px;
           border-radius: 50%;
-          background: rgba(255,255,255,0.92);
+          background: ${colors.ink};
           display: flex; align-items: center; justify-content: center;
-          font-size: 1.5rem;
-          box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+          font-size: 1.4rem;
+          color: ${colors.cream};
+          box-shadow: 0 4px 24px rgba(0,0,0,0.35);
           transition: transform .2s;
-          padding-left: 4px;
+          padding-left: 5px;
         }
         .collab-play-btn:hover .collab-play-icon { transform: scale(1.1); }
         .collab-controls-overlay {
