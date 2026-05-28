@@ -197,7 +197,7 @@ export const collabs = [
       { src: '/collab/central-retail.png', alt: 'Central Retail', style: { width: 'min(180px, 22vw)', height: 'auto' } },
     ],
     color: '#E30613',
-    video:  'https://f003.backblazeb2.com/file/TEE-COLLAB/video.mp4',
+    video:  'https://tee-videos.sim31906.workers.dev/file/TEE-COLLAB/video.mp4',
     poster: '/collab/video-poster.jpg',
   },
   {
@@ -206,7 +206,7 @@ export const collabs = [
     logo: '/collab/curel.png',
     color: '#5B7FA6',
     logoStyle: {},
-    video:  'https://f003.backblazeb2.com/file/TEE-COLLAB/CurelxTee+D5.mp4',
+    video:  'https://tee-videos.sim31906.workers.dev/file/TEE-COLLAB/CurelxTee+D5.mp4',
     poster: '/collab/curel-thumb.png',
   },
 ];
