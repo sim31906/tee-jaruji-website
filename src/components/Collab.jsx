@@ -13,11 +13,12 @@ export default function Collab() {
   const hideTimer  = useRef(null);
   const seekBarRef = useRef(null);
   const dragging   = useRef(false);
+  const [selectedId, setSelectedId] = useState(collabs[0]?.id);
+  const [listOpen, setListOpen]     = useState(false);
   const [playing, setPlaying]       = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration]     = useState(0);
   const [hovering, setHovering]     = useState(false);
-  const [fullscreen, setFullscreen] = useState(false);
 
   function showControlsBriefly() {
     setHovering(true);
@@ -38,17 +39,6 @@ export default function Collab() {
     videoRef.current.currentTime = ratio * duration;
     setCurrentTime(ratio * duration);
   }, [duration]);
-
-  function handleSeek(e) { applySeek(e.clientX); }
-
-  function handleSeekMouseDown(e) {
-    dragging.current = true;
-    applySeek(e.clientX);
-  }
-  function handleSeekTouchStart(e) {
-    dragging.current = true;
-    applySeek(e.touches[0].clientX);
-  }
 
   useEffect(() => {
     function onMouseMove(e) { if (dragging.current) applySeek(e.clientX); }
@@ -75,67 +65,71 @@ export default function Collab() {
   function toggleFullscreen() {
     const v = videoRef.current;
     if (!v) return;
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else if (v.requestFullscreen) {
-      v.requestFullscreen();
-    } else if (v.webkitEnterFullscreen) {
-      v.webkitEnterFullscreen(); // iOS Safari
-    }
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else if (v.requestFullscreen) { v.requestFullscreen(); }
+    else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
   }
 
-  const showControls = hovering;
+  const tickerDuration = `${collabs.length * 7}s`;
 
   return (
     <>
       <style>{`
+        @keyframes ticker-left {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .collab-ticker-track {
+          display: flex;
+          align-items: center;
+          gap: clamp(1.5rem, 3vw, 2.5rem);
+          animation: ticker-left ${tickerDuration} linear infinite;
+          width: max-content;
+          will-change: transform;
+        }
+        .collab-ticker-wrap:hover .collab-ticker-track { animation-play-state: paused; }
+        .collab-logo-btn {
+          background: none;
+          border: 2px solid transparent;
+          cursor: pointer;
+          padding: 0.4rem 0.75rem;
+          border-radius: 8px;
+          transition: border-color .2s, background .2s;
+          display: flex;
+          align-items: center;
+          flex-shrink: 0;
+        }
+        .collab-logo-btn:hover { background: rgba(0,0,0,0.04); }
+        .collab-logo-btn.active { border-color: ${colors.accent}; background: rgba(217,122,142,0.07); }
         .collab-logo-img {
-          height: clamp(48px, 8vw, 88px);
+          height: clamp(36px, 6vw, 68px);
           width: auto;
           object-fit: contain;
           display: block;
-          filter: none;
-          transition: opacity .2s;
         }
-        .collab-logo-img:hover { opacity: .8; }
-        .collab-x {
-          font-family: ${fonts.display};
-          font-size: clamp(2rem, 5vw, 4rem);
-          font-style: italic;
-          font-weight: 300;
-          color: ${colors.accent};
-          line-height: 1;
-          flex-shrink: 0;
-          user-select: none;
-        }
-        .collab-tee {
-          font-family: ${fonts.display};
-          font-size: clamp(2rem, 5vw, 4rem);
-          font-weight: 700;
-          color: ${colors.ink};
-          letter-spacing: -.02em;
-          line-height: 1;
-          flex-shrink: 0;
-        }
-        .collab-play-btn {
-          position: absolute;
-          inset: 0;
+        .collab-list-row {
           display: flex;
           align-items: center;
-          justify-content: center;
+          gap: 1rem;
+          padding: 0.9rem 1.25rem;
+          cursor: pointer;
+          border-bottom: 1px solid ${colors.creamDark};
+          transition: background .15s;
+        }
+        .collab-list-row:hover { background: ${colors.creamDark}; }
+        .collab-list-row:last-child { border-bottom: none; }
+        .collab-play-btn {
+          position: absolute; inset: 0;
+          display: flex; align-items: center; justify-content: center;
           background: rgba(0,0,0,0);
           transition: background .3s;
-          cursor: pointer;
-          border: none;
-          padding: 0;
+          cursor: pointer; border: none; padding: 0;
         }
         .collab-play-btn:hover { background: rgba(0,0,0,0.15); }
         .collab-play-icon {
-          width: 70px; height: 70px;
-          border-radius: 50%;
+          width: 70px; height: 70px; border-radius: 50%;
           background: ${colors.ink};
           display: flex; align-items: center; justify-content: center;
-          font-size: 1.4rem;
           color: ${colors.cream};
           box-shadow: 0 4px 24px rgba(0,0,0,0.35);
           transition: transform .2s;
@@ -150,8 +144,6 @@ export default function Collab() {
         }
         @media (max-width: 768px) {
           .collab-section-tj { padding: 3rem 1.5rem 2rem !important; }
-          .collab-banner { flex-wrap: wrap !important; gap: 1.25rem !important; }
-          .collab-logo-img { height: clamp(36px, 10vw, 60px) !important; max-width: calc(100vw - 3rem) !important; }
         }
       `}</style>
 
@@ -162,46 +154,136 @@ export default function Collab() {
       >
         <SectionHeader num={t.sectionNum} title={t.sectionTitle} italic={t.sectionItalic} mb="2rem" />
 
-        {/* ── TEE × logo banner ── */}
+        {/* ── TEE × + scrolling ticker ── */}
         <Reveal>
-          <div
-            className="collab-banner"
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'clamp(0.75rem, 2vw, 1.5rem)',
+            marginBottom: '1.25rem',
+            overflow: 'hidden',
+          }}>
+            <span style={{
+              fontFamily: fonts.display,
+              fontSize: 'clamp(2rem, 5vw, 4rem)',
+              fontWeight: 700,
+              color: colors.ink,
+              letterSpacing: '-.02em',
+              lineHeight: 1,
+              flexShrink: 0,
+            }}>TEE</span>
+            <span style={{
+              fontFamily: fonts.display,
+              fontSize: 'clamp(2rem, 5vw, 4rem)',
+              fontStyle: 'italic',
+              fontWeight: 300,
+              color: colors.accent,
+              lineHeight: 1,
+              flexShrink: 0,
+            }}>×</span>
+
+            <div className="collab-ticker-wrap" style={{ overflow: 'hidden', flex: 1, minWidth: 0 }}>
+              <div className="collab-ticker-track">
+                {[...collabs, ...collabs].map((brand, i) => (
+                  <button
+                    key={i}
+                    className={`collab-logo-btn${brand.id === selectedId ? ' active' : ''}`}
+                    onClick={() => setSelectedId(brand.id)}
+                    aria-label={brand.name}
+                  >
+                    {brand.logo
+                      ? <img
+                          src={brand.logo}
+                          alt={brand.name}
+                          className="collab-logo-img"
+                          style={brand.logoStyle || {}}
+                        />
+                      : <span style={{
+                          fontFamily: fonts.mono,
+                          fontSize: 'clamp(0.9rem, 2vw, 1.3rem)',
+                          fontWeight: 700,
+                          letterSpacing: '.06em',
+                          color: brand.color || colors.ink,
+                        }}>{brand.name}</span>
+                    }
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* ── ดูทั้งหมด button ── */}
+        <Reveal delay={60}>
+          <button
+            onClick={() => setListOpen(v => !v)}
             style={{
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
-              gap: 'clamp(1rem, 3vw, 2.5rem)',
-              marginBottom: '2.5rem',
-              flexWrap: 'nowrap',
-              overflow: 'hidden',
+              gap: '0.4rem',
+              background: 'none',
+              border: `1px solid ${colors.ink}`,
+              borderRadius: 4,
+              padding: '0.45rem 0.9rem',
+              fontFamily: fonts.mono,
+              fontSize: '0.72rem',
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              color: colors.ink,
+              marginBottom: '1.5rem',
             }}
           >
-            <span className="collab-tee">TEE</span>
+            {listOpen
+              ? <><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg> ซ่อน</>
+              : <><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg> ดูทั้งหมด</>
+            }
+          </button>
+        </Reveal>
 
-            {collabs.map((brand, i) => (
-              <div key={brand.id} style={{ display: 'contents' }}>
-                {i === 0 && <span className="collab-x">×</span>}
-                {brand.logo
-                  ? <img
-                      src={brand.logo}
-                      alt={brand.name}
-                      className="collab-logo-img"
-                      style={brand.logoStyle || {}}
-                    />
-                  : <span style={{
-                      fontFamily: fonts.mono,
-                      fontSize: 'clamp(1rem, 2.5vw, 1.6rem)',
-                      fontWeight: 700,
-                      letterSpacing: '.08em',
-                      color: brand.color,
-                      flexShrink: 0,
-                    }}>
-                      {brand.name}
-                    </span>
-                }
+        {/* ── Expanded brand list ── */}
+        {listOpen && (
+          <div style={{
+            border: `1px solid ${colors.ink}`,
+            borderRadius: 6,
+            overflow: 'hidden',
+            marginBottom: '1.5rem',
+          }}>
+            {collabs.map(brand => (
+              <div
+                key={brand.id}
+                className="collab-list-row"
+                onClick={() => { setSelectedId(brand.id); setListOpen(false); }}
+                style={{ background: brand.id === selectedId ? colors.creamDark : 'transparent' }}
+              >
+                {brand.logo && (
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
+                    style={{ height: 28, width: 'auto', objectFit: 'contain', flexShrink: 0 }}
+                  />
+                )}
+                <span style={{
+                  fontFamily: fonts.mono,
+                  fontSize: '0.82rem',
+                  letterSpacing: '0.08em',
+                  color: colors.ink,
+                }}>
+                  {brand.name}
+                </span>
+                {brand.id === selectedId && (
+                  <span style={{
+                    marginLeft: 'auto',
+                    fontFamily: fonts.mono,
+                    fontSize: '0.68rem',
+                    color: colors.accent,
+                    letterSpacing: '0.1em',
+                  }}>● กำลังแสดง</span>
+                )}
               </div>
             ))}
           </div>
-        </Reveal>
+        )}
 
         {/* ── Video ── */}
         <Reveal delay={120}>
@@ -224,7 +306,6 @@ export default function Collab() {
               playsInline
             />
 
-            {/* center play button — show only on hover when paused */}
             {!playing && hovering && (
               <button className="collab-play-btn" onClick={togglePlay} aria-label="Play">
                 <div className="collab-play-icon">
@@ -235,17 +316,15 @@ export default function Collab() {
               </button>
             )}
 
-            {/* bottom controls — auto-hide when playing and not hovering */}
             <div
               className="collab-controls-overlay"
-              style={{ opacity: showControls ? 1 : 0, pointerEvents: showControls ? 'auto' : 'none' }}
+              style={{ opacity: hovering ? 1 : 0, pointerEvents: hovering ? 'auto' : 'none' }}
             >
-              {/* progress bar */}
               <div
                 ref={seekBarRef}
-                onClick={handleSeek}
-                onMouseDown={handleSeekMouseDown}
-                onTouchStart={handleSeekTouchStart}
+                onClick={(e) => applySeek(e.clientX)}
+                onMouseDown={(e) => { dragging.current = true; applySeek(e.clientX); }}
+                onTouchStart={(e) => { dragging.current = true; applySeek(e.touches[0].clientX); }}
                 style={{
                   height: 8, background: 'rgba(255,255,255,0.25)', borderRadius: 4,
                   cursor: 'pointer', position: 'relative', marginBottom: '.65rem',
@@ -267,7 +346,6 @@ export default function Collab() {
                 }} />
               </div>
 
-              {/* play button + time + fullscreen */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '.65rem' }}>
                 <button onClick={togglePlay} style={{
                   width: 30, height: 30, borderRadius: '50%',

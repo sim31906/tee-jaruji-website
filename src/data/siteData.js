@@ -189,8 +189,9 @@ export const education = [
 // วิธีเพิ่ม: ใส่ { name, logo: '/collab/logo.png', color: '#hex', bg: '#hex', url: '...' }
 // ถ้ายังไม่มีรูป ทิ้ง logo ว่างไว้ ระบบจะแสดง placeholder อัตโนมัติ
 export const collabs = [
-  { id: 'cb-1', name: 'CMG',            logo: '/collab/cmg.png',            color: '#E30613', bg: '#fff0f0', url: '' },
-  { id: 'cb-2', name: 'Central Retail', logo: '/collab/central-retail.png', color: '#E30613', bg: '#f5f5f5', url: '', logoStyle: { width: 'min(300px, 40vw)', height: 'auto' } },
+  { id: 'cb-1', name: 'CMG',            logo: '/collab/cmg.png',            color: '#E30613', logoStyle: {} },
+  { id: 'cb-2', name: 'Central Retail', logo: '/collab/central-retail.png', color: '#E30613', logoStyle: { width: 'min(220px, 28vw)', height: 'auto' } },
+  { id: 'cb-3', name: 'Curel',          logo: '/collab/curel.png',          color: '#5B7FA6', logoStyle: {} },
 ];
 
 // ---- COLLAB VIDEO ----
@@ -199,7 +200,7 @@ export const collabs = [
 export const collabVideo = {
   file:   'https://bzd2xmlvjgs51qcz.public.blob.vercel-storage.com/video.mp4',
   poster: '/collab/video-poster.jpg',
-  title:  'TEE × CMG × Central Retail',
+  title:  'TEE × CMG × Central Retail × Curel',
 };
 
 // ---- SOCIAL MEDIA ----
