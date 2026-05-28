@@ -193,7 +193,7 @@ export default function Collab() {
 
             <div className="collab-ticker-wrap" style={{ overflow: 'hidden', flex: 1, minWidth: 0 }}>
               <div className="collab-ticker-track">
-                {[...collabs, ...collabs].map((brand, i) => (
+                {[...collabs, ...collabs, ...collabs, ...collabs, ...collabs, ...collabs].map((brand, i) => (
                   <button
                     key={i}
                     className={`collab-logo-btn${brand.id === selectedId ? ' active' : ''}`}
@@ -267,13 +267,13 @@ export default function Collab() {
                 style={{ background: brand.id === selectedId ? colors.creamDark : 'transparent' }}
               >
                 {brand.logos
-                  ? <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  ? <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexShrink: 0 }}>
                       {brand.logos.map((l, li) => (
-                        <img key={li} src={l.src} alt={l.alt} style={{ height: 24, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+                        <img key={li} src={l.src} alt={l.alt} style={{ height: 22, maxWidth: 64, width: 'auto', objectFit: 'contain' }} />
                       ))}
                     </div>
                   : brand.logo && (
-                      <img src={brand.logo} alt={brand.name} style={{ height: 24, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+                      <img src={brand.logo} alt={brand.name} style={{ height: 22, maxWidth: 64, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
                     )
                 }
                 <span style={{
@@ -281,6 +281,8 @@ export default function Collab() {
                   fontSize: '0.82rem',
                   letterSpacing: '0.08em',
                   color: colors.ink,
+                  flex: 1,
+                  minWidth: 0,
                 }}>
                   {brand.name}
                 </span>
@@ -291,6 +293,8 @@ export default function Collab() {
                     fontSize: '0.68rem',
                     color: colors.accent,
                     letterSpacing: '0.1em',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
                   }}>● กำลังแสดง</span>
                 )}
               </div>
