@@ -129,7 +129,7 @@ export default function Supporters() {
                             <img
                               src={item.src}
                               alt={item.alt}
-                              loading="lazy"
+                              loading="eager"
                               style={{
                                 width: '100%', height: '100%', objectFit: 'cover',
                                 opacity: 0, transition: 'opacity .4s',
