@@ -15,15 +15,25 @@ export function useGoogleDrivePhotos() {
     }
 
     const q = encodeURIComponent(`'${FOLDER_ID}' in parents and mimeType contains 'image/' and trashed = false`);
-    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${API_KEY}&fields=files(id,name)&pageSize=100`;
 
-    fetch(url)
-      .then(r => {
+    async function fetchAll() {
+      let all = [];
+      let pageToken = null;
+      do {
+        const tokenParam = pageToken ? `&pageToken=${pageToken}` : '';
+        const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${API_KEY}&fields=nextPageToken,files(id,name)&pageSize=1000${tokenParam}`;
+        const r = await fetch(url);
         if (!r.ok) throw new Error(`Drive API error: ${r.status}`);
-        return r.json();
-      })
-      .then(data => {
-        const imgs = (data.files || []).map(f => ({
+        const data = await r.json();
+        all = all.concat(data.files || []);
+        pageToken = data.nextPageToken || null;
+      } while (pageToken);
+      return all;
+    }
+
+    fetchAll()
+      .then(files => {
+        const imgs = files.map(f => ({
           id:  f.id,
           alt: f.name,
           src: `https://drive.google.com/thumbnail?id=${f.id}&sz=w800`,
