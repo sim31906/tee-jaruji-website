@@ -15,7 +15,7 @@ export function useGoogleDrivePhotos() {
     }
 
     const q = encodeURIComponent(`'${FOLDER_ID}' in parents and mimeType contains 'image/' and trashed = false`);
-    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${API_KEY}&fields=files(id,name,thumbnailLink)&pageSize=50`;
+    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${API_KEY}&fields=files(id,name)&pageSize=100`;
 
     fetch(url)
       .then(r => {
@@ -23,13 +23,11 @@ export function useGoogleDrivePhotos() {
         return r.json();
       })
       .then(data => {
-        const imgs = (data.files || [])
-          .filter(f => f.thumbnailLink)
-          .map(f => ({
-            id:  f.id,
-            alt: f.name,
-            src: f.thumbnailLink.replace('=s220', '=s800'),
-          }));
+        const imgs = (data.files || []).map(f => ({
+          id:  f.id,
+          alt: f.name,
+          src: `https://drive.google.com/thumbnail?id=${f.id}&sz=w800`,
+        }));
         setPhotos(imgs);
       })
       .catch(err => setError(err.message))
