@@ -130,11 +130,7 @@ export default function Supporters() {
                               src={item.src}
                               alt={item.alt}
                               loading="eager"
-                              style={{
-                                width: '100%', height: '100%', objectFit: 'cover',
-                                opacity: 0, transition: 'opacity .4s',
-                              }}
-                              onLoad={e => { e.currentTarget.style.opacity = 1; }}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
                           ) : '♡'}
                         </div>
