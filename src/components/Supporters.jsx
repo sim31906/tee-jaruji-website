@@ -33,8 +33,7 @@ export default function Supporters() {
             border-bottom: 1px solid ${colors.ink} !important;
           }
           .stat-tj:last-child { border-bottom: none !important; }
-          .fan-gallery-tj { grid-template-columns: repeat(2, 1fr) !important; height: auto !important; }
-          .fan-col-inner { animation: none !important; transform: none !important; }
+          .fan-gallery-tj { grid-template-columns: repeat(2, 1fr) !important; height: 520px !important; }
           .supporters-section-tj { padding: 5rem 1.5rem !important; }
         }
       `}</style>
