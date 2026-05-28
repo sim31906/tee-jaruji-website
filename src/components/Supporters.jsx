@@ -62,7 +62,7 @@ export default function Supporters() {
         </p>
 
         {(() => {
-          const speeds = [16, 22, 14, 20];
+          const speeds = [35, 45, 30, 40];
 
           /* split into 4 columns — use real photos if loaded, else gradients */
           let cols;
