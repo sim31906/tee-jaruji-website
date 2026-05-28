@@ -33,7 +33,8 @@ export default function Supporters() {
             border-bottom: 1px solid ${colors.ink} !important;
           }
           .stat-tj:last-child { border-bottom: none !important; }
-          .fan-gallery-tj { grid-template-columns: repeat(2, 1fr) !important; height: 520px !important; }
+          .fan-gallery-tj { grid-template-columns: repeat(2, 1fr) !important; height: auto !important; }
+          .fan-col-inner { animation: none !important; transform: none !important; }
           .supporters-section-tj { padding: 5rem 1.5rem !important; }
         }
       `}</style>
@@ -97,7 +98,7 @@ export default function Supporters() {
               {cols.map((col, ci) => {
                 const goDown = ci % 2 === 0;
                 return (
-                  <div key={ci} style={{ overflow: 'hidden', height: '100%' }}>
+                  <div key={ci} style={{ overflow: 'hidden', height: '100%', minHeight: 0 }}>
                     <div
                       className="fan-col-inner"
                       style={{
