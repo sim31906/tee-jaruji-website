@@ -69,8 +69,9 @@ export default function Supporters() {
           const usePhotos = photos.length > 0;
 
           if (usePhotos) {
-            /* repeat photos to fill all 4 columns */
-            const pool = [...photos, ...photos, ...photos, ...photos].slice(0, Math.max(photos.length * 2, 8));
+            /* shuffle then repeat to fill all 4 columns */
+            const shuffled = [...photos].sort(() => Math.random() - 0.5);
+            const pool = [...shuffled, ...shuffled, ...shuffled, ...shuffled].slice(0, Math.max(shuffled.length * 2, 8));
             const perCol = Math.ceil(pool.length / 4);
             cols = [0, 1, 2, 3].map(ci =>
               pool.slice(ci * perCol, ci * perCol + perCol)
