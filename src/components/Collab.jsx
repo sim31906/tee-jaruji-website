@@ -20,6 +20,7 @@ export default function Collab() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration]     = useState(0);
   const [hovering, setHovering]     = useState(false);
+  const [buffering, setBuffering]   = useState(false);
 
   function showControlsBriefly() {
     setHovering(true);
@@ -77,6 +78,7 @@ export default function Collab() {
     setCurrentTime(0);
     setDuration(0);
     setHovering(false);
+    setBuffering(false);
   }, [selectedId]);
 
   const tickerDuration = `${collabs.length * 7}s`;
@@ -145,6 +147,13 @@ export default function Collab() {
           padding-left: 5px;
         }
         .collab-play-btn:hover .collab-play-icon { transform: scale(1.1); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .collab-spinner {
+          width: 52px; height: 52px; border-radius: 50%;
+          border: 3px solid rgba(255,255,255,0.25);
+          border-top-color: #fff;
+          animation: spin .8s linear infinite;
+        }
         .collab-controls-overlay {
           position: absolute; bottom: 0; left: 0; right: 0;
           padding: 2rem 1rem .8rem;
@@ -314,16 +323,25 @@ export default function Collab() {
               ref={videoRef}
               src={activeBrand?.video || ''}
               poster={activeBrand?.poster || undefined}
-              preload="none"
+              preload="metadata"
               style={{ width: '100%', display: 'block', maxHeight: '68vh', objectFit: 'cover' }}
               onTimeUpdate={() => videoRef.current && setCurrentTime(videoRef.current.currentTime)}
               onLoadedMetadata={() => videoRef.current && setDuration(videoRef.current.duration)}
               onEnded={() => { setPlaying(false); setCurrentTime(0); }}
+              onWaiting={() => setBuffering(true)}
+              onPlaying={() => setBuffering(false)}
+              onCanPlay={() => setBuffering(false)}
               onClick={togglePlay}
               playsInline
             />
 
-            {!playing && hovering && (
+            {buffering && (
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                <div className="collab-spinner" />
+              </div>
+            )}
+
+            {!playing && !buffering && hovering && (
               <button className="collab-play-btn" onClick={togglePlay} aria-label="Play">
                 <div className="collab-play-icon">
                   <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
