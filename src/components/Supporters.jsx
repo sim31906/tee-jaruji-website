@@ -62,7 +62,8 @@ export default function Supporters() {
         </p>
 
         {(() => {
-          const speeds = [35, 45, 30, 40];
+          // ~4s per photo, offset per column so they feel independent
+          const secsPerPhoto = [4, 5, 3.5, 4.5];
 
           /* split into 4 columns — use real photos if loaded, else gradients */
           let cols;
@@ -105,7 +106,7 @@ export default function Supporters() {
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '0.75rem',
-                        animation: `${goDown ? 'fan-scroll-down' : 'fan-scroll-up'} ${speeds[ci]}s linear infinite`,
+                        animation: `${goDown ? 'fan-scroll-down' : 'fan-scroll-up'} ${col.length * secsPerPhoto[ci]}s linear infinite`,
                       }}
                     >
                       {[...col, ...col].map((item, i) => (
