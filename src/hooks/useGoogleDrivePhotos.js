@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 
 const API_KEY   = import.meta.env.VITE_GDRIVE_API_KEY;
 const FOLDER_ID = import.meta.env.VITE_GDRIVE_FOLDER_ID;
+const CACHE_KEY = 'gdrive_photos_cache';
 
 export function useGoogleDrivePhotos() {
-  const [photos, setPhotos]   = useState([]);
-  const [loading, setLoading] = useState(true);
+  const cached = (() => { try { return JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null'); } catch { return null; } })();
+  const [photos, setPhotos]   = useState(cached || []);
+  const [loading, setLoading] = useState(!cached);
   const [error, setError]     = useState(null);
 
   useEffect(() => {
+    if (cached) return; // already have data, skip fetch
     if (!API_KEY || !FOLDER_ID || API_KEY === 'YOUR_API_KEY_HERE') {
       setLoading(false);
       return;
@@ -23,7 +26,6 @@ export function useGoogleDrivePhotos() {
         return r.json();
       })
       .then(data => {
-        console.log('Drive API response:', data.files);
         const imgs = (data.files || [])
           .filter(f => f.thumbnailLink)
           .map(f => ({
@@ -31,12 +33,12 @@ export function useGoogleDrivePhotos() {
             alt: f.name,
             src: f.thumbnailLink.replace('=s220', '=s800'),
           }));
-        console.log('Photos to render:', imgs);
+        try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(imgs)); } catch {}
         setPhotos(imgs);
       })
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { photos, loading, error };
 }
