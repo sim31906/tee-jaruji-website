@@ -189,19 +189,27 @@ export const education = [
 // วิธีเพิ่ม: ใส่ { name, logo: '/collab/logo.png', color: '#hex', bg: '#hex', url: '...' }
 // ถ้ายังไม่มีรูป ทิ้ง logo ว่างไว้ ระบบจะแสดง placeholder อัตโนมัติ
 export const collabs = [
-  { id: 'cb-1', name: 'CMG',            logo: '/collab/cmg.png',            color: '#E30613', logoStyle: {} },
-  { id: 'cb-2', name: 'Central Retail', logo: '/collab/central-retail.png', color: '#E30613', logoStyle: { width: 'min(220px, 28vw)', height: 'auto' } },
-  { id: 'cb-3', name: 'Curel',          logo: '/collab/curel.png',          color: '#5B7FA6', logoStyle: {} },
+  {
+    id: 'cb-1',
+    name: 'CMG × Central Retail',
+    logos: [
+      { src: '/collab/cmg.png',            alt: 'CMG',            style: {} },
+      { src: '/collab/central-retail.png', alt: 'Central Retail', style: { width: 'min(180px, 22vw)', height: 'auto' } },
+    ],
+    color: '#E30613',
+    video:  'https://bzd2xmlvjgs51qcz.public.blob.vercel-storage.com/video.mp4',
+    poster: '/collab/video-poster.jpg',
+  },
+  {
+    id: 'cb-2',
+    name: 'Curel',
+    logo: '/collab/curel.png',
+    color: '#5B7FA6',
+    logoStyle: {},
+    video:  'https://bzd2xmlvjgs51qcz.public.blob.vercel-storage.com/CurelxTee%20D5.mp4',
+    poster: '/collab/curel-thumb.png',
+  },
 ];
-
-// ---- COLLAB VIDEO ----
-// วางไฟล์ mp4 ที่ public/collab/video.mp4
-// poster (ภาพ thumbnail) วางที่ public/collab/video-poster.jpg — ถ้าไม่มีปล่อยว่างได้
-export const collabVideo = {
-  file:   'https://bzd2xmlvjgs51qcz.public.blob.vercel-storage.com/video.mp4',
-  poster: '/collab/video-poster.jpg',
-  title:  'TEE × CMG × Central Retail × Curel',
-};
 
 // ---- SOCIAL MEDIA ----
 // เเก้ url ใส่ลิงก์จริงได้เลย

@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { colors, fonts } from '../styles/theme';
-import { collabs, collabVideo } from '../data/siteData';
+import { collabs } from '../data/siteData';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import SectionHeader from './SectionHeader';
@@ -15,6 +15,7 @@ export default function Collab() {
   const dragging   = useRef(false);
   const [selectedId, setSelectedId] = useState(collabs[0]?.id);
   const [listOpen, setListOpen]     = useState(false);
+  const activeBrand = collabs.find(c => c.id === selectedId);
   const [playing, setPlaying]       = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration]     = useState(0);
@@ -69,6 +70,14 @@ export default function Collab() {
     else if (v.requestFullscreen) { v.requestFullscreen(); }
     else if (v.webkitEnterFullscreen) { v.webkitEnterFullscreen(); }
   }
+
+  useEffect(() => {
+    if (videoRef.current) { videoRef.current.pause(); videoRef.current.load(); }
+    setPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
+    setHovering(false);
+  }, [selectedId]);
 
   const tickerDuration = `${collabs.length * 7}s`;
 
@@ -191,20 +200,21 @@ export default function Collab() {
                     onClick={() => setSelectedId(brand.id)}
                     aria-label={brand.name}
                   >
-                    {brand.logo
-                      ? <img
-                          src={brand.logo}
-                          alt={brand.name}
-                          className="collab-logo-img"
-                          style={brand.logoStyle || {}}
-                        />
-                      : <span style={{
-                          fontFamily: fonts.mono,
-                          fontSize: 'clamp(0.9rem, 2vw, 1.3rem)',
-                          fontWeight: 700,
-                          letterSpacing: '.06em',
-                          color: brand.color || colors.ink,
-                        }}>{brand.name}</span>
+                    {brand.logos
+                      ? <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 1.5vw, 1rem)' }}>
+                          {brand.logos.map((l, li) => (
+                            <img key={li} src={l.src} alt={l.alt} className="collab-logo-img" style={l.style || {}} />
+                          ))}
+                        </div>
+                      : brand.logo
+                        ? <img src={brand.logo} alt={brand.name} className="collab-logo-img" style={brand.logoStyle || {}} />
+                        : <span style={{
+                            fontFamily: fonts.mono,
+                            fontSize: 'clamp(0.9rem, 2vw, 1.3rem)',
+                            fontWeight: 700,
+                            letterSpacing: '.06em',
+                            color: brand.color || colors.ink,
+                          }}>{brand.name}</span>
                     }
                   </button>
                 ))}
@@ -256,13 +266,16 @@ export default function Collab() {
                 onClick={() => { setSelectedId(brand.id); setListOpen(false); }}
                 style={{ background: brand.id === selectedId ? colors.creamDark : 'transparent' }}
               >
-                {brand.logo && (
-                  <img
-                    src={brand.logo}
-                    alt={brand.name}
-                    style={{ height: 28, width: 'auto', objectFit: 'contain', flexShrink: 0 }}
-                  />
-                )}
+                {brand.logos
+                  ? <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      {brand.logos.map((l, li) => (
+                        <img key={li} src={l.src} alt={l.alt} style={{ height: 24, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+                      ))}
+                    </div>
+                  : brand.logo && (
+                      <img src={brand.logo} alt={brand.name} style={{ height: 24, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+                    )
+                }
                 <span style={{
                   fontFamily: fonts.mono,
                   fontSize: '0.82rem',
@@ -295,8 +308,8 @@ export default function Collab() {
           >
             <video
               ref={videoRef}
-              src={collabVideo.file}
-              poster={collabVideo.poster || undefined}
+              src={activeBrand?.video || ''}
+              poster={activeBrand?.poster || undefined}
               preload="none"
               style={{ width: '100%', display: 'block', maxHeight: '68vh', objectFit: 'cover' }}
               onTimeUpdate={() => videoRef.current && setCurrentTime(videoRef.current.currentTime)}
