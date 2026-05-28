@@ -6,6 +6,8 @@ import { Analytics } from '@vercel/analytics/react'
 import App from './App.jsx'
 import './styles/global.css'
 
+try { sessionStorage.removeItem('gdrive_photos_cache'); } catch {}
+
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 history.replaceState(null, '', window.location.href);
 
