@@ -11,7 +11,6 @@ export function useGoogleDrivePhotos() {
   const [error, setError]     = useState(null);
 
   useEffect(() => {
-    if (cached) return; // already have data, skip fetch
     if (!API_KEY || !FOLDER_ID || API_KEY === 'YOUR_API_KEY_HERE') {
       setLoading(false);
       return;
