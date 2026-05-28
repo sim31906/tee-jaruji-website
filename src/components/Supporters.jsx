@@ -116,7 +116,7 @@ export default function Supporters() {
                             borderRadius: '10px',
                             overflow: 'hidden',
                             background: usePhotos
-                              ? colors.creamDark
+                              ? `linear-gradient(135deg, ${fanGradients[i % fanGradients.length]?.[0] ?? colors.pinkSoft}, ${fanGradients[i % fanGradients.length]?.[1] ?? colors.creamDark})`
                               : `linear-gradient(135deg, ${item[0]}, ${item[1]})`,
                             display: 'flex',
                             alignItems: 'center',
@@ -130,7 +130,11 @@ export default function Supporters() {
                               src={item.src}
                               alt={item.alt}
                               loading="lazy"
-                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                              style={{
+                                width: '100%', height: '100%', objectFit: 'cover',
+                                opacity: 0, transition: 'opacity .4s',
+                              }}
+                              onLoad={e => { e.currentTarget.style.opacity = 1; }}
                             />
                           ) : '♡'}
                         </div>
