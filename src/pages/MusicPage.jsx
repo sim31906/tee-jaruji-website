@@ -318,13 +318,8 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
           <button
             onClick={onClose}
             aria-label="ปิด"
+            className="music-close-btn"
             style={{
-              position: 'absolute',
-              top: '1.25rem',
-              right: '1.25rem',
-              width: 34,
-              height: 34,
-              borderRadius: '50%',
               border: `1px solid ${colors.creamDark}`,
               background: `${colors.cream}cc`,
               cursor: 'pointer',
@@ -645,13 +640,30 @@ export default function MusicPage() {
           background: ${colors.cream};
           width: 100%;
           max-width: 660px;
-          max-height: 88vh;
+          max-height: min(88vh, 88svh);
           border-radius: 10px 10px 0 0;
           display: flex;
           flex-direction: column;
           overflow: hidden;
           animation: slideUp 0.38s cubic-bezier(0.34,1.12,0.64,1);
           box-shadow: 0 -8px 48px rgba(61,44,46,0.18);
+        }
+        .music-close-btn {
+          position: absolute;
+          top: 1.25rem;
+          right: 1.25rem;
+          width: 34px;
+          height: 34px;
+          border-radius: 50%;
+        }
+        @media (max-width: 640px) {
+          .music-close-btn {
+            width: 44px !important;
+            height: 44px !important;
+            top: 1rem !important;
+            right: 1rem !important;
+            font-size: 1.3rem !important;
+          }
         }
 
         .music-player-sticky {

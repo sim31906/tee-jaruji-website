@@ -778,7 +778,7 @@ export default function TimelinePage() {
           backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
           z-index:200; display:flex; align-items:center; justify-content:center; padding:1.5rem;
           animation:tl-fade-in .22s ease; }
-        .tl-modal { background:${colors.cream}; width:100%; max-height:90vh;
+        .tl-modal { background:${colors.cream}; width:100%; max-height:min(90vh,90svh);
           overflow:hidden; border-radius:6px; box-shadow:0 32px 80px rgba(0,0,0,0.35);
           animation:tl-spring .4s cubic-bezier(.22,.68,0,1.2); }
         .tl-close { position:absolute; top:.9rem; right:.9rem; width:34px; height:34px;
@@ -786,6 +786,9 @@ export default function TimelinePage() {
           font-size:1.2rem; color:${colors.ink}; display:flex; align-items:center; justify-content:center;
           transition:background .2s, transform .2s; z-index:5; }
         .tl-close:hover { background:#fff; transform:rotate(90deg); }
+        @media (max-width: 640px) {
+          .tl-close { width:44px !important; height:44px !important; top:.6rem !important; right:.6rem !important; }
+        }
 
         .show-modal-body-tl { display:flex; flex:1; }
         .show-modal-left-tl { width:190px; flex-shrink:0; border-right:1px solid ${colors.creamDark};
