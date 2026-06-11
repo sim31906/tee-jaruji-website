@@ -506,12 +506,20 @@ export default function MusicPage() {
       const analyser = ctx.createAnalyser();
       analyser.fftSize = 64;
       analyser.smoothingTimeConstant = 0.8;
-      const source = ctx.createMediaElementSource(audioRef.current);
+      // Mirror: muted clone for analysis only — main audio untouched (iOS background audio works)
+      const mirror = new Audio();
+      mirror.crossOrigin = 'anonymous';
+      mirror.muted = true;
+      mirror.src = audioRef.current.src;
+      mirror.currentTime = audioRef.current.currentTime;
+      const source = ctx.createMediaElementSource(mirror);
       source.connect(analyser);
       analyser.connect(ctx.destination);
       audioCtxRef.current = ctx;
       analyserRef.current = analyser;
+      audioCtxRef._mirror = mirror;
       sourceCreated.current = true;
+      mirror.play().catch(() => {});
     } catch (e) {}
   }
 
@@ -597,8 +605,11 @@ export default function MusicPage() {
     const song = allSongs[currentIdx];
     audio.src = song?.audioFile || '';
     setProgress({ current: 0, duration: 0 });
+    const mirror = audioCtxRef._mirror;
+    if (mirror && song?.audioFile) { mirror.src = song.audioFile; mirror.currentTime = 0; }
     if (isPlayingRef.current && song?.audioFile) {
       audio.play().catch(() => setIsPlaying(false));
+      mirror?.play().catch(() => {});
     }
   }, [currentIdx]);
 
@@ -610,10 +621,13 @@ export default function MusicPage() {
     }
     if (isPlaying) {
       audio.pause();
+      audioCtxRef._mirror?.pause();
       setIsPlaying(false);
       stopVisualizer();
     } else {
       initAudioAnalyser();
+      const mirror = audioCtxRef._mirror;
+      if (mirror) { mirror.currentTime = audio.currentTime; mirror.play().catch(() => {}); }
       const ctx = audioCtxRef.current;
       const doPlay = () => audio.play().then(() => { setIsPlaying(true); startVisualizer(); }).catch(() => {});
       if (ctx?.state === 'suspended') ctx.resume().then(doPlay);
@@ -918,7 +932,7 @@ export default function MusicPage() {
         }
       `}</style>
 
-      <audio ref={audioRef} crossOrigin="anonymous" />
+      <audio ref={audioRef} />
       <CursorSparkle />
 
       {/* Nav */}
