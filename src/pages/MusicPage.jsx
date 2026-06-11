@@ -13,11 +13,10 @@ function formatTime(secs) {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-function VinylRecord({ gradient, isPlaying, size = 200, vinylRef }) {
+function VinylRecord({ gradient, isPlaying, size = 200 }) {
   const [c1, c2] = gradient;
   return (
     <div
-      ref={vinylRef}
       className={isPlaying ? 'vinyl-spin' : ''}
       style={{
         width: size,
@@ -43,7 +42,7 @@ function VinylRecord({ gradient, isPlaying, size = 200, vinylRef }) {
         boxShadow: isPlaying
           ? `0 0 28px ${c1}70, 0 8px 32px rgba(0,0,0,0.4)`
           : '0 6px 24px rgba(0,0,0,0.3)',
-        transition: isPlaying ? 'none' : 'box-shadow 0.6s ease',
+        transition: 'box-shadow 0.6s ease',
       }}
     >
       <div style={{
@@ -73,15 +72,11 @@ function VinylRecord({ gradient, isPlaying, size = 200, vinylRef }) {
   );
 }
 
-function WaveformBars({ isPlaying, count = 8, barsRef }) {
+function WaveformBars({ isPlaying, count = 8 }) {
   return (
     <div className="wf-container">
       {Array.from({ length: count }).map((_, i) => (
-        <div
-          key={i}
-          ref={el => { if (barsRef) barsRef.current[i] = el; }}
-          className={isPlaying ? `wf-bar wf-${i % 4}` : 'wf-bar-idle'}
-        />
+        <div key={i} className={isPlaying ? `wf-bar wf-${i % 4}` : 'wf-bar-idle'} />
       ))}
     </div>
   );
@@ -490,74 +485,6 @@ export default function MusicPage() {
   const t = translations[lang].music;
   const audioRef = useRef(null);
   const isPlayingRef = useRef(false);
-  const audioCtxRef = useRef(null);
-  const analyserRef = useRef(null);
-  const animFrameRef = useRef(null);
-  const sourceCreated = useRef(false);
-  const wfBarsRef = useRef([]);
-  const vinylRef = useRef(null);
-  const WF_COUNT = 12;
-
-  function initAudioAnalyser() {
-    if (sourceCreated.current || !audioRef.current) return;
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 64;
-      analyser.smoothingTimeConstant = 0.8;
-      // Mirror: muted clone for analysis only — main audio untouched (iOS background audio works)
-      const mirror = new Audio();
-      mirror.crossOrigin = 'anonymous';
-      mirror.volume = 0;
-      mirror.src = audioRef.current.src;
-      mirror.currentTime = audioRef.current.currentTime;
-      const source = ctx.createMediaElementSource(mirror);
-      source.connect(analyser);
-      audioCtxRef.current = ctx;
-      analyserRef.current = analyser;
-      audioCtxRef._mirror = mirror;
-      sourceCreated.current = true;
-      mirror.play().catch(() => {});
-    } catch (e) {}
-  }
-
-  function startVisualizer() {
-    if (!analyserRef.current) return;
-    const analyser = analyserRef.current;
-    const bufLen = analyser.frequencyBinCount;
-    const data = new Uint8Array(bufLen);
-    const half = Math.floor(WF_COUNT / 2);
-    const startBin = 2;
-    const usable = bufLen - startBin;
-    const step = Math.max(1, Math.floor(usable / half));
-    const song = allSongs[currentIdx];
-    const [c1] = song?.gradient || ['#f4b8c8', '#fce4ea'];
-    function tick() {
-      animFrameRef.current = requestAnimationFrame(tick);
-      analyser.getByteFrequencyData(data);
-      const total = data.reduce((s, v) => s + v, 0);
-      if (total === 0) return; // no data yet (CORS/loading) — CSS animation handles it
-      wfBarsRef.current.forEach((bar, i) => {
-        if (!bar) return;
-        bar.style.animation = 'none'; // disable CSS animation once we have real data
-        const binIdx = i < half ? (half - 1 - i) : (i - half);
-        const val = data[startBin + binIdx * step] || 0;
-        const h = Math.max(4, Math.round(Math.sqrt(val / 255) * 26));
-        bar.style.height = h + 'px';
-      });
-      if (vinylRef.current) {
-        const bass = (data[1] + data[2] + data[3]) / 3;
-        const glow = Math.round((bass / 255) * 40);
-        vinylRef.current.style.boxShadow = `0 0 ${16 + glow}px ${c1}${Math.round(60 + (bass / 255) * 120).toString(16).padStart(2,'0')}, 0 8px 32px rgba(0,0,0,0.4)`;
-      }
-    }
-    tick();
-  }
-
-  function stopVisualizer() {
-    if (animFrameRef.current) { cancelAnimationFrame(animFrameRef.current); animFrameRef.current = null; }
-    wfBarsRef.current.forEach(bar => { if (bar) { bar.style.animation = ''; bar.style.height = ''; } });
-  }
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -570,17 +497,6 @@ export default function MusicPage() {
   const currentSong = allSongs[currentIdx];
 
   useEffect(() => { isPlayingRef.current = isPlaying; }, [isPlaying]);
-
-  // Resume AudioContext when page becomes visible again (iOS suspends it on screen lock)
-  useEffect(() => {
-    const handleVisibility = () => {
-      if (document.visibilityState === 'visible' && audioCtxRef.current?.state === 'suspended') {
-        audioCtxRef.current.resume();
-      }
-    };
-    document.addEventListener('visibilitychange', handleVisibility);
-    return () => document.removeEventListener('visibilitychange', handleVisibility);
-  }, []);
 
   // Mount once: attach persistent audio event listeners
   useEffect(() => {
@@ -606,11 +522,8 @@ export default function MusicPage() {
     const song = allSongs[currentIdx];
     audio.src = song?.audioFile || '';
     setProgress({ current: 0, duration: 0 });
-    const mirror = audioCtxRef._mirror;
-    if (mirror && song?.audioFile) { mirror.src = song.audioFile; mirror.currentTime = 0; }
     if (isPlayingRef.current && song?.audioFile) {
       audio.play().catch(() => setIsPlaying(false));
-      mirror?.play().catch(() => {});
     }
   }, [currentIdx]);
 
@@ -622,17 +535,9 @@ export default function MusicPage() {
     }
     if (isPlaying) {
       audio.pause();
-      audioCtxRef._mirror?.pause();
       setIsPlaying(false);
-      stopVisualizer();
     } else {
-      initAudioAnalyser();
-      const mirror = audioCtxRef._mirror;
-      if (mirror) { mirror.currentTime = audio.currentTime; mirror.play().catch(() => {}); }
-      const ctx = audioCtxRef.current;
-      const doPlay = () => audio.play().then(() => { setIsPlaying(true); startVisualizer(); }).catch(() => {});
-      if (ctx?.state === 'suspended') ctx.resume().then(doPlay);
-      else doPlay();
+      audio.play().then(() => setIsPlaying(true)).catch(() => {});
     }
   }, [isPlaying, currentSong]);
 
@@ -1024,7 +929,7 @@ export default function MusicPage() {
       <div className="music-player-sticky">
         <div className="player-card">
           <div style={{ marginBottom: '1rem' }}>
-            <VinylRecord gradient={currentSong.gradient} isPlaying={isPlaying} size={110} vinylRef={vinylRef} />
+            <VinylRecord gradient={currentSong.gradient} isPlaying={isPlaying} size={110} />
           </div>
 
           <div style={{ textAlign: 'center', marginBottom: '0.6rem' }}>
@@ -1042,7 +947,7 @@ export default function MusicPage() {
           </div>
 
           <div style={{ marginBottom: '0.6rem' }}>
-            <WaveformBars isPlaying={isPlaying} count={WF_COUNT} barsRef={wfBarsRef} />
+            <WaveformBars isPlaying={isPlaying} count={12} />
           </div>
 
           <div className="player-progress-row">
