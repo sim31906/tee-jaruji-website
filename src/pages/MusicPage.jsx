@@ -500,24 +500,18 @@ export default function MusicPage() {
   const WF_COUNT = 12;
 
   function initAudioAnalyser() {
-    if (sourceCreated.current) return;
+    if (sourceCreated.current || !audioRef.current) return;
     try {
+      audioRef.current.crossOrigin = 'anonymous';
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const analyser = ctx.createAnalyser();
       analyser.fftSize = 64;
       analyser.smoothingTimeConstant = 0.8;
-      // Use a silent mirror element so main audio is unaffected (iOS background audio works)
-      const mirror = new Audio();
-      mirror.src = audioRef.current?.src || '';
-      mirror.crossOrigin = 'anonymous';
-      mirror.muted = true;
-      mirror.currentTime = audioRef.current?.currentTime || 0;
-      mirror.play().catch(() => {});
-      const source = ctx.createMediaElementSource(mirror);
+      const source = ctx.createMediaElementSource(audioRef.current);
       source.connect(analyser);
-      analyserRef.current = analyser;
+      analyser.connect(ctx.destination);
       audioCtxRef.current = ctx;
-      audioCtxRef._mirror = mirror;
+      analyserRef.current = analyser;
       sourceCreated.current = true;
     } catch (e) {}
   }
@@ -617,14 +611,10 @@ export default function MusicPage() {
     }
     if (isPlaying) {
       audio.pause();
-      const mirror = audioCtxRef._mirror;
-      if (mirror) mirror.pause();
       setIsPlaying(false);
       stopVisualizer();
     } else {
       initAudioAnalyser();
-      const mirror = audioCtxRef._mirror;
-      if (mirror) { mirror.src = audio.src; mirror.currentTime = audio.currentTime; mirror.play().catch(() => {}); }
       const ctx = audioCtxRef.current;
       const doPlay = () => audio.play().then(() => { setIsPlaying(true); startVisualizer(); }).catch(() => {});
       if (ctx?.state === 'suspended') ctx.resume().then(doPlay);
