@@ -709,8 +709,8 @@ export const eventsData = [
     image: '/events/e-2569-002.jpg',
     links: [
       { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/AstraZeneca.TH/posts/zero-nicotine-fest-%E0%B8%AA%E0%B8%A2%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B9%81%E0%B8%84%E0%B8%A7%E0%B8%A3%E0%B9%8C%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%8A%E0%B8%A7%E0%B8%99%E0%B8%8A%E0%B8%B2%E0%B8%A7-gen-z-%E0%B8%AD%E0%B8%B1%E0%B8%9B%E0%B8%9E%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%A0%E0%B8%B2%E0%B8%9E-%E0%B9%80%E0%B8%99%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B9%83%E0%B8%99%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%87%E0%B8%94%E0%B8%AA%E0%B8%B9%E0%B8%9A%E0%B8%9A%E0%B8%B8%E0%B8%AB%E0%B8%A3%E0%B8%B5/990502400295979/', color: '#1877F2' },
-      { platform: 'TST', label: 'TST', url: 'https://www.tst.or.th/zero-nicotine-fest-2026/', color: '#2e7d32' },
-      { platform: 'Chula', label: 'Chula', url: 'https://www.md.chula.ac.th/zero-nicotine-fest/', color: '#8B0000' },
+      { platform: 'TST', label: 'TST', url: 'https://www.tst.or.th/zero-nicotine-fest-2026/', color: '#ffffff' },
+      { platform: 'Chula', label: 'Chula', url: 'https://www.md.chula.ac.th/zero-nicotine-fest/', color: '#ffffff' },
     ],
   },
 ];

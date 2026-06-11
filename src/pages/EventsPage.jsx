@@ -219,6 +219,7 @@ function EventModal({ event, onClose, t, lang }) {
                             : link.color || meta.color,
                           textDecoration:'none',
                           boxShadow:'0 2px 8px rgba(0,0,0,0.15)',
+                          border: link.color === '#ffffff' ? '1px solid #e0e0e0' : 'none',
                           position:'relative',overflow:'hidden',
                           flexShrink:0,
                           transition:'transform 0.15s, box-shadow 0.15s',
