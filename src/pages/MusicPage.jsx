@@ -80,8 +80,7 @@ function WaveformBars({ isPlaying, count = 8, barsRef }) {
         <div
           key={i}
           ref={el => { if (barsRef) barsRef.current[i] = el; }}
-          className={isPlaying ? 'wf-bar' : 'wf-bar-idle'}
-          style={isPlaying ? { height: '4px' } : undefined}
+          className={isPlaying ? `wf-bar wf-${i % 4}` : 'wf-bar-idle'}
         />
       ))}
     </div>
@@ -509,7 +508,7 @@ export default function MusicPage() {
       // Mirror: muted clone for analysis only — main audio untouched (iOS background audio works)
       const mirror = new Audio();
       mirror.crossOrigin = 'anonymous';
-      mirror.muted = true;
+      mirror.volume = 0;
       mirror.src = audioRef.current.src;
       mirror.currentTime = audioRef.current.currentTime;
       const source = ctx.createMediaElementSource(mirror);
@@ -536,8 +535,11 @@ export default function MusicPage() {
     function tick() {
       animFrameRef.current = requestAnimationFrame(tick);
       analyser.getByteFrequencyData(data);
+      const total = data.reduce((s, v) => s + v, 0);
+      if (total === 0) return; // no data yet (CORS/loading) — CSS animation handles it
       wfBarsRef.current.forEach((bar, i) => {
         if (!bar) return;
+        bar.style.animation = 'none'; // disable CSS animation once we have real data
         const binIdx = i < half ? (half - 1 - i) : (i - half);
         const val = data[startBin + binIdx * step] || 0;
         const h = Math.max(4, Math.round(Math.sqrt(val / 255) * 26));
@@ -554,7 +556,7 @@ export default function MusicPage() {
 
   function stopVisualizer() {
     if (animFrameRef.current) { cancelAnimationFrame(animFrameRef.current); animFrameRef.current = null; }
-    wfBarsRef.current.forEach(bar => { if (bar) bar.style.height = '4px'; });
+    wfBarsRef.current.forEach(bar => { if (bar) { bar.style.animation = ''; bar.style.height = ''; } });
   }
 
   const [currentIdx, setCurrentIdx] = useState(0);
