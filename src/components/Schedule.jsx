@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { colors, fonts } from '../styles/theme';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
@@ -135,14 +135,138 @@ const SAVE_OPTIONS = [
   { id: 'ics',     label: 'iCal / Other (.ics)', color: '#888',    action: ev => downloadICS(ev) },
 ];
 
+const MONTH_NAMES = {
+  th: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
+  en: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  zh: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+};
+const DAY_NAMES = {
+  th: ['อา','จ','อ','พ','พฤ','ศ','ส'],
+  en: ['Su','Mo','Tu','We','Th','Fr','Sa'],
+  zh: ['日','一','二','三','四','五','六'],
+};
+
+function MiniCalendar({ events, lang, onSelectEvent }) {
+  const today = new Date();
+  const [viewYear,  setViewYear]  = useState(today.getFullYear());
+  const [viewMonth, setViewMonth] = useState(today.getMonth());
+  const [selected,  setSelected]  = useState(null);
+
+  const eventDays = new Set(
+    events.map(ev => {
+      const d = parseDate(ev);
+      if (!d) return null;
+      if (d.getFullYear() === viewYear && d.getMonth() === viewMonth)
+        return d.getDate();
+      return null;
+    }).filter(Boolean)
+  );
+
+  const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+  function prevMonth() {
+    if (viewMonth === 0) { setViewYear(y => y - 1); setViewMonth(11); }
+    else setViewMonth(m => m - 1);
+    setSelected(null);
+  }
+  function nextMonth() {
+    if (viewMonth === 11) { setViewYear(y => y + 1); setViewMonth(0); }
+    else setViewMonth(m => m + 1);
+    setSelected(null);
+  }
+
+  function handleDay(day) {
+    setSelected(day);
+    const ev = events.find(ev => {
+      const d = parseDate(ev);
+      return d && d.getFullYear() === viewYear && d.getMonth() === viewMonth && d.getDate() === day;
+    });
+    onSelectEvent(ev || null);
+  }
+
+  const cells = [];
+  for (let i = 0; i < firstDay; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+
+  const isToday = (d) => d === today.getDate() && viewMonth === today.getMonth() && viewYear === today.getFullYear();
+
+  return (
+    <div style={{ background: colors.cream, border: `1px solid ${colors.creamDark}`, padding: '1.5rem', userSelect: 'none', maxWidth: 380, margin: '0 auto' }}>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+        <button onClick={prevMonth} style={{ background: 'none', border: 'none', cursor: 'pointer', color: colors.ink, fontSize: '1rem', padding: '0 .5rem' }}>‹</button>
+        <span style={{ fontFamily: fonts.display, fontSize: '1.1rem', fontWeight: 500, color: colors.ink }}>
+          {MONTH_NAMES[lang][viewMonth]} {viewYear}
+        </span>
+        <button onClick={nextMonth} style={{ background: 'none', border: 'none', cursor: 'pointer', color: colors.ink, fontSize: '1rem', padding: '0 .5rem' }}>›</button>
+      </div>
+
+      {/* Day headers */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2, marginBottom: 6 }}>
+        {DAY_NAMES[lang].map(d => (
+          <div key={d} style={{ textAlign: 'center', fontFamily: fonts.mono, fontSize: '.6rem', letterSpacing: '.1em', color: colors.inkSoft, padding: '2px 0' }}>
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Day cells */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 2 }}>
+        {cells.map((day, i) => (
+          <div
+            key={i}
+            onClick={() => day && handleDay(day)}
+            style={{
+              height: 36,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: day ? 'pointer' : 'default',
+              borderRadius: 4,
+              position: 'relative',
+              background: day && selected === day ? colors.accent : day && isToday(day) ? colors.pinkSoft : 'transparent',
+              transition: 'background .15s',
+            }}
+          >
+            {day && (
+              <>
+                <span style={{
+                  fontFamily: fonts.mono,
+                  fontSize: '.75rem',
+                  color: selected === day ? '#fff' : isToday(day) ? colors.accent : colors.ink,
+                  fontWeight: isToday(day) || selected === day ? 600 : 400,
+                }}>
+                  {day}
+                </span>
+                {eventDays.has(day) && (
+                  <div style={{
+                    width: 4, height: 4, borderRadius: '50%',
+                    background: selected === day ? '#fff' : colors.accent,
+                    position: 'absolute',
+                    bottom: 3,
+                  }} />
+                )}
+              </>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Schedule() {
   const { lang } = useLang();
   const t = translations[lang].schedule;
 
-  const [events,    setEvents]    = useState([]);
-  const [status,    setStatus]    = useState('loading'); // loading | ok | error | nokey
-  const [errDetail, setErrDetail] = useState('');
-  const [openSave,  setOpenSave]  = useState(null); // ev.id ที่ dropdown เปิดอยู่
+  const [events,       setEvents]       = useState([]);
+  const [status,       setStatus]       = useState('loading');
+  const [errDetail,    setErrDetail]    = useState('');
+  const [openSave,     setOpenSave]     = useState(null);
+  const [highlighted,  setHighlighted]  = useState(null);
+  const highlightRef = useRef(null);
 
   useEffect(() => {
     if (!openSave) return;
@@ -318,6 +442,7 @@ export default function Schedule() {
 
           {/* Event cards */}
           {status === 'ok' && events.map((ev, i) => {
+            const isHighlighted = highlighted === (ev.id || i);
             const d     = parseDate(ev);
             const day   = d ? formatDay(d) : '—';
             const month = d ? formatMonth(d, lang) : '—';
@@ -327,7 +452,12 @@ export default function Schedule() {
               : '';
 
             return (
-              <div key={ev.id || i} className="sc-card">
+              <div
+                key={ev.id || i}
+                ref={isHighlighted ? highlightRef : null}
+                className="sc-card"
+                style={{ outline: isHighlighted ? `2px solid ${colors.accent}` : 'none', outlineOffset: 2, transition: 'outline .2s' }}
+              >
                 {/* Date column */}
                 <div style={{
                   textAlign: 'center',
