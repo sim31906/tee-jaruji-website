@@ -115,7 +115,7 @@ function EventModal({ event, onClose, t, lang }) {
         left:0,right:0,
         margin:'0 auto',
         width:'min(580px, 92vw)',
-        maxHeight:'calc(100vh - 96px)',
+        maxHeight:'min(calc(100dvh - 96px), calc(100svh - 96px))',
         zIndex:9999,
         background:colors.cream,
         borderRadius:'20px',
@@ -159,7 +159,7 @@ function EventModal({ event, onClose, t, lang }) {
         </div>
 
         {/* Body */}
-        <div style={{padding:'1.5rem 2rem',overflowY:'auto',flex:1}}>
+        <div style={{padding:'1.5rem 2rem',overflowY:'auto',flex:1,WebkitOverflowScrolling:'touch',overscrollBehavior:'contain'}}>
           {/* Date + Location */}
           <div style={{display:'flex',gap:'2rem',flexWrap:'wrap',marginBottom:'1.25rem'}}>
             <div>

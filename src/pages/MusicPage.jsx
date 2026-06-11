@@ -302,7 +302,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'center',
-        paddingTop: 'max(130px, env(safe-area-inset-top, 130px))',
+        paddingTop: 'max(70px, env(safe-area-inset-top, 70px))',
         animation: 'fadeIn 0.25s ease',
       }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
@@ -562,6 +562,17 @@ export default function MusicPage() {
 
   useEffect(() => { isPlayingRef.current = isPlaying; }, [isPlaying]);
 
+  // Resume AudioContext when page becomes visible again (iOS suspends it on screen lock)
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === 'visible' && audioCtxRef.current?.state === 'suspended') {
+        audioCtxRef.current.resume();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, []);
+
   // Mount once: attach persistent audio event listeners
   useEffect(() => {
     const audio = audioRef.current;
@@ -603,10 +614,10 @@ export default function MusicPage() {
       stopVisualizer();
     } else {
       initAudioAnalyser();
-      audio.play().then(() => {
-        setIsPlaying(true);
-        startVisualizer();
-      }).catch(() => {});
+      const ctx = audioCtxRef.current;
+      const doPlay = () => audio.play().then(() => { setIsPlaying(true); startVisualizer(); }).catch(() => {});
+      if (ctx?.state === 'suspended') ctx.resume().then(doPlay);
+      else doPlay();
     }
   }, [isPlaying, currentSong]);
 

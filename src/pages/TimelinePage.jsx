@@ -830,7 +830,7 @@ export default function TimelinePage() {
           .tl-body  { padding:3rem 1.5rem !important; }
           .tl-grid  { grid-template-columns:1fr !important; }
           .tl-filter{ padding:.4rem .85rem; font-size:.65rem; }
-          .tl-modal-bg { padding:.75rem; padding-top:max(130px, env(safe-area-inset-top, 130px)); align-items:flex-end; }
+          .tl-modal-bg { padding:.75rem; padding-top:max(70px, env(safe-area-inset-top, 70px)); align-items:flex-end; }
           .tl-modal    { max-height:min(80svh, 80vh); }
           .tl-nav-inner{ padding:1.1rem 1.5rem !important; }
           .tl-progress-strip { display:none !important; }
