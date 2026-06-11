@@ -165,6 +165,7 @@ function EventPlatformIcon({ platform, size = 26 }) {
     'Taokaenoi':   '/platforms/taokaenoi.png',
     'Chula':       '/platforms/chula.png',
     'TST':         '/platforms/tst.png',
+    'Joox':        '/platforms/joox.png',
   };
   if (imgPlatforms[platform]) return <img src={imgPlatforms[platform]} alt={platform} style={imgStyle} />;
   return (

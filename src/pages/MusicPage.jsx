@@ -299,7 +299,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'center',
-        padding: 0,
+        paddingTop: 'max(60px, env(safe-area-inset-top, 60px))',
         animation: 'fadeIn 0.25s ease',
       }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
@@ -310,74 +310,52 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
       >
         {/* Header */}
         <div style={{
-          padding: '2rem 2rem 1.5rem',
-          background: `linear-gradient(135deg, ${c1}55, ${c2}55)`,
           position: 'relative',
+          height: 220,
+          background: `linear-gradient(135deg, ${c1}, ${c2})`,
+          overflow: 'hidden',
           flexShrink: 0,
         }}>
+          {song.coverImage && (
+            <img src={song.coverImage} alt={song.title}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          )}
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(30,20,22,0.82) 0%, rgba(0,0,0,0.15) 60%, transparent 100%)' }} />
+
           <button
             onClick={onClose}
             aria-label="ปิด"
             className="music-close-btn"
             style={{
-              border: `1px solid ${colors.creamDark}`,
-              background: `${colors.cream}cc`,
+              border: 'none',
+              background: 'rgba(255,255,255,0.9)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1rem',
-              color: colors.inkSoft,
-              backdropFilter: 'blur(8px)',
+              fontSize: '1.2rem',
+              color: colors.ink,
             }}
           >
             ×
           </button>
 
-          <div style={{
-            fontFamily: fonts.mono,
-            fontSize: '0.62rem',
-            letterSpacing: '0.3em',
-            textTransform: 'uppercase',
-            color: colors.accent,
-            marginBottom: '0.4rem',
-          }}>
-            {song.artist}
-          </div>
-          <h2 style={{
-            fontFamily: fonts.display,
-            fontSize: 'clamp(1.5rem, 4vw, 2.2rem)',
-            fontWeight: 600,
-            color: colors.ink,
-            lineHeight: 1.1,
-            marginBottom: '0.25rem',
-          }}>
-            {lang !== 'th' ? song.titleEn : song.title}
-          </h2>
-          <div style={{
-            fontFamily: fonts.mono,
-            fontSize: '0.75rem',
-            letterSpacing: '0.1em',
-            color: colors.inkSoft,
-            fontStyle: 'italic',
-          }}>
-            {lang !== 'th' ? song.title : song.titleEn}
-          </div>
-          {song.note && (
-            <div style={{
-              marginTop: '0.75rem',
-              fontFamily: fonts.body,
-              fontSize: '0.78rem',
-              color: colors.inkSoft,
-              background: 'rgba(255,255,255,0.45)',
-              backdropFilter: 'blur(4px)',
-              display: 'inline-block',
-              padding: '0.25rem 0.7rem',
-              borderRadius: '2px',
-            }}>
-              ★ {song.note}
+          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '1.25rem 1.5rem' }}>
+            <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.75)', marginBottom: '0.3rem' }}>
+              {song.artist}
             </div>
-          )}
+            <h2 style={{ fontFamily: fonts.display, fontSize: 'clamp(1.5rem, 4vw, 2rem)', fontWeight: 700, color: '#fff', lineHeight: 1.1, marginBottom: '0.15rem' }}>
+              {lang !== 'th' ? song.titleEn : song.title}
+            </h2>
+            <div style={{ fontFamily: fonts.mono, fontSize: '0.72rem', letterSpacing: '0.08em', color: 'rgba(255,255,255,0.65)', fontStyle: 'italic' }}>
+              {lang !== 'th' ? song.title : song.titleEn}
+            </div>
+            {song.note && (
+              <div style={{ marginTop: '0.5rem', fontFamily: fonts.body, fontSize: '0.75rem', color: 'rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.15)', display: 'inline-block', padding: '0.2rem 0.6rem', borderRadius: '2px' }}>
+                ★ {song.note}
+              </div>
+            )}
+          </div>
         </div>
 
         {song.youtubeEmbed ? (
@@ -641,7 +619,6 @@ export default function MusicPage() {
           width: 100%;
           max-width: 660px;
           max-height: min(88vh, 88svh);
-          margin-top: max(60px, env(safe-area-inset-top, 60px));
           border-radius: 10px 10px 0 0;
           display: flex;
           flex-direction: column;
