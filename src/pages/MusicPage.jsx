@@ -513,13 +513,27 @@ export default function MusicPage() {
     navigator.mediaSession.setActionHandler('pause', () => { audioRef.current?.pause(); setIsPlaying(false); });
     navigator.mediaSession.setActionHandler('nexttrack', () => setCurrentIdx(i => (i + 1) % allSongs.length));
     navigator.mediaSession.setActionHandler('previoustrack', () => setCurrentIdx(i => (i - 1 + allSongs.length) % allSongs.length));
+    navigator.mediaSession.setActionHandler('seekto', (e) => {
+      if (audioRef.current) audioRef.current.currentTime = e.seekTime;
+    });
+    navigator.mediaSession.setActionHandler('seekforward', (e) => {
+      if (audioRef.current) audioRef.current.currentTime += (e.seekOffset || 10);
+    });
+    navigator.mediaSession.setActionHandler('seekbackward', (e) => {
+      if (audioRef.current) audioRef.current.currentTime -= (e.seekOffset || 10);
+    });
   }, [currentIdx, lang]);
 
   // Mount once: attach persistent audio event listeners
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-    const onTimeUpdate = () => setProgress(p => ({ ...p, current: audio.currentTime }));
+    const onTimeUpdate = () => {
+      setProgress(p => ({ ...p, current: audio.currentTime }));
+      if ('mediaSession' in navigator && audio.duration) {
+        try { navigator.mediaSession.setPositionState({ duration: audio.duration, playbackRate: 1, position: audio.currentTime }); } catch(e) {}
+      }
+    };
     const onLoadedMetadata = () => setProgress(p => ({ ...p, duration: audio.duration }));
     const onEnded = () => setCurrentIdx(i => (i + 1) % allSongs.length);
     audio.addEventListener('timeupdate', onTimeUpdate);
