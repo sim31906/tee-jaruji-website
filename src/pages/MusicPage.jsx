@@ -299,7 +299,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'center',
-        paddingTop: 'max(60px, env(safe-area-inset-top, 60px))',
+        paddingTop: 'max(90px, env(safe-area-inset-top, 90px))',
         animation: 'fadeIn 0.25s ease',
       }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
@@ -312,7 +312,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         <div style={{
           position: 'relative',
           zIndex: 5,
-          height: song.youtubeEmbed ? 150 : 330,
+          height: song.youtubeEmbed ? 150 : 220,
           background: `linear-gradient(135deg, ${c1}, ${c2})`,
           overflow: 'hidden',
           flexShrink: 0,

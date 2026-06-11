@@ -491,7 +491,7 @@ function MusicModal({ item, lang, onClose }) {
 
         <div style={{ overflowY: 'auto', maxHeight: '90vh' }}>
           {/* ── Cover header ── */}
-          <div style={{ position: 'relative', height: 330, background: `linear-gradient(135deg,${item.gradient?.[0] || '#f4b8c8'},${item.gradient?.[1] || '#fce4ea'})`, overflow: 'hidden' }}>
+          <div style={{ position: 'relative', height: 220, background: `linear-gradient(135deg,${item.gradient?.[0] || '#f4b8c8'},${item.gradient?.[1] || '#fce4ea'})`, overflow: 'hidden' }}>
             {item.coverImage && (
               <img src={item.coverImage} alt={item.title}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
@@ -821,7 +821,7 @@ export default function TimelinePage() {
           .tl-body  { padding:3rem 1.5rem !important; }
           .tl-grid  { grid-template-columns:1fr !important; }
           .tl-filter{ padding:.4rem .85rem; font-size:.65rem; }
-          .tl-modal-bg { padding:.75rem; padding-top:max(60px, env(safe-area-inset-top, 60px)); align-items:flex-end; }
+          .tl-modal-bg { padding:.75rem; padding-top:max(90px, env(safe-area-inset-top, 90px)); align-items:flex-end; }
           .tl-modal    { max-height:min(80svh, 80vh); }
           .tl-nav-inner{ padding:1.1rem 1.5rem !important; }
           .tl-progress-strip { display:none !important; }
