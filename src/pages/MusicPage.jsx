@@ -498,6 +498,23 @@ export default function MusicPage() {
 
   useEffect(() => { isPlayingRef.current = isPlaying; }, [isPlaying]);
 
+  // Update Media Session metadata when song changes
+  useEffect(() => {
+    if (!('mediaSession' in navigator) || !currentSong) return;
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: lang === 'th' ? currentSong.title : (currentSong.titleEn || currentSong.title),
+      artist: currentSong.artist || 'Tee Jaruji',
+      album: 'teejaruji.com',
+      artwork: currentSong.coverImage
+        ? [{ src: window.location.origin + currentSong.coverImage, sizes: '512x512', type: 'image/jpeg' }]
+        : [],
+    });
+    navigator.mediaSession.setActionHandler('play', () => { audioRef.current?.play(); setIsPlaying(true); });
+    navigator.mediaSession.setActionHandler('pause', () => { audioRef.current?.pause(); setIsPlaying(false); });
+    navigator.mediaSession.setActionHandler('nexttrack', () => setCurrentIdx(i => (i + 1) % allSongs.length));
+    navigator.mediaSession.setActionHandler('previoustrack', () => setCurrentIdx(i => (i - 1 + allSongs.length) % allSongs.length));
+  }, [currentIdx, lang]);
+
   // Mount once: attach persistent audio event listeners
   useEffect(() => {
     const audio = audioRef.current;
