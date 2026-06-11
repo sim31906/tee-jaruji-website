@@ -312,7 +312,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         <div style={{
           position: 'relative',
           zIndex: 5,
-          height: song.youtubeEmbed ? 150 : 220,
+          height: song.youtubeEmbed ? 150 : 330,
           background: `linear-gradient(135deg, ${c1}, ${c2})`,
           overflow: 'hidden',
           flexShrink: 0,
@@ -426,9 +426,9 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
             </div>
           </div>
         ) : (
-          /* TEE SONG — player + links fixed, only lyrics scrolls */
-          <>
-            <div style={{ padding: '1.25rem 2rem', borderBottom: `1px solid ${colors.creamDark}`, flexShrink: 0, display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          /* TEE SONG — all content scrollable */
+          <div style={{ overflowY: 'auto', flex: 1, WebkitOverflowScrolling: 'touch' }}>
+            <div style={{ padding: '1.25rem 2rem', borderBottom: `1px solid ${colors.creamDark}`, display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
               <VinylRecord gradient={song.gradient} isPlaying={isActive && isPlaying} size={72} />
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.55rem' }}>
@@ -455,13 +455,13 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
                 </div>
               </div>
             </div>
-            <div style={{ padding: '1.25rem 2rem', borderBottom: `1px solid ${colors.creamDark}`, flexShrink: 0 }}>
+            <div style={{ padding: '1.25rem 2rem', borderBottom: `1px solid ${colors.creamDark}` }}>
               <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '0.75rem' }}>{t.listenOn}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {song.links.map((link, i) => <PlatformLink key={i} link={link} />)}
               </div>
             </div>
-            <div style={{ padding: '1.25rem 2rem 2rem', overflowY: 'auto', flex: 1 }}>
+            <div style={{ padding: '1.25rem 2rem 2rem' }}>
               <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.28em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '1rem' }}>{t.lyrics}</div>
               <div style={{ fontFamily: fonts.body, fontSize: '0.96rem', lineHeight: 2.1, color: colors.ink, whiteSpace: 'pre-line' }}>{song.lyric}</div>
               {lang !== 'th' && (lang === 'en' ? song.lyricEn : song.lyricZh) && (
@@ -475,7 +475,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
                 </div>
               )}
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>

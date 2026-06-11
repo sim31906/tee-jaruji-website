@@ -491,7 +491,7 @@ function MusicModal({ item, lang, onClose }) {
 
         <div style={{ overflowY: 'auto', maxHeight: '90vh' }}>
           {/* ── Cover header ── */}
-          <div style={{ position: 'relative', height: 220, background: `linear-gradient(135deg,${item.gradient?.[0] || '#f4b8c8'},${item.gradient?.[1] || '#fce4ea'})`, overflow: 'hidden' }}>
+          <div style={{ position: 'relative', height: 330, background: `linear-gradient(135deg,${item.gradient?.[0] || '#f4b8c8'},${item.gradient?.[1] || '#fce4ea'})`, overflow: 'hidden' }}>
             {item.coverImage && (
               <img src={item.coverImage} alt={item.title}
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
