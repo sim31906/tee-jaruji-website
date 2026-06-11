@@ -518,8 +518,17 @@ function MusicModal({ item, lang, onClose }) {
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '.75rem' }}>
                 <button onClick={togglePlay}
-                  style={{ width: 40, height: 40, borderRadius: '50%', background: colors.ink, color: colors.cream, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', flexShrink: 0 }}>
-                  {isPlaying ? '⏸' : '▶'}
+                  style={{ width: 40, height: 40, borderRadius: '50%', background: colors.ink, color: colors.cream, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  {isPlaying ? (
+                    <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+                      <line x1="2.5" y1="1" x2="2.5" y2="11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                      <line x1="9.5" y1="1" x2="9.5" y2="11" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                    </svg>
+                  ) : (
+                    <svg width="13" height="13" viewBox="0 0 12 12" fill="none" style={{ marginLeft: '2px' }}>
+                      <polygon points="1,1 11,6 1,11" fill="currentColor"/>
+                    </svg>
+                  )}
                 </button>
                 <span style={{ fontFamily: fonts.mono, fontSize: '.72rem', letterSpacing: '.06em', color: colors.inkSoft }}>
                   {fmt(currentTime)} / {fmt(duration)}
@@ -821,7 +830,7 @@ export default function TimelinePage() {
           .tl-body  { padding:3rem 1.5rem !important; }
           .tl-grid  { grid-template-columns:1fr !important; }
           .tl-filter{ padding:.4rem .85rem; font-size:.65rem; }
-          .tl-modal-bg { padding:.75rem; padding-top:max(90px, env(safe-area-inset-top, 90px)); align-items:flex-end; }
+          .tl-modal-bg { padding:.75rem; padding-top:max(130px, env(safe-area-inset-top, 130px)); align-items:flex-end; }
           .tl-modal    { max-height:min(80svh, 80vh); }
           .tl-nav-inner{ padding:1.1rem 1.5rem !important; }
           .tl-progress-strip { display:none !important; }

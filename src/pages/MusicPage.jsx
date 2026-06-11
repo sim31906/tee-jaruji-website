@@ -13,10 +13,11 @@ function formatTime(secs) {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-function VinylRecord({ gradient, isPlaying, size = 200 }) {
+function VinylRecord({ gradient, isPlaying, size = 200, vinylRef }) {
   const [c1, c2] = gradient;
   return (
     <div
+      ref={vinylRef}
       className={isPlaying ? 'vinyl-spin' : ''}
       style={{
         width: size,
@@ -42,7 +43,7 @@ function VinylRecord({ gradient, isPlaying, size = 200 }) {
         boxShadow: isPlaying
           ? `0 0 28px ${c1}70, 0 8px 32px rgba(0,0,0,0.4)`
           : '0 6px 24px rgba(0,0,0,0.3)',
-        transition: 'box-shadow 0.6s ease',
+        transition: isPlaying ? 'none' : 'box-shadow 0.6s ease',
       }}
     >
       <div style={{
@@ -72,13 +73,15 @@ function VinylRecord({ gradient, isPlaying, size = 200 }) {
   );
 }
 
-function WaveformBars({ isPlaying, count = 8 }) {
+function WaveformBars({ isPlaying, count = 8, barsRef }) {
   return (
     <div className="wf-container">
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className={isPlaying ? `wf-bar wf-${i % 4}` : 'wf-bar-idle'}
+          ref={el => { if (barsRef) barsRef.current[i] = el; }}
+          className={isPlaying ? 'wf-bar' : 'wf-bar-idle'}
+          style={isPlaying ? { height: '4px' } : undefined}
         />
       ))}
     </div>
@@ -299,7 +302,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'center',
-        paddingTop: 'max(90px, env(safe-area-inset-top, 90px))',
+        paddingTop: 'max(130px, env(safe-area-inset-top, 130px))',
         animation: 'fadeIn 0.25s ease',
       }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
@@ -488,6 +491,64 @@ export default function MusicPage() {
   const t = translations[lang].music;
   const audioRef = useRef(null);
   const isPlayingRef = useRef(false);
+  const audioCtxRef = useRef(null);
+  const analyserRef = useRef(null);
+  const animFrameRef = useRef(null);
+  const sourceCreated = useRef(false);
+  const wfBarsRef = useRef([]);
+  const vinylRef = useRef(null);
+  const WF_COUNT = 12;
+
+  function initAudioAnalyser() {
+    if (sourceCreated.current || !audioRef.current) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 64;
+      analyser.smoothingTimeConstant = 0.8;
+      const source = ctx.createMediaElementSource(audioRef.current);
+      source.connect(analyser);
+      analyser.connect(ctx.destination);
+      audioCtxRef.current = ctx;
+      analyserRef.current = analyser;
+      sourceCreated.current = true;
+    } catch (e) {}
+  }
+
+  function startVisualizer() {
+    if (!analyserRef.current) return;
+    const analyser = analyserRef.current;
+    const bufLen = analyser.frequencyBinCount;
+    const data = new Uint8Array(bufLen);
+    const half = Math.floor(WF_COUNT / 2);
+    const startBin = 2;
+    const usable = bufLen - startBin;
+    const step = Math.max(1, Math.floor(usable / half));
+    const song = allSongs[currentIdx];
+    const [c1] = song?.gradient || ['#f4b8c8', '#fce4ea'];
+    function tick() {
+      animFrameRef.current = requestAnimationFrame(tick);
+      analyser.getByteFrequencyData(data);
+      wfBarsRef.current.forEach((bar, i) => {
+        if (!bar) return;
+        const binIdx = i < half ? (half - 1 - i) : (i - half);
+        const val = data[startBin + binIdx * step] || 0;
+        const h = Math.max(4, Math.round(Math.sqrt(val / 255) * 26));
+        bar.style.height = h + 'px';
+      });
+      if (vinylRef.current) {
+        const bass = (data[1] + data[2] + data[3]) / 3;
+        const glow = Math.round((bass / 255) * 40);
+        vinylRef.current.style.boxShadow = `0 0 ${16 + glow}px ${c1}${Math.round(60 + (bass / 255) * 120).toString(16).padStart(2,'0')}, 0 8px 32px rgba(0,0,0,0.4)`;
+      }
+    }
+    tick();
+  }
+
+  function stopVisualizer() {
+    if (animFrameRef.current) { cancelAnimationFrame(animFrameRef.current); animFrameRef.current = null; }
+    wfBarsRef.current.forEach(bar => { if (bar) bar.style.height = '4px'; });
+  }
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -539,8 +600,13 @@ export default function MusicPage() {
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
+      stopVisualizer();
     } else {
-      audio.play().then(() => setIsPlaying(true)).catch(() => {});
+      initAudioAnalyser();
+      audio.play().then(() => {
+        setIsPlaying(true);
+        startVisualizer();
+      }).catch(() => {});
     }
   }, [isPlaying, currentSong]);
 
@@ -932,7 +998,7 @@ export default function MusicPage() {
       <div className="music-player-sticky">
         <div className="player-card">
           <div style={{ marginBottom: '1rem' }}>
-            <VinylRecord gradient={currentSong.gradient} isPlaying={isPlaying} size={110} />
+            <VinylRecord gradient={currentSong.gradient} isPlaying={isPlaying} size={110} vinylRef={vinylRef} />
           </div>
 
           <div style={{ textAlign: 'center', marginBottom: '0.6rem' }}>
@@ -950,7 +1016,7 @@ export default function MusicPage() {
           </div>
 
           <div style={{ marginBottom: '0.6rem' }}>
-            <WaveformBars isPlaying={isPlaying} count={12} />
+            <WaveformBars isPlaying={isPlaying} count={WF_COUNT} barsRef={wfBarsRef} />
           </div>
 
           <div className="player-progress-row">
