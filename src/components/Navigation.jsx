@@ -85,6 +85,7 @@ export default function Navigation() {
         .nav-links-tj li:nth-child(5) { animation-delay: 0.25s; }
         .nav-links-tj li:nth-child(6) { animation-delay: 0.30s; }
         .nav-links-tj li:nth-child(7) { animation-delay: 0.35s; }
+        .nav-links-tj li:nth-child(8) { animation-delay: 0.40s; }
 
         @media (max-width: 968px) {
           .nav-links-tj { display: none !important; }

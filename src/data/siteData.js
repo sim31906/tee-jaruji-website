@@ -27,9 +27,9 @@ export const works = [
     title: "Event\nAppearances",
     desc: "งานเปิดตัว · งานเเฟนมีต · งานพรีเซนเตอร์ · กิจกรรมพิเศษทั้งในประเทศเเละต่างประเทศ",
     items: [
+      { name: "Zero Nicotine Fest", year: "2026" },
       { name: "Fan Meeting Bangkok", year: "2025" },
       { name: "Brand Event · BKK", year: "2025" },
-      { name: "Press Conference", year: "2024" },
     ],
     color: colors.pink,
     detail: {
@@ -37,6 +37,11 @@ export const works = [
       sub: "งานเปิดตัว · แฟนมีต · งานพรีเซนเตอร์ · กิจกรรมพิเศษ",
       body: "รวบรวมกิจกรรมและงานอีเวนต์ต่าง ๆ ที่ Tee Jaruji เข้าร่วม ทั้งในประเทศและต่างประเทศ ตั้งแต่งานแฟนมีต งานแถลงข่าว ไปจนถึงการเป็นพรีเซนเตอร์ให้กับแบรนด์ชั้นนำ",
       items: [
+        {
+          name: "Zero Nicotine Fest",
+          year: "2026",
+          detail: "วันงดสูบบุหรีโลก · AstraZeneca × จุฬาฯ",
+        },
         {
           name: "Fan Meeting Bangkok",
           year: "2025",

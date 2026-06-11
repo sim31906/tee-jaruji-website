@@ -117,7 +117,8 @@ function VinylRecord({ gradient, isPlaying, size = 72 }) {
 
 /* ── Platform icon (for event modal links) ──────────────── */
 function EventPlatformIcon({ platform, size = 26 }) {
-  const imgStyle = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' };
+  const containPlatforms = ['Chula', 'TST'];
+  const imgStyle = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: containPlatforms.includes(platform) ? 'contain' : 'cover', borderRadius: 'inherit', padding: containPlatforms.includes(platform) ? '8%' : 0 };
   if (platform === 'YouTube') return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="white">
       <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
@@ -162,6 +163,8 @@ function EventPlatformIcon({ platform, size = 26 }) {
     'Reeborn':     '/platforms/reeborn.png',
     'Dek-D':       '/platforms/dek-d.png',
     'Taokaenoi':   '/platforms/taokaenoi.png',
+    'Chula':       '/platforms/chula.png',
+    'TST':         '/platforms/tst.png',
   };
   if (imgPlatforms[platform]) return <img src={imgPlatforms[platform]} alt={platform} style={imgStyle} />;
   return (
@@ -274,7 +277,9 @@ function EventModal({ item, lang, onClose }) {
                       style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         width: 56, height: 56, borderRadius: '12px',
-                        background: link.color || typeInfo?.color || colors.ink,
+                        background: link.platform === 'Instagram'
+                          ? 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)'
+                          : link.color || typeInfo?.color || colors.ink,
                         textDecoration: 'none',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
                         position: 'relative', overflow: 'hidden',
@@ -395,14 +400,35 @@ function ShowModal({ item, lang, tPerf, onClose }) {
                 )}
               </div>
               {/* Synopsis */}
-              <div>
-                <div style={{ fontFamily: fonts.mono, fontSize: '.62rem', letterSpacing: '.25em', textTransform: 'uppercase', color: colors.accent, marginBottom: '.6rem' }}>
-                  {tPerf.synopsisLabel}
+              {lang === 'th' ? (
+                <>
+                  <div>
+                    <div style={{ fontFamily: fonts.mono, fontSize: '.62rem', letterSpacing: '.25em', textTransform: 'uppercase', color: colors.accent, marginBottom: '.6rem' }}>
+                      {tPerf.summaryLabel}
+                    </div>
+                    <p style={{ fontFamily: fonts.body, fontSize: '.95rem', lineHeight: 1.85, color: colors.ink }}>
+                      {item.summaryTh}
+                    </p>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: fonts.mono, fontSize: '.62rem', letterSpacing: '.25em', textTransform: 'uppercase', color: colors.accent, marginBottom: '.6rem' }}>
+                      {tPerf.synopsisLabel}
+                    </div>
+                    <p style={{ fontFamily: fonts.body, fontSize: '.95rem', lineHeight: 1.85, color: colors.ink, fontStyle: 'italic' }}>
+                      {item.summaryEn}
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <div>
+                  <div style={{ fontFamily: fonts.mono, fontSize: '.62rem', letterSpacing: '.25em', textTransform: 'uppercase', color: colors.accent, marginBottom: '.6rem' }}>
+                    {tPerf.synopsisLabel}
+                  </div>
+                  <p style={{ fontFamily: fonts.body, fontSize: '.95rem', lineHeight: 1.85, color: colors.ink }}>
+                    {summary}
+                  </p>
                 </div>
-                <p style={{ fontFamily: fonts.body, fontSize: '.95rem', lineHeight: 1.85, color: colors.ink }}>
-                  {summary}
-                </p>
-              </div>
+              )}
             </div>
           </div>
         </div>
@@ -515,7 +541,9 @@ function MusicModal({ item, lang, onClose }) {
                       style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         width: 56, height: 56, borderRadius: '12px',
-                        background: link.color,
+                        background: link.platform === 'Instagram'
+                          ? 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)'
+                          : link.color,
                         textDecoration: 'none',
                         boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
                         position: 'relative', overflow: 'hidden',

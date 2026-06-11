@@ -57,6 +57,7 @@ export const translations = {
           sub: 'งานเปิดตัว · แฟนมีต · งานพรีเซนเตอร์ · กิจกรรมพิเศษ',
           body: 'รวบรวมกิจกรรมและงานอีเวนต์ต่าง ๆ ที่ Tee Jaruji เข้าร่วม ทั้งในประเทศและต่างประเทศ',
           items: [
+            { name: 'Zero Nicotine Fest', year: '2569', detail: 'วันงดสูบบุหรีโลก · AstraZeneca × จุฬาฯ' },
             { name: 'แฟนมีต กรุงเทพฯ', year: '2568', detail: 'Bitec · 2,000 ที่นั่ง' },
             { name: 'งานแบรนด์ · กทม.', year: '2568', detail: 'Siam Paragon · พรีเซนเตอร์' },
             { name: 'งานแถลงข่าว', year: '2567', detail: 'งานเปิดตัวซีรีส์' },
@@ -279,6 +280,7 @@ export const translations = {
           sub: 'Launches · Fan Meets · Presenter · Special Events',
           body: 'A collection of events and activities that Tee Jaruji has participated in, both domestically and internationally.',
           items: [
+            { name: 'Zero Nicotine Fest', year: '2026', detail: 'World No Tobacco Day · AstraZeneca × Chulalongkorn' },
             { name: 'Fan Meeting Bangkok', year: '2025', detail: 'Bitec · 2,000 seats' },
             { name: 'Brand Event · BKK', year: '2025', detail: 'Siam Paragon · Presenter' },
             { name: 'Press Conference', year: '2024', detail: 'Series Launch Event' },
@@ -501,6 +503,7 @@ export const translations = {
           sub: '发布会 · 见面会 · 代言 · 特别活动',
           body: 'Tee Jaruji 参与的各类活动和演出汇总，包括国内外的活动。',
           items: [
+            { name: 'Zero Nicotine Fest', year: '2026', detail: '世界无烟日 · AstraZeneca × 朱拉隆功大学' },
             { name: '曼谷见面会', year: '2025', detail: 'Bitec · 2,000 座位' },
             { name: '品牌活动 · 曼谷', year: '2025', detail: 'Siam Paragon · 代言人' },
             { name: '新闻发布会', year: '2024', detail: '剧集发布活动' },

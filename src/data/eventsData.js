@@ -649,6 +649,27 @@ export const eventsData = [
     ],
   },
 
+  {
+    id: 'e-2568-008',
+    year: 2568,
+    date: '20 ธ.ค. 2568',
+    dateEn: '20 Dec 2025',
+    title: 'Fansign China Shanghai — Happy Birthday TEe',
+    titleEn: 'Fansign China Shanghai — Happy Birthday TEe',
+    titleZh: '中国上海粉丝签名会 — Happy Birthday TEe 胡光平',
+    location: 'เซี่ยงไฮ้ ประเทศจีน',
+    locationEn: 'Shanghai, China',
+    locationZh: '中国上海',
+    type: 'fanmeet',
+    detail: 'แฟนคลับชาวจีนจัดงาน Fansign เซอร์ไพรส์วันเกิดให้ตี๋ที่เซี่ยงไฮ้ ประเทศจีน ตรงกับวันเกิดที่ 20 ธันวาคม 2568 พร้อมป้ายแบนเนอร์ "Happy Birthday TEe 胡光平" บรรยากาศอบอุ่นและเต็มไปด้วยความรักจากแฟนๆ ชาวจีน',
+    detailEn: 'Chinese fans organized a surprise birthday fansign for Tee in Shanghai, China, on his birthday — December 20, 2025. The event featured a "Happy Birthday TEe 胡光平" banner and was filled with warmth and love from Chinese fans.',
+    detailZh: '中国粉丝在上海为Tee（胡光平）精心策划了一场生日惊喜粉丝签名会，时间定于2025年12月20日——Tee的生日当天。现场横幅写着"Happy Birthday TEe 胡光平"，充满了来自中国粉丝的温暖与爱意。',
+    image: '/events/e-2568-008.jpg',
+    links: [
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DR67ZpEARC8/', color: '#C13584' },
+    ],
+  },
+
   // ─── 2569 ───
   {
     id: 'e-2569-001',
@@ -668,6 +689,28 @@ export const eventsData = [
     image: '/events/e-2569-001.jpg',
     links: [
       { platform: 'Netflix', label: 'Netflix', url: 'https://www.netflix.com/th-en/title/82745549', color: '#E50914' },
+    ],
+  },
+  {
+    id: 'e-2569-002',
+    year: 2569,
+    date: '31 พ.ค. 2569',
+    dateEn: '31 May 2026',
+    title: 'Zero Nicotine Fest',
+    titleEn: 'Zero Nicotine Fest',
+    titleZh: 'Zero Nicotine Fest',
+    location: 'สยามสแควร์ · กรุงเทพฯ',
+    locationEn: 'Siam Square · Bangkok',
+    locationZh: '暹罗广场 · 曼谷',
+    type: 'csr',
+    detail: 'ตี๋ร่วมงาน Zero Nicotine Fest เนื่องในวันงดสูบบุหรีโลก (World No Tobacco Day 2569) จัดโดย AstraZeneca ร่วมกับสมาคมโรคหืดแห่งประเทศไทย (TST) และคณะแพทยศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย ชวนคนรุ่น Gen Z หยุดสูบและดูแลสุขภาพปอด',
+    detailEn: 'Tee joined Zero Nicotine Fest on World No Tobacco Day 2026, organized by AstraZeneca together with the Thailand Asthma Society (TST) and the Faculty of Medicine, Chulalongkorn University. The event encouraged Gen Z to quit smoking and take care of their lung health.',
+    detailZh: 'Tee出席了在世界无烟日（2026年）举办的Zero Nicotine Fest活动，由阿斯利康联合泰国哮喘协会（TST）和朱拉隆功大学医学院共同举办，号召Gen Z戒烟、关爱肺部健康。',
+    image: '/events/e-2569-002.jpg',
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/AstraZeneca.TH/posts/zero-nicotine-fest-%E0%B8%AA%E0%B8%A2%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B9%81%E0%B8%84%E0%B8%A7%E0%B8%A3%E0%B9%8C%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%8A%E0%B8%A7%E0%B8%99%E0%B8%8A%E0%B8%B2%E0%B8%A7-gen-z-%E0%B8%AD%E0%B8%B1%E0%B8%9B%E0%B8%9E%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%A0%E0%B8%B2%E0%B8%9E-%E0%B9%80%E0%B8%99%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B9%83%E0%B8%99%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B8%87%E0%B8%94%E0%B8%AA%E0%B8%B9%E0%B8%9A%E0%B8%9A%E0%B8%B8%E0%B8%AB%E0%B8%A3%E0%B8%B5/990502400295979/', color: '#1877F2' },
+      { platform: 'TST', label: 'TST', url: 'https://www.tst.or.th/zero-nicotine-fest-2026/', color: '#2e7d32' },
+      { platform: 'Chula', label: 'Chula', url: 'https://www.md.chula.ac.th/zero-nicotine-fest/', color: '#8B0000' },
     ],
   },
 ];
