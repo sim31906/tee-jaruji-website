@@ -516,12 +516,6 @@ export default function MusicPage() {
     navigator.mediaSession.setActionHandler('seekto', (e) => {
       if (audioRef.current) audioRef.current.currentTime = e.seekTime;
     });
-    navigator.mediaSession.setActionHandler('seekforward', (e) => {
-      if (audioRef.current) audioRef.current.currentTime += (e.seekOffset || 10);
-    });
-    navigator.mediaSession.setActionHandler('seekbackward', (e) => {
-      if (audioRef.current) audioRef.current.currentTime -= (e.seekOffset || 10);
-    });
   }, [currentIdx, lang]);
 
   // Mount once: attach persistent audio event listeners
