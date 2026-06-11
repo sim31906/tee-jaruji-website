@@ -302,7 +302,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'center',
-        paddingTop: 'max(70px, env(safe-area-inset-top, 70px))',
+        paddingTop: 'max(60px, env(safe-area-inset-top, 60px))',
         animation: 'fadeIn 0.25s ease',
       }}
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
@@ -708,7 +708,7 @@ export default function MusicPage() {
           background: ${colors.cream};
           width: 100%;
           max-width: 660px;
-          max-height: min(80svh, calc(100dvh - 70px));
+          max-height: calc(100dvh - 60px);
           border-radius: 10px 10px 0 0;
           display: flex;
           flex-direction: column;
