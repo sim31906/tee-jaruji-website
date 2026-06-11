@@ -641,6 +641,7 @@ export default function MusicPage() {
           width: 100%;
           max-width: 660px;
           max-height: min(88vh, 88svh);
+          margin-top: max(60px, env(safe-area-inset-top, 60px));
           border-radius: 10px 10px 0 0;
           display: flex;
           flex-direction: column;
@@ -846,6 +847,7 @@ export default function MusicPage() {
           .music-modal-sheet {
             border-radius: 10px;
             margin: 2rem;
+            margin-top: 2rem;
             max-height: 85vh;
           }
         }
