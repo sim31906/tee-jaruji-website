@@ -502,7 +502,6 @@ export default function MusicPage() {
   function initAudioAnalyser() {
     if (sourceCreated.current || !audioRef.current) return;
     try {
-      audioRef.current.crossOrigin = 'anonymous';
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const analyser = ctx.createAnalyser();
       analyser.fftSize = 64;
@@ -919,7 +918,7 @@ export default function MusicPage() {
         }
       `}</style>
 
-      <audio ref={audioRef} />
+      <audio ref={audioRef} crossOrigin="anonymous" />
       <CursorSparkle />
 
       {/* Nav */}
