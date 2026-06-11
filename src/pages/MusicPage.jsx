@@ -311,12 +311,13 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
         {/* Header */}
         <div style={{
           position: 'relative',
-          height: 220,
+          zIndex: 5,
+          height: song.youtubeEmbed ? 150 : 220,
           background: `linear-gradient(135deg, ${c1}, ${c2})`,
           overflow: 'hidden',
           flexShrink: 0,
         }}>
-          {song.coverImage && (
+          {song.coverImage && !song.youtubeEmbed && (
             <img src={song.coverImage} alt={song.title}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           )}
@@ -335,6 +336,7 @@ function SongModal({ song, onClose, isActive, isPlaying, progress, onPlay, onSee
               justifyContent: 'center',
               fontSize: '1.2rem',
               color: colors.ink,
+              zIndex: 10,
             }}
           >
             ×
@@ -618,7 +620,7 @@ export default function MusicPage() {
           background: ${colors.cream};
           width: 100%;
           max-width: 660px;
-          max-height: min(88vh, 88svh);
+          max-height: min(80svh, calc(100dvh - 70px));
           border-radius: 10px 10px 0 0;
           display: flex;
           flex-direction: column;
