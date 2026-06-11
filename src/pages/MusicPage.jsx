@@ -514,7 +514,6 @@ export default function MusicPage() {
       mirror.currentTime = audioRef.current.currentTime;
       const source = ctx.createMediaElementSource(mirror);
       source.connect(analyser);
-      analyser.connect(ctx.destination);
       audioCtxRef.current = ctx;
       analyserRef.current = analyser;
       audioCtxRef._mirror = mirror;
