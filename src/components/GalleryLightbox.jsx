@@ -253,7 +253,7 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
           position: 'relative', overflow: 'hidden',
           padding: '0 56px',
           cursor: zoomed ? 'grab' : 'zoom-in',
-          touchAction: 'none',
+          touchAction: zoomed ? 'none' : 'manipulation',
         }}
       >
         <img
