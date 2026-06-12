@@ -137,6 +137,7 @@ export const translations = {
         { num: '50+', label: 'โปรเจกต์แฟน' },
         { num: '∞', label: 'ความรัก' },
       ],
+      viewAllPhotos: 'ดูรูปทั้งหมด ↗',
     },
     fanclub: {
       sectionNum: '07 / บริการแฟนคลับ',
@@ -160,6 +161,9 @@ export const translations = {
       reportTitle: 'แจ้งปัญหา / รายงาน',
       reportDesc: 'พบเห็นบัญชีปลอม ภาพ/วิดีโอที่ใช้โดยไม่ได้รับอนุญาต ข้อมูลเท็จ หรือต้องการรายงานเรื่องอื่น ๆ สามารถส่งเรื่องผ่านแบบฟอร์มได้ตลอด 24 ชั่วโมง',
       reportButton: 'เปิดแบบฟอร์มรายงาน ↗',
+      fanPhotosTitle: 'รูปจากแฟนคลับ',
+      fanPhotosDesc: 'รวมรูปภาพจากแฟนคลับที่บันทึกในแต่ละกิจกรรม',
+      fanPhotosButton: 'ดูรูปทั้งหมด ↗',
     },
     workDetail: {
       backNav: '← กลับหน้าหลัก',
@@ -361,6 +365,7 @@ export const translations = {
         { num: '50+', label: 'Fan Projects' },
         { num: '∞', label: 'Love' },
       ],
+      viewAllPhotos: 'View All Photos ↗',
     },
     fanclub: {
       sectionNum: '07 / Fanclub Services',
@@ -384,6 +389,9 @@ export const translations = {
       reportTitle: 'Report an Issue',
       reportDesc: 'Found a fake account, unauthorized use of images/videos, false information, or want to report other issues? Submit a report via our form anytime, 24 hours a day.',
       reportButton: 'Open Report Form ↗',
+      fanPhotosTitle: 'Fan Photos',
+      fanPhotosDesc: 'A collection of photos taken by fans at various events.',
+      fanPhotosButton: 'View All Photos ↗',
     },
     workDetail: {
       backNav: '← Back to Home',
@@ -585,6 +593,7 @@ export const translations = {
         { num: '50+', label: '粉丝项目' },
         { num: '∞', label: '爱' },
       ],
+      viewAllPhotos: '查看全部照片 ↗',
     },
     fanclub: {
       sectionNum: '07 / Fanclub Services',
@@ -608,6 +617,9 @@ export const translations = {
       reportTitle: '举报问题',
       reportDesc: '发现虚假账号、未经授权使用的图片/视频、虚假信息，或需要举报其他事项？可随时通过表单提交，全天 24 小时接受举报。',
       reportButton: '打开举报表单 ↗',
+      fanPhotosTitle: '粉丝照片',
+      fanPhotosDesc: '收录粉丝在各活动中拍摄的照片。',
+      fanPhotosButton: '查看全部照片 ↗',
     },
     workDetail: {
       backNav: '← 返回主页',

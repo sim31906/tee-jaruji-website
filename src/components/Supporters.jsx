@@ -145,6 +145,31 @@ export default function Supporters() {
           );
         })()}
 
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <a
+            href="https://drive.google.com/drive/folders/1HNyWiLEQ1d57GUxmuJGVPGo3rBfxAhPT?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              border: `1.5px solid ${colors.ink}`,
+              color: colors.ink,
+              padding: '1rem 2.5rem',
+              fontFamily: fonts.mono,
+              fontSize: '0.8rem',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              borderRadius: '2px',
+              transition: 'all 0.3s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = colors.ink; e.currentTarget.style.color = colors.cream; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = colors.ink; }}
+          >
+            {t.viewAllPhotos}
+          </a>
+        </div>
+
         <div className="fan-stats-tj" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
