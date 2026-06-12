@@ -26,7 +26,7 @@ function groupByYear(events) {
 }
 
 function PlatformIcon({ platform, size = 26 }) {
-  const containPlatforms = ['Chula', 'TST'];
+  const containPlatforms = ['Chula', 'TST', 'Google Drive'];
   const imgStyle = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: containPlatforms.includes(platform) ? 'contain' : 'cover', borderRadius: 'inherit', padding: containPlatforms.includes(platform) ? '8%' : 0 };
   if (platform === 'YouTube') return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="white">
@@ -73,6 +73,7 @@ function PlatformIcon({ platform, size = 26 }) {
     'Taokaenoi': '/platforms/taokaenoi.png',
     'Chula': '/platforms/chula.png',
     'TST': '/platforms/tst.png',
+    'Google Drive': '/platforms/google-drive.png',
   };
   if (imgPlatforms[platform]) return (
     <img src={imgPlatforms[platform]} alt={platform} style={imgStyle} />
@@ -145,7 +146,7 @@ function EventModal({ event, onClose, t, lang }) {
         width:'min(580px, 92vw)',
         maxHeight:'min(calc(100dvh - 96px), calc(100svh - 96px))',
         zIndex:9999,
-        background:colors.cream,borderRadius:'20px',overflow:'hidden',
+        background:'#fff',borderRadius:'20px',overflow:'hidden',
         boxShadow:'0 32px 80px rgba(0,0,0,0.28)',
         display:'flex',flexDirection:'column',cursor:'default',
         opacity: vis ? 1 : 0,
@@ -208,7 +209,7 @@ function EventModal({ event, onClose, t, lang }) {
             }}
           >
             {event.image
-              ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:event.imagePosition||'center',position:'absolute',inset:0,transition:'transform 0.3s ease',transform: imgHover && gallery ? 'scale(1.03)' : 'scale(1)'}}/>
+              ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:event.imageContain?'contain':'cover',objectPosition:event.imagePosition||'center',position:'absolute',inset:0,transition:'transform 0.3s ease',transform: imgHover && gallery ? 'scale(1.03)' : 'scale(1)'}}/>
               : <div style={{fontFamily:fonts.mono,fontSize:'0.65rem',letterSpacing:'0.2em',textTransform:'uppercase',color:meta.color,opacity:0.5}}>{t.imagePlaceholder}</div>
             }
             {/* expand icon overlay */}
@@ -617,7 +618,7 @@ export default function EventsPage() {
                       display:'flex',alignItems:'center',justifyContent:'center',
                     }}>
                       {event.image
-                        ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:event.imagePosition||'center',position:'absolute',inset:0}}/>
+                        ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:event.imageContain?'contain':'cover',objectPosition:event.imagePosition||'center',position:'absolute',inset:0}}/>
                         : <div style={{fontFamily:fonts.mono,fontSize:'0.55rem',letterSpacing:'0.2em',textTransform:'uppercase',color:meta.color,opacity:0.4}}>
                             photo
                           </div>

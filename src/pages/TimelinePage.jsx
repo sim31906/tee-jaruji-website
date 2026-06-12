@@ -118,7 +118,7 @@ function VinylRecord({ gradient, isPlaying, size = 72 }) {
 
 /* ── Platform icon (for event modal links) ──────────────── */
 function EventPlatformIcon({ platform, size = 26 }) {
-  const containPlatforms = ['Chula', 'TST'];
+  const containPlatforms = ['Chula', 'TST', 'Google Drive'];
   const imgStyle = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: containPlatforms.includes(platform) ? 'contain' : 'cover', borderRadius: 'inherit', padding: containPlatforms.includes(platform) ? '8%' : 0 };
   if (platform === 'YouTube') return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="white">
@@ -141,6 +141,7 @@ function EventPlatformIcon({ platform, size = 26 }) {
     </svg>
   );
   if (platform === 'Netflix') return <SiNetflix size={size} color="white" />;
+  if (platform === 'Google Drive') return <SiGoogledrive size={size} color="white" />;
   if (platform === 'Spotify') return <SiSpotify size={size} color="white" />;
   if (platform === 'Apple Music' || platform === 'iTunes') return <SiApplemusic size={size} color="white" />;
   if (platform === 'LINE Today') return (
@@ -167,6 +168,7 @@ function EventPlatformIcon({ platform, size = 26 }) {
     'Chula':       '/platforms/chula.png',
     'TST':         '/platforms/tst.png',
     'Joox':        '/platforms/joox.png',
+    'Google Drive': '/platforms/google-drive.png',
   };
   if (imgPlatforms[platform]) return <img src={imgPlatforms[platform]} alt={platform} style={imgStyle} />;
   return (
@@ -258,7 +260,7 @@ function EventModal({ item, lang, onClose }) {
         >
           {hasImage ? (
             <img src={item.image} alt={item.title}
-              style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'top center', display: 'block', transition: 'transform 0.3s ease', transform: imgHover && gallery ? 'scale(1.04)' : 'scale(1)' }} />
+              style={{ width: '100%', height: 220, objectFit: item.imageContain ? 'contain' : 'cover', objectPosition: 'top center', display: 'block', transition: 'transform 0.3s ease', transform: imgHover && gallery ? 'scale(1.04)' : 'scale(1)' }} />
           ) : (
             <>
               <div style={{ position: 'absolute', width: 260, height: 260, borderRadius: '50%', border: '60px solid rgba(255,255,255,0.12)', top: -90, right: -70, pointerEvents: 'none' }} />
