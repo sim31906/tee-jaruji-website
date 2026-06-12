@@ -258,28 +258,6 @@ function EventModal({ event, onClose, t, lang }) {
                     )}
                   </button>
                 ))}
-                {/* View All button */}
-                <button
-                  onClick={() => openGallery(0)}
-                  style={{
-                    flexShrink: 0, width: 66, height: 66, borderRadius: 7,
-                    border: `2px dashed ${meta.color}66`, background: `${meta.color}0a`,
-                    cursor: 'pointer', display: 'flex', flexDirection: 'column',
-                    alignItems: 'center', justifyContent: 'center', gap: 4, padding: 0,
-                    transition: 'background 0.15s',
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.background = `${meta.color}1e`}
-                  onMouseLeave={e => e.currentTarget.style.background = `${meta.color}0a`}
-                >
-                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={meta.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                    <circle cx="8.5" cy="8.5" r="1.5"/>
-                    <polyline points="21 15 16 10 5 21"/>
-                  </svg>
-                  <span style={{ fontFamily: fonts.mono, fontSize: '0.42rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: meta.color, lineHeight: 1.3, textAlign: 'center', padding: '0 4px' }}>
-                    {viewAllLabel}
-                  </span>
-                </button>
               </div>
             </div>
           )}
