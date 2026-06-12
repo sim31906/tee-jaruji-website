@@ -87,8 +87,9 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
     };
 
     const onMove = e => {
-      e.preventDefault();
       if (!touchRef.current) return;
+      // only preventDefault for pinch or pan (zoomed) — allows iOS long-press save
+      if (e.touches.length >= 2 || scaleRef.current > 1) e.preventDefault();
 
       if (e.touches.length === 2) {
         // switch to pinch if two fingers appear mid-gesture
@@ -212,6 +213,30 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
               Reset
             </button>
           )}
+          {/* Download */}
+          <button
+            onClick={async e => {
+              e.stopPropagation();
+              try {
+                const res = await fetch(images[idx]);
+                const blob = await res.blob();
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = images[idx].split('/').pop() || 'photo.jpg';
+                a.click();
+                URL.revokeObjectURL(url);
+              } catch { window.open(images[idx], '_blank'); }
+            }}
+            style={iconBtn}
+            title="บันทึกรูป"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </button>
           <button onClick={e => { e.stopPropagation(); onClose(); }} style={{ ...iconBtn, fontSize: '1.3rem' }}>×</button>
         </div>
       </div>
@@ -241,6 +266,7 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
             maxWidth: '100%', maxHeight: '100%',
             objectFit: 'contain', borderRadius: zoomed ? 0 : 6,
             display: 'block', userSelect: 'none',
+            WebkitTouchCallout: 'default',
             transform: `scale(${scale}) translate(${panX / scale}px, ${panY / scale}px)`,
             transition: scale === 1 ? 'transform 0.25s ease' : 'none',
             transformOrigin: 'center center',
