@@ -1,77 +1,124 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
+function getTouchDist(touches) {
+  return Math.hypot(
+    touches[0].clientX - touches[1].clientX,
+    touches[0].clientY - touches[1].clientY
+  );
+}
+
 export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
   const [idx, setIdx] = useState(startIndex);
   const [scale, setScale] = useState(1);
   const [panX, setPanX] = useState(0);
   const [panY, setPanY] = useState(0);
-  const stateRef = useRef({ scale: 1, panX: 0, panY: 0 });
-  const dragRef = useRef(null);
-  const pinchRef = useRef(null);
+
+  const scaleRef = useRef(1);
+  const panRef = useRef({ x: 0, y: 0 });
+  const didDragRef = useRef(false);
+
+  // touch gesture state
+  const touchRef = useRef(null); // { type: 'swipe'|'pan'|'pinch', ... }
+
   const zoomed = scale > 1;
 
-  const resetZoom = () => { setScale(1); setPanX(0); setPanY(0); stateRef.current = { scale: 1, panX: 0, panY: 0 }; };
-  const goTo = useCallback(i => { resetZoom(); setIdx(i); }, []);
-  const prev = useCallback(() => goTo((idx - 1 + images.length) % images.length), [idx, images.length, goTo]);
-  const next = useCallback(() => goTo((idx + 1) % images.length), [idx, images.length, goTo]);
+  const resetZoom = useCallback(() => {
+    scaleRef.current = 1;
+    panRef.current = { x: 0, y: 0 };
+    setScale(1);
+    setPanX(0);
+    setPanY(0);
+  }, []);
+
+  const goTo = useCallback(i => {
+    resetZoom();
+    setIdx(i);
+  }, [resetZoom]);
+
+  const idxRef = useRef(idx);
+  idxRef.current = idx;
+  const imagesRef = useRef(images);
+  imagesRef.current = images;
+
+  const prev = useCallback(() => {
+    goTo((idxRef.current - 1 + imagesRef.current.length) % imagesRef.current.length);
+  }, [goTo]);
+
+  const next = useCallback(() => {
+    goTo((idxRef.current + 1) % imagesRef.current.length);
+  }, [goTo]);
 
   // keyboard
   useEffect(() => {
     const onKey = e => {
-      if (e.key === 'Escape') { if (zoomed) resetZoom(); else onClose(); }
-      if (e.key === 'ArrowLeft' && !zoomed) prev();
-      if (e.key === 'ArrowRight' && !zoomed) next();
+      if (e.key === 'Escape') { if (scaleRef.current > 1) resetZoom(); else onClose(); }
+      if (e.key === 'ArrowLeft' && scaleRef.current <= 1) prev();
+      if (e.key === 'ArrowRight' && scaleRef.current <= 1) next();
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [onClose, prev, next, zoomed]);
+  }, [onClose, prev, next, resetZoom]);
 
-  // touch handlers
+  // touch events
   useEffect(() => {
     const el = document.getElementById('gl-img-area');
     if (!el) return;
 
-    const dist = (a, b) => Math.hypot(a[0].clientX - b[0].clientX, a[0].clientY - b[0].clientY);
-    const mid = (a, b) => [(a[0].clientX + b[0].clientX) / 2, (a[0].clientY + b[0].clientY) / 2];
-
     const onStart = e => {
       if (e.touches.length === 1) {
-        dragRef.current = {
+        touchRef.current = {
+          type: 'swipe',
           startX: e.touches[0].clientX,
           startY: e.touches[0].clientY,
-          panX: stateRef.current.panX,
-          panY: stateRef.current.panY,
+          panStartX: panRef.current.x,
+          panStartY: panRef.current.y,
           moved: false,
         };
       } else if (e.touches.length === 2) {
-        pinchRef.current = {
-          startDist: dist(e.touches, e.touches),
-          startScale: stateRef.current.scale,
-          startMid: mid(e.touches, e.touches),
-          panX: stateRef.current.panX,
-          panY: stateRef.current.panY,
+        touchRef.current = {
+          type: 'pinch',
+          startDist: getTouchDist(e.touches),
+          startScale: scaleRef.current,
+          startPanX: panRef.current.x,
+          startPanY: panRef.current.y,
         };
-        dragRef.current = null;
       }
     };
 
     const onMove = e => {
       e.preventDefault();
-      if (e.touches.length === 2 && pinchRef.current) {
-        const newDist = dist(e.touches, e.touches);
-        const newScale = Math.min(4, Math.max(1, pinchRef.current.startScale * (newDist / pinchRef.current.startDist)));
-        stateRef.current.scale = newScale;
+      if (!touchRef.current) return;
+
+      if (e.touches.length === 2) {
+        // switch to pinch if two fingers appear mid-gesture
+        if (touchRef.current.type !== 'pinch') {
+          touchRef.current = {
+            type: 'pinch',
+            startDist: getTouchDist(e.touches),
+            startScale: scaleRef.current,
+            startPanX: panRef.current.x,
+            startPanY: panRef.current.y,
+          };
+          return;
+        }
+        const newDist = getTouchDist(e.touches);
+        const newScale = Math.min(5, Math.max(1, touchRef.current.startScale * (newDist / touchRef.current.startDist)));
+        scaleRef.current = newScale;
         setScale(newScale);
-      } else if (e.touches.length === 1 && dragRef.current) {
-        const dx = e.touches[0].clientX - dragRef.current.startX;
-        const dy = e.touches[0].clientY - dragRef.current.startY;
-        dragRef.current.moved = Math.abs(dx) > 5 || Math.abs(dy) > 5;
-        if (stateRef.current.scale > 1) {
-          const nx = dragRef.current.panX + dx;
-          const ny = dragRef.current.panY + dy;
-          stateRef.current.panX = nx;
-          stateRef.current.panY = ny;
+        return;
+      }
+
+      if (e.touches.length === 1 && touchRef.current.type === 'swipe') {
+        const dx = e.touches[0].clientX - touchRef.current.startX;
+        const dy = e.touches[0].clientY - touchRef.current.startY;
+        if (Math.abs(dx) > 4 || Math.abs(dy) > 4) touchRef.current.moved = true;
+
+        if (scaleRef.current > 1) {
+          // pan
+          const nx = touchRef.current.panStartX + dx;
+          const ny = touchRef.current.panStartY + dy;
+          panRef.current = { x: nx, y: ny };
           setPanX(nx);
           setPanY(ny);
         }
@@ -79,18 +126,21 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
     };
 
     const onEnd = e => {
-      if (pinchRef.current) {
-        pinchRef.current = null;
+      if (!touchRef.current) return;
+
+      if (touchRef.current.type === 'pinch') {
+        if (scaleRef.current <= 1) resetZoom();
+        touchRef.current = null;
         return;
       }
-      if (dragRef.current) {
-        const dx = (e.changedTouches[0]?.clientX ?? 0) - dragRef.current.startX;
-        const moved = dragRef.current.moved;
-        dragRef.current = null;
-        if (stateRef.current.scale <= 1 && Math.abs(dx) > 50) {
+
+      if (touchRef.current.type === 'swipe') {
+        const dx = (e.changedTouches[0]?.clientX ?? 0) - touchRef.current.startX;
+        const moved = touchRef.current.moved;
+        touchRef.current = null;
+
+        if (scaleRef.current <= 1 && moved && Math.abs(dx) > 50) {
           dx < 0 ? next() : prev();
-        } else if (!moved && stateRef.current.scale <= 1) {
-          // single tap — do nothing (don't close)
         }
       }
     };
@@ -103,22 +153,20 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
       el.removeEventListener('touchmove', onMove);
       el.removeEventListener('touchend', onEnd);
     };
-  }, [prev, next, idx]);
+  }, [prev, next, resetZoom]);
 
-  // mouse drag for desktop
-  const didDragRef = useRef(false);
+  // mouse drag (desktop)
   const onMouseDown = e => {
-    if (!zoomed) return;
+    if (scaleRef.current <= 1) return;
     e.preventDefault();
     didDragRef.current = false;
-    const startX = e.clientX - panX;
-    const startY = e.clientY - panY;
+    const startX = e.clientX - panRef.current.x;
+    const startY = e.clientY - panRef.current.y;
     const onMove = e => {
       didDragRef.current = true;
       const nx = e.clientX - startX;
       const ny = e.clientY - startY;
-      stateRef.current.panX = nx;
-      stateRef.current.panY = ny;
+      panRef.current = { x: nx, y: ny };
       setPanX(nx);
       setPanY(ny);
     };
@@ -130,25 +178,26 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
     window.addEventListener('mouseup', onUp);
   };
 
+  // scroll wheel zoom (desktop)
+  const onWheel = e => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -0.25 : 0.25;
+    const newScale = Math.min(5, Math.max(1, scaleRef.current + delta));
+    scaleRef.current = newScale;
+    setScale(newScale);
+    if (newScale <= 1) { panRef.current = { x: 0, y: 0 }; setPanX(0); setPanY(0); }
+  };
+
   const toggleZoom = e => {
     e.stopPropagation();
     if (didDragRef.current) { didDragRef.current = false; return; }
-    if (zoomed) resetZoom();
-    else { setScale(2); stateRef.current.scale = 2; }
-  };
-
-  const onWheel = e => {
-    e.preventDefault();
-    const delta = e.deltaY > 0 ? -0.2 : 0.2;
-    const newScale = Math.min(4, Math.max(1, stateRef.current.scale + delta));
-    stateRef.current.scale = newScale;
-    setScale(newScale);
-    if (newScale === 1) { setPanX(0); setPanY(0); stateRef.current.panX = 0; stateRef.current.panY = 0; }
+    if (scaleRef.current > 1) resetZoom();
+    else { scaleRef.current = 2; setScale(2); }
   };
 
   return createPortal(
     <div
-      onClick={() => { if (zoomed) resetZoom(); else onClose(); }}
+      onClick={() => { if (scaleRef.current > 1) resetZoom(); else onClose(); }}
       style={{ position: 'fixed', inset: 0, zIndex: 19999, background: 'rgba(0,0,0,0.96)', display: 'flex', flexDirection: 'column' }}
     >
       {/* Top bar */}
@@ -157,15 +206,12 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
         <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.78rem', fontFamily: 'monospace', letterSpacing: '0.1em' }}>
           {idx + 1} / {images.length}
         </div>
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button onClick={toggleZoom} style={iconBtn} title={zoomed ? 'ย่อ' : 'ขยาย'}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-              {zoomed
-                ? <><line x1="5" y1="12" x2="19" y2="12"/></>
-                : <><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></>
-              }
-            </svg>
-          </button>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          {zoomed && (
+            <button onClick={e => { e.stopPropagation(); resetZoom(); }} style={{ ...iconBtn, fontSize: '0.65rem', fontFamily: 'monospace', letterSpacing: '0.05em', width: 'auto', padding: '0 10px', borderRadius: 12 }}>
+              Reset
+            </button>
+          )}
           <button onClick={e => { e.stopPropagation(); onClose(); }} style={{ ...iconBtn, fontSize: '1.3rem' }}>×</button>
         </div>
       </div>
@@ -221,16 +267,13 @@ export default function GalleryLightbox({ images, startIndex = 0, onClose }) {
           }}
         >
           {images.map((src, i) => (
-            <button key={i}
-              onClick={() => goTo(i)}
-              style={{
-                flexShrink: 0, width: 62, height: 62, borderRadius: 6,
-                overflow: 'hidden', border: 'none', padding: 0, cursor: 'pointer',
-                outline: i === idx ? '2px solid #fff' : '2px solid transparent',
-                outlineOffset: 1, opacity: i === idx ? 1 : 0.5,
-                transition: 'opacity 0.15s, outline 0.15s',
-              }}
-            >
+            <button key={i} onClick={() => goTo(i)} style={{
+              flexShrink: 0, width: 62, height: 62, borderRadius: 6,
+              overflow: 'hidden', border: 'none', padding: 0, cursor: 'pointer',
+              outline: i === idx ? '2px solid #fff' : '2px solid transparent',
+              outlineOffset: 1, opacity: i === idx ? 1 : 0.5,
+              transition: 'opacity 0.15s, outline 0.15s',
+            }}>
               <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </button>
           ))}
