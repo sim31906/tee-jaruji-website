@@ -713,4 +713,25 @@ export const eventsData = [
       { platform: 'Chula', label: 'Chula', url: 'https://www.md.chula.ac.th/zero-nicotine-fest/', color: '#ffffff' },
     ],
   },
+  // ─── 2569 (cont.) ───
+  {
+    id: 'e-2569-003',
+    year: 2569,
+    date: '11 มิ.ย. 2569',
+    dateEn: '11 Jun 2026',
+    title: 'อาโร่ยยย เฟส (AROI FEST)',
+    titleEn: 'AROI FEST',
+    titleZh: 'AROI FEST',
+    location: 'เซ็นทรัล เชียงใหม่ แอร์พอร์ต',
+    locationEn: 'Central Chiangmai Airport',
+    locationZh: '清迈机场中央百货',
+    type: 'fanmeet',
+    detail: 'ตี๋ขึ้นโชว์ใน AROI FEST งานมินิคอนเสิร์ตและแฟนมีตที่เซ็นทรัล เชียงใหม่ แอร์พอร์ต บรรยากาศอบอุ่น แฟนคลับแน่นเวที เต็มไปด้วยความสนุกและพลังงานดี ๆ',
+    detailEn: 'Tee performed at AROI FEST, a mini concert and fan meet at Central Chiangmai Airport. The atmosphere was warm and lively, with fans packing the stage area for an energetic and memorable show.',
+    detailZh: 'Tee在清迈机场中央百货举办的AROI FEST迷你演唱会暨见面会上登台演出，现场气氛热烈，粉丝云集，充满活力与欢乐。',
+    image: '/events/e-2569-003.jpg',
+    links: [
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/CentralChiangmaiAirport/posts/%E0%B8%8A%E0%B8%B2%E0%B8%A7%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%E0%B9%80%E0%B8%95%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1-%E0%B8%A1%E0%B8%AB%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AD%E0%B8%A3%E0%B9%88%E0%B8%AD%E0%B8%A2%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%B4%E0%B8%87%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%A2%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88%E0%B8%81%E0%B8%B3%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%88%E0%B8%B0%E0%B8%A1%E0%B8%B2%E0%B8%96%E0%B8%B6%E0%B8%87%E0%B9%81%E0%B8%A5/1012940434715133/', color: '#1877F2' },
+    ],
+  },
 ];
