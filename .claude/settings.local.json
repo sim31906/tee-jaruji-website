@@ -39,7 +39,8 @@
       "Bash(dir \"c:\\\\tee-jaruji-website\\\\public\")",
       "PowerShell(New-Item -ItemType Directory -Path \"c:\\\\tee-jaruji-website\\\\public\\\\events\" -Force)",
       "WebFetch(domain:www.siamturakij.com)",
-      "Bash(git lfs *)"
+      "Bash(git lfs *)",
+      "Bash(grep -v \"imagePosition\\\\|gallery\\\\|//\\\\|#\")"
     ]
   }
 }

@@ -730,6 +730,15 @@ export const eventsData = [
     detailEn: 'Tee performed at AROI FEST, a mini concert and fan meet at Central Chiangmai Airport. The atmosphere was warm and lively, with fans packing the stage area for an energetic and memorable show.',
     detailZh: 'Tee在清迈机场中央百货举办的AROI FEST迷你演唱会暨见面会上登台演出，现场气氛热烈，粉丝云集，充满活力与欢乐。',
     image: '/events/e-2569-003.jpg',
+    gallery: [
+      '/events/e-2569-003.jpg',
+      'https://pub-46fa3f6d65804c9ea240d7ff9b16d7bc.r2.dev/gallery/e-2569-003/02.jpg',
+      'https://pub-46fa3f6d65804c9ea240d7ff9b16d7bc.r2.dev/gallery/e-2569-003/03.jpg',
+      'https://pub-46fa3f6d65804c9ea240d7ff9b16d7bc.r2.dev/gallery/e-2569-003/04.jpg',
+      'https://pub-46fa3f6d65804c9ea240d7ff9b16d7bc.r2.dev/gallery/e-2569-003/05.jpg',
+      'https://pub-46fa3f6d65804c9ea240d7ff9b16d7bc.r2.dev/gallery/e-2569-003/DSC06025.jpg',
+      'https://pub-46fa3f6d65804c9ea240d7ff9b16d7bc.r2.dev/gallery/e-2569-003/DSC06027.jpg',
+    ],
     links: [
       { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/CentralChiangmaiAirport/posts/%E0%B8%8A%E0%B8%B2%E0%B8%A7%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%E0%B9%80%E0%B8%95%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1-%E0%B8%A1%E0%B8%AB%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AD%E0%B8%A3%E0%B9%88%E0%B8%AD%E0%B8%A2%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%B4%E0%B8%87%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%A2%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88%E0%B8%81%E0%B8%B3%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%88%E0%B8%B0%E0%B8%A1%E0%B8%B2%E0%B8%96%E0%B8%B6%E0%B8%87%E0%B9%81%E0%B8%A5/1012940434715133/', color: '#1877F2' },
     ],

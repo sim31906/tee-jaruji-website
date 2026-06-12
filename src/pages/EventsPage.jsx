@@ -6,6 +6,7 @@ import { eventsData, EVENT_TYPES } from '../data/eventsData';
 import CursorSparkle from '../components/CursorSparkle';
 import { useLang } from '../context/LanguageContext';
 import { SiNetflix } from 'react-icons/si';
+import GalleryLightbox from '../components/GalleryLightbox';
 
 function ev(event, field, lang) {
   if (lang === 'en') return event[field + 'En'] || event[field];
@@ -84,10 +85,37 @@ function PlatformIcon({ platform, size = 26 }) {
   );
 }
 
+const GALLERY_WORKER = 'https://tee-gallery.sim31906.workers.dev';
+
 function EventModal({ event, onClose, t, lang }) {
   const meta = EVENT_TYPES[event.type] || { label: { th: event.type, en: event.type, zh: event.type }, color: '#666', bg: '#f5f5f5' };
   const typeLabel = meta.label[lang] || meta.label.th;
   const [vis, setVis] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryStart, setGalleryStart] = useState(0);
+  const [imgHover, setImgHover] = useState(false);
+  const [r2Gallery, setR2Gallery] = useState(null);
+
+  // fetch gallery from Worker
+  useEffect(() => {
+    fetch(`${GALLERY_WORKER}?event=${event.id}`)
+      .then(r => r.json())
+      .then(urls => {
+        if (urls.length > 0) {
+          const cover = event.image ? [event.image] : [];
+          setR2Gallery([...cover, ...urls]);
+        }
+      })
+      .catch(() => {});
+  }, [event.id, event.image]);
+
+  // r2Gallery (live) → explicit gallery → cover image fallback
+  const gallery = r2Gallery
+    ?? (event.gallery?.length > 0 ? event.gallery : event.image ? [event.image] : null);
+  const hasMultiple = gallery && gallery.length > 1;
+
+  const galleryLabel = lang === 'zh' ? '相册' : lang === 'en' ? 'Gallery' : 'แกลเลอรี';
+  const viewAllLabel = lang === 'en' ? 'View All' : 'ดูทั้งหมด';
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -98,7 +126,9 @@ function EventModal({ event, onClose, t, lang }) {
     };
   }, []);
 
-  return createPortal(
+  const openGallery = (i = 0) => { setGalleryStart(i); setGalleryOpen(true); };
+
+  const portal = createPortal(
     <>
       {/* Backdrop */}
       <div onClick={onClose} style={{
@@ -108,21 +138,16 @@ function EventModal({ event, onClose, t, lang }) {
         opacity: vis ? 1 : 0,
         transition:'opacity 0.2s ease',
       }}/>
-      {/* Modal — top:80px, centered with margin auto (no transform) */}
+      {/* Modal */}
       <div onClick={e => e.stopPropagation()} style={{
-        position:'fixed',
-        top:'80px',
-        left:0,right:0,
+        position:'fixed',top:'80px',left:0,right:0,
         margin:'0 auto',
         width:'min(580px, 92vw)',
         maxHeight:'min(calc(100dvh - 96px), calc(100svh - 96px))',
         zIndex:9999,
-        background:colors.cream,
-        borderRadius:'20px',
-        overflow:'hidden',
+        background:colors.cream,borderRadius:'20px',overflow:'hidden',
         boxShadow:'0 32px 80px rgba(0,0,0,0.28)',
-        display:'flex',flexDirection:'column',
-        cursor:'default',
+        display:'flex',flexDirection:'column',cursor:'default',
         opacity: vis ? 1 : 0,
         transform: vis ? 'translateY(0)' : 'translateY(-10px)',
         transition:'opacity 0.3s ease, transform 0.3s ease',
@@ -141,20 +166,15 @@ function EventModal({ event, onClose, t, lang }) {
             cursor:'pointer',fontSize:'1.1rem',color:colors.ink,
             display:'flex',alignItems:'center',justifyContent:'center',
           }}>×</button>
-
           <div style={{
-            display:'inline-block',
-            background:meta.color,color:'#fff',
+            display:'inline-block',background:meta.color,color:'#fff',
             fontFamily:fonts.mono,fontSize:'0.6rem',letterSpacing:'0.2em',
             textTransform:'uppercase',padding:'0.2rem 0.7rem',
             borderRadius:'4px',marginBottom:'0.75rem',
           }}>{typeLabel}</div>
-
           <h2 style={{
-            fontFamily:fonts.display,
-            fontSize:'clamp(1.2rem, 3vw, 1.65rem)',
-            fontWeight:500,color:colors.ink,
-            lineHeight:1.25,margin:0,paddingRight:'2.5rem',
+            fontFamily:fonts.display,fontSize:'clamp(1.2rem, 3vw, 1.65rem)',
+            fontWeight:500,color:colors.ink,lineHeight:1.25,margin:0,paddingRight:'2.5rem',
           }}>{ev(event, 'title', lang)}</h2>
         </div>
 
@@ -171,37 +191,105 @@ function EventModal({ event, onClose, t, lang }) {
               <div style={{fontFamily:fonts.display,fontSize:'1.05rem',color:colors.ink,lineHeight:1.4}}>{ev(event, 'location', lang)}</div>
             </div>
           </div>
-
           <div style={{height:'1px',background:colors.creamDark,marginBottom:'1.25rem'}}/>
 
-          {/* Image */}
-          <div style={{
-            width:'100%',aspectRatio:'16/9',
-            borderRadius:'12px',overflow:'hidden',
-            marginBottom:'1.25rem',
-            background:`linear-gradient(135deg, ${meta.color}22, ${meta.color}0a)`,
-            display:'flex',alignItems:'center',justifyContent:'center',
-            position:'relative',
-          }}>
+          {/* Main image — always clickable to open lightbox */}
+          <div
+            onClick={() => gallery && openGallery(0)}
+            onMouseEnter={() => setImgHover(true)}
+            onMouseLeave={() => setImgHover(false)}
+            style={{
+              width:'100%',aspectRatio:'16/9',borderRadius:'12px',overflow:'hidden',
+              marginBottom:'1rem',
+              background:`linear-gradient(135deg, ${meta.color}22, ${meta.color}0a)`,
+              display:'flex',alignItems:'center',justifyContent:'center',
+              position:'relative',
+              cursor: gallery ? 'zoom-in' : 'default',
+            }}
+          >
             {event.image
-              ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:event.imagePosition||'center',position:'absolute',inset:0}}/>
-              : <div style={{fontFamily:fonts.mono,fontSize:'0.65rem',letterSpacing:'0.2em',textTransform:'uppercase',color:meta.color,opacity:0.5}}>
-                  {t.imagePlaceholder}
-                </div>
+              ? <img src={event.image} alt={event.title} style={{width:'100%',height:'100%',objectFit:'cover',objectPosition:event.imagePosition||'center',position:'absolute',inset:0,transition:'transform 0.3s ease',transform: imgHover && gallery ? 'scale(1.03)' : 'scale(1)'}}/>
+              : <div style={{fontFamily:fonts.mono,fontSize:'0.65rem',letterSpacing:'0.2em',textTransform:'uppercase',color:meta.color,opacity:0.5}}>{t.imagePlaceholder}</div>
             }
+            {/* expand icon overlay */}
+            {gallery && (
+              <div style={{
+                position:'absolute',bottom:8,right:8,
+                width:30,height:30,borderRadius:6,
+                background:'rgba(0,0,0,0.45)',
+                display:'flex',alignItems:'center',justifyContent:'center',
+                opacity: imgHover ? 1 : 0.55,
+                transition:'opacity 0.2s',
+                pointerEvents:'none',
+              }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round">
+                  <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+                </svg>
+              </div>
+            )}
           </div>
 
+          {/* Thumbnail strip — only when 2+ images */}
+          {hasMultiple && (
+            <div style={{ marginBottom: '1.25rem' }}>
+              <div style={{ fontFamily: fonts.mono, fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '0.55rem' }}>
+                {galleryLabel} · {gallery.length}
+              </div>
+              <div style={{ display: 'flex', gap: '0.45rem', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '0.25rem' }}>
+                {gallery.slice(0, 7).map((src, i) => (
+                  <button key={i}
+                    onClick={() => openGallery(i)}
+                    style={{
+                      flexShrink: 0, width: 66, height: 66, borderRadius: 7,
+                      overflow: 'hidden', border: `2px solid ${colors.creamDark}`,
+                      padding: 0, cursor: 'pointer', background: colors.creamDark,
+                      transition: 'border-color 0.15s, transform 0.15s',
+                      position: 'relative',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = meta.color; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = colors.creamDark; e.currentTarget.style.transform = ''; }}
+                  >
+                    <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    {i === 6 && gallery.length > 7 && (
+                      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.58)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: fonts.mono, fontSize: '0.75rem', fontWeight: 700 }}>
+                        +{gallery.length - 6}
+                      </div>
+                    )}
+                  </button>
+                ))}
+                {/* View All button */}
+                <button
+                  onClick={() => openGallery(0)}
+                  style={{
+                    flexShrink: 0, width: 66, height: 66, borderRadius: 7,
+                    border: `2px dashed ${meta.color}66`, background: `${meta.color}0a`,
+                    cursor: 'pointer', display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center', gap: 4, padding: 0,
+                    transition: 'background 0.15s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = `${meta.color}1e`}
+                  onMouseLeave={e => e.currentTarget.style.background = `${meta.color}0a`}
+                >
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={meta.color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                  <span style={{ fontFamily: fonts.mono, fontSize: '0.42rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: meta.color, lineHeight: 1.3, textAlign: 'center', padding: '0 4px' }}>
+                    {viewAllLabel}
+                  </span>
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Detail */}
-          <p style={{
-            fontFamily:fonts.body,fontSize:'0.98rem',
-            lineHeight:1.8,color:colors.ink,margin:'0 0 1.5rem',
-          }}>{ev(event, 'detail', lang)}</p>
+          <p style={{fontFamily:fonts.body,fontSize:'0.98rem',lineHeight:1.8,color:colors.ink,margin:'0 0 1.5rem'}}>
+            {ev(event, 'detail', lang)}
+          </p>
 
           {/* Links */}
-          <div style={{
-            borderTop:`1px solid ${colors.creamDark}`,
-            paddingTop:'1rem',
-          }}>
+          <div style={{borderTop:`1px solid ${colors.creamDark}`,paddingTop:'1rem'}}>
             <div style={{fontFamily:fonts.mono,fontSize:'0.62rem',letterSpacing:'0.2em',textTransform:'uppercase',color:colors.inkSoft,marginBottom:'0.75rem'}}>
               {t.detailLinks}
             </div>
@@ -209,8 +297,7 @@ function EventModal({ event, onClose, t, lang }) {
               ? <div style={{display:'flex',flexWrap:'wrap',gap:'0.75rem'}}>
                   {event.links.map((link, i) => (
                     <div key={i} style={{display:'flex',flexDirection:'column',alignItems:'center',gap:'0.3rem'}}>
-                      <a href={link.url} target="_blank" rel="noopener noreferrer"
-                        title={link.label}
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" title={link.label}
                         style={{
                           display:'flex',alignItems:'center',justifyContent:'center',
                           width:56,height:56,borderRadius:'12px',
@@ -220,8 +307,7 @@ function EventModal({ event, onClose, t, lang }) {
                           textDecoration:'none',
                           boxShadow:'0 2px 8px rgba(0,0,0,0.15)',
                           border: link.color === '#ffffff' ? '1px solid #e0e0e0' : 'none',
-                          position:'relative',overflow:'hidden',
-                          flexShrink:0,
+                          position:'relative',overflow:'hidden',flexShrink:0,
                           transition:'transform 0.15s, box-shadow 0.15s',
                         }}
                         onMouseEnter={e => { e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='0 6px 16px rgba(0,0,0,0.2)'; }}
@@ -235,15 +321,22 @@ function EventModal({ event, onClose, t, lang }) {
                     </div>
                   ))}
                 </div>
-              : <div style={{fontFamily:fonts.body,fontSize:'0.85rem',color:colors.inkSoft,fontStyle:'italic'}}>
-                  {t.noLinks}
-                </div>
+              : <div style={{fontFamily:fonts.body,fontSize:'0.85rem',color:colors.inkSoft,fontStyle:'italic'}}>{t.noLinks}</div>
             }
           </div>
         </div>
       </div>
     </>,
     document.body
+  );
+
+  return (
+    <>
+      {portal}
+      {galleryOpen && gallery && (
+        <GalleryLightbox images={gallery} startIndex={galleryStart} onClose={() => setGalleryOpen(false)} />
+      )}
+    </>
   );
 }
 

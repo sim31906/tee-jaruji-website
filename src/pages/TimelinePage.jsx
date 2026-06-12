@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import GalleryLightbox from '../components/GalleryLightbox';
 import { colors, fonts } from '../styles/theme';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
@@ -199,37 +200,79 @@ function getPlatformIcon(name, size = 22) {
 /* ══════════════════════════════════════════════════════════
    EVENT MODAL
 ═══════════════════════════════════════════════════════════ */
+const GALLERY_WORKER = 'https://tee-gallery.sim31906.workers.dev';
+
 function EventModal({ item, lang, onClose }) {
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [galleryStart, setGalleryStart] = useState(0);
+  const [imgHover, setImgHover] = useState(false);
+  const [r2Gallery, setR2Gallery] = useState(null);
+
   useEffect(() => {
     const onKey = e => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose]);
 
-  const typeInfo  = EVENT_TYPES[item.type];
-  const typeLabel = lang === 'zh' ? typeInfo?.label.zh : lang === 'en' ? typeInfo?.label.en : typeInfo?.label.th;
-  const hasImage  = !!item.image;
+  // fetch gallery from Worker
+  useEffect(() => {
+    fetch(`${GALLERY_WORKER}?event=${item.id}`)
+      .then(r => r.json())
+      .then(urls => {
+        if (urls.length > 0) {
+          const cover = item.image ? [item.image] : [];
+          setR2Gallery([...cover, ...urls]);
+        }
+      })
+      .catch(() => {});
+  }, [item.id, item.image]);
+
+  const typeInfo   = EVENT_TYPES[item.type];
+  const typeLabel  = lang === 'zh' ? typeInfo?.label.zh : lang === 'en' ? typeInfo?.label.en : typeInfo?.label.th;
+  const hasImage   = !!item.image;
+  const tColor     = typeInfo?.color || CAT_COLORS.event;
+
+  const gallery    = r2Gallery
+    ?? (item.gallery?.length > 0 ? item.gallery : item.image ? [item.image] : null);
+  const hasMultiple = gallery && gallery.length > 1;
+  const galleryLabel = lang === 'zh' ? '相册' : lang === 'en' ? 'Gallery' : 'แกลเลอรี';
+  const viewAllLabel = lang === 'en' ? 'View All' : 'ดูทั้งหมด';
+
+  const openGallery = (i = 0) => { setGalleryStart(i); setGalleryOpen(true); };
 
   return (
+    <>
     <div className="tl-modal-bg" onClick={onClose}>
       <div className="tl-modal" style={{ maxWidth: 620 }} onClick={e => e.stopPropagation()}>
-        {/* ── Image / gradient header ── */}
-        <div style={{
-          position: 'relative', minHeight: hasImage ? 0 : 180,
-          background: hasImage ? 'none' : `linear-gradient(135deg, ${typeInfo?.bg || CAT_BG.event}, ${colors.cream})`,
-          overflow: 'hidden',
-        }}>
+        {/* ── Image / gradient header (clickable) ── */}
+        <div
+          onClick={() => gallery && openGallery(0)}
+          onMouseEnter={() => setImgHover(true)}
+          onMouseLeave={() => setImgHover(false)}
+          style={{
+            position: 'relative', minHeight: hasImage ? 0 : 180,
+            background: hasImage ? 'none' : `linear-gradient(135deg, ${typeInfo?.bg || CAT_BG.event}, ${colors.cream})`,
+            overflow: 'hidden',
+            cursor: gallery ? 'zoom-in' : 'default',
+          }}
+        >
           {hasImage ? (
             <img src={item.image} alt={item.title}
-              style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'top center', display: 'block' }} />
+              style={{ width: '100%', height: 220, objectFit: 'cover', objectPosition: 'top center', display: 'block', transition: 'transform 0.3s ease', transform: imgHover && gallery ? 'scale(1.04)' : 'scale(1)' }} />
           ) : (
             <>
               <div style={{ position: 'absolute', width: 260, height: 260, borderRadius: '50%', border: '60px solid rgba(255,255,255,0.12)', top: -90, right: -70, pointerEvents: 'none' }} />
               <div style={{ position: 'absolute', width: 160, height: 160, borderRadius: '50%', border: '40px solid rgba(255,255,255,0.08)', bottom: -55, left: -45, pointerEvents: 'none' }} />
-              <div style={{ fontFamily: fonts.display, fontSize: '9rem', fontStyle: 'italic', color: typeInfo?.color || CAT_COLORS.event, opacity: 0.18, lineHeight: 1, userSelect: 'none', padding: '2.5rem', paddingBottom: '1.5rem' }}>
-                E
-              </div>
+              <div style={{ fontFamily: fonts.display, fontSize: '9rem', fontStyle: 'italic', color: tColor, opacity: 0.18, lineHeight: 1, userSelect: 'none', padding: '2.5rem', paddingBottom: '1.5rem' }}>E</div>
             </>
+          )}
+          {/* Expand icon */}
+          {gallery && (
+            <div style={{ position: 'absolute', bottom: 8, right: 8, width: 30, height: 30, borderRadius: 6, background: 'rgba(0,0,0,0.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: imgHover ? 1 : 0.55, transition: 'opacity 0.2s', pointerEvents: 'none' }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round">
+                <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+              </svg>
+            </div>
           )}
           {/* Year badge */}
           <div style={{ position: 'absolute', top: '1rem', left: '1rem', fontFamily: fonts.mono, fontSize: '.72rem', letterSpacing: '.2em', background: 'rgba(255,255,255,0.92)', padding: '.3rem .8rem', color: colors.ink }}>
@@ -241,7 +284,7 @@ function EventModal({ item, lang, onClose }) {
               {typeLabel}
             </div>
           )}
-          <button className="tl-close" onClick={onClose}>×</button>
+          <button className="tl-close" onClick={e => { e.stopPropagation(); onClose(); }}>×</button>
         </div>
 
         {/* ── Body ── */}
@@ -265,6 +308,59 @@ function EventModal({ item, lang, onClose }) {
             {ev(item, 'detail', lang)}
           </p>
 
+          {/* Thumbnail strip — only when 2+ images */}
+          {hasMultiple && (
+            <div style={{ marginBottom: '1.25rem' }}>
+              <div style={{ fontFamily: fonts.mono, fontSize: '.62rem', letterSpacing: '.2em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '.55rem' }}>
+                {galleryLabel} · {gallery.length}
+              </div>
+              <div style={{ display: 'flex', gap: '0.45rem', overflowX: 'auto', WebkitOverflowScrolling: 'touch', paddingBottom: '0.25rem' }}>
+                {gallery.slice(0, 7).map((src, i) => (
+                  <button key={i}
+                    onClick={() => openGallery(i)}
+                    style={{
+                      flexShrink: 0, width: 66, height: 66, borderRadius: 7,
+                      overflow: 'hidden', border: `2px solid ${colors.creamDark}`,
+                      padding: 0, cursor: 'pointer', background: colors.creamDark,
+                      transition: 'border-color 0.15s, transform 0.15s',
+                      position: 'relative',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = tColor; e.currentTarget.style.transform = 'scale(1.05)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = colors.creamDark; e.currentTarget.style.transform = ''; }}
+                  >
+                    <img src={src} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                    {i === 6 && gallery.length > 7 && (
+                      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.58)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: fonts.mono, fontSize: '.75rem', fontWeight: 700 }}>
+                        +{gallery.length - 6}
+                      </div>
+                    )}
+                  </button>
+                ))}
+                <button
+                  onClick={() => openGallery(0)}
+                  style={{
+                    flexShrink: 0, width: 66, height: 66, borderRadius: 7,
+                    border: `2px dashed ${tColor}66`, background: `${tColor}0a`,
+                    cursor: 'pointer', display: 'flex', flexDirection: 'column',
+                    alignItems: 'center', justifyContent: 'center', gap: 4, padding: 0,
+                    transition: 'background 0.15s',
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.background = `${tColor}1e`}
+                  onMouseLeave={e => e.currentTarget.style.background = `${tColor}0a`}
+                >
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={tColor} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                  <span style={{ fontFamily: fonts.mono, fontSize: '.42rem', letterSpacing: '.1em', textTransform: 'uppercase', color: tColor, lineHeight: 1.3, textAlign: 'center', padding: '0 4px' }}>
+                    {viewAllLabel}
+                  </span>
+                </button>
+              </div>
+            </div>
+          )}
+
           <div style={{ borderTop: `1px solid ${colors.creamDark}`, paddingTop: '1rem' }}>
             <div style={{ fontFamily: fonts.mono, fontSize: '.62rem', letterSpacing: '.2em', textTransform: 'uppercase', color: colors.inkSoft, marginBottom: '.75rem' }}>
               Links
@@ -273,18 +369,15 @@ function EventModal({ item, lang, onClose }) {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.75rem' }}>
                 {item.links.map((link, i) => (
                   <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '.3rem' }}>
-                    <a href={link.url} target="_blank" rel="noopener noreferrer"
-                      title={link.label}
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" title={link.label}
                       style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         width: 56, height: 56, borderRadius: '12px',
                         background: link.platform === 'Instagram'
                           ? 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)'
                           : link.color || typeInfo?.color || colors.ink,
-                        textDecoration: 'none',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                        position: 'relative', overflow: 'hidden',
-                        flexShrink: 0,
+                        textDecoration: 'none', boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                        position: 'relative', overflow: 'hidden', flexShrink: 0,
                         transition: 'transform 0.15s, box-shadow 0.15s',
                       }}
                       onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.2)'; }}
@@ -305,6 +398,10 @@ function EventModal({ item, lang, onClose }) {
         </div>
       </div>
     </div>
+    {galleryOpen && gallery && (
+      <GalleryLightbox images={gallery} startIndex={galleryStart} onClose={() => setGalleryOpen(false)} />
+    )}
+    </>
   );
 }
 
