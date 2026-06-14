@@ -65,7 +65,7 @@ export default function PRSlider() {
       </div>
 
       {items.length > 0 && (
-        <div style={{ position: 'relative' }}>
+        <div className="pr-slider-wrap" style={{ position: 'relative' }}>
           <div style={{
             width: '100%',
             aspectRatio: '16 / 7',
@@ -84,7 +84,7 @@ export default function PRSlider() {
                   style={{
                     position: 'absolute', inset: 0,
                     width: '100%', height: '100%',
-                    objectFit: 'cover',
+                    objectFit: 'contain',
                     opacity: i === idx ? 1 : 0,
                     transition: 'opacity 0.8s ease',
                     display: 'block',
@@ -100,7 +100,7 @@ export default function PRSlider() {
                   style={{
                     position: 'absolute', inset: 0,
                     width: '100%', height: '100%',
-                    objectFit: 'cover',
+                    objectFit: 'contain',
                     opacity: i === idx ? 1 : 0,
                     transition: 'opacity 0.8s ease',
                     display: 'block',
@@ -111,8 +111,8 @@ export default function PRSlider() {
 
             {items.length > 1 && (
               <>
-                <button onClick={() => navTo(prev)} style={arrowStyle('left')}>‹</button>
-                <button onClick={() => navTo(next)} style={arrowStyle('right')}>›</button>
+                <button className="pr-arrow" onClick={() => navTo(prev)} style={arrowStyle('left')}>‹</button>
+                <button className="pr-arrow" onClick={() => navTo(next)} style={arrowStyle('right')}>›</button>
               </>
             )}
 
@@ -170,6 +170,13 @@ export default function PRSlider() {
         @keyframes pr-progress {
           from { transform: scaleX(0); }
           to   { transform: scaleX(1); }
+        }
+        .pr-slider-wrap .pr-arrow {
+          opacity: 0;
+          transition: opacity 0.25s;
+        }
+        .pr-slider-wrap:hover .pr-arrow {
+          opacity: 1;
         }
       `}</style>
     </section>
