@@ -1,7 +1,7 @@
 export const translations = {
   th: {
     nav: {
-      home: 'หน้าหลัก', profile: 'ประวัติ', collab: 'ร่วมงาน', about: 'เกี่ยวกับ',
+      home: 'หน้าหลัก', profile: 'ประวัติ', pr: 'ประชาสัมพันธ์', collab: 'ร่วมงาน', about: 'เกี่ยวกับ',
       contact: 'ติดต่อ', schedule: 'ตารางงาน',
       supporters: 'แฟนคลับ', fanclub: 'บริการ',
     },
@@ -239,7 +239,7 @@ export const translations = {
 
   en: {
     nav: {
-      home: 'home', profile: 'profile', collab: 'collabs', about: 'about',
+      home: 'home', profile: 'profile', pr: 'press & pr', collab: 'collabs', about: 'about',
       contact: 'contact', schedule: 'schedule',
       supporters: 'supporters', fanclub: 'fanclub',
     },

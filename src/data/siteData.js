@@ -384,6 +384,7 @@ export const careerTimeline = [
 export const navItems = [
   "home",
   "profile",
+  "pr",
   "collab",
   "about",
   "contact",

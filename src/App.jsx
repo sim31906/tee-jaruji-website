@@ -10,6 +10,7 @@ import Contact from './components/Contact';
 import Schedule from './components/Schedule';
 import Supporters from './components/Supporters';
 import Fanclub from './components/Fanclub';
+import PRSlider from './components/PRSlider';
 import Footer from './components/Footer';
 import CursorSparkle from './components/CursorSparkle';
 import Reveal from './components/Reveal';
@@ -73,6 +74,7 @@ function MainPage() {
       <Navigation />
       <Hero />
       <Reveal><Profile /></Reveal>
+      <PRSlider />
       <Reveal><Collab /></Reveal>
       <Reveal><About /></Reveal>
       <Reveal><Contact /></Reveal>
