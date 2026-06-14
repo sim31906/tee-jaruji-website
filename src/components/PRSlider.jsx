@@ -38,7 +38,7 @@ export default function PRSlider() {
   const label = lang === 'en' ? 'Press & PR' : lang === 'zh' ? '宣传资讯' : 'ประชาสัมพันธ์';
 
   return (
-    <section style={{
+    <section id="pr" style={{
       background: colors.ink,
       padding: '5rem 0 4rem',
       overflow: 'hidden',
@@ -71,7 +71,7 @@ export default function PRSlider() {
           aspectRatio: '16 / 7',
           overflow: 'hidden',
           position: 'relative',
-          background: '#111',
+          background: colors.ink,
         }}>
           {photos.map((photo, i) => (
             <img
@@ -81,7 +81,7 @@ export default function PRSlider() {
               style={{
                 position: 'absolute', inset: 0,
                 width: '100%', height: '100%',
-                objectFit: 'contain',
+                objectFit: 'cover',
                 opacity: i === idx ? 1 : 0,
                 transition: 'opacity 0.8s ease',
                 display: 'block',

@@ -477,7 +477,7 @@ export const translations = {
 
   zh: {
     nav: {
-      home: '首页', profile: '简介', collab: '合作', about: '关于',
+      home: '首页', profile: '简介', pr: '宣传资讯', collab: '合作', about: '关于',
       contact: '联系', schedule: '日程',
       supporters: '支持者', fanclub: '粉丝服务',
     },
