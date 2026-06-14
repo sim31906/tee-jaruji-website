@@ -50,7 +50,7 @@ export default function Hero() {
           position: 'relative',
           zIndex: 2,
           gap: '3rem',
-          background: 'linear-gradient(145deg, #FFFDE0 0%, #FFF5A0 60%, #FFF0A0 100%)',
+          background: 'linear-gradient(145deg, #D4F4EE 0%, #A8DDD8 50%, #8FCFCA 100%)',
           overflow: 'hidden',
         }}
       >
@@ -104,7 +104,7 @@ export default function Hero() {
             <span style={{
               fontStyle: 'italic',
               fontWeight: 300,
-              color: '#B8860B',
+              color: '#3A9E96',
             }}>
               {hero.surname}
             </span>
@@ -138,7 +138,7 @@ export default function Hero() {
                 fontSize: '0.68rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.15em',
-                background: 'rgba(255,255,255,0.35)',
+                background: 'rgba(255,255,255,0.4)',
                 color: colors.ink,
                 backdropFilter: 'blur(4px)',
               }}>
@@ -181,7 +181,7 @@ export default function Hero() {
               onClick={handleVideoClick}
               style={{
                 position: 'absolute', inset: 0,
-                background: 'linear-gradient(160deg, #FFE066 0%, #F5A623 100%)',
+                background: 'linear-gradient(160deg, #A8DDD8 0%, #7BCAC4 100%)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
