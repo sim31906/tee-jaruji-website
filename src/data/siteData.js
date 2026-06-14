@@ -244,12 +244,6 @@ export const socials = [
     color: "#69C9D0",
   },
   {
-    platform: "Line",
-    handle: "Tee's RooM Open ChaT",
-    url: "https://line.me/ti/g2/oOMD7IBEzAyK5iMXg_rsrVY6w5KvCcxOSyMTUw?utm_source=invitation&utm_medium=link_copy&utm_campaign=default",
-    color: "#00B900",
-  },
-  {
     platform: "Weibo",
     handle: "Tee Jaruji",
     url: "https://weibo.com/u/6186540338",

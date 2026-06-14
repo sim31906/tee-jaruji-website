@@ -71,58 +71,69 @@ export default function Fanclub() {
           gap: '2rem',
           marginBottom: '4rem',
         }}>
-          {t.services.map((s, i) => (
-            <Reveal key={i} delay={i * 150}>
-            <TiltCard style={{ height: '100%' }}>
-            <div
-              className="service-card-tj"
-              style={{
-                border: `1px solid rgba(253, 246, 236, 0.2)`,
-                padding: '3rem 2.5rem',
-                color: colors.cream,
-                cursor: 'pointer',
-              }}
-            >
-              <span style={{
-                fontFamily: fonts.display,
-                fontStyle: 'italic',
-                fontSize: '1rem',
-                color: colors.pink,
-                marginBottom: '1rem',
-                display: 'block',
-              }}>
-                {s.num}
-              </span>
-              <h3 style={{
-                fontFamily: fonts.display,
-                fontSize: '1.7rem',
-                fontWeight: 500,
-                marginBottom: '1rem',
-                lineHeight: 1.1,
-                whiteSpace: 'pre-line',
-              }}>
-                {s.title}
-              </h3>
-              <p style={{
-                fontSize: '0.95rem',
-                lineHeight: 1.7,
-                opacity: 0.8,
-                marginBottom: '2rem',
-              }}>
-                {s.desc}
-              </p>
-              <div style={{
-                fontFamily: fonts.mono,
-                fontSize: '0.8rem',
-                letterSpacing: '0.2em',
-                textTransform: 'uppercase',
-              }}>
-                {s.arrow}
+          {t.services.map((s, i) => {
+            const card = (
+              <div
+                className="service-card-tj"
+                style={{
+                  border: `1px solid rgba(253, 246, 236, 0.2)`,
+                  padding: '3rem 2.5rem',
+                  color: colors.cream,
+                  cursor: 'pointer',
+                  height: '100%',
+                  boxSizing: 'border-box',
+                }}
+              >
+                <span style={{
+                  fontFamily: fonts.display,
+                  fontStyle: 'italic',
+                  fontSize: '1rem',
+                  color: colors.pink,
+                  marginBottom: '1rem',
+                  display: 'block',
+                }}>
+                  {s.num}
+                </span>
+                <h3 style={{
+                  fontFamily: fonts.display,
+                  fontSize: '1.7rem',
+                  fontWeight: 500,
+                  marginBottom: '1rem',
+                  lineHeight: 1.1,
+                  whiteSpace: 'pre-line',
+                }}>
+                  {s.title}
+                </h3>
+                <p style={{
+                  fontSize: '0.95rem',
+                  lineHeight: 1.7,
+                  opacity: 0.8,
+                  marginBottom: '2rem',
+                }}>
+                  {s.desc}
+                </p>
+                <div style={{
+                  fontFamily: fonts.mono,
+                  fontSize: '0.8rem',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                }}>
+                  {s.arrow}
+                </div>
               </div>
-            </div>
+            );
+            const isLastOdd = t.services.length % 2 !== 0 && i === t.services.length - 1;
+            return (
+            <Reveal key={i} delay={i * 150} style={{ gridColumn: isLastOdd ? 'span 2' : undefined }}>
+            <TiltCard style={{ height: '100%' }}>
+            {s.url
+              ? <a href={s.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block', height: '100%' }}>{card}</a>
+              : card
+            }
             </TiltCard>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
 
         <div className="report-banner-tj" style={{

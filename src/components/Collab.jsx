@@ -254,8 +254,8 @@ export default function Collab() {
             }}
           >
             {listOpen
-              ? <><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg> ซ่อน</>
-              : <><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg> ดูทั้งหมด</>
+              ? <><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M7 14l5-5 5 5z"/></svg> {t.hide}</>
+              : <><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg> {t.viewAll}</>
             }
           </button>
         </Reveal>
