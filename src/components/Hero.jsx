@@ -41,6 +41,7 @@ export default function Hero() {
           position: 'relative',
           zIndex: 2,
           gap: '3rem',
+          background: 'linear-gradient(135deg, #ffffff 0%, #FFF3B0 100%)',
         }}
       >
         <div>
@@ -50,14 +51,14 @@ export default function Hero() {
             letterSpacing: '0.3em',
             textTransform: 'uppercase',
             marginBottom: '2rem',
-            color: colors.accent,
+            color: '#B8860B',
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
             animation: 'hero-reveal 0.8s ease both',
             animationDelay: '0.1s',
           }}>
-            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: colors.accent }}></span>
+            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: '#B8860B' }}></span>
             {t.tagline}
           </div>
 
@@ -72,7 +73,7 @@ export default function Hero() {
             animationDelay: '0.3s',
           }}>
             {hero.name}<br />
-            <span style={{ fontStyle: 'italic', fontWeight: 300, color: colors.accent }}>
+            <span style={{ fontStyle: 'italic', fontWeight: 300, color: '#B8860B' }}>
               {hero.surname}
             </span>
           </h1>
@@ -99,7 +100,7 @@ export default function Hero() {
                 fontSize: '0.7rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.15em',
-                background: colors.pinkSoft,
+                background: '#FFF3B0',
               }}>
                 {tag}
               </span>
@@ -115,7 +116,7 @@ export default function Hero() {
           width: '100%',
           borderRadius: '8px',
           overflow: 'hidden',
-          boxShadow: `20px 20px 0 ${colors.pink}, 30px 30px 0 ${colors.blue}`,
+          boxShadow: `20px 20px 0 #ffffff, 30px 30px 0 #B8860B`,
           transform: 'rotate(-2deg)',
         }}>
           {hero.videoUrl ? (
@@ -139,7 +140,7 @@ export default function Hero() {
               style={{
                 position: 'absolute',
                 inset: 0,
-                background: `linear-gradient(135deg, ${colors.pink}, ${colors.blue})`,
+                background: `linear-gradient(135deg, #ffffff, #FFE566)`,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
