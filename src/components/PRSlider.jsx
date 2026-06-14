@@ -1,41 +1,56 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { colors, fonts } from '../styles/theme';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { colors } from '../styles/theme';
 import { useLang } from '../context/LanguageContext';
 import { useGoogleDrivePhotos } from '../hooks/useGoogleDrivePhotos';
+import SectionHeader from './SectionHeader';
 
 const PR_FOLDER_ID = '1ZLopkVvnp4LJ_td3KPa8TDv4VXb_ORaU';
+const PR_VIDEO_URL = 'https://pub-46fa3f6d65804c9ea240d7ff9b16d7bc.r2.dev/pr/ais.mp4';
 
 export default function PRSlider() {
   const { lang } = useLang();
-  const { photos, loading } = useGoogleDrivePhotos(PR_FOLDER_ID);
+  const { photos } = useGoogleDrivePhotos(PR_FOLDER_ID);
   const [idx, setIdx] = useState(0);
+  const [muted, setMuted] = useState(true);
   const timerRef = useRef(null);
+  const videoRef = useRef(null);
 
-  const next = useCallback(() => {
-    setIdx(i => (i + 1) % photos.length);
-  }, [photos.length]);
+  const items = useMemo(() => [
+    ...(PR_VIDEO_URL ? [{ id: 'pr-video', type: 'video', src: PR_VIDEO_URL, alt: 'PR Video' }] : []),
+    ...photos.map(p => ({ ...p, type: 'image' })),
+  ], [photos]);
 
-  const prev = useCallback(() => {
-    setIdx(i => (i - 1 + photos.length) % photos.length);
-  }, [photos.length]);
+  const isVideo = items[idx]?.type === 'video';
 
+  const next = useCallback(() => setIdx(i => (i + 1) % items.length), [items.length]);
+  const prev = useCallback(() => setIdx(i => (i - 1 + items.length) % items.length), [items.length]);
   const goTo = useCallback(i => setIdx(i), []);
 
-  // reset timer helper
   const navTo = useCallback(fn => {
     clearInterval(timerRef.current);
     fn();
-    timerRef.current = setInterval(next, 15000);
-  }, [next]);
+  }, []);
 
-  // auto-advance every 15s
+  // auto-advance 15s สำหรับ image slides เท่านั้น
   useEffect(() => {
-    if (photos.length < 2) return;
+    if (items.length < 2 || isVideo) return;
     timerRef.current = setInterval(next, 15000);
     return () => clearInterval(timerRef.current);
-  }, [photos.length, next]);
+  }, [idx, items.length, isVideo, next]);
 
-  const label = lang === 'en' ? 'Press & PR' : lang === 'zh' ? '宣传资讯' : 'ประชาสัมพันธ์';
+  // play/pause video ตามว่า slide ไหน active
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isVideo) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+    }
+  }, [idx, isVideo]);
+
+  const label    = lang === 'en' ? 'Announcement' : lang === 'zh' ? '宣传资讯' : 'ประชาสัมพันธ์';
+  const numLabel = lang === 'en' ? '02 / Announcement' : lang === 'zh' ? '02 / 宣传资讯' : '02 / ประชาสัมพันธ์';
 
   return (
     <section id="pr" style={{
@@ -45,99 +60,116 @@ export default function PRSlider() {
       position: 'relative',
       zIndex: 2,
     }}>
-      {/* header */}
-      <div style={{ padding: '0 3rem', marginBottom: photos.length > 0 ? '2rem' : 0, display: 'flex', alignItems: 'baseline', gap: '1rem' }}>
-        <span style={{
-          fontFamily: fonts.mono, fontSize: '0.7rem',
-          letterSpacing: '0.25em', textTransform: 'uppercase',
-          color: colors.pink, opacity: 0.8,
-        }}>
-          02.5 /
-        </span>
-        <h2 style={{
-          fontFamily: fonts.display,
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontWeight: 400, color: colors.cream, margin: 0,
-        }}>
-          {label}
-        </h2>
+      <div style={{ padding: '0 3rem', marginBottom: items.length > 0 ? '3rem' : 0 }}>
+        <SectionHeader num={numLabel} title={label} dark mb="0" pb="2rem" />
       </div>
 
-      {/* slideshow — แสดงเมื่อมีรูป */}
-      {photos.length > 0 && (
-      <div style={{ position: 'relative' }}>
-        <div style={{
-          width: '100%',
-          aspectRatio: '16 / 7',
-          overflow: 'hidden',
-          position: 'relative',
-          background: colors.ink,
-        }}>
-          {photos.map((photo, i) => (
-            <img
-              key={photo.id}
-              src={photo.src}
-              alt={photo.alt}
-              style={{
-                position: 'absolute', inset: 0,
-                width: '100%', height: '100%',
-                objectFit: 'cover',
-                opacity: i === idx ? 1 : 0,
-                transition: 'opacity 0.8s ease',
-                display: 'block',
-              }}
-            />
-          ))}
+      {items.length > 0 && (
+        <div style={{ position: 'relative' }}>
+          <div style={{
+            width: '100%',
+            aspectRatio: '16 / 7',
+            overflow: 'hidden',
+            position: 'relative',
+            background: colors.ink,
+          }}>
+            {items.map((item, i) =>
+              item.type === 'video' ? (
+                <video
+                  key={item.id}
+                  ref={videoRef}
+                  muted={muted}
+                  playsInline
+                  onEnded={next}
+                  style={{
+                    position: 'absolute', inset: 0,
+                    width: '100%', height: '100%',
+                    objectFit: 'cover',
+                    opacity: i === idx ? 1 : 0,
+                    transition: 'opacity 0.8s ease',
+                    display: 'block',
+                  }}
+                >
+                  <source src={item.src} type="video/mp4" />
+                </video>
+              ) : (
+                <img
+                  key={item.id}
+                  src={item.src}
+                  alt={item.alt}
+                  style={{
+                    position: 'absolute', inset: 0,
+                    width: '100%', height: '100%',
+                    objectFit: 'cover',
+                    opacity: i === idx ? 1 : 0,
+                    transition: 'opacity 0.8s ease',
+                    display: 'block',
+                  }}
+                />
+              )
+            )}
 
-          {photos.length > 1 && (
-            <>
-              <button onClick={() => navTo(prev)} style={arrowStyle('left')}>‹</button>
-              <button onClick={() => navTo(next)} style={arrowStyle('right')}>›</button>
-            </>
-          )}
+            {items.length > 1 && (
+              <>
+                <button onClick={() => navTo(prev)} style={arrowStyle('left')}>‹</button>
+                <button onClick={() => navTo(next)} style={arrowStyle('right')}>›</button>
+              </>
+            )}
 
-          {/* progress bar */}
-          <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 3, background: 'rgba(255,255,255,0.12)' }}>
-            <div
-              key={idx}
-              style={{
-                height: '100%',
-                background: colors.pink,
-                animation: 'pr-progress 15s linear',
-                transformOrigin: 'left',
-              }}
-            />
-          </div>
-        </div>
-
-        {/* dots */}
-        {photos.length > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: '1.25rem' }}>
-            {photos.map((_, i) => (
+            {/* ปุ่ม mute/unmute เฉพาะตอน slide วิดีโอ */}
+            {isVideo && (
               <button
-                key={i}
-                onClick={() => navTo(() => goTo(i))}
+                onClick={() => setMuted(m => !m)}
                 style={{
-                  width: i === idx ? 24 : 8, height: 8,
-                  borderRadius: 4,
-                  background: i === idx ? colors.pink : 'rgba(253,246,236,0.25)',
-                  border: 'none', cursor: 'pointer', padding: 0,
-                  transition: 'all 0.3s',
+                  position: 'absolute', bottom: 16, right: 16,
+                  width: 40, height: 40, borderRadius: '50%',
+                  background: 'rgba(0,0,0,0.55)', border: 'none',
+                  color: '#fff', fontSize: '1.1rem', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  zIndex: 3, backdropFilter: 'blur(4px)',
                 }}
-              />
-            ))}
+              >
+                {muted ? '🔇' : '🔊'}
+              </button>
+            )}
+
+            {/* progress bar เฉพาะ image slides */}
+            {!isVideo && (
+              <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 3, background: 'rgba(255,255,255,0.12)' }}>
+                <div key={idx} style={{
+                  height: '100%',
+                  background: colors.pink,
+                  animation: 'pr-progress 15s linear',
+                  transformOrigin: 'left',
+                }} />
+              </div>
+            )}
           </div>
-        )}
-      </div>
+
+          {items.length > 1 && (
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: '1.25rem' }}>
+              {items.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => navTo(() => goTo(i))}
+                  style={{
+                    width: i === idx ? 24 : 8, height: 8,
+                    borderRadius: 4,
+                    background: i === idx ? colors.pink : 'rgba(253,246,236,0.25)',
+                    border: 'none', cursor: 'pointer', padding: 0,
+                    transition: 'all 0.3s',
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       )}
 
       <style>{`
         @keyframes pr-progress {
           from { transform: scaleX(0); }
           to   { transform: scaleX(1); }
-        }
-        @keyframes pr-spin {
-          to { transform: rotate(360deg); }
         }
       `}</style>
     </section>

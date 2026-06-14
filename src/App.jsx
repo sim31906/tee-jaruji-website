@@ -74,7 +74,7 @@ function MainPage() {
       <Navigation />
       <Hero />
       <Reveal><Profile /></Reveal>
-      <PRSlider />
+      <Reveal><PRSlider /></Reveal>
       <Reveal><Collab /></Reveal>
       <Reveal><About /></Reveal>
       <Reveal><Contact /></Reveal>
