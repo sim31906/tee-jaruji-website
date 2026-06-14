@@ -17,14 +17,23 @@ export default function Hero() {
     <>
       <style>{`
         .video-placeholder-tj:hover .play-icon-tj {
-          transform: scale(1.15);
-          background: ${colors.pink};
+          transform: scale(1.1);
+          background: rgba(255,255,255,0.35);
+        }
+        .hero-tag-tj {
+          transition: background 0.2s, color 0.2s;
+        }
+        .hero-tag-tj:hover {
+          background: rgba(255,255,255,0.45) !important;
         }
         @media (max-width: 968px) {
           .hero-grid-tj {
             grid-template-columns: 1fr !important;
             gap: 3rem !important;
             padding: 6rem 1.5rem 4rem !important;
+          }
+          .hero-card-tj {
+            max-width: 320px !important;
           }
         }
       `}</style>
@@ -41,47 +50,71 @@ export default function Hero() {
           position: 'relative',
           zIndex: 2,
           gap: '3rem',
-          background: 'linear-gradient(135deg, #ffffff 0%, #FFF3B0 100%)',
+          background: 'linear-gradient(145deg, #FFFDE0 0%, #FFF5A0 60%, #FFF0A0 100%)',
+          overflow: 'hidden',
         }}
       >
-        <div>
+        {/* decorative circles */}
+        <div style={{
+          position: 'absolute', top: '-10%', right: '5%',
+          width: 400, height: 400, borderRadius: '50%',
+          background: 'rgba(255,255,255,0.12)',
+          pointerEvents: 'none',
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-15%', left: '-5%',
+          width: 500, height: 500, borderRadius: '50%',
+          background: 'rgba(0,0,0,0.06)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          {/* tagline */}
           <div style={{
             fontFamily: fonts.mono,
             fontSize: '0.75rem',
             letterSpacing: '0.3em',
             textTransform: 'uppercase',
             marginBottom: '2rem',
-            color: '#B8860B',
+            color: colors.inkSoft,
             display: 'flex',
             alignItems: 'center',
             gap: '1rem',
             animation: 'hero-reveal 0.8s ease both',
             animationDelay: '0.1s',
           }}>
-            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: '#B8860B' }}></span>
+            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: colors.inkSoft }} />
             {t.tagline}
           </div>
 
+          {/* name */}
           <h1 style={{
             fontFamily: fonts.display,
             fontSize: 'clamp(4rem, 9vw, 9rem)',
             fontWeight: 400,
-            lineHeight: 0.85,
-            letterSpacing: '-0.04em',
-            marginBottom: '1.5rem',
+            lineHeight: 0.88,
+            letterSpacing: '-0.03em',
+            marginBottom: '1.75rem',
+            color: colors.ink,
+            textShadow: 'none',
             animation: 'hero-reveal 0.9s ease both',
             animationDelay: '0.3s',
           }}>
             {hero.name}<br />
-            <span style={{ fontStyle: 'italic', fontWeight: 300, color: '#B8860B' }}>
+            <span style={{
+              fontStyle: 'italic',
+              fontWeight: 300,
+              color: '#B8860B',
+            }}>
               {hero.surname}
             </span>
           </h1>
 
+          {/* description */}
           <p style={{
             fontSize: '1rem',
-            maxWidth: '420px',
-            lineHeight: 1.7,
+            maxWidth: '400px',
+            lineHeight: 1.8,
             color: colors.inkSoft,
             marginBottom: '2.5rem',
             animation: 'hero-reveal 0.9s ease both',
@@ -90,17 +123,24 @@ export default function Hero() {
             {t.description}
           </p>
 
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', animation: 'hero-reveal 0.9s ease both', animationDelay: '0.75s' }}>
+          {/* tags */}
+          <div style={{
+            display: 'flex', gap: '0.6rem', flexWrap: 'wrap',
+            animation: 'hero-reveal 0.9s ease both',
+            animationDelay: '0.75s',
+          }}>
             {t.tags.map(tag => (
-              <span key={tag} style={{
-                padding: '0.5rem 1rem',
-                border: `1px solid ${colors.ink}`,
+              <span key={tag} className="hero-tag-tj" style={{
+                padding: '0.45rem 1.1rem',
+                border: `1.5px solid ${colors.ink}`,
                 borderRadius: '100px',
                 fontFamily: fonts.mono,
-                fontSize: '0.7rem',
+                fontSize: '0.68rem',
                 textTransform: 'uppercase',
                 letterSpacing: '0.15em',
-                background: '#FFF3B0',
+                background: 'rgba(255,255,255,0.35)',
+                color: colors.ink,
+                backdropFilter: 'blur(4px)',
               }}>
                 {tag}
               </span>
@@ -108,16 +148,18 @@ export default function Hero() {
           </div>
         </div>
 
-        <div style={{
+        {/* video card */}
+        <div className="hero-card-tj" style={{
           position: 'relative',
           aspectRatio: '9/12',
           maxWidth: '420px',
           margin: '0 auto',
           width: '100%',
-          borderRadius: '8px',
+          borderRadius: '16px',
           overflow: 'hidden',
-          boxShadow: `20px 20px 0 #ffffff, 30px 30px 0 #B8860B`,
+          boxShadow: '16px 16px 0 rgba(255,255,255,0.35), 28px 28px 0 rgba(0,0,0,0.12)',
           transform: 'rotate(-2deg)',
+          zIndex: 1,
         }}>
           {hero.videoUrl ? (
             hero.videoUrl.includes('youtube.com') || hero.videoUrl.includes('youtu.be') ? (
@@ -138,45 +180,49 @@ export default function Hero() {
               className="video-placeholder-tj"
               onClick={handleVideoClick}
               style={{
-                position: 'absolute',
-                inset: 0,
-                background: `linear-gradient(135deg, #ffffff, #FFE566)`,
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(160deg, #FFE066 0%, #F5A623 100%)',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: colors.ink,
+                color: '#fff',
                 cursor: 'pointer',
                 transition: 'all 0.3s',
               }}
             >
               <div className="play-icon-tj" style={{
-                width: '90px',
-                height: '90px',
-                border: `2px solid ${colors.ink}`,
+                width: '88px', height: '88px',
+                border: '2px solid rgba(255,255,255,0.75)',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginBottom: '1.5rem',
                 transition: 'all 0.3s',
-                background: 'rgba(253, 246, 236, 0.5)',
+                background: 'rgba(255,255,255,0.18)',
+                backdropFilter: 'blur(6px)',
               }}>
                 <div style={{
                   width: 0, height: 0,
-                  borderLeft: `20px solid ${colors.ink}`,
-                  borderTop: '14px solid transparent',
-                  borderBottom: '14px solid transparent',
-                  marginLeft: '5px',
-                }}></div>
+                  borderLeft: '20px solid #fff',
+                  borderTop: '13px solid transparent',
+                  borderBottom: '13px solid transparent',
+                  marginLeft: '6px',
+                }} />
               </div>
-              <div style={{ fontFamily: fonts.mono, fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>
+              <div style={{
+                fontFamily: fonts.mono,
+                fontSize: '0.72rem',
+                letterSpacing: '0.28em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.9)',
+              }}>
                 {t.watchIntro}
               </div>
             </div>
           )}
         </div>
-
       </section>
     </>
   );
