@@ -35,8 +35,11 @@ export default function Fanclub() {
           color: ${colors.ink} !important;
         }
 
+        @media (min-width: 700px) {
+          .fanclub-card-span2 { grid-column: span 2; }
+        }
+
         @media (max-width: 968px) {
-          .service-grid-tj { grid-template-columns: 1fr !important; }
           .report-banner-tj { grid-template-columns: 1fr !important; }
           .fanclub-section-tj { padding: 5rem 1.5rem !important; }
         }
@@ -67,7 +70,7 @@ export default function Fanclub() {
 
         <div className="service-grid-tj" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
           alignItems: 'start',
           gap: '2rem',
           marginBottom: '4rem',
@@ -125,7 +128,7 @@ export default function Fanclub() {
             );
             const isLastOdd = t.services.length % 2 !== 0 && i === t.services.length - 1;
             return (
-            <Reveal key={i} delay={i * 150} style={{ gridColumn: isLastOdd ? 'span 2' : undefined }}>
+            <Reveal key={i} delay={i * 150} className={isLastOdd ? 'fanclub-card-span2' : undefined}>
             <TiltCard style={{ height: '100%' }}>
             {s.url
               ? <a href={s.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block', height: '100%' }}>{card}</a>
