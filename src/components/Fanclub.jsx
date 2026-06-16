@@ -35,8 +35,12 @@ export default function Fanclub() {
           color: ${colors.ink} !important;
         }
 
-        @media (min-width: 700px) {
+        @media (min-width: 701px) {
           .fanclub-card-span2 { grid-column: span 2; }
+        }
+
+        @media (max-width: 700px) {
+          .service-grid-tj { grid-template-columns: 1fr !important; }
         }
 
         @media (max-width: 968px) {
@@ -70,7 +74,7 @@ export default function Fanclub() {
 
         <div className="service-grid-tj" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(2, 1fr)',
           alignItems: 'start',
           gap: '2rem',
           marginBottom: '4rem',
