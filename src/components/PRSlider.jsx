@@ -60,15 +60,15 @@ export default function PRSlider() {
       position: 'relative',
       zIndex: 2,
     }}>
-      <div style={{ padding: '0 3rem', marginBottom: items.length > 0 ? '3rem' : 0 }}>
+      <div className="pr-header-tj" style={{ padding: '0 3rem', marginBottom: items.length > 0 ? '3rem' : 0 }}>
         <SectionHeader num={numLabel} title={label} dark mb="0" pb="2rem" />
       </div>
 
       {items.length > 0 && (
         <div className="pr-slider-wrap" style={{ position: 'relative' }}>
-          <div style={{
+          <div className="pr-slide-box" style={{
             width: '100%',
-            aspectRatio: '16 / 7',
+            aspectRatio: '16 / 9',
             overflow: 'hidden',
             position: 'relative',
             background: colors.ink,
@@ -177,6 +177,10 @@ export default function PRSlider() {
         }
         .pr-slider-wrap:hover .pr-arrow {
           opacity: 1;
+        }
+        @media (max-width: 768px) {
+          .pr-header-tj { padding: 0 1.5rem !important; }
+          .pr-slide-box { aspect-ratio: 4 / 3 !important; }
         }
       `}</style>
     </section>

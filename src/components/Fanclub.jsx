@@ -68,6 +68,7 @@ export default function Fanclub() {
         <div className="service-grid-tj" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(2, 1fr)',
+          alignItems: 'start',
           gap: '2rem',
           marginBottom: '4rem',
         }}>
