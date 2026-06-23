@@ -337,7 +337,7 @@ export const services = [
 
 // ---- REPORT FORM ----
 // ใส่ลิงก์ Google Form ที่นี่
-export const reportFormUrl = "https://forms.google.com/your-form-id";
+export const reportFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLScD0IRyzaWHc9r58-qfxkhTr4L_kAb45oZ37xxgtXQxE6hVFA/viewform?pli=1";
 
 // ---- CAREER TIMELINE ----
 // type: 'event' | 'acting' | 'music'
