@@ -44,8 +44,8 @@ export default function Hero() {
 
         @media (max-width: 768px) {
           .hero-text-col {
-            padding: 6rem 1.5rem 2rem !important;
-            max-width: 90% !important;
+            padding: 6rem 1.5rem 3rem !important;
+            max-width: 100% !important;
             justify-content: flex-start !important;
           }
           .hero-h1 { font-size: clamp(3.5rem, 15vw, 6rem) !important; }
@@ -53,15 +53,16 @@ export default function Hero() {
             font-size: clamp(4rem, 20vw, 8rem) !important;
             top: 28vh !important;
           }
-          /* รูป — เต็มความสูง ชิดขวา เหมือน desktop แต่ width ปรับตามสัดส่วน */
+          /* รูปบนมือถือ — อยู่หลัง text (z-index ต่ำ) เต็มความสูง ชิดขวา */
           .hero-photo-front {
             height: 100% !important;
             width: auto !important;
             top: 0 !important;
             bottom: auto !important;
-            right: -10% !important; /* ขยับขวาหน่อยให้หน้าโชว์ */
+            right: 0 !important;
+            z-index: 1 !important;   /* อยู่หลัง gradient และ text */
           }
-          /* ซ่อน description บนมือถือ — ทับรูป */
+          /* ซ่อน description บนมือถือ */
           .hero-desc-p { display: none !important; }
         }
       `}</style>
