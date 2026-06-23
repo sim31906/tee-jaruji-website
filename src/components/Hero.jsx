@@ -175,10 +175,10 @@ export default function Hero() {
           {/* CTA */}
           <div className="ha3">
             <a
-              href="#profile"
+              role="button"
               className="hero-cta-tj"
-              onClick={(e) => {
-                e.preventDefault();
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
                 document.getElementById('profile')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
