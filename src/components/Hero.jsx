@@ -54,9 +54,9 @@ export default function Hero() {
             top: 30vh !important;
             left: 0.5rem !important;
           }
-          /* รูปขวา 50% — เลื่อนขวาขึ้น เส้นขอบรูปเริ่มที่ 50% ของจอ */
+          /* รูปขวา — เลื่อนให้ขอบซ้ายรูปอยู่ที่ 55% ของจอ */
           .hero-photo-front {
-            width: 50% !important;
+            width: 45% !important;
             height: 100% !important;
             top: 0 !important;
             right: 0 !important;
