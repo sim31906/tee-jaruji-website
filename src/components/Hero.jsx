@@ -43,30 +43,41 @@ export default function Hero() {
         .ha5 { animation: hIn .65s ease both .82s; }
 
         @media (max-width: 768px) {
-          /* text บนซ้าย — ใต้ nav bar */
           .hero-text-col {
-            padding: 5.5rem 1.2rem 3rem !important;
-            max-width: 50% !important;
-            justify-content: flex-start !important;
+            padding: 5rem 1.2rem 3rem !important;
+            max-width: 58% !important;
+            justify-content: center !important;
           }
-          .hero-h1 { font-size: clamp(2.5rem, 9vw, 4rem) !important; }
+          .hero-h1 { font-size: clamp(2.8rem, 10.5vw, 5rem) !important; }
           .hero-wm {
-            font-size: clamp(2rem, 10vw, 4rem) !important;
-            top: 28vh !important;
+            font-size: clamp(2.5rem, 12vw, 5rem) !important;
+            top: 30vh !important;
             left: 0.5rem !important;
           }
-          /* รูป — ขนาด natural ratio ขวา, ไม่ override z-index → ใช้ z4 (front) จาก inline */
+          /* รูปขวา 50% — เลื่อนขวาขึ้น เส้นขอบรูปเริ่มที่ 50% ของจอ */
           .hero-photo-front {
-            height: 90% !important;
-            width: auto !important;
+            width: 50% !important;
+            height: 100% !important;
             top: 0 !important;
             right: 0 !important;
             left: auto !important;
             bottom: auto !important;
-            object-fit: unset !important;
+            object-fit: cover !important;
+            object-position: center top !important;
+            z-index: 1 !important;
           }
           .hero-desc-p { display: none !important; }
-          /* ปุ่มเล็กลง */
+          /* gradient ลื่น ไม่มีเส้นแบ่ง */
+          .hero-grad {
+            background: linear-gradient(to right,
+              rgba(12,8,18,0.96) 0%,
+              rgba(12,8,18,0.85) 28%,
+              rgba(12,8,18,0.55) 44%,
+              rgba(12,8,18,0.20) 56%,
+              rgba(12,8,18,0.05) 66%,
+              transparent 78%
+            ) !important;
+          }
           .hero-cta-tj {
             padding: 0.7rem 1.6rem !important;
             font-size: 0.65rem !important;
