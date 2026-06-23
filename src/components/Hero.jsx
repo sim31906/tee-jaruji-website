@@ -43,29 +43,30 @@ export default function Hero() {
         .ha5 { animation: hIn .65s ease both .82s; }
 
         @media (max-width: 768px) {
+          /* text อยู่ซ้าย แคบลงให้พอดีกับรูปขวา */
           .hero-text-col {
-            padding: 6rem 1.5rem 3rem !important;
-            max-width: 100% !important;
+            padding: 5.5rem 1.2rem 3rem !important;
+            max-width: 58% !important;
             justify-content: flex-start !important;
           }
-          .hero-h1 { font-size: clamp(3.5rem, 15vw, 6rem) !important; }
+          .hero-h1 { font-size: clamp(2.8rem, 10vw, 4.5rem) !important; }
           .hero-wm {
-            font-size: clamp(4rem, 20vw, 8rem) !important;
-            top: 28vh !important;
+            font-size: clamp(3rem, 14vw, 6rem) !important;
+            top: 26vh !important;
+            left: 1rem !important;
           }
-          /* รูปบนมือถือ — full-bleed เต็มจอ objectFit cover */
+          /* รูปขวา 58% เหมือน desktop */
           .hero-photo-front {
-            width: 100% !important;
+            width: 60% !important;
             height: 100% !important;
             top: 0 !important;
             right: 0 !important;
-            left: 0 !important;
-            bottom: 0 !important;
+            left: auto !important;
+            bottom: auto !important;
             object-fit: cover !important;
-            object-position: 60% top !important;
+            object-position: center top !important;
             z-index: 1 !important;
           }
-          /* ซ่อน description บนมือถือ */
           .hero-desc-p { display: none !important; }
         }
       `}</style>
