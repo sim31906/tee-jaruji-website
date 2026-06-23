@@ -43,31 +43,41 @@ export default function Hero() {
         .ha5 { animation: hIn .65s ease both .82s; }
 
         @media (max-width: 768px) {
-          /* text อยู่ซ้าย แคบลงให้พอดีกับรูปขวา */
+          /* text วางทับรูปซ้าย เหมือน reference */
           .hero-text-col {
-            padding: 5.5rem 1.2rem 3rem !important;
-            max-width: 58% !important;
-            justify-content: flex-start !important;
+            padding: 5rem 1.5rem 3rem !important;
+            max-width: 80% !important;
+            justify-content: center !important;
           }
-          .hero-h1 { font-size: clamp(2.8rem, 10vw, 4.5rem) !important; }
+          .hero-h1 { font-size: clamp(4rem, 16vw, 7rem) !important; }
           .hero-wm {
-            font-size: clamp(3rem, 14vw, 6rem) !important;
-            top: 26vh !important;
-            left: 1rem !important;
+            font-size: clamp(3rem, 15vw, 6rem) !important;
+            top: 35vh !important;
+            left: 0.8rem !important;
           }
-          /* รูปขวา 58% เหมือน desktop */
+          /* รูป full bleed background — อยู่หลัง text */
           .hero-photo-front {
-            width: 60% !important;
+            width: 100% !important;
             height: 100% !important;
             top: 0 !important;
             right: 0 !important;
-            left: auto !important;
-            bottom: auto !important;
+            left: 0 !important;
+            bottom: 0 !important;
             object-fit: cover !important;
-            object-position: center top !important;
+            object-position: 65% top !important;
             z-index: 1 !important;
           }
           .hero-desc-p { display: none !important; }
+          /* gradient แรงขึ้นบนมือถือ — รูปเต็มจอต้องมีพื้นมืดพอสำหรับ text */
+          .hero-grad {
+            background: linear-gradient(to right,
+              rgba(12,8,18,0.92) 0%,
+              rgba(12,8,18,0.82) 30%,
+              rgba(12,8,18,0.45) 55%,
+              rgba(12,8,18,0.12) 72%,
+              transparent 88%
+            ) !important;
+          }
         }
       `}</style>
 
@@ -103,7 +113,7 @@ export default function Hero() {
         </div>
 
         {/* ── z2: left gradient — readable dark area for text ── */}
-        <div style={{
+        <div className="hero-grad" style={{
           position: 'absolute', inset: 0, zIndex: 2,
           background: `linear-gradient(to right,
             rgba(12,8,18,0.90) 0%,
