@@ -56,26 +56,27 @@ export default function Hero() {
           }
           /* รูปขวา — เลื่อนให้ขอบซ้ายรูปอยู่ที่ 55% ของจอ */
           .hero-photo-front {
-            width: 45% !important;
+            width: 60% !important;
             height: 100% !important;
             top: 0 !important;
             right: 0 !important;
             left: auto !important;
             bottom: auto !important;
             object-fit: cover !important;
-            object-position: center top !important;
+            object-position: 20% top !important;
             z-index: 1 !important;
           }
           .hero-desc-p { display: none !important; }
-          /* gradient ลื่น ไม่มีเส้นแบ่ง */
+          /* gradient ทึบถึงขอบรูป ไม่มีเส้น */
           .hero-grad {
             background: linear-gradient(to right,
-              rgba(12,8,18,0.96) 0%,
-              rgba(12,8,18,0.85) 28%,
-              rgba(12,8,18,0.55) 44%,
-              rgba(12,8,18,0.20) 56%,
-              rgba(12,8,18,0.05) 66%,
-              transparent 78%
+              rgba(12,8,18,0.98) 0%,
+              rgba(12,8,18,0.95) 35%,
+              rgba(12,8,18,0.80) 50%,
+              rgba(12,8,18,0.55) 58%,
+              rgba(12,8,18,0.25) 68%,
+              rgba(12,8,18,0.05) 78%,
+              transparent 88%
             ) !important;
           }
           .hero-cta-tj {
