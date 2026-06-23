@@ -43,11 +43,26 @@ export default function Hero() {
         .ha5 { animation: hIn .65s ease both .82s; }
 
         @media (max-width: 768px) {
-          .hero-text-col { padding: 5.5rem 1.5rem 3rem !important; max-width: 85% !important; }
-          .hero-h1 { font-size: clamp(3rem, 13vw, 5rem) !important; }
-          .hero-wm { font-size: clamp(3.5rem, 18vw, 7rem) !important; top: 24vh !important; }
-          .hero-photo-front { height: 70% !important; bottom: 0 !important; top: auto !important; right: -5% !important; }
-          .hero-desc-abs { display: none !important; }
+          .hero-text-col {
+            padding: 6rem 1.5rem 2rem !important;
+            max-width: 90% !important;
+            justify-content: flex-start !important;
+          }
+          .hero-h1 { font-size: clamp(3.5rem, 15vw, 6rem) !important; }
+          .hero-wm {
+            font-size: clamp(4rem, 20vw, 8rem) !important;
+            top: 28vh !important;
+          }
+          /* รูป — เต็มความสูง ชิดขวา เหมือน desktop แต่ width ปรับตามสัดส่วน */
+          .hero-photo-front {
+            height: 100% !important;
+            width: auto !important;
+            top: 0 !important;
+            bottom: auto !important;
+            right: -10% !important; /* ขยับขวาหน่อยให้หน้าโชว์ */
+          }
+          /* ซ่อน description บนมือถือ — ทับรูป */
+          .hero-desc-p { display: none !important; }
         }
       `}</style>
 
@@ -146,7 +161,7 @@ export default function Hero() {
           </div>
 
           {/* description — ซ้าย ใต้ปุ่ม */}
-          <p className="ha4" style={{
+          <p className="ha4 hero-desc-p" style={{
             marginTop: '1.5rem',
             fontSize: '1rem',
             lineHeight: 1.85,
