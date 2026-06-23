@@ -486,7 +486,7 @@ export default function Schedule() {
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <h4 style={{ fontFamily: fonts.display, fontSize: '1.2rem', fontWeight: 500,
                     marginBottom: '.3rem', color: colors.ink,
-                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    whiteSpace: 'normal' }}>
                     {ev.summary || (lang === 'th' ? 'ไม่มีชื่อ' : 'Untitled')}
                   </h4>
                   {desc && (
