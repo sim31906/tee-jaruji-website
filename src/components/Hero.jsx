@@ -68,15 +68,21 @@ export default function Hero() {
             z-index: 1 !important;
           }
           .hero-desc-p { display: none !important; }
-          /* gradient cover ซ้ายจนถึง 42% (ส่วน dark ก่อนรูป) */
+          /* gradient ลื่น ไม่มีเส้นแบ่ง */
           .hero-grad {
             background: linear-gradient(to right,
-              rgba(12,8,18,0.95) 0%,
-              rgba(12,8,18,0.90) 30%,
-              rgba(12,8,18,0.70) 42%,
-              rgba(12,8,18,0.20) 50%,
-              transparent 60%
+              rgba(12,8,18,0.96) 0%,
+              rgba(12,8,18,0.88) 22%,
+              rgba(12,8,18,0.60) 38%,
+              rgba(12,8,18,0.30) 50%,
+              rgba(12,8,18,0.08) 62%,
+              transparent 75%
             ) !important;
+          }
+          /* ปุ่มเล็กลงบนมือถือ */
+          .hero-cta-tj {
+            padding: 0.7rem 1.6rem !important;
+            font-size: 0.65rem !important;
           }
         }
       `}</style>
