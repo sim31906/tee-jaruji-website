@@ -10,6 +10,7 @@ export const translations = {
       description: 'นักแสดง · นักร้อง · ศิลปิน — เก็บรวบรวมเรื่องราว ผลงาน และช่วงเวลาดี ๆ ที่อยากแบ่งปันกับทุกคน ยินดีต้อนรับสู่บ้านอย่างเป็นทางการของผมครับ',
       tags: ['นักแสดง', 'นักร้อง', 'นักเล่าเรื่อง'],
       watchIntro: 'ดูวิดีโอแนะนำตัว',
+      ctaButton: 'ดูประวัติ',
     },
     profile: {
       sectionNum: '01 / ประวัติ',
@@ -248,6 +249,7 @@ export const translations = {
       description: 'Actor · Singer · Artist — collecting stories, works, and wonderful moments to share with everyone. Welcome to my official home.',
       tags: ['Performer', 'Vocalist', 'Storyteller'],
       watchIntro: 'Watch Intro',
+      ctaButton: 'View Profile',
     },
     profile: {
       sectionNum: '01 / Profile',
@@ -486,6 +488,7 @@ export const translations = {
       description: '演员 · 歌手 · 艺术家 — 收集故事、作品和美好时刻，与大家分享。欢迎来到我的官方主页。',
       tags: ['表演者', '歌手', '讲述者'],
       watchIntro: '观看介绍',
+      ctaButton: '查看简介',
     },
     profile: {
       sectionNum: '01 / Profile',

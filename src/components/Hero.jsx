@@ -7,174 +7,210 @@ export default function Hero() {
   const { lang } = useLang();
   const t = translations[lang].hero;
 
-  const handleVideoClick = () => {
-    if (!hero.videoUrl) {
-      alert('วางลิงก์วิดีโอแนะนำตัวที่ src/data/siteData.js > hero.videoUrl');
-    }
-  };
+  const taglineParts = t.tagline.includes(' ')
+    ? t.tagline.split(' ')
+    : t.tagline.split('·');
 
   return (
     <>
       <style>{`
-        .video-placeholder-tj:hover .play-icon-tj {
-          transform: scale(1.15);
+        .hero-cta-tj {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.8rem;
+          padding: 1.1rem 2.6rem;
           background: ${colors.pink};
+          color: ${colors.ink};
+          font-family: ${fonts.mono};
+          font-size: 0.75rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          text-decoration: none;
+          border-radius: 100px;
+          transition: background 0.3s;
+          white-space: nowrap;
         }
-        @media (max-width: 968px) {
-          .hero-grid-tj {
-            grid-template-columns: 1fr !important;
-            gap: 3rem !important;
-            padding: 6rem 1.5rem 4rem !important;
-          }
+        .hero-cta-tj:hover { background: ${colors.cream}; }
+
+        @keyframes hIn {
+          from { opacity: 0; transform: translateY(14px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .ha1 { animation: hIn .65s ease both .05s; }
+        .ha2 { animation: hIn .65s ease both .22s; }
+        .ha3 { animation: hIn .65s ease both .44s; }
+        .ha4 { animation: hIn .65s ease both .62s; }
+        .ha5 { animation: hIn .65s ease both .82s; }
+
+        @media (max-width: 768px) {
+          .hero-text-col { padding: 5.5rem 1.5rem 3rem !important; max-width: 85% !important; }
+          .hero-h1 { font-size: clamp(3rem, 13vw, 5rem) !important; }
+          .hero-wm { font-size: clamp(3.5rem, 18vw, 7rem) !important; top: 24vh !important; }
+          .hero-photo-front { height: 70% !important; bottom: 0 !important; top: auto !important; right: -5% !important; }
+          .hero-desc-abs { display: none !important; }
         }
       `}</style>
 
       <section
         id="home"
-        className="hero-grid-tj"
-        style={{
-          minHeight: '100vh',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          alignItems: 'center',
-          padding: '8rem 3rem 4rem',
-          position: 'relative',
-          zIndex: 2,
-          gap: '3rem',
-        }}
+        style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden', background: colors.ink }}
       >
-        <div>
-          <div style={{
-            fontFamily: fonts.mono,
-            fontSize: '0.75rem',
-            letterSpacing: '0.3em',
-            textTransform: 'uppercase',
-            marginBottom: '2rem',
-            color: colors.accent,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem',
-            animation: 'hero-reveal 0.8s ease both',
-            animationDelay: '0.1s',
-          }}>
-            <span style={{ display: 'inline-block', width: '40px', height: '1px', background: colors.accent }}></span>
-            {t.tagline}
+
+        {/* ── z0: dark background ── */}
+        {/* (section background = colors.ink) */}
+
+        {/* ── z1: watermark — sits BEHIND the person photo ── */}
+        <div
+          className="hero-wm"
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: '36vh',
+            left: '2.8rem',
+            zIndex: 1,
+            fontSize: 'clamp(8rem, 16vw, 18rem)',
+            fontFamily: fonts.display,
+            fontWeight: 700,
+            color: `${colors.pink}42`,
+            lineHeight: 0.82,
+            whiteSpace: 'nowrap',
+            pointerEvents: 'none',
+            letterSpacing: '-0.02em',
+            userSelect: 'none',
+          }}
+        >
+          TEE<br />JARUJI
+        </div>
+
+        {/* ── z2: left gradient — readable dark area for text ── */}
+        <div style={{
+          position: 'absolute', inset: 0, zIndex: 2,
+          background: `linear-gradient(to right,
+            rgba(12,8,18,0.90) 0%,
+            rgba(12,8,18,0.75) 22%,
+            rgba(12,8,18,0.35) 44%,
+            rgba(12,8,18,0.08) 62%,
+            transparent 76%
+          )`,
+        }} />
+
+        {/* ── z3: text content ── */}
+        <div
+          className="hero-text-col"
+          style={{
+            position: 'relative', zIndex: 3,
+            minHeight: '100vh',
+            display: 'flex', flexDirection: 'column', justifyContent: 'center',
+            padding: '8rem 3.5rem 6rem',
+            maxWidth: '48%',
+          }}
+        >
+          {/* small name — two lines */}
+          <div className="ha1" style={{ marginBottom: '0.4rem' }}>
+            {taglineParts.map((p, i) => (
+              <div key={i} style={{
+                fontFamily: fonts.display,
+                fontWeight: 700,
+                fontSize: 'clamp(1.5rem, 2.5vw, 2.2rem)',
+                color: 'rgba(255,255,255,0.9)',
+                lineHeight: 1.2,
+              }}>{p}</div>
+            ))}
           </div>
 
-          <h1 style={{
-            fontFamily: fonts.display,
-            fontSize: 'clamp(4rem, 9vw, 9rem)',
-            fontWeight: 400,
-            lineHeight: 0.85,
-            letterSpacing: '-0.04em',
-            marginBottom: '1.5rem',
-            animation: 'hero-reveal 0.9s ease both',
-            animationDelay: '0.3s',
-          }}>
+          {/* big name */}
+          <h1
+            className="hero-h1 ha2"
+            style={{
+              fontFamily: fonts.display,
+              fontSize: 'clamp(6.5rem, 12vw, 14rem)',
+              fontWeight: 700,
+              lineHeight: 0.95,
+              letterSpacing: '-0.025em',
+              color: '#fff',
+              margin: '0.3rem 0 2.25rem 0',
+            }}
+          >
             {hero.name}<br />
-            <span style={{ fontStyle: 'italic', fontWeight: 300, color: colors.accent }}>
+            <span style={{ fontStyle: 'italic', fontWeight: 400, color: colors.pink }}>
               {hero.surname}
             </span>
           </h1>
 
-          <p style={{
+          {/* CTA */}
+          <div className="ha3">
+            <a href="#profile" className="hero-cta-tj">
+              <span style={{ fontSize: '0.85rem' }}>✦</span>
+              {t.ctaButton}
+            </a>
+          </div>
+
+          {/* description — ซ้าย ใต้ปุ่ม */}
+          <p className="ha4" style={{
+            marginTop: '1.5rem',
             fontSize: '1rem',
-            maxWidth: '420px',
-            lineHeight: 1.7,
-            color: colors.inkSoft,
-            marginBottom: '2.5rem',
-            animation: 'hero-reveal 0.9s ease both',
-            animationDelay: '0.55s',
+            lineHeight: 1.85,
+            color: 'rgba(255,255,255,0.55)',
+            maxWidth: '380px',
+            margin: '1.5rem 0 0 0',
           }}>
             {t.description}
           </p>
 
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', animation: 'hero-reveal 0.9s ease both', animationDelay: '0.75s' }}>
-            {t.tags.map(tag => (
-              <span key={tag} style={{
-                padding: '0.5rem 1rem',
-                border: `1px solid ${colors.ink}`,
-                borderRadius: '100px',
-                fontFamily: fonts.mono,
-                fontSize: '0.7rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.15em',
-                background: colors.pinkSoft,
-              }}>
-                {tag}
-              </span>
+          {/* scroll indicator */}
+          <div className="ha5" style={{
+            marginTop: '1.5rem',
+            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px',
+          }}>
+            <span style={{ fontFamily: fonts.mono, fontSize: '0.6rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.1em' }}>0</span>
+            {[0,1,2].map(i => (
+              <span key={i} style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.6rem', lineHeight: 1 }}>›</span>
             ))}
           </div>
         </div>
 
-        <div style={{
-          position: 'relative',
-          aspectRatio: '9/12',
-          maxWidth: '420px',
-          margin: '0 auto',
-          width: '100%',
-          borderRadius: '8px',
-          overflow: 'hidden',
-          boxShadow: `20px 20px 0 ${colors.pink}, 30px 30px 0 ${colors.blue}`,
-          transform: 'rotate(-2deg)',
-        }}>
-          {hero.videoUrl ? (
-            hero.videoUrl.includes('youtube.com') || hero.videoUrl.includes('youtu.be') ? (
-              <iframe
-                src={hero.videoUrl}
-                style={{ width: '100%', height: '100%', border: 'none' }}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Intro video"
-              />
-            ) : (
-              <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
-                <source src={hero.videoUrl} type="video/mp4" />
-              </video>
-            )
-          ) : (
-            <div
-              className="video-placeholder-tj"
-              onClick={handleVideoClick}
+        {/* ── z4: PHOTO — หน้าสุด, เต็มสัดส่วน ── */}
+        {(hero.bgImage || hero.bgVideo) && (
+          hero.bgVideo ? (
+            <video
+              autoPlay muted loop playsInline
+              className="hero-photo-front"
               style={{
                 position: 'absolute',
-                inset: 0,
-                background: `linear-gradient(135deg, ${colors.pink}, ${colors.blue})`,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: colors.ink,
-                cursor: 'pointer',
-                transition: 'all 0.3s',
+                right: 0, top: 0,
+                height: '100%',
+                width: 'auto',      /* แสดงตามสัดส่วนจริง ไม่ crop */
+                zIndex: 4,          /* หน้า text/watermark ทั้งหมด */
+                pointerEvents: 'none',
               }}
             >
-              <div className="play-icon-tj" style={{
-                width: '90px',
-                height: '90px',
-                border: `2px solid ${colors.ink}`,
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '1.5rem',
-                transition: 'all 0.3s',
-                background: 'rgba(253, 246, 236, 0.5)',
-              }}>
-                <div style={{
-                  width: 0, height: 0,
-                  borderLeft: `20px solid ${colors.ink}`,
-                  borderTop: '14px solid transparent',
-                  borderBottom: '14px solid transparent',
-                  marginLeft: '5px',
-                }}></div>
-              </div>
-              <div style={{ fontFamily: fonts.mono, fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase' }}>
-                {t.watchIntro}
-              </div>
-            </div>
-          )}
-        </div>
+              <source src={hero.bgVideo} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              src={hero.bgImage}
+              alt=""
+              className="hero-photo-front"
+              style={{
+                position: 'absolute',
+                right: 0, top: 0,
+                height: '100%',
+                width: 'auto',      /* แสดงตามสัดส่วนจริง ไม่ crop */
+                zIndex: 4,          /* หน้า text/watermark ทั้งหมด */
+                pointerEvents: 'none',
+              }}
+            />
+          )
+        )}
+
+        {/* ── z5: bottom fade — ทับทุกอย่างรวมถึงรูป ── */}
+        <div style={{
+          position: 'absolute',
+          bottom: 0, left: 0, right: 0, height: '12%',
+          zIndex: 5,
+          background: `linear-gradient(to top, ${colors.ink}, transparent)`,
+        }} />
+
       </section>
     </>
   );

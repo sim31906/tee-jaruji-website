@@ -8,12 +8,10 @@ import { colors } from "../styles/theme";
 export const hero = {
   name: "Tee",
   surname: "Jaruji",
-  tagline: "EST. ONLINE · 2026",
-  description:
-    "นักเเสดง · นักร้อง · ศิลปิน — เก็บรวบรวมเรื่องราว ผลงาน เเละช่วงเวลาดี ๆ ที่อยากเเบ่งปันกับทุกคน ยินดีต้อนรับสู่บ้านอย่างเป็นทางการของผมครับ",
-  tags: ["Performer", "Vocalist", "Storyteller"],
-  // ใส่ลิงก์วิดีโอเเนะนำตัวที่นี่ (MP4 หรือ YouTube embed URL)
-  videoUrl: "", // ตัวอย่าง: 'https://www.youtube.com/embed/VIDEO_ID' หรือ '/intro.mp4'
+  // ใส่ path รูปพื้นหลัง Hero (วางไฟล์ใน public/ แล้วใส่ '/ชื่อไฟล์.jpg')
+  bgImage: "/HOME.png",
+  // ใส่ path วิดีโอพื้นหลัง Hero (ถ้ามีทั้งสองอย่าง วิดีโอจะเล่นก่อน รูปเป็น fallback)
+  bgVideo: "",
 };
 
 // ---- WORKS ----
