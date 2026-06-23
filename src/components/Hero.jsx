@@ -192,16 +192,6 @@ export default function Hero() {
             {t.description}
           </p>
 
-          {/* scroll indicator */}
-          <div className="ha5" style={{
-            marginTop: '1.5rem',
-            display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '2px',
-          }}>
-            <span style={{ fontFamily: fonts.mono, fontSize: '0.6rem', color: 'rgba(255,255,255,0.28)', letterSpacing: '0.1em' }}>0</span>
-            {[0,1,2].map(i => (
-              <span key={i} style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.6rem', lineHeight: 1 }}>›</span>
-            ))}
-          </div>
         </div>
 
         {/* ── z4: PHOTO — หน้าสุด, เต็มสัดส่วน ── */}
