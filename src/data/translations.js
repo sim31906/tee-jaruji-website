@@ -436,7 +436,7 @@ export const translations = {
       modalCategory: 'Category 02',
       watchOn: 'Watch on',
       trailerLabel: '— Trailer',
-      summaryLabel: '— เรื่องย่อ',
+      summaryLabel: '— Summary',
       synopsisLabel: '— Synopsis',
       noTrailer: 'No trailer available',
       posterAlt: 'poster',
@@ -491,7 +491,7 @@ export const translations = {
       ctaButton: '查看简介',
     },
     profile: {
-      sectionNum: '01 / Profile',
+      sectionNum: '01 / 简介',
       sectionTitle: '学习 &',
       sectionItalic: '作品',
       educationLabel: '— 教育经历',
@@ -584,14 +584,14 @@ export const translations = {
       hide: '收起',
     },
     about: {
-      sectionNum: '04 / About',
+      sectionNum: '04 / 关于',
       sectionTitle: '找我',
       sectionItalic: '在线',
       quote: '感谢你们的到来，欢迎通过我的社交媒体关注我的作品和故事。',
       signature: '— Tee Jaruji',
     },
     contact: {
-      sectionNum: '05 / Contact',
+      sectionNum: '05 / 联系',
       sectionTitle: '工作',
       sectionItalic: '问询',
       items: [
@@ -600,7 +600,7 @@ export const translations = {
       ],
     },
     schedule: {
-      sectionNum: '06 / Schedule',
+      sectionNum: '06 / 日程',
       sectionTitle: '活动',
       sectionItalic: '日程',
       events: [
@@ -610,7 +610,7 @@ export const translations = {
       ],
     },
     supporters: {
-      sectionNum: '07 / Supporters',
+      sectionNum: '07 / 支持者',
       sectionTitle: '我的',
       sectionItalic: '家人',
       description: '感谢一直陪伴在我身边的每一个人。每一个微笑、每一条留言、每一份支持，都是我每天前进的动力。',
@@ -622,7 +622,7 @@ export const translations = {
       viewAllPhotos: '查看全部照片 ↗',
     },
     fanclub: {
-      sectionNum: '08 / Fanclub Services',
+      sectionNum: '08 / 粉丝服务',
       sectionTitle: '粉丝',
       sectionItalic: '服务',
       description: '为想要支持、组织活动或反映问题的粉丝提供的渠道。我们的团队随时准备为您提供帮助。',
@@ -675,7 +675,7 @@ export const translations = {
       modalCategory: 'Category 02',
       watchOn: '观看渠道',
       trailerLabel: '— 预告片',
-      summaryLabel: '— 剧情简介（泰文）',
+      summaryLabel: '— 剧情简介',
       synopsisLabel: '— Synopsis',
       noTrailer: '暂无预告片',
       posterAlt: 'poster',
