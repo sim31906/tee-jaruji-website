@@ -43,39 +43,39 @@ export default function Hero() {
         .ha5 { animation: hIn .65s ease both .82s; }
 
         @media (max-width: 768px) {
-          /* text วางทับรูปซ้าย เหมือน reference */
+          /* text อยู่ซ้าย ไม่ overlap รูป */
           .hero-text-col {
-            padding: 5rem 1.5rem 3rem !important;
-            max-width: 80% !important;
+            padding: 5rem 1.2rem 3rem !important;
+            max-width: 52% !important;
             justify-content: center !important;
           }
-          .hero-h1 { font-size: clamp(4rem, 16vw, 7rem) !important; }
+          .hero-h1 { font-size: clamp(2.8rem, 10.5vw, 5rem) !important; }
           .hero-wm {
-            font-size: clamp(3rem, 15vw, 6rem) !important;
-            top: 35vh !important;
-            left: 0.8rem !important;
+            font-size: clamp(2.5rem, 12vw, 5rem) !important;
+            top: 30vh !important;
+            left: 0.5rem !important;
           }
-          /* รูป full bleed background — อยู่หลัง text */
+          /* รูปขวา — fixed width 58%, height เต็ม, crop กึ่งกลางแนวตั้ง */
           .hero-photo-front {
-            width: 100% !important;
+            width: 58% !important;
             height: 100% !important;
             top: 0 !important;
             right: 0 !important;
-            left: 0 !important;
-            bottom: 0 !important;
+            left: auto !important;
+            bottom: auto !important;
             object-fit: cover !important;
-            object-position: 65% top !important;
+            object-position: center top !important;
             z-index: 1 !important;
           }
           .hero-desc-p { display: none !important; }
-          /* gradient แรงขึ้นบนมือถือ — รูปเต็มจอต้องมีพื้นมืดพอสำหรับ text */
+          /* gradient cover ซ้ายจนถึง 42% (ส่วน dark ก่อนรูป) */
           .hero-grad {
             background: linear-gradient(to right,
-              rgba(12,8,18,0.92) 0%,
-              rgba(12,8,18,0.82) 30%,
-              rgba(12,8,18,0.45) 55%,
-              rgba(12,8,18,0.12) 72%,
-              transparent 88%
+              rgba(12,8,18,0.95) 0%,
+              rgba(12,8,18,0.90) 30%,
+              rgba(12,8,18,0.70) 42%,
+              rgba(12,8,18,0.20) 50%,
+              transparent 60%
             ) !important;
           }
         }
