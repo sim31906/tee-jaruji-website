@@ -174,7 +174,14 @@ export default function Hero() {
 
           {/* CTA */}
           <div className="ha3">
-            <a href="#profile" className="hero-cta-tj">
+            <a
+              href="#profile"
+              className="hero-cta-tj"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('profile')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               <span style={{ fontSize: '0.85rem' }}>✦</span>
               {t.ctaButton}
             </a>
