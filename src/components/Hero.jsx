@@ -53,14 +53,17 @@ export default function Hero() {
             font-size: clamp(4rem, 20vw, 8rem) !important;
             top: 28vh !important;
           }
-          /* รูปบนมือถือ — อยู่หลัง text (z-index ต่ำ) เต็มความสูง ชิดขวา */
+          /* รูปบนมือถือ — full-bleed เต็มจอ objectFit cover */
           .hero-photo-front {
+            width: 100% !important;
             height: 100% !important;
-            width: auto !important;
             top: 0 !important;
-            bottom: auto !important;
             right: 0 !important;
-            z-index: 1 !important;   /* อยู่หลัง gradient และ text */
+            left: 0 !important;
+            bottom: 0 !important;
+            object-fit: cover !important;
+            object-position: 60% top !important;
+            z-index: 1 !important;
           }
           /* ซ่อน description บนมือถือ */
           .hero-desc-p { display: none !important; }
