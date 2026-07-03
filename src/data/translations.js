@@ -51,6 +51,7 @@ export const translations = {
         { title: 'งานอีเวนต์\nและกิจกรรม', desc: 'งานเปิดตัว · งานแฟนมีต · งานพรีเซนเตอร์ · กิจกรรมพิเศษทั้งในประเทศและต่างประเทศ' },
         { title: 'การแสดง\nและภาพยนตร์', desc: 'งานแสดงละคร · ซีรีส์ · ภาพยนตร์ · และการแสดงบนเวที' },
         { title: 'เพลง\nและดนตรี', desc: 'ผลงานเพลง · ซิงเกิล · OST · และการแสดงดนตรีสด' },
+        { title: 'รายการ\nทีวี', desc: 'รายการทีวี · เกมโชว์ · วาไรตี้ · และรายการพิเศษ' },
       ],
       workDetail: [
         {
@@ -176,6 +177,19 @@ export const translations = {
       fanPhotosDesc: 'รวมรูปภาพจากแฟนคลับที่บันทึกในแต่ละกิจกรรม',
       fanPhotosButton: 'ดูรูปทั้งหมด ↗',
     },
+    tvshows: {
+      backNav: '← กลับหน้าหลัก',
+      categoryLabel: 'Category 04',
+      titleMain: 'รายการ',
+      titleItalic: 'ทีวี',
+      subtitle: 'รายการทีวี วาไรตี้ และรายการพิเศษที่ตี๋ธนพลเคยร่วมรายการ — กดที่การ์ดเพื่อดูคลิป',
+      allWorks: '— รายการทั้งหมด',
+      itemsUnit: 'รายการ',
+      backButton: '← กลับไป ผลงานที่คัดสรร',
+      viewDetail: 'ดูคลิป →',
+      typeTV: 'รายการทีวี',
+      noTrailer: 'ยังไม่มีคลิป',
+    },
     workDetail: {
       backNav: '← กลับหน้าหลัก',
       backButton: '← กลับไป ผลงานที่คัดสรร',
@@ -290,6 +304,7 @@ export const translations = {
         { title: 'Event\nAppearances', desc: 'Launches · Fan Meets · Presenter Events · Special activities both domestic and international' },
         { title: 'Performance\n& Acting', desc: 'Drama series · Movies · Stage performances and theatrical productions' },
         { title: 'Music\n& Sound', desc: 'Music releases · Singles · OST soundtracks · Live musical performances' },
+        { title: 'TV\nShows', desc: 'TV programs · Game shows · Variety shows · Special appearances' },
       ],
       workDetail: [
         {
@@ -415,6 +430,19 @@ export const translations = {
       fanPhotosDesc: 'A collection of photos taken by fans at various events.',
       fanPhotosButton: 'View All Photos ↗',
     },
+    tvshows: {
+      backNav: '← Back to Home',
+      categoryLabel: 'Category 04',
+      titleMain: 'TV',
+      titleItalic: 'Shows',
+      subtitle: 'TV programs, variety shows, and special appearances by Tee Jaruji — click a card to watch',
+      allWorks: '— All Shows',
+      itemsUnit: 'shows',
+      backButton: '← Back to Selected Works',
+      viewDetail: 'Watch →',
+      typeTV: 'TV Show',
+      noTrailer: 'No clip yet',
+    },
     workDetail: {
       backNav: '← Back to Home',
       backButton: '← Back to Selected Works',
@@ -529,6 +557,7 @@ export const translations = {
         { title: '活动\n出席', desc: '发布会 · 见面会 · 代言活动 · 国内外特别活动' },
         { title: '表演\n与影视', desc: '电视剧 · 电影 · 舞台剧 · 短片' },
         { title: '音乐\n与声音', desc: '音乐发行 · 单曲 · OST · 现场演出' },
+        { title: '电视\n节目', desc: '电视节目 · 游戏秀 · 综艺 · 特别活动' },
       ],
       workDetail: [
         {
@@ -653,6 +682,19 @@ export const translations = {
       fanPhotosTitle: '粉丝照片',
       fanPhotosDesc: '收录粉丝在各活动中拍摄的照片。',
       fanPhotosButton: '查看全部照片 ↗',
+    },
+    tvshows: {
+      backNav: '← 返回主页',
+      categoryLabel: 'Category 04',
+      titleMain: '电视',
+      titleItalic: '节目',
+      subtitle: 'Tee Jaruji 参与的电视节目、综艺及特别节目 — 点击卡片观看片段',
+      allWorks: '— 全部节目',
+      itemsUnit: '个',
+      backButton: '← 返回精选作品',
+      viewDetail: '观看 →',
+      typeTV: '电视节目',
+      noTrailer: '暂无片段',
     },
     workDetail: {
       backNav: '← 返回主页',

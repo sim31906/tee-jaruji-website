@@ -19,6 +19,7 @@ import TimelinePage from './pages/TimelinePage';
 import PerformancePage from './pages/PerformancePage';
 import MusicPage from './pages/MusicPage';
 import EventsPage from './pages/EventsPage';
+import TVShowsPage from './pages/TVShowsPage';
 
 function MainPage() {
   const location = useLocation();
@@ -93,6 +94,7 @@ export default function App() {
       <Route path="/work/events" element={<EventsPage />} />
       <Route path="/work/performance" element={<PerformancePage />} />
       <Route path="/work/music" element={<MusicPage />} />
+      <Route path="/work/tvshows" element={<TVShowsPage />} />
       <Route path="/work/:slug" element={<WorkDetailPage />} />
       <Route path="/timeline" element={<TimelinePage />} />
     </Routes>
