@@ -672,6 +672,26 @@ export const eventsData = [
 
   // ─── 2569 ───
   {
+    id: 'e-2569-005',
+    year: 2569,
+    date: '11 ม.ค. 2569',
+    dateEn: '11 Jan 2026',
+    title: 'Garden Back Concert',
+    titleZh: 'Garden Back Concert',
+    location: 'กรุงเทพฯ',
+    locationEn: 'Bangkok',
+    locationZh: '曼谷',
+    type: 'concert',
+    detail: 'ตี๋ร่วมขึ้นเวทีคอนเสิร์ตบรรยากาศอบอุ่นพร้อมแบ็นด์สด ร้องเพลงคู่กับเพื่อนศิลปิน ท่ามกลางแฟนคลับที่มาร่วมบันทึกความทรงจำอย่างใกล้ชิด',
+    detailEn: 'Tee performed at Garden Back Concert, taking the stage with a live band and a fellow artist for an intimate set, surrounded by fans capturing every moment up close.',
+    detailZh: 'Tee在Garden Back Concert登台演出，与好友艺人同台献唱，现场配有真实乐队伴奏，粉丝们近距离记录下每一个珍贵瞬间。',
+    image: '/events/e-2569-005.jpg',
+    links: [
+      { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/1MypOd0h0mnQEfYHUYebzpLyyFNJZ8Jm0?usp=share_link', color: '#fff' },
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DTaLkjwEhFT/?igsh=MTZnbnRrdzhwb3Y5dQ==', color: '#C13584' },
+    ],
+  },
+  {
     id: 'e-2569-001',
     year: 2569,
     date: '2 มี.ค. 2569',

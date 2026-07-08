@@ -7,9 +7,9 @@ export default function Hero() {
   const { lang } = useLang();
   const t = translations[lang].hero;
 
-  const taglineParts = t.tagline.includes(' ')
-    ? t.tagline.split(' ')
-    : t.tagline.split('·');
+  const taglineParts = t.tagline.includes('·')
+    ? t.tagline.split('·')
+    : t.tagline.split(' ');
 
   return (
     <>

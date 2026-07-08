@@ -512,7 +512,7 @@ export const translations = {
       supporters: '支持者', fanclub: '粉丝服务',
     },
     hero: {
-      tagline: '塔纳朋·扎卢吉塔侬',
+      tagline: '胡光平·Hu guang ping',
       description: '演员 · 歌手 · 艺术家 — 收集故事、作品和美好时刻，与大家分享。欢迎来到我的官方主页。',
       tags: ['表演者', '歌手', '讲述者'],
       watchIntro: '观看介绍',
