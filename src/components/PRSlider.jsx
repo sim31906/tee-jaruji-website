@@ -41,7 +41,7 @@ function Slider({ items, autoSec = 15 }) {
       }}>
         {items.map((item, i) =>
           item.type === 'video' ? (
-            <video key={item.id} ref={videoRef} muted={muted} playsInline onEnded={next}
+            <video key={item.id} ref={videoRef} muted={muted} playsInline autoPlay onEnded={next}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', opacity: i === idx ? 1 : 0, transition: 'opacity 0.8s ease' }}>
               <source src={item.src} type="video/mp4" />
             </video>
