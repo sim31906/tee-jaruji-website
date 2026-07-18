@@ -43,7 +43,7 @@ export default {
     const listed = await env.BUCKET.list({ prefix });
 
     const items = listed.objects
-      .filter(o => !o.key.endsWith('/'))
+      .filter(o => !o.key.endsWith('/') && !o.key.split('/').pop().startsWith('.') && o.size > 0)
       .sort((a, b) => a.key.localeCompare(b.key, undefined, { numeric: true }))
       .map(o => ({
         key: o.key,

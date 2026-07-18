@@ -141,7 +141,7 @@ function EventPlatformIcon({ platform, size = 26 }) {
     </svg>
   );
   if (platform === 'Netflix') return <SiNetflix size={size} color="white" />;
-  if (platform === 'Google Drive') return <SiGoogledrive size={size} color="white" />;
+  if (platform === 'Google Drive') return <img src="/platforms/google-drive.png" alt="Google Drive" style={{ width: size, height: size, objectFit: 'contain', padding: '10%' }} />;
   if (platform === 'Spotify') return <SiSpotify size={size} color="white" />;
   if (platform === 'Apple Music' || platform === 'iTunes') return <SiApplemusic size={size} color="white" />;
   if (platform === 'LINE Today') return (
@@ -216,11 +216,14 @@ function EventModal({ item, lang, onClose }) {
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose]);
 
-  // fetch gallery from Worker
+  // fetch gallery from Worker — normalise both old (string[]) and new ({key,url,name}[]) formats
   useEffect(() => {
     fetch(`${GALLERY_WORKER}?event=${item.id}`)
       .then(r => r.json())
-      .then(urls => {
+      .then(data => {
+        const urls = (Array.isArray(data) ? data : [])
+          .map(u => (typeof u === 'string' ? u : u?.url))
+          .filter(u => u && !/\/\.[^/]+$/.test(u));
         if (urls.length > 0) {
           const cover = item.image ? [item.image] : [];
           setR2Gallery([...cover, ...urls]);

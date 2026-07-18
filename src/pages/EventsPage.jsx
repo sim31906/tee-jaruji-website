@@ -97,11 +97,14 @@ function EventModal({ event, onClose, t, lang }) {
   const [imgHover, setImgHover] = useState(false);
   const [r2Gallery, setR2Gallery] = useState(null);
 
-  // fetch gallery from Worker
+  // fetch gallery from Worker — normalise both old (string[]) and new ({key,url,name}[]) formats
   useEffect(() => {
     fetch(`${GALLERY_WORKER}?event=${event.id}`)
       .then(r => r.json())
-      .then(urls => {
+      .then(data => {
+        const urls = (Array.isArray(data) ? data : [])
+          .map(u => (typeof u === 'string' ? u : u?.url))
+          .filter(u => u && !/\/\.[^/]+$/.test(u));
         if (urls.length > 0) {
           const cover = event.image ? [event.image] : [];
           setR2Gallery([...cover, ...urls]);
