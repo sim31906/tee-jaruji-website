@@ -153,8 +153,8 @@ export default function PRSlider() {
           from { transform: scaleX(0); }
           to   { transform: scaleX(1); }
         }
-        .pr-slider-wrap .pr-arrow { opacity: 0; transition: opacity 0.25s; }
-        .pr-slider-wrap:hover .pr-arrow { opacity: 1; }
+        .pr-slider-wrap .pr-arrow { opacity: 0.7; transition: opacity 0.25s; }
+        .pr-slider-wrap .pr-arrow:hover { opacity: 1; }
         @media (max-width: 768px) {
           .pr-header-tj { padding: 0 1.5rem !important; }
           .pr-slide-box { aspect-ratio: 4 / 3 !important; }
