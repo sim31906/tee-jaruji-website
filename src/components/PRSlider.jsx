@@ -10,14 +10,24 @@ const PR_FOLDER_ID = '1ZLopkVvnp4LJ_td3KPa8TDv4VXb_ORaU';
 function Slider({ items, autoSec = 15 }) {
   const [idx, setIdx] = useState(0);
   const [muted, setMuted] = useState(true);
+  const [showUI, setShowUI] = useState(false);
   const timerRef = useRef(null);
   const videoRef = useRef(null);
+  const hideRef  = useRef(null);
 
   const isVideo = items[idx]?.type === 'video';
 
   const next = useCallback(() => setIdx(i => (i + 1) % items.length), [items.length]);
   const prev = useCallback(() => setIdx(i => (i - 1 + items.length) % items.length), [items.length]);
   const navTo = useCallback(fn => { clearInterval(timerRef.current); fn(); }, []);
+
+  const showControls  = useCallback(() => { clearTimeout(hideRef.current); setShowUI(true); }, []);
+  const hideControls  = useCallback(() => { hideRef.current = setTimeout(() => setShowUI(false), 400); }, []);
+  const touchControls = useCallback(() => {
+    setShowUI(true);
+    clearTimeout(hideRef.current);
+    hideRef.current = setTimeout(() => setShowUI(false), 2500);
+  }, []);
 
   useEffect(() => {
     if (items.length < 2 || isVideo) return;
@@ -33,8 +43,11 @@ function Slider({ items, autoSec = 15 }) {
 
   if (items.length === 0) return null;
 
+  const uiFade = { opacity: showUI ? 1 : 0, transition: 'opacity 0.3s ease', pointerEvents: showUI ? 'auto' : 'none' };
+
   return (
-    <div className="pr-slider-wrap" style={{ position: 'relative' }}>
+    <div className="pr-slider-wrap" style={{ position: 'relative' }}
+      onMouseEnter={showControls} onMouseLeave={hideControls} onTouchStart={touchControls}>
       <div className="pr-slide-box" style={{
         width: '100%', aspectRatio: '16/9',
         overflow: 'hidden', position: 'relative', background: colors.ink,
@@ -57,8 +70,8 @@ function Slider({ items, autoSec = 15 }) {
 
         {items.length > 1 && (
           <>
-            <button className="pr-arrow" onClick={() => navTo(prev)} style={arrowStyle('left')}>‹</button>
-            <button className="pr-arrow" onClick={() => navTo(next)} style={arrowStyle('right')}>›</button>
+            <button className="pr-arrow" onClick={() => navTo(prev)} style={{ ...arrowStyle('left'), ...uiFade }}>‹</button>
+            <button className="pr-arrow" onClick={() => navTo(next)} style={{ ...arrowStyle('right'), ...uiFade }}>›</button>
           </>
         )}
 
@@ -67,7 +80,7 @@ function Slider({ items, autoSec = 15 }) {
             position: 'absolute', bottom: 16, right: 16, width: 40, height: 40, borderRadius: '50%',
             background: 'rgba(0,0,0,0.55)', border: 'none', color: '#fff', fontSize: '1.1rem',
             cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            zIndex: 3, backdropFilter: 'blur(4px)',
+            zIndex: 3, backdropFilter: 'blur(4px)', ...uiFade,
           }}>{muted ? '🔇' : '🔊'}</button>
         )}
 
@@ -79,7 +92,7 @@ function Slider({ items, autoSec = 15 }) {
       </div>
 
       {items.length > 1 && (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: '1.25rem', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: '1.25rem', flexWrap: 'wrap', ...uiFade }}>
           {items.map((_, i) => (
             <button key={i} onClick={() => { clearInterval(timerRef.current); setIdx(i); }} style={{
               width: i === idx ? 24 : 8, height: 8, borderRadius: 4,
@@ -100,8 +113,8 @@ export default function PRSlider() {
 
   const imageItems = useMemo(() => photos.map(p => ({ ...p, type: 'image' })), [photos]);
 
-  const numLabel  = lang === 'en' ? '02 / PR' : lang === 'zh' ? '02 / 宣传' : '02 / ประชาสัมพันธ์';
-  const mainTitle = lang === 'en' ? 'PR' : lang === 'zh' ? '宣传资讯' : 'ประชาสัมพันธ์';
+  const numLabel  = lang === 'en' ? '02 / Media & Ads' : lang === 'zh' ? '02 / 媒体广告' : '02 / สื่อ & โฆษณา';
+  const mainTitle = lang === 'en' ? 'Media & Ads' : lang === 'zh' ? '媒体广告' : 'สื่อ & โฆษณา';
   const adLabel   = lang === 'en' ? '— Commercial' : lang === 'zh' ? '— 广告' : '— โฆษณา';
   const prLabel   = lang === 'en' ? '— Announcement' : lang === 'zh' ? '— 宣传资讯' : '— ประชาสัมพันธ์';
 
