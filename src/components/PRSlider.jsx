@@ -2,10 +2,10 @@ import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { colors, fonts } from '../styles/theme';
 import { useLang } from '../context/LanguageContext';
 import { useGoogleDrivePhotos } from '../hooks/useGoogleDrivePhotos';
+import { useR2Videos } from '../hooks/useR2Videos';
 import SectionHeader from './SectionHeader';
 
 const PR_FOLDER_ID = '1ZLopkVvnp4LJ_td3KPa8TDv4VXb_ORaU';
-const PR_VIDEO_URL = 'https://pub-46fa3f6d65804c9ea240d7ff9b16d7bc.r2.dev/pr/ais.mp4';
 
 function Slider({ items, autoSec = 15 }) {
   const [idx, setIdx] = useState(0);
@@ -27,9 +27,9 @@ function Slider({ items, autoSec = 15 }) {
 
   useEffect(() => {
     if (!videoRef.current) return;
-    if (isVideo) { videoRef.current.currentTime = 0; videoRef.current.play().catch(() => {}); }
-    else videoRef.current.pause();
-  }, [idx, isVideo]);
+    videoRef.current.currentTime = 0;
+    videoRef.current.play().catch(() => {});
+  }, [idx]);
 
   if (items.length === 0) return null;
 
@@ -41,13 +41,17 @@ function Slider({ items, autoSec = 15 }) {
       }}>
         {items.map((item, i) =>
           item.type === 'video' ? (
-            <video key={item.id} ref={videoRef} muted={muted} playsInline autoPlay onEnded={next}
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', opacity: i === idx ? 1 : 0, transition: 'opacity 0.8s ease' }}>
-              <source src={item.src} type="video/mp4" />
-            </video>
+            i === idx ? (
+              <video key={item.id} ref={videoRef} muted={muted} playsInline autoPlay onEnded={next}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%',
+                  objectFit: 'contain' }}>
+                <source src={item.src} type="video/mp4" />
+              </video>
+            ) : null
           ) : (
             <img key={item.id} src={item.src} alt={item.alt}
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', opacity: i === idx ? 1 : 0, transition: 'opacity 0.8s ease' }} />
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%',
+                objectFit: 'contain', opacity: i === idx ? 1 : 0, transition: 'opacity 0.8s ease' }} />
           )
         )}
 
@@ -75,7 +79,7 @@ function Slider({ items, autoSec = 15 }) {
       </div>
 
       {items.length > 1 && (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: '1.25rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: '1.25rem', flexWrap: 'wrap' }}>
           {items.map((_, i) => (
             <button key={i} onClick={() => { clearInterval(timerRef.current); setIdx(i); }} style={{
               width: i === idx ? 24 : 8, height: 8, borderRadius: 4,
@@ -91,18 +95,15 @@ function Slider({ items, autoSec = 15 }) {
 
 export default function PRSlider() {
   const { lang } = useLang();
-  const { photos } = useGoogleDrivePhotos(PR_FOLDER_ID);
-
-  const videoItems = useMemo(() => PR_VIDEO_URL
-    ? [{ id: 'pr-video', type: 'video', src: PR_VIDEO_URL, alt: 'PR Video' }]
-    : [], []);
+  const { photos }         = useGoogleDrivePhotos(PR_FOLDER_ID);
+  const { videos, loading: videoLoading } = useR2Videos('pr');
 
   const imageItems = useMemo(() => photos.map(p => ({ ...p, type: 'image' })), [photos]);
 
-  const numLabel   = lang === 'en' ? '02 / PR' : lang === 'zh' ? '02 / 宣传' : '02 / ประชาสัมพันธ์';
-  const mainTitle  = lang === 'en' ? 'PR' : lang === 'zh' ? '宣传资讯' : 'ประชาสัมพันธ์';
-  const adLabel    = lang === 'en' ? '— Commercial' : lang === 'zh' ? '— 广告' : '— โฆษณา';
-  const prLabel    = lang === 'en' ? '— Announcement' : lang === 'zh' ? '— 宣传资讯' : '— ประชาสัมพันธ์';
+  const numLabel  = lang === 'en' ? '02 / PR' : lang === 'zh' ? '02 / 宣传' : '02 / ประชาสัมพันธ์';
+  const mainTitle = lang === 'en' ? 'PR' : lang === 'zh' ? '宣传资讯' : 'ประชาสัมพันธ์';
+  const adLabel   = lang === 'en' ? '— Commercial' : lang === 'zh' ? '— 广告' : '— โฆษณา';
+  const prLabel   = lang === 'en' ? '— Announcement' : lang === 'zh' ? '— 宣传资讯' : '— ประชาสัมพันธ์';
 
   const subStyle = {
     fontFamily: fonts.mono, fontSize: '0.72rem',
@@ -116,15 +117,20 @@ export default function PRSlider() {
         <SectionHeader num={numLabel} title={mainTitle} dark mb="0" pb="2rem" />
       </div>
 
-      {/* โฆษณา */}
-      <div style={{ marginBottom: '4rem' }}>
-        <div className="pr-header-tj" style={{ padding: '0 3rem' }}>
-          <p style={subStyle}>{adLabel}</p>
+      {/* โฆษณา — videos from R2 */}
+      {(videos.length > 0 || videoLoading) && (
+        <div style={{ marginBottom: '4rem' }}>
+          <div className="pr-header-tj" style={{ padding: '0 3rem' }}>
+            <p style={subStyle}>{adLabel}</p>
+          </div>
+          {videoLoading
+            ? <div style={{ width: '100%', aspectRatio: '16/9', background: colors.ink }} />
+            : <Slider items={videos} />
+          }
         </div>
-        <Slider items={videoItems} />
-      </div>
+      )}
 
-      {/* ประชาสัมพันธ์ */}
+      {/* ประชาสัมพันธ์ — photos from Google Drive */}
       {imageItems.length > 0 && (
         <div>
           <div className="pr-header-tj" style={{ padding: '0 3rem' }}>
