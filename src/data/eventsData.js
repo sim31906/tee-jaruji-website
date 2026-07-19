@@ -608,10 +608,10 @@ export const eventsData = [
     ],
   },
   {
-    id: 'e-2568-006',
-    year: 2568,
-    date: '12 มี.ค. 2568',
-    dateEn: '12 Mar 2025',
+    id: 'e-2569-008',
+    year: 2569,
+    date: '12 มี.ค. 2569',
+    dateEn: '12 Mar 2026',
     title: 'SIAM CENTER THE SUMMER TRENDSETTER',
     titleZh: 'SIAM CENTER 夏日潮流风向标',
     location: 'สยามเซ็นเตอร์ กรุงเทพฯ',
@@ -621,7 +621,7 @@ export const eventsData = [
     detail: 'ตี๋ร่วมงาน SIAM CENTER THE SUMMER TRENDSETTER — THE THAIDEAOPOLIS RUNWAY ถ่ายภาพหมู่ร่วมกับทีมนักแสดงและทีมงาน ณ สยามเซ็นเตอร์',
     detailEn: 'Tee joined the SIAM CENTER THE SUMMER TRENDSETTER — THE THAIDEAOPOLIS RUNWAY event, posing for group photos with the cast and team at Siam Center.',
     detailZh: 'Tee出席SIAM CENTER THE SUMMER TRENDSETTER — THE THAIDEAOPOLIS RUNWAY活动，与演员及团队在暹罗中心合影留念。',
-    image: '/events/e-2568-006.jpg',
+    image: '/events/e-2569-008.jpg',
     links: [
       { platform: 'Workpoint', label: 'Workpoint', url: 'https://www.workpointtoday.com/siamcenter-795375-2', color: '#FFFFFF' },
       { platform: 'Siam Center', label: 'Siam Center', url: 'https://www.siamcenter.co.th/happening/siamcenter-the-summer-trendsetter-thaideaipolis-2026/876', color: '#1A1A1A' },
