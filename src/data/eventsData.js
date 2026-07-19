@@ -755,6 +755,28 @@ export const eventsData = [
       { platform: 'Chula', label: 'Chula', url: 'https://www.md.chula.ac.th/zero-nicotine-fest/', color: '#ffffff' },
     ],
   },
+  {
+    id: 'e-2569-006',
+    year: 2569,
+    date: '7 ก.พ. 2569',
+    dateEn: '7 Feb 2026',
+    title: 'ธรรมศาสตร์รวมใจรักษ์ผ้าไทยคู่แผ่นดิน × ตี๋ธนพล',
+    titleEn: 'Thammasat Unites to Preserve Thai Fabric × Tee Thanaphon',
+    titleZh: '法政大学团结守护泰式织物 × Tee',
+    location: 'มหาวิทยาลัยธรรมศาสตร์',
+    locationEn: 'Thammasat University',
+    locationZh: '法政大学',
+    type: 'csr',
+    detail: 'ตี๋ร่วมงาน "ธรรมศาสตร์รวมใจรักษ์ผ้าไทยคู่แผ่นดิน" จัดโดยมหาวิทยาลัยธรรมศาสตร์ สวมชุดไทยพระราชนิยมอันวิจิตรงดงามร่วมกับนักแสดงและคนดังอีก 4 คน ถ่ายภาพอย่างเป็นทางการเพื่อส่งเสริมและอนุรักษ์มรดกผ้าไทยให้คงอยู่คู่แผ่นดินสืบไป',
+    detailEn: 'Tee joined "Thammasat Unites to Preserve Thai Fabric with the Land" organized by Thammasat University, dressed in exquisite royal-style Thai traditional attire alongside four other performers and public figures for an official photoshoot promoting and preserving the heritage of Thai fabric for future generations.',
+    detailZh: 'Tee出席由法政大学主办的"法政团结守护泰式织物"活动，与另外四位演员及公众人物共同身着华美的泰式传统服饰，进行官方拍摄，携手推广与传承泰国传统织品文化。',
+    image: '/events/e-2569-006.jpg',
+    links: [
+      { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/14j3YBSJPogdcynAYYGd1XoHgf03RXh7K?usp=share_link', color: '#fff' },
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DUl2pl8Eugf/?igsh=amJxeG92YmVqdHNh', color: '#C13584' },
+    ],
+  },
+
   // ─── 2569 (cont.) ───
   {
     id: 'e-2569-003',
