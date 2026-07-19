@@ -646,6 +646,7 @@ export const eventsData = [
     links: [
       { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/theseriesythai/posts/%E0%B8%A1%E0%B8%B2%E0%B8%AA%E0%B8%B8-%E0%B8%95%E0%B8%B5%E0%B9%8B-%E0%B8%98%E0%B8%99%E0%B8%9E%E0%B8%A5-%E0%B9%80%E0%B8%9B%E0%B8%B4%E0%B8%94%E0%B8%AA%E0%B8%95%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B8%97%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%9F%E0%B8%B4%E0%B8%99%E0%B8%81%E0%B8%A5%E0%B8%B2%E0%B8%87%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87-%E0%B9%82%E0%B8%8A%E0%B8%A7%E0%B9%8C%E0%B9%80%E0%B8%84%E0%B8%A1%E0%B8%B5%E0%B8%AB%E0%B8%A7%E0%B8%B2%E0%B8%99%E0%B8%AA%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%B7%E0%B8%AD%E0%B8%99%E0%B8%97%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B8%AE%E0%B8%AD%E0%B8%A5%E0%B8%A5%E0%B9%8C%E0%B9%83%E0%B8%99%E0%B8%87%E0%B8%B2%E0%B8%99-love-l/1529791865822065/', color: '#1877F2' },
       { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DU4wCXwEhjd/', color: '#C13584' },
+      { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/1LSkHmp6IDAj2gY-Ce8vsStF2sfBvxTAC', color: '#fff' },
     ],
   },
 
@@ -774,6 +775,28 @@ export const eventsData = [
     links: [
       { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/14j3YBSJPogdcynAYYGd1XoHgf03RXh7K?usp=share_link', color: '#fff' },
       { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DUl2pl8Eugf/?igsh=amJxeG92YmVqdHNh', color: '#C13584' },
+    ],
+  },
+
+  {
+    id: 'e-2569-007',
+    year: 2569,
+    date: '28 ก.พ. 2569',
+    dateEn: '28 Feb 2026',
+    title: 'A Night of Love & Birthday Celebration With TEe',
+    titleEn: 'A Night of Love & Birthday Celebration With TEe',
+    titleZh: 'A Night of Love & Birthday Celebration With TEe',
+    location: 'The Proud Event Venue กรุงเทพฯ',
+    locationEn: 'The Proud Event Venue, Bangkok',
+    locationZh: 'The Proud Event Venue，曼谷',
+    type: 'fanmeet',
+    detail: 'ตี๋จัดงานแฟนมีตสุดพิเศษ "A Night of Love & Birthday Celebration With TEe" ณ The Proud Event Venue แฟนคลับนั่งโต๊ะดินเนอร์ท่ามกลางบรรยากาศโรแมนติก ไฟสีม่วงและลายรอยอุ้งเท้าบนเวที ตี๋ขึ้นร้องเพลงและพูดคุยกับแฟนๆ อย่างใกล้ชิดในบรรยากาศอบอุ่นเต็มไปด้วยความรัก',
+    detailEn: 'Tee hosted the special fan meet "A Night of Love & Birthday Celebration With TEe" at The Proud Event Venue. Fans enjoyed a dinner in a romantic atmosphere with purple lighting and paw print patterns on stage, as Tee performed and shared heartfelt moments with everyone up close.',
+    detailZh: 'Tee在The Proud Event Venue举办了特别粉丝见面会"A Night of Love & Birthday Celebration With TEe"，粉丝们在浪漫的紫色灯光下共享晚宴，舞台上印有可爱爪印图案，Tee登台献唱并与粉丝亲密互动，现场充满温馨与爱意。',
+    image: '/events/e-2569-007.jpg',
+    links: [
+      { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/1zw5TzKIQcXgceidQ_yDb01X6Z4ub8IVQ', color: '#fff' },
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DVlp-2CATn7/?igsh=MXRlcmYwcTlnbGdycg==', color: '#C13584' },
     ],
   },
 
