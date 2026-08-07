@@ -14,6 +14,13 @@ function ev(event, field, lang) {
   return event[field];
 }
 
+const MONTH_EN = { Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12 };
+function getMonth(dateEn) {
+  if (!dateEn) return 0;
+  const m = dateEn.split(' ')[1];
+  return MONTH_EN[m] || 0;
+}
+
 function groupByYear(events) {
   const map = {};
   events.forEach(ev => {
@@ -22,7 +29,10 @@ function groupByYear(events) {
   });
   return Object.entries(map)
     .sort((a, b) => Number(b[0]) - Number(a[0]))
-    .map(([year, items]) => ({ year: Number(year), items }));
+    .map(([year, items]) => ({
+      year: Number(year),
+      items: [...items].sort((a, b) => getMonth(b.dateEn) - getMonth(a.dateEn)),
+    }));
 }
 
 function PlatformIcon({ platform, size = 26 }) {

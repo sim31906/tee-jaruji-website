@@ -929,6 +929,7 @@ export const eventsData = [
     links: [
       { platform: 'X', label: 'X', url: 'https://x.com/Tee_Jaruji/status/2085346322031501723', color: '#000000' },
       { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/CentralNakhonPathom/posts/%E0%B9%80%E0%B8%A3%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B9%81%E0%B8%A5%E0%B9%89%E0%B8%A7-%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%87%E0%B8%B2%E0%B8%99-%E0%B8%9B%E0%B8%B2%E0%B8%81%E0%B9%80%E0%B8%9A%E0%B8%B4%E0%B8%A3%E0%B9%8C%E0%B8%99-%E0%B9%80%E0%B8%9E%E0%B8%A5%E0%B8%B4%E0%B8%99%E0%B8%9E%E0%B8%B8%E0%B8%87-%E0%B8%A3%E0%B8%A7%E0%B8%A1%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%AD%E0%B8%A3%E0%B9%88%E0%B8%AD%E0%B8%A2%E0%B8%81%E0%B8%A7%E0%B9%88%E0%B8%B2-60-%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%95%E0%B9%87%E0%B8%A1-%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%9B%E0%B8%B5%E0%B8%99%E0%B8%B5/1041968522060474/', color: '#1877F2' },
+      { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/1TpsCwqvioicno7ac47DN18u4Zc3Fb8Lb?usp=sharing', color: '#fff' },
     ],
   },
 ];
