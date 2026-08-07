@@ -52,6 +52,7 @@ export const translations = {
         { title: 'การแสดง\nและภาพยนตร์', desc: 'งานแสดงละคร · ซีรีส์ · ภาพยนตร์ · และการแสดงบนเวที' },
         { title: 'เพลง\nและดนตรี', desc: 'ผลงานเพลง · ซิงเกิล · OST · และการแสดงดนตรีสด' },
         { title: 'รายการ\nทีวี', desc: 'รายการทีวี · เกมโชว์ · วาไรตี้ · และรายการพิเศษ' },
+        { title: 'นิตยสาร', desc: 'ปกนิตยสาร · Editorial · แฟชั่น · บทสัมภาษณ์พิเศษ' },
       ],
       workDetail: [
         {
@@ -190,6 +191,18 @@ export const translations = {
       typeTV: 'รายการทีวี',
       noTrailer: 'ยังไม่มีคลิป',
     },
+    magazine: {
+      backNav: '← กลับหน้าหลัก',
+      categoryLabel: 'Category 05',
+      titleMain: 'นิตยสาร',
+      titleItalic: 'Editorial',
+      subtitle: 'รวมปกนิตยสารต่าง ๆ ที่ตี๋ธนพลได้รับเชิญ — กดที่การ์ดเพื่ออ่านต่อ',
+      allWorks: '— นิตยสารทั้งหมด',
+      itemsUnit: 'ฉบับ',
+      backButton: '← กลับไป ผลงานที่คัดสรร',
+      readMore: 'อ่านต่อ →',
+      viewDetail: 'ดูรายละเอียด →',
+    },
     workDetail: {
       backNav: '← กลับหน้าหลัก',
       backButton: '← กลับไป ผลงานที่คัดสรร',
@@ -305,6 +318,7 @@ export const translations = {
         { title: 'Performance\n& Acting', desc: 'Drama series · Movies · Stage performances and theatrical productions' },
         { title: 'Music\n& Sound', desc: 'Music releases · Singles · OST soundtracks · Live musical performances' },
         { title: 'TV\nShows', desc: 'TV programs · Game shows · Variety shows · Special appearances' },
+        { title: 'Magazine', desc: 'Magazine covers · Editorial features · Fashion · Special interviews' },
       ],
       workDetail: [
         {
@@ -443,6 +457,18 @@ export const translations = {
       typeTV: 'TV Show',
       noTrailer: 'No clip yet',
     },
+    magazine: {
+      backNav: '← Back to Home',
+      categoryLabel: 'Category 05',
+      titleMain: 'Magazine',
+      titleItalic: 'Editorial',
+      subtitle: 'Magazine covers featuring Tee Jaruji — click a card to read more',
+      allWorks: '— All Magazines',
+      itemsUnit: 'issues',
+      backButton: '← Back to Selected Works',
+      readMore: 'Read more →',
+      viewDetail: 'View detail →',
+    },
     workDetail: {
       backNav: '← Back to Home',
       backButton: '← Back to Selected Works',
@@ -558,6 +584,7 @@ export const translations = {
         { title: '表演\n与影视', desc: '电视剧 · 电影 · 舞台剧 · 短片' },
         { title: '音乐\n与声音', desc: '音乐发行 · 单曲 · OST · 现场演出' },
         { title: '电视\n节目', desc: '电视节目 · 游戏秀 · 综艺 · 特别活动' },
+        { title: '杂志', desc: '杂志封面 · 专题报道 · 时尚 · 特别采访' },
       ],
       workDetail: [
         {
@@ -695,6 +722,18 @@ export const translations = {
       viewDetail: '观看 →',
       typeTV: '电视节目',
       noTrailer: '暂无片段',
+    },
+    magazine: {
+      backNav: '← 返回主页',
+      categoryLabel: 'Category 05',
+      titleMain: '杂志',
+      titleItalic: '专题',
+      subtitle: 'Tee Jaruji 的杂志封面 — 点击卡片查看详情',
+      allWorks: '— 全部杂志',
+      itemsUnit: '期',
+      backButton: '← 返回精选作品',
+      readMore: '阅读更多 →',
+      viewDetail: '查看详情 →',
     },
     workDetail: {
       backNav: '← 返回主页',

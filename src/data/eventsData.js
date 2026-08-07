@@ -673,6 +673,26 @@ export const eventsData = [
 
   // ─── 2569 ───
   {
+    id: 'e-2569-012',
+    year: 2569,
+    date: '17 ม.ค. 2569',
+    dateEn: '17 Jan 2026',
+    title: 'ActSpace Entertainment New Year Party 2026',
+    titleEn: 'ActSpace Entertainment New Year Party 2026',
+    titleZh: 'ActSpace Entertainment 2026年新年派对',
+    location: 'กรุงเทพฯ',
+    locationEn: 'Bangkok',
+    locationZh: '曼谷',
+    type: 'fanmeet',
+    detail: 'ตี๋ร่วมงานเลี้ยงปีใหม่ "ActSpace Entertainment New Year Party 2026" พบปะแฟนคลับและเพื่อนนักแสดงในบรรยากาศสบายๆ ท่ามกลางมื้ออาหารร่วมกัน เต็มไปด้วยรอยยิ้มและความสุขในการต้อนรับปีใหม่',
+    detailEn: 'Tee attended the "ActSpace Entertainment New Year Party 2026," joining fans and fellow actors for a warm and relaxed dinner gathering, filled with smiles and joy to welcome the new year together.',
+    detailZh: 'Tee出席"ActSpace Entertainment 2026年新年派对"，与粉丝及演员朋友们共聚一堂，在轻松愉快的餐叙氛围中共迎新年，现场洋溢着欢笑与喜悦。',
+    image: '/events/e-2569-012.jpg',
+    links: [
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/DTpd5yLkcde/?igsh=Nm14YnFhdHYxcm56', color: '#C13584' },
+    ],
+  },
+  {
     id: 'e-2569-005',
     year: 2569,
     date: '11 ม.ค. 2569',
@@ -879,7 +899,7 @@ export const eventsData = [
     location: 'เซ็นทรัล เชียงใหม่ แอร์พอร์ต',
     locationEn: 'Central Chiangmai Airport',
     locationZh: '清迈机场中央百货',
-    type: 'fanmeet',
+    type: 'brand',
     detail: 'ตี๋ขึ้นโชว์ใน AROI FEST งานมินิคอนเสิร์ตและแฟนมีตที่เซ็นทรัล เชียงใหม่ แอร์พอร์ต บรรยากาศอบอุ่น แฟนคลับแน่นเวที เต็มไปด้วยความสนุกและพลังงานดี ๆ',
     detailEn: 'Tee performed at AROI FEST, a mini concert and fan meet at Central Chiangmai Airport. The atmosphere was warm and lively, with fans packing the stage area for an energetic and memorable show.',
     detailZh: 'Tee在清迈机场中央百货举办的AROI FEST迷你演唱会暨见面会上登台演出，现场气氛热烈，粉丝云集，充满活力与欢乐。',
@@ -887,6 +907,28 @@ export const eventsData = [
     links: [
       { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/CentralChiangmaiAirport/posts/%E0%B8%8A%E0%B8%B2%E0%B8%A7%E0%B9%80%E0%B8%8A%E0%B8%B5%E0%B8%A2%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%A1%E0%B9%88%E0%B9%80%E0%B8%95%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%95%E0%B8%B1%E0%B8%A7%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%AD%E0%B8%A1-%E0%B8%A1%E0%B8%AB%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%AD%E0%B8%A3%E0%B9%88%E0%B8%AD%E0%B8%A2%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%9A%E0%B8%B1%E0%B8%99%E0%B9%80%E0%B8%97%E0%B8%B4%E0%B8%87%E0%B8%AA%E0%B8%B8%E0%B8%94%E0%B8%A2%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88%E0%B8%81%E0%B8%B3%E0%B8%A5%E0%B8%B1%E0%B8%87%E0%B8%88%E0%B8%B0%E0%B8%A1%E0%B8%B2%E0%B8%96%E0%B8%B6%E0%B8%87%E0%B9%81%E0%B8%A5/1012940434715133/', color: '#1877F2' },
       { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/1i2Le-u1yrbu5oo6afFJH-7DJgYbMC0XG', color: '#fff' },
+    ],
+  },
+
+  {
+    id: 'e-2569-013',
+    year: 2569,
+    date: '6 ส.ค. 2569',
+    dateEn: '6 Aug 2026',
+    title: 'ปากเบิร์น เพลินพุง',
+    titleEn: 'Pak Burn Ploen Pung',
+    titleZh: 'ปากเบิร์น เพลินพุง',
+    location: 'เซ็นทรัล นครปฐม',
+    locationEn: 'Central Nakhon Pathom',
+    locationZh: 'Central Nakhon Pathom，那空巴塔玛',
+    type: 'brand',
+    detail: 'ตี๋ร่วมงาน "ปากเบิร์น เพลินพุง" ณ เซ็นทรัล นครปฐม งานมหกรรมอาหารที่รวบรวมร้านอาหารอร่อยกว่า 60 ร้านค้า ตี๋สวมผ้ากันเปื้อนลุยทำอาหารพร้อมสร้างบรรยากาศสนุกสนานให้แก่แฟนคลับและผู้ร่วมงาน',
+    detailEn: 'Tee joined the "Pak Burn Ploen Pung" food festival at Central Nakhon Pathom, a vibrant event gathering over 60 food stalls. Tee donned an apron and got hands-on in the kitchen, bringing fun and energy to fans and visitors throughout the event.',
+    detailZh: 'Tee出席在Central Nakhon Pathom举办的"ปากเบิร์น เพลินพุง"美食节，活动汇聚逾60家美食摊位。Tee系上围裙亲自下厨，为粉丝和与会者带来欢乐与活力。',
+    image: '/events/e-2569-013.jpg',
+    links: [
+      { platform: 'X', label: 'X', url: 'https://x.com/Tee_Jaruji/status/2085346322031501723', color: '#000000' },
+      { platform: 'Facebook', label: 'Facebook', url: 'https://www.facebook.com/CentralNakhonPathom/posts/%E0%B9%80%E0%B8%A3%E0%B8%B4%E0%B9%88%E0%B8%A1%E0%B9%81%E0%B8%A5%E0%B9%89%E0%B8%A7-%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B8%87%E0%B8%B2%E0%B8%99-%E0%B8%9B%E0%B8%B2%E0%B8%81%E0%B9%80%E0%B8%9A%E0%B8%B4%E0%B8%A3%E0%B9%8C%E0%B8%99-%E0%B9%80%E0%B8%9E%E0%B8%A5%E0%B8%B4%E0%B8%99%E0%B8%9E%E0%B8%B8%E0%B8%87-%E0%B8%A3%E0%B8%A7%E0%B8%A1%E0%B8%82%E0%B8%AD%E0%B8%87%E0%B8%AD%E0%B8%A3%E0%B9%88%E0%B8%AD%E0%B8%A2%E0%B8%81%E0%B8%A7%E0%B9%88%E0%B8%B2-60-%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B9%89%E0%B8%B2%E0%B8%88%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%95%E0%B9%87%E0%B8%A1-%E0%B8%A7%E0%B8%B1%E0%B8%99%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%9B%E0%B8%B5%E0%B8%99%E0%B8%B5/1041968522060474/', color: '#1877F2' },
     ],
   },
 ];

@@ -154,6 +154,24 @@ export const works = [
       items: [],
     },
   },
+  {
+    slug: "magazine",
+    icon: "N",
+    heroImage: "/bgmagazine.jpg",
+    objectPosition: "center 30%",
+    gradient: [colors.creamDark, colors.pinkSoft],
+    type: "Category 05",
+    title: "นิตยสาร",
+    desc: "ปกนิตยสาร · Editorial · แฟชั่น · บทสัมภาษณ์พิเศษ",
+    items: [],
+    color: colors.accent,
+    detail: {
+      headline: "นิตยสาร",
+      sub: "ปกนิตยสาร · Editorial · แฟชั่น",
+      body: "รวมปกนิตยสารและ editorial ต่าง ๆ ที่ Tee Jaruji ได้รับเชิญ",
+      items: [],
+    },
+  },
 ];
 
 // ---- EDUCATION ----
