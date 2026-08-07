@@ -34,26 +34,42 @@ export default function Navigation() {
   return (
     <>
       <style>{`
+        .nav-tj::after {
+          content: '';
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          height: 1.5px;
+          background: linear-gradient(90deg, transparent 0%, ${colors.pink} 30%, ${colors.accent} 70%, transparent 100%);
+          opacity: 0.55;
+        }
         .nav-link-tj {
           position: relative;
-          padding-bottom: 3px;
+          padding: 0.3rem 0.65rem;
+          border-radius: 999px;
+          transition: all 0.25s ease;
         }
         .nav-link-tj::after {
           content: '';
           position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
+          bottom: 2px;
+          left: 50%; right: 50%;
           height: 1.5px;
-          background: ${colors.accent};
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+          background: linear-gradient(90deg, ${colors.pink}, ${colors.accent});
+          border-radius: 2px;
+          transition: left 0.3s cubic-bezier(0.4,0,0.2,1), right 0.3s cubic-bezier(0.4,0,0.2,1);
         }
-        .nav-link-tj:hover { opacity: 1 !important; color: ${colors.accent} !important; }
-        .nav-link-tj:hover::after { transform: scaleX(1); }
-        .nav-link-tj.active { color: ${colors.accent} !important; }
-        .nav-link-tj.active::after { transform: scaleX(1); }
+        .nav-link-tj:hover {
+          opacity: 1 !important;
+          color: ${colors.accent} !important;
+          background: rgba(212,96,122,0.07);
+        }
+        .nav-link-tj:hover::after { left: 18%; right: 18%; }
+        .nav-link-tj.active {
+          color: ${colors.accent} !important;
+          background: rgba(212,96,122,0.1);
+          font-weight: 600;
+        }
+        .nav-link-tj.active::after { left: 18%; right: 18%; }
 
         .lang-btn-tj {
           background: none;
@@ -69,7 +85,7 @@ export default function Navigation() {
           color: ${colors.inkSoft};
         }
         .lang-btn-tj:hover { color: ${colors.ink}; }
-        .lang-btn-tj.active-lang { color: ${colors.ink}; background: ${colors.pinkSoft}; font-weight: 600; }
+        .lang-btn-tj.active-lang { color: ${colors.accent}; background: rgba(212,96,122,0.12); font-weight: 700; }
 
         @keyframes nav-fade-in {
           from { opacity: 0; transform: translateY(-6px); }
@@ -101,14 +117,14 @@ export default function Navigation() {
         left: 0,
         right: 0,
         zIndex: 100,
-        padding: '1.5rem 3rem',
+        padding: '1.25rem 3rem',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        background: 'rgba(253, 246, 236, 0.85)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        borderBottom: `1px solid ${colors.creamDark}`,
+        background: 'rgba(253, 246, 236, 0.82)',
+        backdropFilter: 'blur(20px) saturate(160%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(160%)',
+        boxShadow: '0 2px 24px rgba(180,120,100,0.08)',
       }}>
         <div
           onClick={() => scrollTo('home')}

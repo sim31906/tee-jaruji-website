@@ -227,7 +227,7 @@ export default function Profile() {
                         position: 'absolute', inset: 0,
                         width: '100%', height: '100%',
                         objectFit: 'cover',
-                        objectPosition: 'center top',
+                        objectPosition: 'center center',
                         transition: 'transform 0.5s cubic-bezier(0.4,0,0.2,1)',
                       }}
                       className="work-card-img"
