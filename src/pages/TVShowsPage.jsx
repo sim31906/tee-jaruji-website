@@ -165,7 +165,7 @@ function ShowModal({ show, onClose, t, lang }) {
           <div style={{ padding: "1.75rem 2rem 2rem", display: "flex", flexDirection: "column", gap: "1rem" }}>
             {/* ep selector */}
             {hasMultiple && (
-              <div style={{ display: "flex", gap: "0.5rem" }}>
+              <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                 {show.trailerUrls.map((_, i) => {
                   const label = show.trailerLabels?.[i] ?? `EP.${i + 1}`;
                   const active = i === epIndex;
