@@ -104,9 +104,15 @@ export default function Navigation() {
         .nav-links-tj li:nth-child(8) { animation-delay: 0.40s; }
         .nav-links-tj li:nth-child(9) { animation-delay: 0.45s; }
 
-        @media (max-width: 968px) {
+        @media (max-width: 1400px) {
+          .nav-links-tj { gap: 0.5rem !important; font-size: 0.72rem !important; letter-spacing: 0.1em !important; }
+          .nav-logo-tj { font-size: 1.2rem !important; letter-spacing: 0.2em !important; }
+          .nav-tj { padding: 1.25rem 2rem !important; }
+        }
+        @media (max-width: 1200px) {
           .nav-links-tj { display: none !important; }
           .menu-toggle-tj { display: block !important; }
+          .nav-logo-tj { font-size: 1.1rem !important; letter-spacing: 0.15em !important; }
           .nav-tj { padding: 1rem 1.5rem !important; }
         }
       `}</style>
@@ -128,6 +134,7 @@ export default function Navigation() {
       }}>
         <div
           onClick={() => scrollTo('home')}
+          className="nav-logo-tj"
           style={{
             fontFamily: fonts.display,
             fontSize: '1.5rem',
@@ -136,6 +143,7 @@ export default function Navigation() {
             textTransform: 'uppercase',
             color: colors.ink,
             cursor: 'pointer',
+            whiteSpace: 'nowrap',
           }}
         >
           Tee · Jaruji

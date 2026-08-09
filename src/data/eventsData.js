@@ -932,4 +932,26 @@ export const eventsData = [
       { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/1TpsCwqvioicno7ac47DN18u4Zc3Fb8Lb?usp=sharing', color: '#fff' },
     ],
   },
+
+  {
+    id: 'e-2569-014',
+    year: 2569,
+    date: '16 ก.ค. 2569',
+    dateEn: '16 Jul 2026',
+    title: 'มูลนิธิเพื่อนพึ่ง(ภาฯ) ยามยาก สภากาชาดไทย',
+    titleEn: 'Phuean Phueng (Pha) Foundation — Thai Red Cross',
+    titleZh: '泰国红十字会慈善基金会活动',
+    location: 'กรุงเทพฯ',
+    locationEn: 'Bangkok',
+    locationZh: '曼谷',
+    type: 'csr',
+    detail: 'ตี๋ร่วมกิจกรรมจิตอาสากับมูลนิธิเพื่อนพึ่ง(ภาฯ) ยามยาก สภากาชาดไทย ช่วยปรุงและแจกจ่ายอาหารกล่องให้แก่ผู้ยากไร้และผู้ประสบภัย สวมชุดดำร่วมทำงานเคียงข้างทีมอาสาสมัครและคณะกรรมการมูลนิธิ',
+    detailEn: 'Tee volunteered with the Phuean Phueng (Pha) Yam Yak Foundation under the Thai Red Cross, helping prepare and distribute food boxes to those in need. Dressed in black, he worked alongside volunteers and foundation committee members.',
+    detailZh: 'Tee参与泰国红十字会慈善基金会的志愿活动，协助烹饪并向困难群体分发餐盒。他身穿黑衣，与志愿者及基金会委员会成员并肩工作。',
+    image: '/events/e-2569-014.jpg',
+    links: [
+      { platform: 'Instagram', label: 'Instagram', url: 'https://www.instagram.com/p/Da2LF8uILYJ/?img_index=16', color: '#C13584' },
+      { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/1aHOqozTlDeYYgizP9z21pjIukirN3B_E?usp=sharing', color: '#fff' },
+    ],
+  },
 ];
