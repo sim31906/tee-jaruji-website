@@ -256,9 +256,9 @@ export const eventsData = [
     locationEn: 'Bangkok',
     locationZh: '曼谷',
     type: 'contest',
-    detail: 'ตี๋คว้าอันดับ 1 การประกวด Cool Boy Cute Girl จัดโดย GPad ขึ้นรับรางวัลห้องสมุดอิเล็กทรอนิกส์ GPad มูลค่า 1 ล้านบาท ถือเป็นก้าวแรกสู่วงการบันเทิง',
-    detailEn: 'Tee won 1st place in the Cool Boy Cute Girl contest organized by GPad, claiming the GPad electronic library prize worth 1 million baht — his first step into the entertainment industry.',
-    detailZh: 'Tee在GPad主办的"Cool Boy Cute Girl"选拔赛中荣获第一名，赢得价值100万泰铢的GPad电子图书馆大奖，正式迈出进军娱乐圈的第一步。',
+    detail: 'ตี๋คว้ารางวัลชนะเลิศ การประกวด Cool Boy Cute Girl จัดโดย GPad รับเงินรางวัล 200,000 บาท พร้อมรางวัลมะดันทองคำของแม่กาน มูลค่า 100,000 บาท และรถยนต์ Suzuki Swift 1 คัน ถือเป็นก้าวแรกสู่วงการบันเทิง',
+    detailEn: 'Tee won 1st place in the Cool Boy Cute Girl contest organized by GPad, claiming a 200,000-baht cash prize, the Mae Kan Golden Madan Award worth 100,000 baht, and a Suzuki Swift car — his first step into the entertainment industry.',
+    detailZh: 'Tee在GPad主办的"Cool Boy Cute Girl"选拔赛中荣获冠军，获得20万泰铢现金奖，价值10万泰铢的"แม่กาน"金马登奖，以及一辆铃木Swift轿车，正式迈出进军娱乐圈的第一步。',
     image: '/events/e-2555-001.jpg',
     links: [
       { platform: 'Dek-D', label: 'Dek-D', url: 'https://www.dek-d.com/activity/29367/', color: '#FFFFFF' },
