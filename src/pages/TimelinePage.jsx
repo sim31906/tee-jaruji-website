@@ -5,7 +5,7 @@ import { colors, fonts } from '../styles/theme';
 import { useLang } from '../context/LanguageContext';
 import { translations } from '../data/translations';
 import CursorSparkle from '../components/CursorSparkle';
-import { SiNetflix, SiYoutube, SiSpotify, SiApplemusic } from 'react-icons/si';
+import { SiNetflix, SiYoutube, SiSpotify, SiApplemusic, SiWordpress } from 'react-icons/si';
 import { eventsData, EVENT_TYPES } from '../data/eventsData';
 import { SHOWS } from '../data/performanceData';
 import { allSongs } from '../data/musicData';
@@ -148,6 +148,7 @@ function EventPlatformIcon({ platform, size = 26 }) {
     </svg>
   );
   if (platform === 'Netflix') return <SiNetflix size={size} color="white" />;
+  if (platform === 'Blog' || platform === 'WordPress') return <SiWordpress size={size} color="white" />;
   if (platform === 'Google Drive') return <img src="/platforms/google-drive.png" alt="Google Drive" style={{ width: size, height: size, objectFit: 'contain', padding: '10%' }} />;
   if (platform === 'Spotify') return <SiSpotify size={size} color="white" />;
   if (platform === 'Apple Music' || platform === 'iTunes') return <SiApplemusic size={size} color="white" />;
