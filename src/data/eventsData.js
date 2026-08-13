@@ -404,6 +404,7 @@ export const eventsData = [
     detailEn: 'Tee took part in a photoshoot for Kazz Magazine, one of his early modeling works before formally entering the entertainment industry.',
     detailZh: 'Tee参与了Kazz杂志的拍摄工作，这是他正式进入娱乐圈之前学生时代的早期模特经历之一。',
     image: '/events/e-2556-007.jpg',
+    imagePosition: 'center top',
     links: [
       { platform: 'Google Drive', label: 'Drive', url: 'https://drive.google.com/drive/folders/1p1CMY0t4sOtHnb8N0gI42h82Qo6H96MV', color: '#fff' },
     ],
