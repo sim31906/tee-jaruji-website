@@ -44,8 +44,14 @@ const allItems = [
 ].sort((a, b) => {
   if (a.year !== b.year) return a.year - b.year;
   const MONTH_EN = { Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12 };
-  const getM = d => d ? (MONTH_EN[d.split(' ')[1]] || 0) : 0;
-  const ma = getM(a.dateEn), mb = getM(b.dateEn);
+  const getMD = d => {
+    if (!d) return 0;
+    const parts = d.split(' ');
+    const day = parseInt(parts[0], 10) || 0;
+    const month = MONTH_EN[parts[1]] || 0;
+    return month * 100 + day;
+  };
+  const ma = getMD(a.dateEn), mb = getMD(b.dateEn);
   if (ma !== mb) return ma - mb;
   return a.category === 'event' ? -1 : 1;
 });

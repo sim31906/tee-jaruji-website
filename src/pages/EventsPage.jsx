@@ -15,10 +15,12 @@ function ev(event, field, lang) {
 }
 
 const MONTH_EN = { Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12 };
-function getMonth(dateEn) {
+function getMonthDay(dateEn) {
   if (!dateEn) return 0;
-  const m = dateEn.split(' ')[1];
-  return MONTH_EN[m] || 0;
+  const parts = dateEn.split(' ');
+  const day = parseInt(parts[0], 10) || 0;
+  const month = MONTH_EN[parts[1]] || 0;
+  return month * 100 + day;
 }
 
 function groupByYear(events) {
@@ -31,7 +33,7 @@ function groupByYear(events) {
     .sort((a, b) => Number(b[0]) - Number(a[0]))
     .map(([year, items]) => ({
       year: Number(year),
-      items: [...items].sort((a, b) => getMonth(b.dateEn) - getMonth(a.dateEn)),
+      items: [...items].sort((a, b) => getMonthDay(b.dateEn) - getMonthDay(a.dateEn)),
     }));
 }
 
