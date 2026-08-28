@@ -1120,12 +1120,6 @@ export default function TimelinePage() {
                           <div style={{ position:'absolute', width:180, height:180, borderRadius:'50%',
                             border:'48px solid rgba(255,255,255,0.1)', right:-60, top:-60, pointerEvents:'none' }} />
 
-                          {img && (
-                            <div style={{ position:'absolute', inset:0, top:0, height:'55%',
-                              background:'linear-gradient(to bottom, rgba(0,0,0,0.5), transparent)',
-                              pointerEvents:'none' }} />
-                          )}
-
                           {img ? (
                             <img src={img} alt={ttl}
                               style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'top center', transition:'transform .45s ease' }} />
@@ -1136,14 +1130,6 @@ export default function TimelinePage() {
                             </div>
                           )}
 
-                          {/* Category badge */}
-                          <div style={{ position:'absolute', top:'.65rem', left:'.65rem',
-                            fontFamily:fonts.mono, fontSize:'.55rem', letterSpacing:'.15em',
-                            lineHeight:1.5, textTransform:'uppercase', background:colors.cream,
-                            boxShadow:'0 2px 8px rgba(0,0,0,0.18)',
-                            padding:'.3rem .6rem', color:CAT_COLORS[item.category] }}>
-                            {tp.journeyLegend[item.category]}
-                          </div>
                           {/* Year watermark */}
                           <div style={{ position:'absolute', bottom:'.5rem', right:'.7rem',
                             fontFamily:fonts.mono, fontSize:'.55rem', letterSpacing:'.1em',
@@ -1152,6 +1138,13 @@ export default function TimelinePage() {
 
                         {/* Text body */}
                         <div style={{ padding:'.9rem 1rem 1.1rem' }}>
+                          <div style={{ display:'inline-block', fontFamily:fonts.mono,
+                            fontSize:'.55rem', letterSpacing:'.15em', lineHeight:1.5,
+                            textTransform:'uppercase', background:CAT_BG[item.category],
+                            padding:'.25rem .55rem', marginBottom:'.55rem',
+                            color:CAT_COLORS[item.category] }}>
+                            {tp.journeyLegend[item.category]}
+                          </div>
                           <h3 style={{ fontFamily: item.category === 'music' ? fonts.display : (lang === 'th' ? fonts.body : fonts.display),
                             fontSize:'1rem', fontWeight:600, color:colors.ink, lineHeight:1.25,
                             marginBottom:'.35rem',
