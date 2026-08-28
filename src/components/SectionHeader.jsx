@@ -17,7 +17,7 @@ export default function SectionHeader({ num, title, italic, dark = false, mb = '
       <div className="section-header-tj" style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '1rem',
+        gap: '1.5rem',
         marginBottom: mb,
         paddingBottom: pb,
         borderBottom: `1px solid ${borderColor}`,

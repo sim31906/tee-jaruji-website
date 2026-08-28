@@ -115,6 +115,45 @@ export default function Navigation() {
           .nav-logo-tj { font-size: 1.1rem !important; letter-spacing: 0.15em !important; }
           .nav-tj { padding: 1rem 1.5rem !important; }
         }
+
+        .nav-right-tj {
+          display: flex;
+          align-items: center;
+          gap: 1.25rem;
+        }
+
+        .mobile-menu-tj {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: ${colors.cream};
+          border-top: 1px solid rgba(0,0,0,0.08);
+          padding: 1.5rem 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          font-family: ${fonts.mono};
+          font-size: 0.85rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+          transform: translateY(-8px);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+        }
+        .mobile-menu-tj.open {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
+        .mobile-menu-tj .nav-link-tj {
+          display: block;
+          padding: 0.6rem 0.75rem;
+        }
       `}</style>
 
       <nav className="nav-tj" style={{
@@ -174,66 +213,53 @@ export default function Navigation() {
           ))}
         </ul>
 
-        {/* Language switcher */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.1rem' }}>
-          {LANGS.map((l, i) => (
-            <span key={l} style={{ display: 'flex', alignItems: 'center' }}>
-              <button
-                className={`lang-btn-tj${lang === l ? ' active-lang' : ''}`}
-                onClick={() => setLang(l)}
-                style={{ fontFamily: fonts.mono }}
-              >
-                {l.toUpperCase()}
-              </button>
-              {i < LANGS.length - 1 && (
-                <span style={{ color: colors.creamDark, fontSize: '0.6rem' }}>|</span>
-              )}
-            </span>
-          ))}
-        </div>
-
-        <button
-          className="menu-toggle-tj"
-          onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            display: 'none',
-            background: 'none',
-            border: 'none',
-            color: colors.ink,
-            fontSize: '1.5rem',
-          }}
-        >
-          {menuOpen ? '✕' : '☰'}
-        </button>
-
-        {menuOpen && (
-          <div style={{
-            position: 'fixed',
-            top: '60px',
-            right: '1rem',
-            background: colors.cream,
-            border: `1px solid ${colors.ink}`,
-            padding: '1.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            fontFamily: fonts.mono,
-            fontSize: '0.8rem',
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            boxShadow: `4px 4px 0 ${colors.pink}`,
-          }}>
-            {navItems.map(id => (
-              <a
-                key={id}
-                onClick={() => scrollTo(id)}
-                style={{ color: colors.ink, cursor: 'pointer' }}
-              >
-                {t[id]}
-              </a>
+        <div className="nav-right-tj">
+          {/* Language switcher */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.1rem' }}>
+            {LANGS.map((l, i) => (
+              <span key={l} style={{ display: 'flex', alignItems: 'center' }}>
+                <button
+                  className={`lang-btn-tj${lang === l ? ' active-lang' : ''}`}
+                  onClick={() => setLang(l)}
+                  style={{ fontFamily: fonts.mono }}
+                >
+                  {l.toUpperCase()}
+                </button>
+                {i < LANGS.length - 1 && (
+                  <span style={{ color: colors.creamDark, fontSize: '0.6rem' }}>|</span>
+                )}
+              </span>
             ))}
           </div>
-        )}
+
+          <button
+            className="menu-toggle-tj"
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              display: 'none',
+              background: 'none',
+              border: 'none',
+              color: colors.ink,
+              fontSize: '1.5rem',
+              lineHeight: 1,
+            }}
+          >
+            {menuOpen ? '✕' : '☰'}
+          </button>
+        </div>
+
+        <div className={`mobile-menu-tj${menuOpen ? ' open' : ''}`}>
+          {navItems.map(id => (
+            <a
+              key={id}
+              onClick={() => scrollTo(id)}
+              className={`nav-link-tj ${activeSection === id ? 'active' : ''}`}
+              style={{ color: colors.ink, cursor: 'pointer' }}
+            >
+              {t[id]}
+            </a>
+          ))}
+        </div>
       </nav>
     </>
   );

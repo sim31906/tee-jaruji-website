@@ -17,7 +17,7 @@ export const colors = {
 };
 
 export const fonts = {
-  display: "'Cormorant Garamond', 'Times New Roman', serif",
-  body: "'Sarabun', 'Helvetica Neue', sans-serif",
-  mono: "'JetBrains Mono', 'Courier New', monospace",
+  display: "'Newsreader', 'Times New Roman', serif",
+  body: "'Prompt', 'Helvetica Neue', sans-serif",
+  mono: "'Fragment Mono', 'Courier New', monospace",
 };
