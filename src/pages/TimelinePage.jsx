@@ -1120,6 +1120,12 @@ export default function TimelinePage() {
                           <div style={{ position:'absolute', width:180, height:180, borderRadius:'50%',
                             border:'48px solid rgba(255,255,255,0.1)', right:-60, top:-60, pointerEvents:'none' }} />
 
+                          {img && (
+                            <div style={{ position:'absolute', inset:0, top:0, height:'55%',
+                              background:'linear-gradient(to bottom, rgba(0,0,0,0.5), transparent)',
+                              pointerEvents:'none' }} />
+                          )}
+
                           {img ? (
                             <img src={img} alt={ttl}
                               style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', objectPosition:'top center', transition:'transform .45s ease' }} />
@@ -1133,8 +1139,9 @@ export default function TimelinePage() {
                           {/* Category badge */}
                           <div style={{ position:'absolute', top:'.65rem', left:'.65rem',
                             fontFamily:fonts.mono, fontSize:'.55rem', letterSpacing:'.15em',
-                            textTransform:'uppercase', background:'rgba(255,255,255,0.88)',
-                            padding:'.2rem .55rem', color:CAT_COLORS[item.category] }}>
+                            lineHeight:1.5, textTransform:'uppercase', background:colors.cream,
+                            boxShadow:'0 2px 8px rgba(0,0,0,0.18)',
+                            padding:'.3rem .6rem', color:CAT_COLORS[item.category] }}>
                             {tp.journeyLegend[item.category]}
                           </div>
                           {/* Year watermark */}
