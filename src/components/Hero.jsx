@@ -42,7 +42,7 @@ export default function Hero() {
         .ha4 { animation: hIn .65s ease both .62s; }
         .ha5 { animation: hIn .65s ease both .82s; }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .hero-text-col {
             padding: 5rem 1.2rem 3rem !important;
             max-width: 58% !important;
